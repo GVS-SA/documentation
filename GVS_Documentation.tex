@@ -23,7 +23,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{mathtools}
-\usepackage[sort,round]{natbib} %For the bibliography.
+\usepackage[style=numeric,backend=bibtex, firstinits=true]{biblatex}
 \usepackage{etoolbox} %To remove the page number on \appendixpage.
 \usepackage{amsthm} %For theorems, definitions etc.
 \usepackage{thmtools} %For theorems, definitions etc.
@@ -65,7 +65,7 @@
 \setlength{\oddsidemargin}{0in}
 \setlength{\parskip}{1mm}
 
-\bibliographystyle{abbrvnat} %Reference style.
+
 \allowdisplaybreaks[1] %Page breaks of equations are allowed, but avoided if possible. 2-4 more relaxed.
 
 %New command for the HSR logo.
@@ -96,6 +96,9 @@
 %Readjust the numbering.
 \counterwithout{footnote}{chapter}
 \numberwithin{equation}{chapter}
+
+% Bibliography
+\bibliography{References}
 
 %\setlength{\parindent}{0cm} %Uncomment this if you don't want to have indents.
 
@@ -235,7 +238,7 @@ Wir danken folgenden Personen für Ihre Unterstützung während der Studienarbei
 \section{ [ UI Design ] }
 
 \subsection{Logo}
-Das Logo wurde von den Eigenschaften des Kraken inspiriert. Kraken sind bekannt dafür, dass sie viele Irrgarten-Probleme effizient lösen können. Dies ist eine Anspielung an die Algorithmen, die vom \gls{gvs} unterstützt werden. Ebenfalls wurden die Saugnäpfe des Kraken als Graph visualisiert und auf der Stirn ist ein binärer Baum zu erkennen. 
+Das Logo wurde von den Eigenschaften des Kraken \cite{kraken} inspiriert. Kraken sind bekannt dafür, dass sie viele Irrgarten-Probleme effizient lösen können. Dies ist eine Anspielung an die Algorithmen, die vom \gls{gvs} unterstützt werden. Ebenfalls wurden die Saugnäpfe des Kraken als Graph visualisiert und auf der Stirn ist ein binärer Baum zu erkennen. 
 
 \begin{figure}[h!]
 	\centering
@@ -246,7 +249,7 @@ Das Logo wurde von den Eigenschaften des Kraken inspiriert. Kraken sind bekannt 
 
 
 
-\cite{kraken}
+
 
 \subsection{Konzept}
 
@@ -471,7 +474,8 @@ drift condition in the proposition. $\blacksquare$
 \glsaddall
 
 % List of references
-\bibliography{References}
+\printbibliography[heading=bibintoc]
+
 
 \newpage
 \thispagestyle{firststyle}
