@@ -23,7 +23,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{mathtools}
-\usepackage[sort,round]{natbib} %For the bibliography.
+\usepackage[style=numeric,backend=bibtex, firstinits=true]{biblatex}
 \usepackage{etoolbox} %To remove the page number on \appendixpage.
 \usepackage{amsthm} %For theorems, definitions etc.
 \usepackage{thmtools} %For theorems, definitions etc.
@@ -44,6 +44,7 @@
 \usepackage{rotating} %To rotate a table.
 \usepackage{tabularx} %An extended version of tabular.
 
+
 %Setup of the reference links.
 \hypersetup{
      colorlinks=false,
@@ -51,6 +52,11 @@
      citecolor=blue,
      filecolor=magenta,
      urlcolor=blue}
+ 
+% Setup glossary and acronyms
+\usepackage[acronym,toc,nopostdot]{glossaries}
+\loadglsentries{glossar-terms}
+\makeglossaries
 
 %Define some reasonable margins.
 \setlength{\textwidth}{6.6in}
@@ -59,10 +65,10 @@
 \setlength{\oddsidemargin}{0in}
 \setlength{\parskip}{1mm}
 
-\bibliographystyle{abbrvnat} %Reference style.
+
 \allowdisplaybreaks[1] %Page breaks of equations are allowed, but avoided if possible. 2-4 more relaxed.
 
-%New command for the UZH logo.
+%New command for the HSR logo.
 \newcommand*{\plogo}{\includegraphics{logo_hsr.pdf}}
 
 %New command for the differential d to have an ordinary d.
@@ -90,6 +96,9 @@
 %Readjust the numbering.
 \counterwithout{footnote}{chapter}
 \numberwithin{equation}{chapter}
+
+% Bibliography
+\bibliography{References}
 
 %\setlength{\parindent}{0cm} %Uncomment this if you don't want to have indents.
 
@@ -129,7 +138,7 @@ Auditor\\
 \vspace*{2\baselineskip}
 
 \vfill
-{\scshape Zeitraum: 18.09.2017 - 15.12.2017} \\[0.3\baselineskip]
+{\scshape Zeitraum: 18.09.2017 - 22.12.2017} \\[0.3\baselineskip]
 \endgroup}
 
 
@@ -181,9 +190,22 @@ Auditor\\
 
 \subsection*{Ausblick}
 
+\newpage
+
+\section*{Danksagungen}
+\thispagestyle{firststyle}
+
+Wir danken folgenden Personen für Ihre Unterstützung während der Studienarbeit:
+
+\begin{itemize}
+	\item Thomas Letsch für die Betreuung unserer Studienarbeit.
+	\item Jessica Martin für die technische Unterstützung beim Logo Design.
+\end{itemize}
+
 \tableofcontents
 \listoffigures
 \listoftables
+
 \newpage
 \pagenumbering{arabic}
 % \part{[ Part title ]}
@@ -214,6 +236,20 @@ Auditor\\
 \section{ [ Architektur ] }
 
 \section{ [ UI Design ] }
+
+\subsection{Logo}
+Das Logo wurde von den Eigenschaften des Kraken \cite{kraken} inspiriert. Kraken sind bekannt dafür, dass sie viele Irrgarten-Probleme effizient lösen können. Dies ist eine Anspielung an die Algorithmen, die vom \gls{gvs} unterstützt werden. Ebenfalls wurden die Saugnäpfe des Kraken als Graph visualisiert und auf der Stirn ist ein binärer Baum zu erkennen. 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{assets/images/logo}
+	\caption[GVS Logo]{Graphs-Visualization-Service Logo}
+	\label{fig:logo}
+\end{figure}
+
+
+
+
 
 \subsection{Konzept}
 
@@ -433,9 +469,13 @@ To ensure that $L(t,T_j)$ is a martingale under the
 $T_{j+1}$-forward measure, the drift must equal zero, which gives the
 drift condition in the proposition. $\blacksquare$
 
+% Glossary
+\printglossary
+\glsaddall
 
+% List of references
+\printbibliography[heading=bibintoc]
 
-\bibliography{References}
 
 \newpage
 \thispagestyle{firststyle}
