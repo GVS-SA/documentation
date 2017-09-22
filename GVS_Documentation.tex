@@ -17,6 +17,9 @@
 \loadglsentries{glossar-terms}
 \makeglossaries
 
+% Include external pdf
+\usepackage{pdfpages}
+
 \usepackage{dsfont} %Nice style for the indicator function.
 \usepackage{fancyhdr} %To customize the headers and footers.
 \usepackage{booktabs} %In case you need \cmidrule or \addlinespace in tables.
@@ -391,6 +394,10 @@ eprint=false
 	\dotbox{Ort, Datum} \hfill \dotbox{Unterschrift des/der Verfassers/in}
 	
 	\chapter{Aufgabenstellung}
+	Auf den nächsten Seiten befindet sich die Aufgabenstellung.
+	%TODO write something better here
+	
+    \includepdf[pages={1-}]{assets/Aufgabenstellung_GVS2.pdf}
 	
 	\chapter{Zeitauswertung}
 	\label{zeitauswertung}
