@@ -293,13 +293,28 @@ eprint=false
 	
 	\chapter{ [ Projektmanagement ]}
 	
+	\section{ [ Zeitplanung ] }
+	Das Projekt wird im Rahmen der Studienarbeit durchgeführt. Insgesamt stehen 14 Wochen zur Verfügung, in welchen jedes Teammitglied 240 Stunden leisten muss. Somit entstehen ca. 17 Stunden Arbeitsaufwand pro Woche und Teammitglied.
+	
+	\subsection{Zeitauswertung}
+	% TODO Zeitauswertung pro Teammitglied
+		
 	\section{ [ Projektverwaltung ] }
 	
 	Als Projektmanagement Software wird Jira \cite{jira} eingesetzt. In Jira werden alle Requirements als Issues erfasst und in den Product Backlog eingepflegt. Pro Iteration sollen jeweils so viele Issues eingeplant werden, wie unter Berücksichtigung von administrativen Aufgaben abgearbeitet werden können. Dabei spielt der Teamspeed eine grosse Rolle, welcher sich über die Projektdauer einpendeln soll. 
 	
+	\subsection{Phasen}
+	Das Projekt ist grob in zwei Phasen aufgeteilt.
+	
+	\subsubsection{Analysephase}
+	In der Analysephase wird das bestehende Produkt in einer ersten Phase genau analysiert. Dabei soll festgestellt werden, welche Teile der Software verbessert werden müssen. Ebenfalls wird die Machbarkeit mit kleinen Prototypen validiert. 
+	
+	\subsubsection{Realisationsphase}
+	In der Realisationsphase beginnt das eigentliche Software Projekt. Wie dabei vorgegangen wird ist in den folgenden Unterkapitel genauer beschreiben. 
+	
 	\subsection{Iterationsplanung}
 	
-	Die Iterationsplanung orientiert sich grob am \gls{rup} und ist unterteilt in eine Inception-, Elaboration-, Construction- sowie eine Transition-Phase. Eine Iteration wird nach \gls{scrum} organisiert und deshalb auch Sprint genannt. Ein Sprint beginnt und endet jeweils am Freitag und dauert 2 Wochen.
+	Die Iterationsplanung orientiert sich grob am \gls{rup} und ist unterteilt in eine Inception-, Elaboration-, Construction- sowie eine Transition-Phase. Jede Phase besteht aus mehreren Iterationen, die jeweils 2 Wochen dauern und am Freitag enden. Eine Iteration wird nach \gls{scrum} organisiert. Am Anfang des Sprints definiert das Projektteam die zu erledigen Issues und schätzt deren Aufwand. (Siehe \ref{sec:estimations})
 	
 	%TODO sync with artefact document
 	%TODO allenfalls durch Artefact Overview (.xls) ersetzen
@@ -325,6 +340,7 @@ eprint=false
 	Über die gesamte Projektdauer findet jeweils am Mittwoch um 17:15 ein wöchentliches Standortmeeting statt. Die Beschlüsse aus den Meetings werden protokolliert und bis spätestens 24h später an alle Teilnehmer versendet. Allfälliges Feedback wird nachträglich eingepflegt und versioniert abgelegt.
 	
 	\subsection{Schätzungen}
+	\label{sec:estimations}
 	Issues werden auf Basis von Story Points geschätzt. Dieses Vorgehen hat sich mit SCRUM etabliert. Die Nutzung von Story Points führt dazu, dass nicht die individuell unterschiedliche Bearbeitungszeit, sondern die Komplexität einer UserStory geschätzt wird. Dies vereinfacht  und homogenisiert die Schätzungen und hilft den Teamspeed zu bestimmen.\cite{storypoints, storypoints2}
 	
 	\subsection{Zeitauswertung}
@@ -333,7 +349,8 @@ eprint=false
 	\section{ [ Artefakte ] }
 	
 	
-	\section{ [ Git Repositories ] }
+	\section{ [ Repositories ] }
+	Die Artefakte werden in verschiedenen Repositories auf GitHub versioniert abgelegt. So gibt es für die Dokumentation, die Meetingprotokolle und den Sourcecode ein eigenes Repository.
 	
 	\section{ [ Entwicklungsumgebung ] }
 	%TODO
@@ -347,6 +364,7 @@ eprint=false
 	%TODO Test Coverage, Code Style
 	
 	\subsection{Review}
+	Nach Abschluss eines Issues wird dieses in Form eines Pull-Request an den Teampartner zum Review freigegeben. Durch das Vier-Augen-Prinzip kann die Qualität des Produktes hoch gehalten werden. Zusätzlich haben beide Teampartner den selben Wissensstand.
 	
 	\section{ [ Risikomanagement ] }
 	
