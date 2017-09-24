@@ -294,10 +294,8 @@ eprint=false
 	\chapter{ [ Projektmanagement ]}
 	
 	\section{ [ Zeitplanung ] }
-	Das Projekt wird im Rahmen der Studienarbeit durchgeführt. Insgesamt stehen 14 Wochen zur Verfügung, in welchen jedes Teammitglied 240 Stunden leisten muss. Somit entstehen ca. 17 Stunden Arbeitsaufwand pro Woche und Teammitglied.
 	
-	\subsection{Zeitauswertung}
-	% TODO Zeitauswertung pro Teammitglied
+	Das Projekt wird im Rahmen der Studienarbeit durchgeführt. Insgesamt stehen 14 Wochen zur Verfügung in welchen jedes Teammitglied 240 Stunden leisten muss. Somit entstehen ca. 17 Stunden Arbeitsaufwand pro Woche und Teammitglied.
 		
 	\section{ [ Projektverwaltung ] }
 	
@@ -307,14 +305,14 @@ eprint=false
 	Das Projekt ist grob in zwei Phasen aufgeteilt.
 	
 	\subsubsection{Analysephase}
-	In der Analysephase wird das bestehende Produkt in einer ersten Phase genau analysiert. Dabei soll festgestellt werden, welche Teile der Software verbessert werden müssen. Ebenfalls wird die Machbarkeit mit kleinen Prototypen validiert. 
+	In der Analysephase wird das bestehende Produkt genau analysiert. Dabei soll festgestellt werden, welche Teile der Software verbessert werden müssen. Ebenfalls wird die Machbarkeit mit kleinen Prototypen validiert. 
 	
 	\subsubsection{Realisationsphase}
 	In der Realisationsphase beginnt das eigentliche Software Projekt. Wie dabei vorgegangen wird ist in den folgenden Unterkapitel genauer beschreiben. 
 	
 	\subsection{Iterationsplanung}
 	
-	Die Iterationsplanung orientiert sich grob am \gls{rup} und ist unterteilt in eine Inception-, Elaboration-, Construction- sowie eine Transition-Phase. Jede Phase besteht aus mehreren Iterationen, die jeweils 2 Wochen dauern und am Freitag enden. Eine Iteration wird nach \gls{scrum} organisiert. Am Anfang des Sprints definiert das Projektteam die zu erledigen Issues und schätzt deren Aufwand. (Siehe \ref{sec:estimations})
+	Die Iterationsplanung orientiert sich grob am \gls{rup} und ist unterteilt in eine Inception-, Elaboration-, Construction- sowie eine Transition-Phase. Jede Phase besteht aus einer oder mehreren Iterationen, die jeweils 2 Wochen dauern und am Freitag enden. Eine Iteration wird nach \gls{scrum} organisiert. Am Anfang des Sprints definiert das Projektteam die zu erledigen Issues und schätzt deren Aufwand. (Siehe \ref{sec:estimations})
 	
 	%TODO sync with artefact document
 	%TODO allenfalls durch Artefact Overview (.xls) ersetzen
@@ -325,8 +323,8 @@ eprint=false
 			Phase & Beschreibung \\
 			\midrule
 			Inception & Projektsetup (Jira, Workflow, IDE), Einarbeitung in die bestehenden Sourcen \\
-			Ellaboration 1 & Anforderungsspezifikation, Domainmodell \\
-			Ellaboration 2 & Architektur Modell, Guidelines für Quellcode und Tests, Wireframes \\
+			Elaboration 1 & Anforderungsspezifikation, Domainmodell \\
+			Elaboration 2 & Architektur Modell, Guidelines für Quellcode und Tests, Wireframes \\
 			Construction 1 & \\
 			Construction 2 & \\
 			Construction 3 &  \\
@@ -335,37 +333,70 @@ eprint=false
 		\end{tabularx} 
 		\caption{Iterationsplanung}
 	\end{table}
-	
-	\subsection{Meetings}
-	Über die gesamte Projektdauer findet jeweils am Mittwoch um 17:15 ein wöchentliches Standortmeeting statt. Die Beschlüsse aus den Meetings werden protokolliert und bis spätestens 24h später an alle Teilnehmer versendet. Allfälliges Feedback wird nachträglich eingepflegt und versioniert abgelegt.
+
+	\subsection{Meilensteine}
+	%TODO Releases und meilensteine hinzufügen
 	
 	\subsection{Schätzungen}
 	\label{sec:estimations}
-	Issues werden auf Basis von Story Points geschätzt. Dieses Vorgehen hat sich mit SCRUM etabliert. Die Nutzung von Story Points führt dazu, dass nicht die individuell unterschiedliche Bearbeitungszeit, sondern die Komplexität einer UserStory geschätzt wird. Dies vereinfacht  und homogenisiert die Schätzungen und hilft den Teamspeed zu bestimmen.\cite{storypoints, storypoints2}
+	Issues werden auf Basis von Story Points geschätzt. Dieses Vorgehen hat sich mit SCRUM etabliert. Die Nutzung von Story Points führt dazu, dass nicht die individuell unterschiedliche Bearbeitungszeit, sondern die Komplexität einer User Story geschätzt wird. Dies vereinfacht  und homogenisiert die Schätzungen und hilft den Teamspeed zu bestimmen.\cite{storypoints, storypoints2}
 	
 	\subsection{Zeitauswertung}
 	Für die Zeitauswertung wird das Jira Plugin Tempo \cite{jiratempo} verwendet. Dieses bietet umfassende Auswertungsmöglichkeiten, sowie Exports nach MS Excel. Die Auswertungen dieser Arbeit befinden sich im Anhang \ref{zeitauswertung}.
 	
-	\section{ [ Artefakte ] }
+	\subsection{Meetings}
+	Über die gesamte Projektdauer findet jeweils am Mittwoch um 17:15 ein wöchentliches Standortmeeting statt. Die Beschlüsse aus den Meetings werden protokolliert und bis spätestens 24h später an alle Teilnehmer versendet. Allfälliges Feedback wird nachträglich eingepflegt und versioniert abgelegt.
 	
+
+	
+	\section{ [ Artefakte ] }
+	%TODO uebersicht einfügen
 	
 	\section{ [ Repositories ] }
-	Die Artefakte werden in verschiedenen Repositories auf GitHub versioniert abgelegt. So gibt es für die Dokumentation, die Meetingprotokolle und den Sourcecode ein eigenes Repository.
+	Die Artefakte werden in verschiedenen Repositories auf GitHub versioniert abgelegt. So gibt es für die Dokumentation, die Meetingprotokolle und den Sourcecode jeweils ein eigenes Repository.
+	
+	\subsection{Gitflow}
+	Die Branch Struktur orientiert sich an Gitflow \cite{gitflow}. Pro Issue wird ein Feature Branch erstellt, der nach erfolgreichem Review in den Development Branch gemerged wird. Beim Erreichen eines Meilensteins wird der Entwicklungszweig in den Master Branch gemerged.
 	
 	\section{ [ Entwicklungsumgebung ] }
-	%TODO
+	Als \gls{ide} wird Eclipse mit folgenden Plugins verwendet
+	\begin{itemize}
+		\item FindBugs \cite{findbugs} zur statischen Code Analyse
+		\item EclEmma \cite{eclemma} zur Überprüfung der Test Coverage
+		\item Stan4J \cite{stan4j} zur Überprüfung von zyklischen Abhängigkeiten
+		\item Checkstyle \cite{checkstyle} zur Überprüfung der Coding Guidelines.
+	\end{itemize}
+
+	\section{ [ Frameworks ] }
+	%TODO any additional libraries? 
+	Als UI Framework wird \gls{javafx} eingesetzt. \gls{javafx} gilt seit 2014 als Standardlösung für grafische Java Anwendungen. \gls{javafx} ist eine komplette Neuentwicklung und ist der offizielle Nachfolger von AWT und Swing. 
+
+	
 	
 	\section{ [ Continuous Integration ] }
 	%TODO Tavis
-	
+		
 	\section{ [ Qualitätsmanagement ] }
 	
-	\subsection{Metriken}
-	%TODO Test Coverage, Code Style
+	\subsection{TDD}
+	Zur Sicherung der Software Qualität sind gute Tests unerlässlich. Es macht deshalb Sinn für jedes Feature zuerst entsprechende Tests zu schreiben. \gls{tdd} verfolgt genau diesen Ansatz und soll in dem Projekt speziell im Business Layer verwendet werden. 
 	
+	\subsection{Definition of Done}
+	Source Code wird erst zum Review freigegeben, wenn folgende Kriterien erfüllt sind.
+	\begin{itemize}
+		\item Die \gls{ide} zeigt keine Warnungen und Fehler
+		\item Es gibt keinen auskommentierten Code
+		\item Es existieren sinnvolle Unit und Integrationstests für das Feature
+		\item Alle Metriken geben grünes Licht
+		\item Das Issue wurde in Jira \cite{jira} zum Review vermerkt
+	\end{itemize}
+		
 	\subsection{Review}
-	Nach Abschluss eines Issues wird dieses in Form eines Pull-Request an den Teampartner zum Review freigegeben. Durch das Vier-Augen-Prinzip kann die Qualität des Produktes hoch gehalten werden. Zusätzlich haben beide Teampartner den selben Wissensstand.
+	Nach Abschluss eines Issues wird dieses in Form eines Pull-Request an den Teampartner zum Review freigegeben. Durch das Vier-Augen-Prinzip kann die Qualität des Produktes hoch gehalten werden. Zusätzlich haben beide Teampartner stets den selben Wissensstand.
 	
+	\subsection{Metriken}
+	%TODO Test Coverage, Code Style, Code Climate
+		
 	\section{ [ Risikomanagement ] }
 	
 	\subsection{Backups}
