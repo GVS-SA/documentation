@@ -20,6 +20,9 @@
 % Include external pdf
 \usepackage{pdfpages}
 
+% set single pages to landscape
+\usepackage{lscape}
+
 \usepackage{dsfont} %Nice style for the indicator function.
 \usepackage{fancyhdr} %To customize the headers and footers.
 \usepackage{booktabs} %In case you need \cmidrule or \addlinespace in tables.
@@ -280,7 +283,7 @@ eprint=false
 			\bottomrule 
 		\end{tabularx} 
 		\caption{Versionshistory Realisierung} 
-	\end{table}
+		\end{table}
 	
 	\section{ [ Architektur ] }
 	
@@ -323,7 +326,8 @@ eprint=false
 			\toprule 
 			Datum & Version & Änderungen & Autor \\
 			\midrule
-			28.09.17 & 1.0 & Dokument erstellt & wie \\
+			25.09.17 & 1.0 & Dokument erstellt & wie, tre \\
+			28.09.17 & 1.1 & Risikomanagement hinzugefügt & tre \\
 			\bottomrule 
 		\end{tabularx} 
 		\caption{Versionshistory Projektmanagement} 
@@ -431,11 +435,46 @@ eprint=false
 	
 	\subsection{Metriken}
 	%TODO Test Coverage, Code Style, Code Climate
-		
-	\section{ [ Risikomanagement ] }
 	
+
+	\section{ [ Risikomanagement ] }
+	Nachfolgend sind die wichtigsten Risiken für diese Arbeit aufgelistet. Gewichtet werden die Risiken nach Eintrittswahrscheinlichkeit und Schadenshöhe. \cite{risikomanagement}
+	
+	\begin{table}[h!]
+		\centering
+		\begin{tabularx}{0.6\linewidth}{l c c}
+			\toprule 
+			\# & Eintrittswahrscheinlichkeit (E) & Schadensschwere (S) \\
+			\toprule 
+			1 & gering & leicht  \\
+			2 & mittel & mittelschwer \\
+			3 & hoch & schwer \\
+			\bottomrule 
+		\end{tabularx} 
+		\caption{Legende Risiken} 
+	\end{table}
+	\begin{landscape}		
+		\subsection{Mögliche Risiken}
+			\begin{table}[h!]
+			\centering
+			\begin{tabularx}{\linewidth}{l X l l X X}
+				\toprule 
+				\# & Beschreibung & E & S & Prävention & Massnahmen bei Eintritt \\
+				\toprule 
+				1 & Verlust von Daten auf Grund von technischen Störungen oder Diebstahl von persönlichen Notebooks & 2 & 1 & Backups (siehe \ref{sec:backup}) & Durch die Massnahmen muss höchstens ein Datenverlust von 8h aufgearbeitet werden. \\
+				\midrule
+				2 & Komplexität wurde unterschätzt. Der effektive Zeitaufwand übersteigt die Schätzung um ein Vielfaches & 2 & 2 & Gute Recherche und Einarbeit in GVS 1.0, genügend lange Inception Phase & Rücksprache mit Betreuer \\
+				\midrule
+				3 & Funktionalitäten von GVS 1.0, welche mit Swing umgeseztzt wurden, werden durch JavaFX nicht oder unzureichend unterstützt & 2 & 2 & Einlesen in JavaFX, Funktionalitäten GVS 1.0 abklären & Alternative zur bestehenden Umsetzung finden \\
+				\bottomrule 
+			\end{tabularx} 
+			\caption{mögliche Risiken} 
+		\end{table}
+    \end{landscape}
+
 	\subsection{Backups}
-	Zur Minimierung von allfälligen Datenverlusten wird wie folgt vorgegangen:
+		\label{sec:backup}
+		Zur Minimierung von allfälligen Datenverlusten wird wie folgt vorgegangen:
 	
 	\begin{enumerate}
 		\item Täglich automatisiertes Backup aller Projektdaten im JIRA \cite{jira} (Zeiterfassung, erstellte Issues, Jira Konfiguration)
