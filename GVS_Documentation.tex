@@ -418,11 +418,16 @@ eprint=false
 
 	
 	\section{ [ Continuous Integration ] }
-	%TODO Tavis
+	Die Software wird nach jedem Commit mit Travis CI \cite{travisci} gebuildet. Dies garantiert, dass sämtliche Qualitätmassnahmen stets eingehalten werden. (Siehe \ref{sec:qualitymeasures})
+	
+	\subsection{Buildprozess}
+	\label{sec:buildprocess}
+	Zur Erstellung der Software Artefakten wird Gradle \cite{gradle} eingesetzt. Gradle verwaltet alle externen Abhängigkeiten. Zusätzlich wird die Software nur dann gebuilded, wenn alle Metriktools grünes Licht geben. Es resultiert ein ausführbares \gls{jar}. 
 		
 	\section{ [ Qualitätsmanagement ] }
+	\label{sec:qualitymeasures}
 	
-	\subsection{TDD}
+	\subsection{TDD: Test Driven Development}
 	Zur Sicherung der Software Qualität sind gute Tests unerlässlich. Für jedes Feature werden deshalb zuerst entsprechende Tests geschrieben. Dieses Vorgehen wird \gls{tdd} genannt.
 	
 	\subsection{Definition of Done}
@@ -439,8 +444,12 @@ eprint=false
 	Nach Abschluss eines Issues wird dieses in Form eines Pull-Request an den Teampartner zum Review freigegeben. Durch das Vier-Augen-Prinzip kann die Qualität des Produktes hoch gehalten werden. Zusätzlich haben beide Teampartner stets den selben Wissensstand.
 	
 	\subsection{Metriken}
-	%TODO Test Coverage, Code Style, Code Climate
+	\subsubsection{Code Style}
+	Als Styleguide wird eine angepasste Version des Sun Styleguide verwendet \cite{suncheckstyle}. Damit dieser im Projekt durchgängig eingehalten wird, wurde das Checkstyle Plugin \cite{checkstyle} in den Buildprozess integriert. (Siehe \ref{sec:buildprocess})	
 	
+	\subsubsection{Code Climate}
+	Zur Überwachung des Technical Debt und der Testabdeckung wird die Github App Code Climate \cite{codeclimate} eingesetzt.  
+
 
 	\section{ [ Risikomanagement ] }
 	Nachfolgend sind die wichtigsten Risiken für diese Arbeit aufgelistet. Gewichtet werden die Risiken nach Eintrittswahrscheinlichkeit und Schadenshöhe. \cite{risikomanagement}
