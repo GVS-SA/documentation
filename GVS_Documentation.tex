@@ -242,7 +242,7 @@ eprint=false
 	\newpage
 	\pagenumbering{arabic}
 	% \part{[ Part title ]}
-	\chapter{[ Anforderungsanalyse ]}
+	\chapter{Anforderungsanalyse}
 	
 	\begin{table}[h!]
 		\centering
@@ -256,27 +256,23 @@ eprint=false
 		\caption{Versionshistory Anfoderungsanalyse} 
 	\end{table}
 	
-	\section{[ Ausgangslage ]}
+	\section{Ausgangslage}
 	
-	\section{[ Mehrwert ]}
+	\section{Mehrwert}
 	
-	\section{[ Aufgabenstellung ]}
+	\section{Aufgabenstellung}
 	
-	\section{[ User Stories ]}
+	\section{User Stories}
 	
-	\section{[ Use Cases ]}
+	\section{Use Cases}
 	
 	\subsection{Brief}
 	
 	\subsection{Fully Dressed}
 	
-	\section{[ Domainanalyse ]}
+	\section{Domainanalyse}
 	
-	
-	
-	%\part{ [ Realisierung ] }
-	
-	\chapter{ [ Realisierung ]}
+	\chapter{Realisierung}
 	
 		\begin{table}[h!]
 		\centering
@@ -290,9 +286,9 @@ eprint=false
 		\caption{Versionshistory Realisierung} 
 		\end{table}
 	
-	\section{ [ Architektur ] }
+	\section{Architektur}
 	
-	\section{ [ UI Design ] }
+	\section{UI Design}
 	
 	\subsection{Logo}
 	Das Logo wurde von den Eigenschaften des Kraken \cite{kraken} inspiriert. Kraken sind bekannt dafür, dass sie viele Irrgarten-Probleme effizient lösen können. Dies ist eine Anspielung an die Algorithmen, die vom \gls{gvs} unterstützt werden. Ebenfalls wurden die Saugnäpfe des Kraken als Graph visualisiert und auf der Stirn ist ein binärer Baum zu erkennen. 
@@ -316,14 +312,14 @@ eprint=false
 	
 	\subsection{Wireframes}
 	
-	\section{ [ Testing ] }
+	\section{Testing}
 	
 	
 	
 	
 	
 	
-	\chapter{ [ Projektmanagement ]}
+	\chapter{Projektmanagement}
 	
 	
 	\begin{table}[h!]
@@ -341,24 +337,24 @@ eprint=false
 		\caption{Versionshistory Projektmanagement} 
 	\end{table}
 	
-	\section{[Meilensteine]}
-	%TODO Releases und meilensteine hinzufügen
+	\section{Meilensteine}
+	\label{sec:milestones}
 	
-	\subsubsection{Analyse}
+	\subsubsection{Meilenstein 1: Analyse}
 	Analyse des Ist-Zustandes von GVS 1.0: Die Problemdomäne wird spezifiziert. Mehrere Diagramme zeigen die Schnittstelle zwischen Business Layer und Presentation Layer auf. Es ist ersichtlich, wie die einzelnen Komponenten miteinander kommunizieren bzw. wie die Daten von der Socket ans UI weiter gereicht werden.
 	
-	\subsubsection{Entwurf}
+	\subsubsection{Meilenstein 2: Entwurf}
 	\label{milestone2}
 	Entwurf des Soll-Zustand von GVS 2.0: Eine klassische 3-Schichten Architektur wird entworfen. Es wird spezifiziert, welche GVS 1.0 Komponenten durch welche GVS 2.0 Komponenten ersetzt werden. Zur Überprüfung der Projektziele werden die Designentscheide als Requirements festgehalten.
 	
-	\subsubsection{Release 1}
+	\subsubsection{Meilenstein 3: Release 1}
 	Erste Funktionalitäten sind implementiert.
 	
-	\subsubsection{Release 2}
+	\subsubsection{Meilenstein 4: Release 2}
 	Weitere Funktionalitäten sind implementiert. Das mit dem Enterprise Architekt erstellte Klassendiagramm ist mit dem Stand der GVS 2.0 Software synchron.
 	
-	\subsubsection{Release 3}
-	Alle im Meilenstein 2 (\ref{milestone2}) definierten Requirements wurden umgesetzt. Die GVS 2.0 Software ist für den Einsatz im Unterricht bereit.
+	\subsubsection{Meilenstein 5: Release 3}
+	Alle im Meilenstein 2 definierten Requirements wurden umgesetzt. Die GVS 2.0 Software ist für den Einsatz im Unterricht bereit.
 	
 	\begin{table}[h!]
 		\centering
@@ -384,16 +380,16 @@ eprint=false
 		\caption{Legende Risiken} 
 	\end{table}
 	
-	\subsection{[ Artefact Overview ]}
+	\subsection{Artefact Overview}
 	%TODO Artefact Overview einfügen
 
 	
 	
-	\section{ [ Zeitplanung ] }
+	\section{Zeitplanung}
 	
 	Das Projekt wird im Rahmen der Studienarbeit durchgeführt. Insgesamt stehen 14 Wochen zur Verfügung in welchen jedes Teammitglied 240 Stunden leisten muss. Somit entstehen ca. 17 Stunden Arbeitsaufwand pro Woche und Teammitglied.
 		
-	\section{ [ Projektverwaltung ] }
+	\section{Projektverwaltung}
 	
 	Als Projektmanagement Software wird Jira \cite{jira} eingesetzt. In Jira werden alle Requirements als Issues erfasst und in den Product Backlog eingepflegt. Pro Iteration sollen jeweils so viele Issues eingeplant werden, wie unter Berücksichtigung von administrativen Aufgaben abgearbeitet werden können. Dabei spielt der Teamspeed eine grosse Rolle, welcher sich über die Projektdauer einpendeln soll. 
 
@@ -413,13 +409,10 @@ eprint=false
 	\subsection{Meetings}
 	Über die gesamte Projektdauer findet jeweils am Mittwoch um 17:15 ein wöchentliches Standortmeeting statt. Die Beschlüsse aus den Meetings werden protokolliert und bis spätestens 24h später an alle Teilnehmer versendet. Allfälliges Feedback wird nachträglich eingepflegt und versioniert abgelegt.
 	
-
+	\subsection{Branch Konzept}
+	Die Branch Struktur orientiert sich an Gitflow \cite{gitflow}. Pro Issue wird ein Feature Branch erstellt, der nach erfolgreichem Review in den Development Branch gemerged wird. Beim Erreichen eines Meilensteins (siehe \ref{sec:milestones}) wird der Entwicklungszweig in den Master Branch gemerged.
 	
-	\subsection{Gitflow}
-	%TODO Reference to milestones
-	Die Branch Struktur orientiert sich an Gitflow \cite{gitflow}. Pro Issue wird ein Feature Branch erstellt, der nach erfolgreichem Review in den Development Branch gemerged wird. Beim Erreichen eines Meilensteins wird der Entwicklungszweig in den Master Branch gemerged.
-	
-	\section{ [ Entwicklungsumgebung ] }
+	\section{Entwicklungsumgebung}
 	Als \gls{ide} wird Eclipse mit folgenden Plugins verwendet
 	\begin{itemize}
 		\item FindBugs \cite{findbugs} zur statischen Code Analyse
@@ -428,21 +421,21 @@ eprint=false
 		\item Checkstyle \cite{checkstyle} zur Überprüfung der Coding Richtlinien.
 	\end{itemize}
 
-	\section{ [ Frameworks ] }
+	\section{Frameworks}
 	%TODO any additional libraries? 
 	Als UI Framework wird gemäss Aufgabenstellung \gls{javafx} eingesetzt (siehe Anhang \ref{aufgabenstellung}). \gls{javafx} gilt seit 2014 als Standardlösung für grafische Java Anwendungen. \gls{javafx} ist eine komplette Neuentwicklung und der offizielle Nachfolger vom \gls{awt} \cite{awt} und Swing \cite{swing}. 
 
-	\section{ [ Repositories ] }
+	\section{Repositories}
 	Die Artefakte werden in verschiedenen Repositories auf GitHub versioniert abgelegt. So gibt es für die Dokumentation, die Meetingprotokolle und den Sourcecode jeweils ein eigenes Repository.
 
-	\section{ [ Continuous Integration ] }
+	\section{Continuous Integration}
 	Die Software wird nach jedem Commit mit Travis CI \cite{travisci} gebuildet. Dies garantiert, dass sämtliche Qualitätsmassnahmen stets eingehalten werden. (Siehe \ref{sec:qualitymeasures})
 	
 	\subsection{Buildprozess}
 	\label{sec:buildprocess}
 	Zur Erstellung der Software Artefakte wird Gradle \cite{gradle} eingesetzt. Gradle verwaltet alle externen Software Abhängigkeiten. Zusätzlich wird die Software nur dann gebuilded, wenn alle Metriktools grünes Licht geben. Es resultiert ein ausführbares \gls{jar}.
 		
-	\section{ [ Qualitätsmanagement ] }
+	\section{Qualitätsmanagement}
 	\label{sec:qualitymeasures}
 	
 	\subsection{Unit Tests}
@@ -470,7 +463,7 @@ eprint=false
 	Zur Überwachung des Technical Debt und der Testabdeckung wird die Github App Code Climate \cite{codeclimate} eingesetzt.  
 
 
-	\section{ [ Risikomanagement ] }
+	\section{Risikomanagement}
 	Nachfolgend sind die wichtigsten Risiken für diese Arbeit aufgelistet. Gewichtet werden die Risiken nach Eintrittswahrscheinlichkeit und Schadenshöhe. \cite{risikomanagement}
 	
 	\begin{table}[h!]
