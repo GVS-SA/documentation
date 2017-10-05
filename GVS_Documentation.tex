@@ -246,7 +246,7 @@ eprint=false
 	
 	\begin{table}[h!]
 		\centering
-		\begin{tabularx}{\linewidth}{X X X X}
+		\begin{tabularx}{\linewidth}{l l X l}
 			\toprule 
 			Datum & Version & Änderungen & Autor \\
 			\midrule
@@ -280,11 +280,11 @@ eprint=false
 	
 		\begin{table}[h!]
 		\centering
-		\begin{tabularx}{\linewidth}{X X X X}
+		\begin{tabularx}{\linewidth}{l l X l}
 			\toprule 
 			Datum & Version & Änderungen & Autor \\
 			\midrule
-			28.09.17 & 1.0 & Dokument erstellt & wie \\
+			28.09.17 & 1.0 & Dokument erstellt & mwieland \\
 			\bottomrule 
 		\end{tabularx} 
 		\caption{Versionshistory Realisierung} 
@@ -327,16 +327,18 @@ eprint=false
 	
 	\begin{table}[h!]
 		\centering
-		\begin{tabularx}{\linewidth}{X X X X}
+		\begin{tabularx}{\linewidth}{l l X l}
 			\toprule 
 			Datum & Version & Änderungen & Autor \\
 			\midrule
 			25.09.17 & 1.0 & Dokument erstellt & mwieland, mtrentini \\
 			28.09.17 & 1.1 & Risikomanagement hinzugefügt & mtrentini \\
+			03.10.17 & 1.2 & IDE, Frameworks, Buildprozess, Qualitätsmanagement hinzugefügt, & mwieland \\
 			\bottomrule 
 		\end{tabularx} 
 		\caption{Versionshistory Projektmanagement} 
 	\end{table}
+	
 	
 	\section{ [ Zeitplanung ] }
 	
@@ -401,13 +403,14 @@ eprint=false
 	Die Artefakte werden in verschiedenen Repositories auf GitHub versioniert abgelegt. So gibt es für die Dokumentation, die Meetingprotokolle und den Sourcecode jeweils ein eigenes Repository.
 	
 	\subsection{Gitflow}
+	%TODO Reference to milestones
 	Die Branch Struktur orientiert sich an Gitflow \cite{gitflow}. Pro Issue wird ein Feature Branch erstellt, der nach erfolgreichem Review in den Development Branch gemerged wird. Beim Erreichen eines Meilensteins wird der Entwicklungszweig in den Master Branch gemerged.
 	
 	\section{ [ Entwicklungsumgebung ] }
 	Als \gls{ide} wird Eclipse mit folgenden Plugins verwendet
 	\begin{itemize}
 		\item FindBugs \cite{findbugs} zur statischen Code Analyse
-		\item EclEmma \cite{eclemma} zur Überprüfung der Test Abdeckung
+		\item Cobertura \cite{cobertura} zur Überprüfung der Test Abdeckung
 		\item Stan4J \cite{stan4j} zur Überprüfung von zyklischen Abhängigkeiten
 		\item Checkstyle \cite{checkstyle} zur Überprüfung der Coding Richtlinien.
 	\end{itemize}
@@ -416,24 +419,23 @@ eprint=false
 	%TODO any additional libraries? 
 	Als UI Framework wird gemäss Aufgabenstellung \gls{javafx} eingesetzt (siehe Anhang \ref{aufgabenstellung}). \gls{javafx} gilt seit 2014 als Standardlösung für grafische Java Anwendungen. \gls{javafx} ist eine komplette Neuentwicklung und der offizielle Nachfolger vom \gls{awt} \cite{awt} und Swing \cite{swing}. 
 
-	
 	\section{ [ Continuous Integration ] }
-	Die Software wird nach jedem Commit mit Travis CI \cite{travisci} gebuildet. Dies garantiert, dass sämtliche Qualitätmassnahmen stets eingehalten werden. (Siehe \ref{sec:qualitymeasures})
+	Die Software wird nach jedem Commit mit Travis CI \cite{travisci} gebuildet. Dies garantiert, dass sämtliche Qualitätsmassnahmen stets eingehalten werden. (Siehe \ref{sec:qualitymeasures})
 	
 	\subsection{Buildprozess}
 	\label{sec:buildprocess}
-	Zur Erstellung der Software Artefakten wird Gradle \cite{gradle} eingesetzt. Gradle verwaltet alle externen Abhängigkeiten. Zusätzlich wird die Software nur dann gebuilded, wenn alle Metriktools grünes Licht geben. Es resultiert ein ausführbares \gls{jar}. 
+	Zur Erstellung der Software Artefakten wird Gradle \cite{gradle} eingesetzt. Gradle verwaltet alle externen Software Abhängigkeiten. Zusätzlich wird die Software nur dann gebuilded, wenn alle Metriktools grünes Licht geben. Es resultiert ein ausführbares \gls{jar}.
 		
 	\section{ [ Qualitätsmanagement ] }
 	\label{sec:qualitymeasures}
 	
-	\subsection{TDD: Test Driven Development}
-	Zur Sicherung der Software Qualität sind gute Tests unerlässlich. Für jedes Feature werden deshalb zuerst entsprechende Tests geschrieben. Dieses Vorgehen wird \gls{tdd} genannt.
+	\subsection{Unit Tests}
+	Zur Sicherung der Software Qualität sind gute Tests unerlässlich. Der Business Layer soll mit einer hinreichenden Testabdeckung abgedeckt sein. Der Schwerpunkt liegt dabei bei der Qualität und nicht bei einer möglichst hohen Testabdeckung.
 	
 	\subsection{Definition of Done}
 	Source Code wird erst zum Review freigegeben, wenn folgende Kriterien erfüllt sind.
 	\begin{itemize}
-		\item Die \gls{ide} zeigt keine Warnungen und Fehler
+		\item Die \gls{ide} rsp. Build Tool zeigt keine Warnungen und Fehler
 		\item Es gibt keinen auskommentierten Code
 		\item Es existieren sinnvolle Unit und Integrationstests für das Feature
 		\item Alle Metriken geben grünes Licht
@@ -448,6 +450,7 @@ eprint=false
 	Als Styleguide wird eine angepasste Version des Sun Styleguide verwendet \cite{suncheckstyle}. Damit dieser im Projekt durchgängig eingehalten wird, wurde das Checkstyle Plugin \cite{checkstyle} in den Buildprozess integriert. (Siehe \ref{sec:buildprocess})	
 	
 	\subsubsection{Code Climate}
+	%TODO Check technical debt
 	Zur Überwachung des Technical Debt und der Testabdeckung wird die Github App Code Climate \cite{codeclimate} eingesetzt.  
 
 
