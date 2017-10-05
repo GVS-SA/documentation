@@ -325,6 +325,7 @@ eprint=false
 	
 	\chapter{ [ Projektmanagement ]}
 	
+	
 	\begin{table}[h!]
 		\centering
 		\begin{tabularx}{\linewidth}{l l X l}
@@ -334,10 +335,58 @@ eprint=false
 			25.09.17 & 1.0 & Dokument erstellt & mwieland, mtrentini \\
 			28.09.17 & 1.1 & Risikomanagement hinzugefügt & mtrentini \\
 			03.10.17 & 1.2 & IDE, Frameworks, Buildprozess, Qualitätsmanagement hinzugefügt, & mwieland \\
+			05.10.17 & 1.3 & Meilensteine definiert & mtrentini \\
 			\bottomrule 
 		\end{tabularx} 
 		\caption{Versionshistory Projektmanagement} 
 	\end{table}
+	
+	\section{[Meilensteine]}
+	%TODO Releases und meilensteine hinzufügen
+	
+	\subsubsection{Analyse}
+	Analyse des Ist-Zustandes von GVS 1.0: Die Problemdomäne wird spezifiziert. Mehrere Diagramme zeigen die Schnittstelle zwischen Business Layer und Presentation Layer auf. Es ist ersichtlich, wie die einzelnen Komponenten miteinander kommunizieren bzw. wie die Daten von der Socket ans UI weiter gereicht werden.
+	
+	\subsubsection{Entwurf}
+	\label{milestone2}
+	Entwurf des Soll-Zustand von GVS 2.0: Eine klassische 3-Schichten Architektur wird entworfen. Es wird spezifiziert, welche GVS 1.0 Komponenten durch welche GVS 2.0 Komponenten ersetzt werden. Zur Überprüfung der Projektziele werden die Designentscheide als Requirements festgehalten.
+	
+	\subsubsection{Release 1}
+	Erste Funktionalitäten sind implementiert.
+	
+	\subsubsection{Release 2}
+	Weitere Funktionalitäten sind implementiert. Das mit dem Enterprise Architekt erstellte Klassendiagramm ist mit dem Stand der GVS 2.0 Software synchron.
+	
+	\subsubsection{Release 3}
+	Alle im Meilenstein 2 (\ref{milestone2}) definierten Requirements wurden umgesetzt. Die GVS 2.0 Software ist für den Einsatz im Unterricht bereit.
+	
+	\begin{table}[h!]
+		\centering
+		\begin{tabular}{l l l l}
+			\toprule 
+			\# & Name & Artefakte & Datum \\
+			\toprule 
+			1 & Analyse & Domainmodell & 18.10.17 \\
+			& & Sequenzdiagramme & \\
+			& &  Komponentendiagramm & \\
+			\midrule
+			2 & Entwurf  & Requirements & 25.10.17\\
+			& & Schichtendiagramm & \\
+			\midrule
+			3 & Release 1 & GVS 2.0.1 & 15.11.2017 \\
+			\midrule
+			4 & Release 2 & GVS 2.0.2 & 06.12.2017 \\
+			\midrule
+			5 & Release 3 & GVS 2.0.3 & 22.12.2017 \\
+			
+			\bottomrule 
+		\end{tabular} 
+		\caption{Legende Risiken} 
+	\end{table}
+	
+	\subsection{[ Artefact Overview ]}
+	%TODO Artefact Overview einfügen
+
 	
 	
 	\section{ [ Zeitplanung ] }
@@ -347,43 +396,13 @@ eprint=false
 	\section{ [ Projektverwaltung ] }
 	
 	Als Projektmanagement Software wird Jira \cite{jira} eingesetzt. In Jira werden alle Requirements als Issues erfasst und in den Product Backlog eingepflegt. Pro Iteration sollen jeweils so viele Issues eingeplant werden, wie unter Berücksichtigung von administrativen Aufgaben abgearbeitet werden können. Dabei spielt der Teamspeed eine grosse Rolle, welcher sich über die Projektdauer einpendeln soll. 
+
 	
-	\subsection{Phasen}
-	Das Projekt ist grob in zwei Phasen aufgeteilt.
-	
-	\subsubsection{Analysephase}
-	In der Analysephase wird das bestehende Produkt genau analysiert. Dabei soll festgestellt werden, welche Teile der Software verbessert werden müssen. Ebenfalls wird die Machbarkeit mit kleinen Prototypen validiert. 
-	
-	\subsubsection{Realisationsphase}
-	In der Realisationsphase beginnt das eigentliche Software Projekt. Wie dabei vorgegangen wird ist in den folgenden Unterkapitel genauer beschreiben. 
 	
 	\subsection{Iterationsplanung}
 	
-	Die Iterationsplanung orientiert sich grob am \gls{rup} und ist unterteilt in eine Inception-, Elaboration-, Construction- sowie eine Transition-Phase. Jede Phase besteht aus einer oder mehreren Iterationen, die jeweils 2 Wochen dauern und am Freitag enden. Eine Iteration wird nach \gls{scrum} organisiert. Am Anfang des Sprints definiert das Projektteam die zu erledigen Issues und schätzt deren Aufwand. (Siehe \ref{sec:estimations})
-	
-	%TODO sync with artefact document
-	%TODO allenfalls durch Artefact Overview (.xls) ersetzen
-	\begin{table}[h!]
-		\centering
-		\begin{tabularx}{\linewidth}{l X }
-			\toprule 
-			Phase & Beschreibung \\
-			\midrule
-			Inception & Projektsetup (Jira, Workflow, IDE), Einarbeitung in die bestehenden Sourcen \\
-			Elaboration 1 & Anforderungsspezifikation, Domainmodell \\
-			Elaboration 2 & Architektur Modell, Guidelines für Quellcode und Tests, Wireframes \\
-			Construction 1 & \\
-			Construction 2 & \\
-			Construction 3 &  \\
-			Transition&   \\
-			\bottomrule 
-		\end{tabularx} 
-		\caption{Iterationsplanung}
-	\end{table}
-
-	\subsection{Meilensteine}
-	%TODO Releases und meilensteine hinzufügen
-	
+	Die Iterationsplanung orientiert sich grob am \gls{rup} und ist unterteilt in eine Inception-, Elaboration-, Construction- sowie eine Transition-Phase. Jede Phase besteht aus einer oder mehreren Iterationen, die jeweils 1-2 Wochen dauern und am Freitag enden. Am Anfang des Projekt sind die Sprints bewusst nur 1 Woche lang, da sich dort die Anforderungen schnell ändern können. Eine Iteration wird nach \gls{scrum} organisiert. Am Anfang des Sprints definiert das Projektteam die zu erledigenden Issues und schätzt deren Aufwand. (Siehe \ref{sec:estimations}) Jeweils am Ende eines Sprint wird die geleistete Arbeit reflektiert. Entsprechende Erkenntnisse und Verbesserungen werden fortlaufend in die Projektorganisation aufgenommen. 
+		
 	\subsection{Schätzungen}
 	\label{sec:estimations}
 	Issues werden auf Basis von Story Points geschätzt. Dieses Vorgehen hat sich mit SCRUM etabliert. Die Nutzung von Story Points führt dazu, dass nicht die individuell unterschiedliche Bearbeitungszeit, sondern die Komplexität einer User Story geschätzt wird. Dies vereinfacht  und homogenisiert die Schätzungen und hilft den Teamspeed zu bestimmen.\cite{storypoints, storypoints2}
@@ -395,12 +414,6 @@ eprint=false
 	Über die gesamte Projektdauer findet jeweils am Mittwoch um 17:15 ein wöchentliches Standortmeeting statt. Die Beschlüsse aus den Meetings werden protokolliert und bis spätestens 24h später an alle Teilnehmer versendet. Allfälliges Feedback wird nachträglich eingepflegt und versioniert abgelegt.
 	
 
-	
-	\section{ [ Artefakte ] }
-	%TODO uebersicht einfügen
-	
-	\section{ [ Repositories ] }
-	Die Artefakte werden in verschiedenen Repositories auf GitHub versioniert abgelegt. So gibt es für die Dokumentation, die Meetingprotokolle und den Sourcecode jeweils ein eigenes Repository.
 	
 	\subsection{Gitflow}
 	%TODO Reference to milestones
@@ -418,6 +431,9 @@ eprint=false
 	\section{ [ Frameworks ] }
 	%TODO any additional libraries? 
 	Als UI Framework wird gemäss Aufgabenstellung \gls{javafx} eingesetzt (siehe Anhang \ref{aufgabenstellung}). \gls{javafx} gilt seit 2014 als Standardlösung für grafische Java Anwendungen. \gls{javafx} ist eine komplette Neuentwicklung und der offizielle Nachfolger vom \gls{awt} \cite{awt} und Swing \cite{swing}. 
+
+	\section{ [ Repositories ] }
+	Die Artefakte werden in verschiedenen Repositories auf GitHub versioniert abgelegt. So gibt es für die Dokumentation, die Meetingprotokolle und den Sourcecode jeweils ein eigenes Repository.
 
 	\section{ [ Continuous Integration ] }
 	Die Software wird nach jedem Commit mit Travis CI \cite{travisci} gebuildet. Dies garantiert, dass sämtliche Qualitätsmassnahmen stets eingehalten werden. (Siehe \ref{sec:qualitymeasures})
@@ -459,7 +475,7 @@ eprint=false
 	
 	\begin{table}[h!]
 		\centering
-		\begin{tabularx}{0.6\linewidth}{l c c}
+		\begin{tabular}{l c c}
 			\toprule 
 			\# & Eintrittswahrscheinlichkeit (E) & Schadensschwere (S) \\
 			\toprule 
@@ -467,7 +483,7 @@ eprint=false
 			2 & mittel & mittelschwer \\
 			3 & hoch & schwer \\
 			\bottomrule 
-		\end{tabularx} 
+		\end{tabular} 
 		\caption{Legende Risiken} 
 	\end{table}
 	\begin{landscape}		
