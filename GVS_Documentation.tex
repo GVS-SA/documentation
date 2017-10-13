@@ -131,7 +131,7 @@ eprint=false
 	\plogo\\[2\baselineskip] %University Logo.
 	\rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt} %Thick horizontal line.
 	\rule{\textwidth}{0.4pt}\\[\baselineskip] %Thin horizontal line.
-	{\LARGE [ Graphs-Visualization-Service ]}\\[0.2\baselineskip] %Title.
+	{\LARGE Graphs-Visualization-Service }\\[0.2\baselineskip] %Title.
 	\rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt} %Thin horizontal line.
 	\rule{\textwidth}{1.6pt}\\[2\baselineskip] %Thick horizontal line.
 	\scshape %Small caps.
@@ -142,13 +142,13 @@ eprint=false
 	
 	
 	Autoren\\
-	{\Large [ Michael Wieland ] \\ [5pt]}
+	{\Large  Michael Wieland  \\ [5pt]}
 	
-	{\Large [ Murièle Trentini ] \\ [5pt]}
+	{\Large Murièle Trentini \\ [5pt]}
 	
 	\vspace*{2\baselineskip}
 	Betreuer\\
-	{\Large [ Thomas Letsch ] \\[5pt]
+	{\Large Thomas Letsch  \\[5pt]
 		\small Dozent für Informatik an der \\[5pt]Hochschule für Technik Rapperswil\par}
 	\vspace*{2\baselineskip}
 	
@@ -211,22 +211,6 @@ eprint=false
 	
 	\newpage
 	
-	\section*{Technischer Bericht}  % ca 5 Seiten lang
-	% Im Technischen Bericht sind formelle Elemente besonders wichtig (z.B. Bildunterschriften und das Referenzieren der Bilder im Text).
-	\thispagestyle{firststyle}
-	
-	\subsection*{Ausgangslage \& Problembeschreibung}
-	
-	% (Beschreibung ob Fokus Lösungserstellung oder Machbarkeitsanalyse)
-	
-	\subsection*{Lösungskonzept}
-	
-	\subsection*{Umsetzung}
-	
-	\subsection*{Ergebnisdiskussion mit Ausblick}
-	
-	\newpage
-	
 	\section*{Danksagungen}
 	\thispagestyle{firststyle}
 	
@@ -256,39 +240,71 @@ eprint=false
 		\caption{Versionshistory Anfoderungsanalyse} 
 	\end{table}
 	
-	\section{Ausgangslage}
+	\section{Ausgangslage \& Problembeschreibung}
 	
-	\section{Mehrwert}
+	\subsection{Mehrwert}
 	
 	\section{Aufgabenstellung}
+	(siehe Anhang \ref{aufgabenstellung})
 	
-	\section{User Stories}
-	
-	\section{Use Cases}
-	
-	\subsection{Brief}
-	
-	\subsection{Fully Dressed}
+	\section{Anforderungen}
 	
 	\section{Domainanalyse}
+		
+
 	
-	\chapter{Realisierung}
+	\chapter{Designspezifikation}
 	
-		\begin{table}[h!]
+	\begin{table}[h!]
 		\centering
 		\begin{tabularx}{\linewidth}{l l X l}
 			\toprule 
 			Datum & Version & Änderungen & Autor \\
 			\midrule
-			28.09.17 & 1.0 & Dokument erstellt & mwieland \\
+			13.10.17 & 1.0 & MVVM Konzept geschrieben & mwieland \\
 			\bottomrule 
 		\end{tabularx} 
-		\caption{Versionshistory Realisierung} 
-		\end{table}
+		\caption{Versionshistory Designspezifikation} 
+	\end{table}
 	
-	\section{Architektur}
+	\section{Layering}
+	
+	\subsection{Presentation Layer}
+	Der Presentation Layer ist entkoppelt von der restlichen Anwendung, da er oft technologiespezifische Komponenten enthält. (z.B \gls{javafx}). Er ist nach dem \gls{mvvm} Prinzip organisiert.
+	
+	\subsubsection{Model-View-ViewModel}
+	\gls{mvvm} dient der Trennung zwischen dem User Interface und der Anzeigelogik. \gls{mvvm} ist eine Konkretisierung des verbreiteten \gls{mvc} Pattern und setzt stark auf Databindings. Es wurde von Microsoft für das \gls{wpf} Framework entwickelt.
+	
+	\paragraph{Model}
+	%TODO
+	
+	\paragraph{View}
+	Die View stellt den UI Zustand des View Model dar. Sie setzt sich aus einer Controller Klasse sowie eine \gls{fxml} Datei zusammen. Die View beinhaltet keine nennenswerte Logik und leitet die eingehenden Request einfach an das View Model weiter. Die Weiterleitung wird mit der Databinding-API gemacht. 
+	
+	\paragraph{View Model}
+	Das ViewM Model enthält den gesamten UI Zustand. (z.B Button A ist aktiv). Es kennt die View nicht und hat keine Abhängigkeiten zu konkreten View Elementen.  Dies hat den grossen Vorteil, dass die gesamte UI Logik im View Model gekapselt ist und somit sehr gut testbar ist.
+	
+	\subsection{Business Layer}
+	
+	\subsection{Access Layer}
+	
+	\chapter{Realisierung}
+		
+	\begin{table}[h!]
+	\centering
+	\begin{tabularx}{\linewidth}{l l X l}
+		\toprule 
+		Datum & Version & Änderungen & Autor \\
+		\midrule
+		28.09.17 & 1.0 & Dokument erstellt & mwieland \\
+		\bottomrule 
+	\end{tabularx} 
+	\caption{Versionshistory Realisierung} 
+	\end{table}
 	
 	\section{UI Design}
+	
+	\subsection{FXML}
 	
 	\subsection{Logo}
 	Das Logo wurde von den Eigenschaften des Kraken \cite{kraken} inspiriert. Kraken sind bekannt dafür, dass sie viele Irrgarten-Probleme effizient lösen können. Dies ist eine Anspielung an die Algorithmen, die vom \gls{gvs} unterstützt werden. Ebenfalls wurden die Saugnäpfe des Kraken als Graph visualisiert und auf der Stirn ist ein binärer Baum zu erkennen. 
@@ -300,22 +316,16 @@ eprint=false
 		\label{fig:logo}
 	\end{figure}
 	
-	
-	
-	
-	
-	\subsection{Konzept}
-	
 	\subsection{Icons}
 	
 	\subsection{Farben}
 	
 	\subsection{Wireframes}
 	
-	\section{Testing}
 	
+	\chapter{Ausblick}
 	
-	
+	\section{Weiterführende Arbeiten}
 	
 	
 	
