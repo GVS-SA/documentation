@@ -267,26 +267,39 @@ eprint=false
 		\caption{Versionshistory Designspezifikation} 
 	\end{table}
 	
-	\section{Layering}
+	\section{Systemübersicht}
+	%TODO
+	
+	\section{Domainmodell}
+	%TODO
+	
+	\section{Schichtendiagramm}
 	
 	\subsection{Presentation Layer}
-	Der Presentation Layer ist entkoppelt von der restlichen Anwendung, da er oft technologiespezifische Komponenten enthält. (z.B \gls{javafx}). Er ist nach dem \gls{mvvm} Prinzip organisiert.
+	Der Presentation Layer wurde von der restlichen Anwendung entkoppelt. Damit kann das eingesetzte UI Framework (z.B \gls{javafx}) leicht ersetzt werden. Der Presentation Layer ist nach dem \gls{mvvm} Prinzip organisiert.
 	
 	\subsubsection{Model-View-ViewModel}
 	\gls{mvvm} dient der Trennung zwischen dem User Interface und der Anzeigelogik. \gls{mvvm} ist eine Konkretisierung des verbreiteten \gls{mvc} Pattern und setzt stark auf Databindings. Es wurde von Microsoft für das \gls{wpf} Framework entwickelt.
 	
 	\paragraph{Model}
-	%TODO
+	Das Model enthält reine Datenklassen ohne nennenswerte Logik.
 	
 	\paragraph{View}
-	Die View stellt den UI Zustand des View Model dar. Sie setzt sich aus einer Controller Klasse sowie eine \gls{fxml} Datei zusammen. Die View beinhaltet keine nennenswerte Logik und leitet die eingehenden Request einfach an das View Model weiter. Die Weiterleitung wird mit der Databinding-API gemacht. 
+	Die View stellt den UI Zustand des View Model dar. Sie setzt sich aus einer Controller Klasse sowie einer deklarativen \gls{fxml} Datei zusammen. Auch die View beinhaltet keine nennenswerte Logik. Sie leitet die eingehenden Request direkt an das View Model weiter. Mit der Databinding-API wird eine bidirektionale Kommunikation zwischen View und View Model sichergestellt. 
 	
 	\paragraph{View Model}
-	Das ViewM Model enthält den gesamten UI Zustand. (z.B Button A ist aktiv). Es kennt die View nicht und hat keine Abhängigkeiten zu konkreten View Elementen.  Dies hat den grossen Vorteil, dass die gesamte UI Logik im View Model gekapselt ist und somit sehr gut testbar ist.
+	Das View Model kennt die View nicht. Es hat somit keine Abhängigkeiten zu konkreten Anzeige Elementen. Dies hat den grossen Vorteil, dass die gesamte UI Logik im View Model gekapselt ist und somit sehr gut testbar ist.
 	
 	\subsection{Business Layer}
+	Im Business Layer liegt die eigentliche Logik. Er enthält keine \gls{javafx} Komponenten, weshalb das eingesetzte UI Framework ohne weiteres ausgewechselt werden kann. 
 	
 	\subsection{Access Layer}
+	Der Access Layer enthält Klassen für den Zugang zum Socket Server, sowie dem Filesystem. Ist für das Parsen von eingehenden XML Files zuständig und für deren Umwandlung in Domainobjekte.
+	
+	\section{Sequenzdiagramme}
+	%TODO
+	
+
 	
 	\chapter{Realisierung}
 		
@@ -325,7 +338,15 @@ eprint=false
 	
 	\chapter{Ausblick}
 	
-	\section{Weiterführende Arbeiten}
+	\section{Server Ausbau}
+	
+	\subsection{Multithreading aufräumen}
+	
+	\section{Client Ausbau}
+	
+	\subsection{Algorithmen Library}
+	
+	\subsection{Annotations}
 	
 	
 	
@@ -562,6 +583,9 @@ eprint=false
 	
     \includepdf[pages={1-}]{assets/Aufgabenstellung_GVS2.pdf}
 
+
+	\chapter{Persönliche Berichte}
+	\label{erfahrungsberichte}
 	
 	\chapter{Zeitauswertung}
 	\label{zeitauswertung}
