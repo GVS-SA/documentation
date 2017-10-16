@@ -131,7 +131,7 @@ eprint=false
 	\plogo\\[2\baselineskip] %University Logo.
 	\rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt} %Thick horizontal line.
 	\rule{\textwidth}{0.4pt}\\[\baselineskip] %Thin horizontal line.
-	{\LARGE [ Graphs-Visualization-Service ]}\\[0.2\baselineskip] %Title.
+	{\LARGE Graphs-Visualization-Service }\\[0.2\baselineskip] %Title.
 	\rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt} %Thin horizontal line.
 	\rule{\textwidth}{1.6pt}\\[2\baselineskip] %Thick horizontal line.
 	\scshape %Small caps.
@@ -142,13 +142,13 @@ eprint=false
 	
 	
 	Autoren\\
-	{\Large [ Michael Wieland ] \\ [5pt]}
+	{\Large  Michael Wieland  \\ [5pt]}
 	
-	{\Large [ Murièle Trentini ] \\ [5pt]}
+	{\Large Murièle Trentini \\ [5pt]}
 	
 	\vspace*{2\baselineskip}
 	Betreuer\\
-	{\Large [ Thomas Letsch ] \\[5pt]
+	{\Large Thomas Letsch  \\[5pt]
 		\small Dozent für Informatik an der \\[5pt]Hochschule für Technik Rapperswil\par}
 	\vspace*{2\baselineskip}
 	
@@ -211,22 +211,6 @@ eprint=false
 	
 	\newpage
 	
-	\section*{Technischer Bericht}  % ca 5 Seiten lang
-	% Im Technischen Bericht sind formelle Elemente besonders wichtig (z.B. Bildunterschriften und das Referenzieren der Bilder im Text).
-	\thispagestyle{firststyle}
-	
-	\subsection*{Ausgangslage \& Problembeschreibung}
-	
-	% (Beschreibung ob Fokus Lösungserstellung oder Machbarkeitsanalyse)
-	
-	\subsection*{Lösungskonzept}
-	
-	\subsection*{Umsetzung}
-	
-	\subsection*{Ergebnisdiskussion mit Ausblick}
-	
-	\newpage
-	
 	\section*{Danksagungen}
 	\thispagestyle{firststyle}
 	
@@ -256,39 +240,84 @@ eprint=false
 		\caption{Versionshistory Anfoderungsanalyse} 
 	\end{table}
 	
-	\section{Ausgangslage}
+	\section{Ausgangslage \& Problembeschreibung}
 	
-	\section{Mehrwert}
+	\subsection{Mehrwert}
 	
 	\section{Aufgabenstellung}
+	(siehe Anhang \ref{aufgabenstellung})
 	
-	\section{User Stories}
-	
-	\section{Use Cases}
-	
-	\subsection{Brief}
-	
-	\subsection{Fully Dressed}
+	\section{Anforderungen}
 	
 	\section{Domainanalyse}
+		
+
 	
-	\chapter{Realisierung}
+	\chapter{Designspezifikation}
 	
-		\begin{table}[h!]
+	\begin{table}[h!]
 		\centering
 		\begin{tabularx}{\linewidth}{l l X l}
 			\toprule 
 			Datum & Version & Änderungen & Autor \\
 			\midrule
-			28.09.17 & 1.0 & Dokument erstellt & mwieland \\
+			13.10.17 & 1.0 & MVVM Konzept geschrieben & mwieland \\
 			\bottomrule 
 		\end{tabularx} 
-		\caption{Versionshistory Realisierung} 
-		\end{table}
+		\caption{Versionshistory Designspezifikation} 
+	\end{table}
 	
-	\section{Architektur}
+	\section{Systemübersicht}
+	%TODO
+	
+	\section{Domainmodell}
+	%TODO
+	
+	\section{Schichtendiagramm}
+	
+	\subsection{Presentation Layer}
+	Der Presentation Layer wurde von der restlichen Anwendung entkoppelt. Damit kann das eingesetzte UI Framework (z.B \gls{javafx}) leicht ersetzt werden. Der Presentation Layer ist nach dem \gls{mvvm} Prinzip organisiert.
+	
+	\subsubsection{Model-View-ViewModel}
+	\gls{mvvm} dient der Trennung zwischen dem User Interface und der Anzeigelogik. \gls{mvvm} ist eine Konkretisierung des verbreiteten \gls{mvc} Pattern und setzt stark auf Databindings. Es wurde von Microsoft für das \gls{wpf} Framework entwickelt.
+	
+	\paragraph{Model}
+	Das Model enthält reine Datenklassen ohne nennenswerte Logik.
+	
+	\paragraph{View}
+	Die View stellt den UI Zustand des View Models dar. Sie setzt sich aus einer Controller Klasse sowie einer deklarativen \gls{fxml} Datei zusammen. Auch die View beinhaltet keine nennenswerte Logik. Sie leitet die eingehenden Requests direkt an das View Model weiter. Mit der Databinding-API wird eine bidirektionale Kommunikation zwischen View und View Model sichergestellt. 
+	
+	\paragraph{View Model}
+	Das View Model kennt die View nicht. Es hat somit keine Abhängigkeiten zu konkreten Anzeige Elementen. Dies hat den grossen Vorteil, dass die gesamte UI Logik im View Model gekapselt ist und somit sehr gut testbar ist.
+	
+	\subsection{Business Layer}
+	Im Business Layer liegt die eigentliche Logik. Er enthält keine \gls{javafx} Komponenten, weshalb das eingesetzte UI Framework ohne weiteres ausgewechselt werden kann. 
+	
+	\subsection{Access Layer}
+	Der Access Layer enthält Klassen für den Zugriff auf den Socket Server, sowie das File System. Es Ist für das Parsen von eingehenden XML Files zuständig und für deren Umwandlung in Domainobjekte.
+	
+	\section{Sequenzdiagramme}
+	%TODO
+	
+
+	
+	\chapter{Realisierung}
+		
+	\begin{table}[h!]
+	\centering
+	\begin{tabularx}{\linewidth}{l l X l}
+		\toprule 
+		Datum & Version & Änderungen & Autor \\
+		\midrule
+		28.09.17 & 1.0 & Dokument erstellt & mwieland \\
+		\bottomrule 
+	\end{tabularx} 
+	\caption{Versionshistory Realisierung} 
+	\end{table}
 	
 	\section{UI Design}
+	
+	\subsection{FXML}
 	
 	\subsection{Logo}
 	Das Logo wurde von den Eigenschaften des Kraken \cite{kraken} inspiriert. Kraken sind bekannt dafür, dass sie viele Irrgarten-Probleme effizient lösen können. Dies ist eine Anspielung an die Algorithmen, die vom \gls{gvs} unterstützt werden. Ebenfalls wurden die Saugnäpfe des Kraken als Graph visualisiert und auf der Stirn ist ein binärer Baum zu erkennen. 
@@ -300,22 +329,24 @@ eprint=false
 		\label{fig:logo}
 	\end{figure}
 	
-	
-	
-	
-	
-	\subsection{Konzept}
-	
 	\subsection{Icons}
 	
 	\subsection{Farben}
 	
 	\subsection{Wireframes}
 	
-	\section{Testing}
 	
+	\chapter{Ausblick}
 	
+	\section{Server Ausbau}
 	
+	\subsection{Multithreading aufräumen}
+	
+	\section{Client Ausbau}
+	
+	\subsection{Algorithmen Library}
+	
+	\subsection{Annotations}
 	
 	
 	
@@ -552,6 +583,9 @@ eprint=false
 	
     \includepdf[pages={1-}]{assets/Aufgabenstellung_GVS2.pdf}
 
+
+	\chapter{Persönliche Berichte}
+	\label{erfahrungsberichte}
 	
 	\chapter{Zeitauswertung}
 	\label{zeitauswertung}
