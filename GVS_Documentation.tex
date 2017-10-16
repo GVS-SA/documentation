@@ -285,7 +285,7 @@ eprint=false
 	Das Model enthält reine Datenklassen ohne nennenswerte Logik.
 	
 	\paragraph{View}
-	Die View stellt den UI Zustand des View Model dar. Sie setzt sich aus einer Controller Klasse sowie einer deklarativen \gls{fxml} Datei zusammen. Auch die View beinhaltet keine nennenswerte Logik. Sie leitet die eingehenden Request direkt an das View Model weiter. Mit der Databinding-API wird eine bidirektionale Kommunikation zwischen View und View Model sichergestellt. 
+	Die View stellt den UI Zustand des View Models dar. Sie setzt sich aus einer Controller Klasse sowie einer deklarativen \gls{fxml} Datei zusammen. Auch die View beinhaltet keine nennenswerte Logik. Sie leitet die eingehenden Requests direkt an das View Model weiter. Mit der Databinding-API wird eine bidirektionale Kommunikation zwischen View und View Model sichergestellt. 
 	
 	\paragraph{View Model}
 	Das View Model kennt die View nicht. Es hat somit keine Abhängigkeiten zu konkreten Anzeige Elementen. Dies hat den grossen Vorteil, dass die gesamte UI Logik im View Model gekapselt ist und somit sehr gut testbar ist.
@@ -294,7 +294,7 @@ eprint=false
 	Im Business Layer liegt die eigentliche Logik. Er enthält keine \gls{javafx} Komponenten, weshalb das eingesetzte UI Framework ohne weiteres ausgewechselt werden kann. 
 	
 	\subsection{Access Layer}
-	Der Access Layer enthält Klassen für den Zugang zum Socket Server, sowie dem Filesystem. Ist für das Parsen von eingehenden XML Files zuständig und für deren Umwandlung in Domainobjekte.
+	Der Access Layer enthält Klassen für den Zugriff auf den Socket Server, sowie das File System. Es Ist für das Parsen von eingehenden XML Files zuständig und für deren Umwandlung in Domainobjekte.
 	
 	\section{Sequenzdiagramme}
 	%TODO
