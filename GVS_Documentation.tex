@@ -282,7 +282,7 @@ eprint=false
 	\gls{mvvm} dient der Trennung zwischen dem User Interface und der Anzeigelogik. \gls{mvvm} ist eine Konkretisierung des verbreiteten \gls{mvc} Pattern und setzt stark auf Databindings. Es wurde von Microsoft für das \gls{wpf} Framework entwickelt.
 	
 	\paragraph{Model}
-	Das Model enthält reine Datenklassen ohne nennenswerte Logik.
+	Das Model enthält reine Datenklassen ohne nennenswerte Logik. Die Model Klassen im Presentation Layer enhalten \gls{javafx} Properties, die für das Data Binding nötig sind. Zusätzlich gibt es im Business Layer vergleichbare Domainobjekte, die jedoch bewusst keine UI spezifische Imports besitzen. (\gls{pojo})
 	
 	\paragraph{View}
 	Die View stellt den UI Zustand des View Models dar. Sie setzt sich aus einer Controller Klasse sowie einer deklarativen \gls{fxml} Datei zusammen. Auch die View beinhaltet keine nennenswerte Logik. Sie leitet die eingehenden Requests direkt an das View Model weiter. Mit der Databinding-API wird eine bidirektionale Kommunikation zwischen View und View Model sichergestellt. 
