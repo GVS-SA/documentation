@@ -235,6 +235,7 @@ eprint=false
 			Datum & Version & Änderungen & Autor \\
 			\midrule
 			28.09.17 & 1.0 & Grundgerüst erstellt & mwieland \\
+			17.10.17 & 1.1 & Sequenzdiagramme eingefügt & mtrentini \\
 			\bottomrule 
 		\end{tabularx} 
 		\caption{Versionshistory Anfoderungsanalyse} 
@@ -250,8 +251,47 @@ eprint=false
 	\section{Anforderungen}
 	
 	\section{Domainanalyse}
-		
+	
+	\subsection{Sequenzdiagramme}
+	Zum besseren Verständnis von GVS 1.0 hat das Projektteam die wichtigsten Abläufe analysiert und als Sequenzdiagramme aufgezeichnet.
+	
+	\subsubsection{Verbindungsaufbau}
+	Dieses Sequenzdiagramm zeigt den Verbindungsaufbau über den \textit{SocketServer} beim starten der Applikation. Der Start von \textit{SeverConnectionXML} führt zu einem Locking mit Hilfe des \textit{ConnectionMonitors}. Dieses Locking verhindert, dass mehr als ein Client mit einem Server kommuniziert. Nach empfangen von Daten aus der Socket, erstellt der \textit{ModelBuilder} einen Graphen oder Tree als Domain-Objekt. Dieser Ablauf ist auf dem Sequenzdiagramm \textbf{ModelBuilder} (siehe \ref{sssec:modelbuilder}) zu sehen.
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\linewidth]{assets/images/verbindungsaufbau}
+		\caption{Sequenzdiagramm: Verbindungsaufbau}
+		\label{fig:sd-verbindungsaufbau}
+	\end{figure}
 
+	\subsubsection{ModelBuilder} 	\label{sssec:modelbuilder}
+	Der \textit{ModelBuilder} parsed aus empfangenen \gls{xml} Dokumenten das entsprechende Domain-Objekt. Dabei wird zwischen Graphen und Trees unterschieden. Nach Fertigstellung des Parse-Vorgangs, wird das Model an den entsprechenden \textit{SessionController} übergeben. Der weitere Ablauf befindet sich im separaten Sequenzdiagramm \textbf{GraphSessionController} (siehe \ref{sssec:sessioncontroller})
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\linewidth]{assets/images/modelbuilder}
+		\caption{Sequenzdiagramm: ModelBuilder}
+		\label{fig:sd-modelbuilder}
+	\end{figure}
+
+	\subsubsection{ApplicationView: Load \& Save Session} \label{sssec:appView}
+	Wenn ein User eine Session ladet, wird das entsprechende \gls{xml} vom Persistor geparsed. Dieser erstellt je nach Bedarf ein Vector voller Graphs oder Trees. Dieser Vector wird an den \textit{SessionController} übergeben. Der Ablauf innerhalb des \textit{SessionController}s ist im separaten Sequenzdiagramm \textbf{GraphSessionController} (siehe \ref{sssec:sessioncontroller}) dargestellt. \\
+	Nachdem die Session erstellt wurde, wird die \textit{ApplicationView} per Observer-Beziehung (siehe Glossar: \gls{observer}) aktiviert und stellt die neue Session im GUI dar.
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\linewidth]{assets/images/application_view}
+		\caption{Sequenzdiagramm: ApplicationView}
+		\label{fig:sd-applicationview}
+	\end{figure}
+
+	\subsubsection{GraphSessionController} \label{sssec:sessioncontroller}
+	Der \textit{GraphSessionController} wird vom \textit{ModelBuilder} und vom \textit{Persistor} angestossen, wenn ein oder mehrere neue Graphen geparsed wurden. Der \textit{GraphSessionController} ist dafür zuständig, diese Graphen in eine neue oder bestehende Session einzufügen. Dabei unterscheidet sich der Programmablauf kaum. Übersichtshalber ist nur der Fall ''ein einzelner neuer Graph wurde empfangen'' abgebildet.
+	Der \textit{GraphSessionController} setzt den neuen Graphen als aktuellen Graphen auf dem \textit{VisualizationGraphModel}. Dieses informiert per Observer-Beziehung (siehe Glossar: \gls{observer}) das \textit{VisualiztionGraphPanel}, welches die für die Darstellung benötigten Vertex und Edge Komponenten erstellt.
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\linewidth]{assets/images/graph_session_controller}
+		\caption{Sequenzdiagramm: GraphSessionController}
+		\label{fig:sd-graphsessioncontroller}
+	\end{figure}
 	
 	\chapter{Designspezifikation}
 	
