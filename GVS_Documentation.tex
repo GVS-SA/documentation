@@ -236,21 +236,54 @@ eprint=false
 			\midrule
 			28.09.17 & 1.0 & Grundgerüst erstellt & mwieland \\
 			17.10.17 & 1.1 & Sequenzdiagramme eingefügt & mtrentini \\
+			18.10.17 & 1.1 & Ausgangslage und Stakeholder eingefügt & mwieland \\
 			\bottomrule 
 		\end{tabularx} 
 		\caption{Versionshistory Anfoderungsanalyse} 
 	\end{table}
 	
 	\section{Ausgangslage \& Problembeschreibung}
+	Die Software \gls{gvs} unterstützt Studenten beim Erlernen von schwierig zu verstehenden Algorithmen. Der wichtigste Aspekt ist dabei die Visualisierung der einzelnen Arbeitsschritte, die ein Algorithmus auf einem Graph oder Tree ausführt.
+	
+	Die Software wurde 2005 bereits im Rahmen einer Bachelorarbeit umgesetzt. Der in die Jahre gekommene GVS 1.0 soll nun in einem Major-Upgrade aktualisiert werden.
 	
 	\subsection{Mehrwert}
 	
-	\section{Aufgabenstellung}
-	(siehe Anhang \ref{aufgabenstellung})
+
 	
 	\section{Anforderungen}
+	Die Anforderungen wurden massgeblich aus der offiziellen Aufgabenstellung entnommen. (siehe Anhang \ref{aufgabenstellung})
+	
+	\begin{enumerate}
+		\item Serverseitig muss das UI Framework Swing durch den offiziellen Nachfolger \gls{javafx} ersetzt werden.
+		\item Clientseitig muss der Java und .NET Client um Generics erweitert werden. 
+		\item Punktuell müssen Verbesserungen vorgenommen werden.
+	\end{enumerate}
+
+	%TODO punktuelle verbesserung kommentieren
 	
 	\section{Domainanalyse}
+	In der Domainanalyse hat sich das Projektteam einen Überblick über den aktuellen Stand von GVS 1.0 verschafft. Die dabei gewonnen Erkenntnisse sind dann in die Designspezifikation eingeflossen.
+	
+	\subsection{Stakeholder}
+	Aus den beschrieben Anforderungen kristallisieren sich drei relevante Stakeholder heraus.
+	\begin{table}[h!]
+		\centering
+		\begin{tabularx}{\linewidth}{l X X}
+			\toprule 
+			Rolle & Ziel/Intention & Erwartungshaltung \\
+			\midrule
+			Student & Möchte GVS unkompliziert installieren und benutzen können & Möchte den zu visualisierenden Graphen/Tree ansprechend dargestellt bekommen. Ihm ist der Lerneffekt wichtig.  \\
+			Entwickler & Möchte GVS einfach erweitern können & Sucht nach bekannten Software Pattern und klaren Software Schichten.  \\			
+			Dozent & Möchte GVS in seinem Unterricht einsetzen & Erwartet eine intuitive Integration von GVS in bestehende Übungsaufgaben. \\
+			\bottomrule 
+		\end{tabularx} 
+		\caption{Relevante Stakeholder} 
+	\end{table}
+	
+	\subsection{Kontextdiagramm}
+	
+	\subsection{Klassendiagramm}
 	
 	\subsection{Sequenzdiagramme}
 	Zum besseren Verständnis von GVS 1.0 hat das Projektteam die wichtigsten Abläufe analysiert und als Sequenzdiagramme aufgezeichnet.
@@ -308,10 +341,7 @@ eprint=false
 		\caption{Versionshistory Designspezifikation} 
 	\end{table}
 	
-	\section{Systemübersicht}
-	%TODO
-	
-	\section{Domainmodell}
+	\section{Klassendiagramm}
 	%TODO
 	
 	\section{Schichtendiagramm}
