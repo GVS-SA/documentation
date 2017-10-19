@@ -269,19 +269,19 @@ eprint=false
 	Aus den beschrieben Anforderungen kristallisieren sich drei relevante Stakeholder heraus.
 	\begin{table}[h!]
 		\centering
-		\begin{tabularx}{\linewidth}{l X X}
+		\begin{tabularx}{\linewidth}{l l X X}
 			\toprule 
-			Rolle & Ziel/Intention & Erwartungshaltung \\
+			\# & Rolle & Ziel/Intention & Erwartungshaltung \\
 			\midrule
-			Student & Möchte GVS unkompliziert installieren und benutzen können & Möchte den zu visualisierenden Graphen/Tree ansprechend dargestellt bekommen. Ihm ist der Lerneffekt wichtig.  \\
-			Entwickler & Möchte GVS einfach erweitern können & Sucht nach bekannten Software Pattern und klaren Software Schichten.  \\			
-			Dozent & Möchte GVS in seinem Unterricht einsetzen & Erwartet eine intuitive Integration von GVS in bestehende Übungsaufgaben. \\
+			1 & Student & Möchte GVS unkompliziert installieren und benutzen können & Möchte den zu visualisierenden Graphen/Tree ansprechend dargestellt bekommen. Ihm ist der Lerneffekt wichtig.  \\
+			2 & Entwickler & Möchte GVS einfach erweitern können & Sucht nach bekannten Software Pattern und klaren Software Schichten.  \\			
+			3 & Dozent & Möchte GVS in seinem Unterricht einsetzen & Erwartet eine intuitive Integration von GVS in bestehende Übungsaufgaben. \\
 			\bottomrule 
 		\end{tabularx} 
 		\caption{Relevante Stakeholder} 
 	\end{table}
 	
-	\subsection{Kontextdiagramm}
+	\subsection{Komponentendiagramm}
 	
 	\subsection{Klassendiagramm}
 	
@@ -327,6 +327,11 @@ eprint=false
 		\label{fig:sd-graphsessioncontroller}
 	\end{figure}
 	
+	
+	\section{Erkenntnisse}
+	%TODO presentation layer kann relativ gut abgelöst werden. tangle. nur beschreiben was aktuell ist. Unser vorgehen gehört in die designspezifikation
+	
+	
 	\chapter{Designspezifikation}
 	
 	\begin{table}[h!]
@@ -344,7 +349,7 @@ eprint=false
 	\section{Klassendiagramm}
 	%TODO
 	
-	\section{Schichtendiagramm}
+	\section{Schichtenstruktur}
 	
 	\subsection{Presentation Layer}
 	Der Presentation Layer wurde von der restlichen Anwendung entkoppelt. Damit kann das eingesetzte UI Framework (z.B \gls{javafx}) leicht ersetzt werden. Der Presentation Layer ist nach dem \gls{mvvm} Prinzip organisiert.
@@ -353,6 +358,7 @@ eprint=false
 	\gls{mvvm} dient der Trennung zwischen dem User Interface und der Anzeigelogik. \gls{mvvm} ist eine Konkretisierung des verbreiteten \gls{mvc} Pattern und setzt stark auf Databindings. Es wurde von Microsoft für das \gls{wpf} Framework entwickelt.
 	
 	\paragraph{Model}
+	%TODO update: now in business layer
 	Das Model enthält reine Datenklassen ohne nennenswerte Logik. Die Model Klassen im Presentation Layer enhalten \gls{javafx} Properties, die für das Data Binding nötig sind. Zusätzlich gibt es im Business Layer vergleichbare Domainobjekte, die jedoch bewusst keine UI spezifische Imports besitzen. (\gls{pojo})
 	
 	\paragraph{View}
@@ -367,6 +373,11 @@ eprint=false
 	\subsection{Access Layer}
 	Der Access Layer enthält Klassen für den Zugriff auf den Socket Server, sowie das File System. Es Ist für das Parsen von eingehenden XML Files zuständig und für deren Umwandlung in Domainobjekte.
 
+	\section{Refactoring Konzept}
+	%TODO übersicht klassen einfügen und beschreiben
+	
+	\subsection{Ablauf}
+	%TODO übersicht klassen einfügen und beschreiben
 	
 	\chapter{Realisierung}
 		
@@ -407,7 +418,8 @@ eprint=false
 	
 	\section{Server Ausbau}
 	
-	\subsection{Multithreading aufräumen}
+	\subsection{Threading Konzept}
+	%TODO Multi or Single Threading?
 	
 	\section{Client Ausbau}
 	
