@@ -359,18 +359,25 @@ eprint=false
 	\subsection{Presentation Layer}
 	Der Presentation Layer wurde von der restlichen Anwendung entkoppelt. Damit kann das eingesetzte UI Framework (z.B \gls{javafx}) leicht ersetzt werden. Der Presentation Layer ist nach dem \gls{mvvm} Prinzip organisiert.
 	
+		
 	\subsubsection{Model-View-ViewModel}
-	\gls{mvvm} dient der Trennung zwischen dem User Interface und der Anzeigelogik. \gls{mvvm} ist eine Konkretisierung des verbreiteten \gls{mvc} Pattern und setzt stark auf Databindings. Es wurde von Microsoft für das \gls{wpf} Framework entwickelt.
+	\gls{mvvm} dient der Trennung zwischen dem User Interface und der Anzeigelogik. \gls{mvvm} ist eine Konkretisierung des verbreiteten \gls{mvc} Pattern und setzt stark auf Databindings. Es wurde von Microsoft für das \gls{wpf} Framework entwickelt und wird auch in modernen \gls{javafx} Applikation eingesetzt.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\linewidth]{assets/images/mvvm_concept}
+		\caption[MVVM Konzept]{Mode View ViewModel Konzept}
+		\label{fig:mvvmconcept}
+	\end{figure}	
 	
 	\paragraph{Model}
-	%TODO update: now in business layer
-	Das Model enthält reine Datenklassen ohne nennenswerte Logik. Die Model Klassen im Presentation Layer enhalten \gls{javafx} Properties, die für das Data Binding nötig sind. Zusätzlich gibt es im Business Layer vergleichbare Domainobjekte, die jedoch bewusst keine UI spezifische Imports besitzen. (\gls{pojo})
+	Das \textit{Model} enthält reine Datenklassen ohne nennenswerte Logik. (siehe \gls{pojo}) Das \textit{Model} wurde in den Business Layer verschoben, damit das UI Framework einfach ausgewechselt werden kann. Werden die Werte im Model geändert wird das \textit{ViewModel} über eine Observer Beziehung benachrichtig. Dies entspricht nicht dem klassischen \gls{mvvm} Konzept, wird jedoch benötigt, damit die View entsprechend aktualisiert wird, wenn z.B die Koordinaten neu berechnet werden.
 	
 	\paragraph{View}
-	Die View stellt den UI Zustand des View Models dar. Sie setzt sich aus einer Controller Klasse sowie einer deklarativen \gls{fxml} Datei zusammen. Auch die View beinhaltet keine nennenswerte Logik. Sie leitet die eingehenden Requests direkt an das View Model weiter. Mit der Databinding-API wird eine bidirektionale Kommunikation zwischen View und View Model sichergestellt. 
+	Die \textit{View} stellt den UI Zustand des \textit{ViewModels} dar. Sie setzt sich aus einer Controller Klasse sowie einer deklarativen \gls{fxml} Datei zusammen. Die View hält eine Instanz des ViewModels und leitet die eingehenden Anfragen direkt an dieses weiter. Mit der Databinding-API wird eine bidirektionale Kommunikation zwischen \textit{View} und \textit{ViewModel} sichergestellt. 
 	
-	\paragraph{View Model}
-	Das View Model kennt die View nicht. Es hat somit keine Abhängigkeiten zu konkreten Anzeige Elementen. Dies hat den grossen Vorteil, dass die gesamte UI Logik im View Model gekapselt ist und somit sehr gut testbar ist.
+	\paragraph{ViewModel}
+	Das \textit{ViewModel} kennt die View nicht. Es hat somit keine Abhängigkeiten zu konkreten Anzeige Elementen. Dies hat den grossen Vorteil, dass die gesamte UI Logik im \textit{ViewModel} gekapselt ist und somit sehr gut testbar ist. Das ViewModel enthält \gls{javafx} spezifische Properties, die für das bidirektionale Binding zwischen UI Komponenten und Code Behind nötig sind.
 	
 	\subsection{Business Layer}
 	Im Business Layer liegt die eigentliche Logik. Er enthält keine \gls{javafx} Komponenten, weshalb das eingesetzte UI Framework ohne weiteres ausgewechselt werden kann. 
