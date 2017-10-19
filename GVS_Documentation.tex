@@ -15,6 +15,7 @@
 % Setup glossary and acronyms
 \usepackage[acronym,toc,nopostdot]{glossaries}
 \loadglsentries{glossar-terms}
+\glsenablehyper
 \makeglossaries
 
 % Include external pdf
@@ -69,15 +70,15 @@ eprint=false
 
 %Setup of the reference links.
 \hypersetup{
-	colorlinks=false,
-	linkcolor=blue,
-	citecolor=blue,
-	filecolor=magenta,
-	urlcolor=blue}
-
-
-
-
+	colorlinks=true,
+	linkcolor=cyan,
+	anchorcolor=black,
+	citecolor=cyan,
+	filecolor=cyan,
+	urlcolor=cyan,
+	runcolor=cyan,
+	menucolor=black
+}
 
 
 %Define some reasonable margins.
@@ -220,8 +221,11 @@ eprint=false
 		\item Thomas Letsch für die Betreuung unserer Studienarbeit.
 		\item Jessica Martin für die technische Unterstützung beim Logo Design.
 	\end{itemize}
-	
-	\tableofcontents
+
+	{
+		\hypersetup{linkcolor=black}
+		\tableofcontents
+	}
 	
 	\newpage
 	\pagenumbering{arabic}
@@ -637,9 +641,17 @@ eprint=false
 	% List of references
 	\printbibliography[heading=bibintoc]
 	
-	\listoffigures
+	{
+		\hypersetup{linkcolor=black}
+		\listoffigures
+	}
 	
-	\listoftables
+	{
+		\hypersetup{linkcolor=black}
+		\listoftables
+	}
+	
+	
 	
 	\chapter{Eigenständigkeitserklärung}
 	Der/Die Verfasser/in erklärt hiermit, dass er/sie die vorliegende Arbeit selbständig, ohne fremde Hilfe und ohne Benutzung anderer als die angegebenen Hilfsmittel angefertigt hat. Die aus fremden Quellen (einschliesslich elektronischer Quellen) direkt oder indirekt übernommenen Gedanken sind ausnahmslos als solche kenntlich gemacht. Durch Copyright geschützte Materialien wurden in dieser Arbeit nicht in unerlaubter Weise genutzt. Die Arbeit ist in gleicher oder ähnlicher Form oder auszugsweise im Rahmen einer anderen Prüfung noch nicht vorgelegt worden.\\[2cm]
