@@ -247,12 +247,11 @@ eprint=false
 	\end{table}
 	
 	\section{Ausgangslage \& Problembeschreibung}
-	Die Software \gls{gvs} unterstützt Studenten beim Erlernen von schwierig zu verstehenden Algorithmen. Der wichtigste Aspekt ist dabei die Visualisierung der einzelnen Arbeitsschritte, die ein Algorithmus auf einem Graph oder Tree ausführt.
-	
+	Die Software \gls{gvs} unterstützt Studenten beim Erlernen von schwierig zu verstehenden Algorithmen. Der wichtigste Aspekt ist dabei die Visualisierung der einzelnen Arbeitsschritte, die ein Algorithmus auf einem Graph oder Tree ausführt.\\
 	Die Software wurde 2005 bereits im Rahmen einer Bachelorarbeit umgesetzt. Der in die Jahre gekommene GVS 1.0 soll nun in einem Major-Upgrade aktualisiert werden.
 	
 	\subsection{Mehrwert}
-	
+	Die Software profitiert von einer durchgängig klaren Architektur, die einfach erweitert werden kann. Der Endbenutzer bemerkt nur eine modernes und ansprechendes User Interface. Die Funktionalität soll beibehalten werden. 
 
 	
 	\section{Anforderungen}
@@ -264,7 +263,7 @@ eprint=false
 		\item Punktuell müssen Verbesserungen vorgenommen werden.
 	\end{enumerate}
 
-	%TODO punktuelle verbesserung kommentieren
+	Welche Punktuellen Verbesserungen vorgenommen werden sollen, hat das Projekttem zusammen mit dem Betreuer, Herr Letsch, festegelegt und sind dem Abschnitt \textbf{Refactroing Ablauf} (\ref{ssec:ablauf}) zu entnehmen.
 	
 	\section{Domainanalyse}
 	In der Domainanalyse hat sich das Projektteam einen Überblick über den aktuellen Stand von GVS 1.0 verschafft. Die dabei gewonnen Erkenntnisse sind dann in die Designspezifikation eingeflossen.
@@ -288,6 +287,7 @@ eprint=false
 	\subsection{Komponentendiagramm}
 	
 	\subsection{Klassendiagramm}
+	\includepdf[fitpaper]{assets/pdf/gvs1-0.pdf}
 	
 	\subsection{Sequenzdiagramme}
 	Zum besseren Verständnis von GVS 1.0 hat das Projektteam die wichtigsten Abläufe analysiert und als Sequenzdiagramme aufgezeichnet.
@@ -346,15 +346,16 @@ eprint=false
 			Datum & Version & Änderungen & Autor \\
 			\midrule
 			13.10.17 & 1.0 & MVVM Konzept geschrieben & mwieland \\
+			19.10.17 & 1.1 & Refactoring Konzept erstellt & mtrentini \\
 			\bottomrule 
 		\end{tabularx} 
 		\caption{Versionshistory Designspezifikation} 
 	\end{table}
 	
-	\section{Klassendiagramm}
-	%TODO
+	\section{Klassendiagramm} \label{sec:class-diagram}
+	\includepdf[fitpaper]{assets/pdf/gvs2-1.pdf}
 	
-	\section{Schichtenstruktur}
+	\section{Schichtenstruktur} \label{ssec:layer-architecture}
 	
 	\subsection{Presentation Layer}
 	Der Presentation Layer wurde von der restlichen Anwendung entkoppelt. Damit kann das eingesetzte UI Framework (z.B \gls{javafx}) leicht ersetzt werden. Der Presentation Layer ist nach dem \gls{mvvm} Prinzip organisiert.
@@ -379,10 +380,21 @@ eprint=false
 	Der Access Layer enthält Klassen für den Zugriff auf den Socket Server, sowie das File System. Es Ist für das Parsen von eingehenden XML Files zuständig und für deren Umwandlung in Domainobjekte.
 
 	\section{Refactoring Konzept}
-	%TODO übersicht klassen einfügen und beschreiben
+	Im Rahmen dieser Studienarbeit soll die GVS 1.0 Applikation ein umfangreiches Refactoring erfahren. In diesem Unterkapitel wird beschrieben, wie dabei vorgegangen wird.
 	
-	\subsection{Ablauf}
-	%TODO übersicht klassen einfügen und beschreiben
+	\subsection{Ablauf}\label{ssec:ablauf}
+	\begin{enumerate}
+		\item Das Presentation Layer wird ersetzt. Dabei wird \gls{swing} durch JavaFX ersetzt. Mehr Details finden sich in der Klassen-Refactoring-Liste (\ref{ssec:class-refactroing-list}) sowie im Klassendiagramm von GVS 2.0 (\ref{sec:class-diagram})
+		\item Die GVS 1.0 Library wird um Generics erweitert.
+		\item Eine klare Schichtenarchitektur (\ref{ssec:layer-architecture}) wird eingeführt. Besonders wichtig ist dabei, die Entfernung von \gls{tangle}s.
+		\item Duplicated Code und weitere Code Smells sollen entfernt werden. Ein besonderes Augenmerk wird auf ein konsequentes Naming, das DRY Konzept sowie das ''Single Responsibility'' Konzept für Klassen und Methoden gelegt.
+	\end{enumerate}
+
+	\subsection{Klassen Refactoring Liste}
+	\label{ssec:class-refactroing-list}
+	Die folgende Liste soll zeigen, welche Klassen aus GVS 1.0 übernommen werden und welche Klassen in welcher Art und Weise verändert oder neu erstellt werden.
+	
+	\includepdf[fitpaper]{assets/pdf/Migration_Replacements.pdf}
 	
 	\chapter{Realisierung}
 		
