@@ -240,7 +240,8 @@ eprint=false
 			\midrule
 			28.09.17 & 1.0 & Grundgerüst erstellt & mwieland \\
 			17.10.17 & 1.1 & Sequenzdiagramme eingefügt & mtrentini \\
-			18.10.17 & 1.1 & Ausgangslage und Stakeholder eingefügt & mwieland \\
+			18.10.17 & 1.2 & Ausgangslage und Stakeholder eingefügt & mwieland \\
+			19.10.17 & 1.3 & Erkennisse: Stärken, Schwächen, Schlüsse beschrieben & mwieland \\
 			\bottomrule 
 		\end{tabularx} 
 		\caption{Versionshistory Anfoderungsanalyse} 
@@ -350,12 +351,48 @@ eprint=false
 		\label{fig:sd-graphsessioncontroller}
 	\end{figure}
 	
+	\section{Erkenntnisse} \label{sec:erkenntnisse}
+	Aus der Analysephase konnten wertvolle Erkennisse für das weitere Vorgehen gewonnen werden.
 	
-	\section{Erkenntnisse}
-	\label{sec:erkenntnisse}
-	%TODO presentation layer kann relativ gut abgelöst werden. tangle. nur beschreiben was aktuell ist. Unser vorgehen gehört in die designspezifikation
+	\subsection{Stärken}
+	Der GVS 1.0 weisst folgende Stärken auf:
+	
+	\subsubsection{Trennung Socket / Visualization}
+	Die angedachte Trennung zwischen Server und Visualisierung der Daten wiederspiegeln sich klar im Code.
+	
+	\subsubsection{Layering}
+	Die meisten Klassen konnten bei Analyse klar einem bestimmten Layer zugewiesen werden. Dies zeigt, dass die angedachte Architektur mehrheitlich umgesetzt wurde.
+		
+	\subsection{Schwächen}
+	Der GVS 1.0 weisst folgende Schwächen auf:
+	
+	\subsubsection{Swing/AWT Imports im Business Layer} Im Business Layer wurden diverse Imports der UI Frameworks \gls{swing} rsp. \gls{awt} gefunden. Dies erschwert einen Austausch des eingesetzten UI Frameworks.
+	
+	\subsubsection{Tangles} Zwischen den Software Schichten gibt es Zugriffe unten nach oben.
+	
+	\subsubsection{Magic Numbers} Viele Konstanten wurden ungenügend beschrieben. Der Zweck von vielen Zahlen ist daher nur schwer nachvollziehbar.
+	
+	\subsubsection{Namenskonvention}
+	Eine Prüfung der Namenskonvention wurde offenbar nicht durchgeführt. Zum Beispiel sind volatile Variablen in Grossbuchstaben geschrieben, was normalerweise auf eine Konstante hindeutet.
+	
+	\subsubsection{Temporary Fields}
+	Viele Klassen arbeiten stark mit Klassenvariablen die in diversen Methoden gesetzt und gelesen werden. Zusätzlich werden diese auch von lokalen Variablen überdeckt. Dies erschwert es, dem Programmfluss folgen zu können.
+	
+	\subsubsection{Duplicated Code}
+	Klassen wie der \textit{ModelBuilder} und \textit{Persistor} übernehmen sehr ähnliche Aufgaben.
+	
+	\subsubsection{Long Classes}
+	Mehrere Klassen sind mehr als 500 Zeichen lang. Dies hebt den Verdacht, dass die Klassen mehr als eine Aufgabe erledigen.
+	
+	\subsubsection{Keine Unit Tests} In dem Projekt wurden keine Unit Tests geschrieben. Dies ruht vermutlich daher, dass JUnit zum Entwicklungszeitpunkt noch sehr jung war.
+	
+	\subsubsection{JavaDoc}
+	Das Verhalten von Klassen nicht durchgehend nachgeführt. Ebenfalls lässt die Qualität der Kommentare zu wünschen übrig.	
 	
 	
+	\subsection{Schlüsse}
+	Aus den gewonnen Erkenntnissen hat das Projektteam Metriken eingeführt, damit der neue Code auf Konventionen Konformität geprüft werden kann. Ebenfalls wurde vor dem Start mit der Releasierung erste Refactorings durchgeführt, um den alten Code an die neuen Metrik Konventionen anzugleichen.
+
 		
 	\chapter{Designspezifikation}
 	
