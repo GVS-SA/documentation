@@ -248,11 +248,12 @@ eprint=false
 	\end{table}
 	
 	\section{Ausgangslage \& Problembeschreibung}
-	Die Software \gls{gvs} unterstützt Studenten beim Erlernen von schwierig zu verstehenden Algorithmen. Der wichtigste Aspekt ist dabei die Visualisierung der einzelnen Arbeitsschritte, die ein Algorithmus auf einem Graph oder Tree ausführt.\\
+	Die Software \gls{gvs} unterstützt Studenten beim Erlernen der Datenstrukturen Tree und Graph, sowie der darauf anwendbaren Algorithmen. Der wichtigste Aspekt ist dabei die Visualisierung der Arbeitsweise von Datenstrukturen und Algorithmen. So zeigt die Software zum Beispiel den schrittweisen Aufbau eines Baumes oder den Ablauf des Path Finding Algorithmus ''Dijkstra''. \\
 	Die Software wurde 2005 bereits im Rahmen einer Bachelorarbeit umgesetzt. Der in die Jahre gekommene GVS 1.0 soll nun in einem Major-Upgrade aktualisiert werden.
 	
 	\subsection{Mehrwert}
-	Die Software profitiert von einer durchgängig klaren Architektur, die einfach erweitert werden kann. Der Endbenutzer bemerkt nur eine modernes und ansprechendes User Interface. Die Funktionalität soll beibehalten werden. 
+	\gls{gvs} wird nun auf den neusten der Technik gebracht und profitiert von neueren Java Features wie Generics und Lambdas sowie einer klaren und erweiterbaren Schichtenarchitektur. 
+	Der Endbenutzer bemerkt nur eine modernes und ansprechendes User Interface. Die Funktionalität soll beibehalten werden. 
 
 	
 	\section{Anforderungen}
@@ -260,56 +261,57 @@ eprint=false
 	
 	\begin{enumerate}
 		\item Serverseitig muss das UI Framework Swing durch den offiziellen Nachfolger \gls{javafx} ersetzt werden.
-		\item Clientseitig muss der Java und .NET Client um Generics erweitert werden. 
+		\item Clientseitig muss die Java und .NET Library um Generics erweitert werden. 
 		\item Punktuell müssen Verbesserungen vorgenommen werden.
 	\end{enumerate}
 
-	Welche Punktuellen Verbesserungen vorgenommen werden sollen, hat das Projekttem zusammen mit dem Betreuer, Herr Letsch, festegelegt und sind dem Abschnitt \textbf{Refactroing Ablauf} (\ref{ssec:ablauf}) zu entnehmen.
+	Eine genauere Definition der dritten Anforderung, hat das Projektteam zusammen mit dem Betreuer, Herr Letsch, festgelegt und ist dem Abschnitt Refactroing Ablauf (\ref{ssec:ablauf}) zu entnehmen.
 	
 	\section{Domainanalyse}
-	In der Domainanalyse hat sich das Projektteam einen Überblick über den aktuellen Stand von GVS 1.0 verschafft. Die dabei gewonnen Erkenntnisse sind dann in die Designspezifikation eingeflossen.
+	In der Domainanalyse hat sich das Projektteam einen Überblick über den aktuellen Stand von GVS 1.0 verschafft. Die dabei gewonnen Erkenntnisse sind in die Designspezifikation eingeflossen.
 	
 	\subsection{Stakeholder}
-	Aus den beschrieben Anforderungen kristallisieren sich drei relevante Stakeholder heraus.
+	Aus den Anforderungen für GVS 1.0 kristallisieren sich drei relevante Stakeholder heraus. Während der Realisierung des UI sollen die Bedürfnisse der Studenten berücksichtigt werden. Zusätzlich muss das Projektteam den Ansprüchen zukünftiger Entwickler an eine erweiterbare Architektur gerecht werden.
 	\begin{table}[h!]
 		\centering
 		\begin{tabularx}{\linewidth}{l l X X}
 			\toprule 
 			\# & Rolle & Ziel/Intention & Erwartungshaltung \\
 			\midrule
-			1 & Student & Möchte GVS unkompliziert installieren und benutzen können & Möchte den zu visualisierenden Graphen/Tree ansprechend dargestellt bekommen. Ihm ist der Lerneffekt wichtig.  \\
-			2 & Entwickler & Möchte GVS einfach erweitern können & Sucht nach bekannten Software Pattern und klaren Software Schichten.  \\			
-			3 & Dozent & Möchte GVS in seinem Unterricht einsetzen & Erwartet eine intuitive Integration von GVS in bestehende Übungsaufgaben. \\
+			1 & Student & Möchte GVS unkompliziert installieren und benutzen können. & Möchte den zu visualisierenden Graphen/Tree ansprechend dargestellt bekommen. Ihm ist der Lerneffekt wichtig.  \\
+			2 & Entwickler & Möchte GVS einfach erweitern können. & Sucht nach bekannten Software Pattern und klaren Software Schichten.  \\			
+			3 & Dozent & Möchte GVS in seinem Unterricht einsetzen. & Erwartet eine intuitive Integration von GVS in bestehende Übungsaufgaben. \\
 			\bottomrule 
 		\end{tabularx} 
 		\caption{Relevante Stakeholder} 
 	\end{table}
-	
-	\subsection{Komponentendiagramm}
 
+	\subsection{Aktoren} \label{ssec:actors}
+	Das System wird von zwei Aktoren beeinflusst
+	
+	\subsubsection{GVS User} \label{sssec:actor-user}
+	Der User interagiert mit dem GVS Server über das User Interface. Er die aktuelle Session auf das Filesystem speichern oder eine Session von dort laden. Wenn ein Graph visualisiert ist, kann er die Koordinaten der Vertices neu berechnen lassen.
+	
+	\subsubsection{GVS Client Lib} \label{sssec:actor-lib}
+	Die Client Lib wird in das Software Projekt des GVS User eingebunden. Sie sendet in \gls{xml} beschriebene Datenstrukturen über eine Socket Verbindung an den GVS Server.
+	
+	\subsection{Systemübersicht}
+	Der Aktor \textit{User} (\ref{sssec:actor-user}) interagiert mit dem GVS System über den Presentation Layer. Beispielsweise fliesst beim Laden einer Session der Dataflow bis ins Access Layer, wo die Applikation mit dem FileSystem interagiert.
+	Über den Access Layers verbindet sich der Aktor \textit{GVS Client Lib} (\ref{sssec:actor-lib}) mit dem System und sendet Daten, welche auf dem Presentation Layer angezeit werden.
+	
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[width=0.7\linewidth]{assets/images/gvs-component}
-		\caption[Komponentendiagramm]{Komponentendiagramm}
-		\label{fig:gvs-component}
+		\includegraphics[width=0.7\linewidth]{assets/images/system_overview}
+		\caption{Systemübersicht}
+		\label{fig:gvs-systemuebersicht}
 	\end{figure}
-
-	\subsection{Aktoren}
-	Das System wird von zwei Aktoren beeinflusst
-	\begin{description}
-		\item[GVS User] \hfill \\
-		Der User interagiert mit dem GVS Server über das User Interface. Über das User Interface kann er die aktuelle Session auf das Filesystem speichern oder eine Session von dort laden. Wenn ein Graph visualisiert ist, kann er die Koordinaten der Vertices neu berechnen lassen.
-		\item[GVS Client Lib] \hfill \\
-		Die Client Lib wird in das Software Projekt des GVS User eingebunden. Sie sendet in \gls{xml} beschriebene Graphen über eine Socket Verbindung.
-	\end{description}
-	
 	
 	\subsection{Klassendiagramm} \label{ssec:klassendiagramm-1}
-	Das Klassendiagramm gab dem Projektteam eine gute Übersicht über die Struktur des GVS 1.0. Die Klassen wurden so organisiert, dass sie einer der drei Schichten ''Presentation'', ''Business'' und ''Access'' zugewiesen werden konnten. Bei der Analyse sind dem Projektteam einige Punkte aufgefallen, die im Abschnitt Erkenntnisse (\ref{sec:erkenntnisse}) genauer beschrieben sind.
+	Das Klassendiagramm gab dem Projektteam eine gute Übersicht über die Struktur des GVS 1.0. Die Klassen wurden so organisiert, dass sie einer der drei Schichten ''Presentation'', ''Business'' und ''Access'' zugewiesen sind. Die aus der Analyse gezogenen Erkenntnisse sind im Abschnitt \ref{sec:erkenntnisse} genauer beschrieben.
 	\includepdf[fitpaper]{assets/pdf/gvs1-0.pdf}
 	
 	\subsection{Sequenzdiagramme}
-	Zum besseren Verständnis von GVS 1.0 hat das Projektteam die wichtigsten Abläufe analysiert und als Sequenzdiagramme aufgezeichnet.
+	Zum besseren Verständnis von GVS 1.0 hat das Projektteam die wichtigsten Systemabläufe analysiert und als Sequenzdiagramme aufgezeichnet.
 	
 	\subsubsection{Verbindungsaufbau}
 	Dieses Sequenzdiagramm zeigt den Verbindungsaufbau über den \textit{SocketServer} beim starten der Applikation. Der Start einer \textit{SeverConnectionXML} führt zu einem Locking mit Hilfe des \textit{ConnectionMonitors}. Dieses Locking verhindert, dass mehr als ein Client gleichzeitig mit einem Server kommuniziert. Nach dem Empfangen der Daten aus dem Socket, erstellt der \textit{ModelBuilder} einen Graphen oder Tree als Domain-Objekt. Dieser Ablauf ist auf dem Sequenzdiagramm \textbf{ModelBuilder} (siehe \ref{sssec:modelbuilder}) ersichtlich.
@@ -352,28 +354,29 @@ eprint=false
 	\end{figure}
 	
 	\section{Erkenntnisse} \label{sec:erkenntnisse}
-	Aus der Analysephase konnten wertvolle Erkennisse für das weitere Vorgehen gewonnen werden.
+	Aus der Analysephase konnten wertvolle Erkenntnisse für das weitere Vorgehen gewonnen werden.
 	
 	\subsection{Stärken}
 	Der GVS 1.0 weisst folgende Stärken auf:
 	
 	\subsubsection{Trennung Socket / Visualization}
-	Die angedachte Trennung zwischen Server und Visualisierung der Daten wiederspiegeln sich klar im Code.
+	Die angedachte Trennung zwischen Server und Visualisierung der Daten widerspiegelt sich klar im vorliegenden Code.
 	
 	\subsubsection{Layering}
-	Die meisten Klassen konnten bei Analyse klar einem bestimmten Layer zugewiesen werden. Dies zeigt, dass die angedachte Architektur mehrheitlich umgesetzt wurde.
+	Die meisten Klassen konnten bei der Analyse eindeutig einem Layer zugewiesen werden. Dies zeigt, dass die geplante Architektur mehrheitlich umgesetzt wurde.
 		
 	\subsection{Schwächen}
 	Der GVS 1.0 weisst folgende Schwächen auf:
 	
-	\subsubsection{Swing/AWT Imports im Business Layer} Im Business Layer wurden diverse Imports der UI Frameworks \gls{swing} rsp. \gls{awt} gefunden. Dies erschwert einen Austausch des eingesetzten UI Frameworks.
+	\subsubsection{Swing/AWT Imports im Business Layer} 
+	Im Business Layer wurden diverse Imports der UI Frameworks \gls{swing} rsp. \gls{awt} gefunden. Dies erschwert einen Austausch des eingesetzten UI Frameworks.
 	
-	\subsubsection{Tangles} Zwischen den Software Schichten gibt es Zugriffe unten nach oben.
+	\subsubsection{Tangles} Zwischen dem Presentation und Business Layer existieren \gls{tangle}s. Dies verhindert einen einfachen Austausch des Presentation Layers. 
 	
 	\subsubsection{Magic Numbers} Viele Konstanten wurden ungenügend beschrieben. Der Zweck von vielen Zahlen ist daher nur schwer nachvollziehbar.
 	
 	\subsubsection{Namenskonvention}
-	Eine Prüfung der Namenskonvention wurde offenbar nicht durchgeführt. Zum Beispiel sind volatile Variablen in Grossbuchstaben geschrieben, was normalerweise auf eine Konstante hindeutet.
+	Eine Prüfung der Namenskonvention wurde offenbar nicht durchgeführt. Zum Beispiel sind veränderbare Variablen in Grossbuchstaben geschrieben, was normalerweise auf eine Konstante hindeutet.
 	
 	\subsubsection{Temporary Fields}
 	Viele Klassen arbeiten stark mit Klassenvariablen die in diversen Methoden gesetzt und gelesen werden. Zusätzlich werden diese auch von lokalen Variablen überdeckt. Dies erschwert es, dem Programmfluss folgen zu können.
@@ -382,16 +385,15 @@ eprint=false
 	Klassen wie der \textit{ModelBuilder} und \textit{Persistor} übernehmen sehr ähnliche Aufgaben.
 	
 	\subsubsection{Long Classes}
-	Mehrere Klassen sind mehr als 500 Zeichen lang. Dies hebt den Verdacht, dass die Klassen mehr als eine Aufgabe erledigen.
+	Einige Klassen überschreiten die Obergrenze von 250 Zeilen Code/Klasse. Dies hebt den Verdacht, dass die Klassen mehr als eine Aufgabe erledigen und somit das ''Single Responsibility Principle'' verletzen.
 	
-	\subsubsection{Keine Unit Tests} In dem Projekt wurden keine Unit Tests geschrieben. Dies ruht vermutlich daher, dass JUnit zum Entwicklungszeitpunkt noch sehr jung war.
+	\subsubsection{Keine Unit Tests} Im Projekt wurden keine Unit Tests geschrieben. Der Grund dafür ist vermutlich, dass JUnit zum Entwicklungszeitpunkt noch sehr jung war.
 	
 	\subsubsection{JavaDoc}
-	Das Verhalten von Klassen nicht durchgehend nachgeführt. Ebenfalls lässt die Qualität der Kommentare zu wünschen übrig.	
-	
-	
+	Das Verhalten von Klassen ist nicht durchgehend dokumentiert.  Ebenfalls fehlt es bei einigen Kommentaren an Aussagekraft.	
+		
 	\subsection{Schlüsse}
-	Aus den gewonnen Erkenntnissen hat das Projektteam Metriken eingeführt, damit der neue Code auf Konventionen Konformität geprüft werden kann. Ebenfalls wurde vor dem Start mit der Releasierung erste Refactorings durchgeführt, um den alten Code an die neuen Metrik Konventionen anzugleichen.
+	Aus den gewonnen Erkenntnissen hat das Projektteam Metriken eingeführt, damit der neue Code auf die Einhaltung von Konventionen geprüft werden kann. Ebenfalls wurden vor dem Start der Realisierung erste Refactorings durchgeführt, um den alten Code an die neuen Metriken anzugleichen.
 
 		
 	\chapter{Designspezifikation}
@@ -410,7 +412,7 @@ eprint=false
 	\end{table}
 	
 	\section{Klassendiagramm} \label{sec:class-diagram}
-	Das neue Klassendiagramm orientiert sich stark an die Vorgängerversion des GVS 1.0. (Siehe \ref{ssec:klassendiagramm-1}). Einzig der Presentation Layer wurde komplett durch die neu eingeführte \gls{mvvm} Struktur ersetzt. (Siehe \ref{sssec:mvvm})
+	Das neue Klassendiagramm orientiert sich stark an die Vorgängerversion des GVS 1.0. (Siehe \ref{ssec:klassendiagramm-1}). Mit dem Ziel möglichst viel Code wiederzuverwenden, wurde der Access und Business Layer mehrheitlich beibehalten. Der Presentation wurde vollständig durch die neu eingeführte \gls{mvvm} Struktur ersetzt. (Siehe \ref{sssec:mvvm})
 	
 	\includepdf[fitpaper]{assets/pdf/gvs2-1.pdf}
 	
@@ -430,13 +432,13 @@ eprint=false
 	\end{figure}
 	
 	\paragraph{Model}
-	Das \textit{Model} enthält reine Datenklassen ohne nennenswerte Logik. (siehe \gls{pojo}) Das \textit{Model} wurde in den Business Layer verschoben, damit das UI Framework einfach ausgewechselt werden kann. Werden die Werte im Model geändert wird das \textit{ViewModel} über eine Observer Beziehung benachrichtig. Dies entspricht nicht dem klassischen \gls{mvvm} Konzept, wird jedoch benötigt, damit die View entsprechend aktualisiert wird, wenn z.B die Koordinaten neu berechnet werden.
+	Das \textit{Model} enthält reine Datenklassen ohne nennenswerte Logik. (siehe \gls{pojo}) Das \textit{Model} wurde in den Business Layer verschoben, damit das UI Framework einfach ausgewechselt werden kann. Werden die Werte im Model geändert, wird das \textit{ViewModel} über eine Observer Beziehung (\gls{observer}) benachrichtigt. Dies entspricht nicht dem klassischen \gls{mvvm} Konzept, wird jedoch benötigt, damit die View entsprechend aktualisiert wird, wenn z.B die Koordinaten neu berechnet werden.
 	
 	\paragraph{View}
 	Die \textit{View} stellt den UI Zustand des \textit{ViewModels} dar. Sie setzt sich aus einer Controller Klasse sowie einer deklarativen \gls{fxml} Datei zusammen. Die View hält eine Instanz des ViewModels und leitet die eingehenden Anfragen direkt an dieses weiter. Mit der Databinding-API wird eine bidirektionale Kommunikation zwischen \textit{View} und \textit{ViewModel} sichergestellt. 
 	
 	\paragraph{ViewModel}
-	Das \textit{ViewModel} kennt die View nicht. Es hat somit keine Abhängigkeiten zu konkreten Anzeige Elementen. Dies hat den grossen Vorteil, dass die gesamte UI Logik im \textit{ViewModel} gekapselt ist und somit sehr gut testbar ist. Das ViewModel enthält \gls{javafx} spezifische Properties, die für das bidirektionale Binding zwischen UI Komponenten und Code Behind nötig sind.
+	Das \textit{ViewModel} kennt die View nicht. Es hat somit keine Abhängigkeiten zu konkreten Anzeige-Elementen. Dies hat den grossen Vorteil, dass die gesamte UI Logik im \textit{ViewModel} gekapselt ist und somit sehr gut testbar ist. Das ViewModel enthält \gls{javafx} spezifische Properties, die für das bidirektionale Binding zwischen UI Komponenten und Code Behind nötig sind.
 	
 	\subsection{Business Layer}
 	Im Business Layer liegt die eigentliche Logik. Er enthält keine \gls{javafx} Komponenten, weshalb das eingesetzte UI Framework ohne weiteres ausgewechselt werden kann. 
@@ -449,13 +451,13 @@ eprint=false
 	
 	\subsection{Ablauf}\label{ssec:ablauf}
 	\begin{enumerate}
-		\item Das Presentation Layer wird ersetzt. Dabei wird \gls{swing} durch JavaFX ersetzt. Mehr Details finden sich in der Klassen-Refactoring-Liste (\ref{ssec:class-refactroing-list}) sowie im Klassendiagramm von GVS 2.0 (\ref{sec:class-diagram})
+		\item Der Presentation Layer wird ersetzt. Dabei wird \gls{swing} durch \gls{javafx} ersetzt. Mehr Details finden sich in der Migrations Liste (\ref{ssec:class-refactroing-list}) sowie im Klassendiagramm von GVS 2.0 (\ref{sec:class-diagram})
 		\item Die GVS 1.0 Library wird um Generics erweitert.
 		\item Eine klare Schichtenarchitektur (\ref{ssec:layer-architecture}) wird eingeführt. Besonders wichtig ist dabei, die Entfernung von \gls{tangle}s.
 		\item Duplicated Code und weitere Code Smells sollen entfernt werden. Ein besonderes Augenmerk wird auf ein konsequentes Naming, das DRY Konzept sowie das ''Single Responsibility'' Konzept für Klassen und Methoden gelegt.
 	\end{enumerate}
 
-	\subsection{Klassen Refactoring Liste}
+	\subsection{Migrations Liste}
 	\label{ssec:class-refactroing-list}
 	Die folgende Liste soll zeigen, welche Klassen aus GVS 1.0 übernommen werden und welche Klassen in welcher Art und Weise verändert oder neu erstellt werden.
 	
@@ -488,12 +490,6 @@ eprint=false
 		\caption[GVS Logo]{Graphs-Visualization-Service Logo}
 		\label{fig:logo}
 	\end{figure}
-	
-	\subsection{Icons}
-	
-	\subsection{Farben}
-	
-	\subsection{Wireframes}
 	
 	
 	\chapter{Ausblick}
@@ -533,11 +529,11 @@ eprint=false
 	\label{sec:milestones}
 	
 	\subsubsection{Meilenstein 1: Analyse}
-	Analyse des Ist-Zustandes von GVS 1.0: Die Problemdomäne wird spezifiziert. Mehrere Diagramme zeigen die Schnittstelle zwischen Business Layer und Presentation Layer auf. Es ist ersichtlich, wie die einzelnen Komponenten miteinander kommunizieren bzw. wie die Daten von der Socket ans UI weiter gereicht werden.
+	Analyse des Ist-Zustandes von GVS 1.0: Die Problemdomäne wird spezifiziert. Mehrere Diagramme zeigen die Schnittstelle zwischen dem Business Layer und dem Presentation Layer auf. Es ist ersichtlich, wie die einzelnen Komponenten miteinander kommunizieren bzw. wie die Daten von der Socket ans UI weiter gereicht werden.
 	
 	\subsubsection{Meilenstein 2: Entwurf}
 	\label{milestone2}
-	Entwurf des Soll-Zustand von GVS 2.0: Eine klassische 3-Schichten Architektur wird entworfen. Es wird spezifiziert, welche GVS 1.0 Komponenten durch welche GVS 2.0 Komponenten ersetzt werden. Zur Überprüfung der Projektziele werden die Designentscheide als Requirements festgehalten.
+	Entwurf des Soll-Zustand von GVS 2.0: Eine klassische 3-Schichten Architektur wird entworfen. Es wird spezifiziert, welche GVS 1.0 Komponenten durch welche GVS 2.0 Komponenten ersetzt werden. Die in der Aufgabenstellung (\ref{aufgabenstellung}) geforderten Requirements werden festgehalten.
 	
 	\subsubsection{Meilenstein 3: Release 1}
 	Erste Funktionalitäten sind implementiert.
