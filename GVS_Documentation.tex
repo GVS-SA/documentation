@@ -285,8 +285,26 @@ eprint=false
 	\end{table}
 	
 	\subsection{Komponentendiagramm}
+
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\linewidth]{assets/images/gvs-component}
+		\caption[Komponentendiagramm]{Komponentendiagramm}
+		\label{fig:gvs-component}
+	\end{figure}
+
+	\subsection{Aktoren}
+	Das System wird von zwei Aktoren beeinflusst
+	\begin{description}
+		\item[GVS User] \hfill \\
+		Der User interagiert mit dem GVS Server über das User Interface. Über das User Interface kann er die aktuelle Session auf das Filesystem speichern oder eine Session von dort laden. Wenn ein Graph visualisiert ist, kann er die Koordinaten der Vertices neu berechnen lassen.
+		\item[GVS Client Lib] \hfill \\
+		Die Client Lib wird in das Software Projekt des GVS User eingebunden. Sie sendet in \gls{xml} beschriebene Graphen über eine Socket Verbindung.
+	\end{description}
 	
-	\subsection{Klassendiagramm}
+	
+	\subsection{Klassendiagramm} \label{ssec:klassendiagramm-1}
+	Das Klassendiagramm gab dem Projektteam eine gute Übersicht über die Struktur des GVS 1.0. Die Klassen wurden so organisiert, dass sie einer der drei Schichten ''Presentation'', ''Business'' und ''Access'' zugewiesen werden konnten. Bei der Analyse sind dem Projektteam einige Punkte aufgefallen, die im Abschnitt Erkenntnisse (\ref{sec:erkenntnisse}) genauer beschrieben sind.
 	\includepdf[fitpaper]{assets/pdf/gvs1-0.pdf}
 	
 	\subsection{Sequenzdiagramme}
@@ -334,9 +352,11 @@ eprint=false
 	
 	
 	\section{Erkenntnisse}
+	\label{sec:erkenntnisse}
 	%TODO presentation layer kann relativ gut abgelöst werden. tangle. nur beschreiben was aktuell ist. Unser vorgehen gehört in die designspezifikation
 	
 	
+		
 	\chapter{Designspezifikation}
 	
 	\begin{table}[h!]
@@ -353,6 +373,8 @@ eprint=false
 	\end{table}
 	
 	\section{Klassendiagramm} \label{sec:class-diagram}
+	Das neue Klassendiagramm orientiert sich stark an die Vorgängerversion des GVS 1.0. (Siehe \ref{ssec:klassendiagramm-1}). Einzig der Presentation Layer wurde komplett durch die neu eingeführte \gls{mvvm} Struktur ersetzt. (Siehe \ref{sssec:mvvm})
+	
 	\includepdf[fitpaper]{assets/pdf/gvs2-1.pdf}
 	
 	\section{Schichtenstruktur} \label{ssec:layer-architecture}
@@ -360,8 +382,7 @@ eprint=false
 	\subsection{Presentation Layer}
 	Der Presentation Layer wurde von der restlichen Anwendung entkoppelt. Damit kann das eingesetzte UI Framework (z.B \gls{javafx}) leicht ersetzt werden. Der Presentation Layer ist nach dem \gls{mvvm} Prinzip organisiert.
 	
-		
-	\subsubsection{Model-View-ViewModel}
+	\subsubsection{Model-View-ViewModel} \label{sssec:mvvm}
 	\gls{mvvm} dient der Trennung zwischen dem User Interface und der Anzeigelogik. \gls{mvvm} ist eine Konkretisierung des verbreiteten \gls{mvc} Pattern und setzt stark auf Databindings. Es wurde von Microsoft für das \gls{wpf} Framework entwickelt und wird auch in modernen \gls{javafx} Applikation eingesetzt.
 	
 	\begin{figure}[h!]
@@ -369,7 +390,7 @@ eprint=false
 		\includegraphics[width=0.7\linewidth]{assets/images/mvvm_concept}
 		\caption[MVVM Konzept]{Mode View ViewModel Konzept}
 		\label{fig:mvvmconcept}
-	\end{figure}	
+	\end{figure}
 	
 	\paragraph{Model}
 	Das \textit{Model} enthält reine Datenklassen ohne nennenswerte Logik. (siehe \gls{pojo}) Das \textit{Model} wurde in den Business Layer verschoben, damit das UI Framework einfach ausgewechselt werden kann. Werden die Werte im Model geändert wird das \textit{ViewModel} über eine Observer Beziehung benachrichtig. Dies entspricht nicht dem klassischen \gls{mvvm} Konzept, wird jedoch benötigt, damit die View entsprechend aktualisiert wird, wenn z.B die Koordinaten neu berechnet werden.
