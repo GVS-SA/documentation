@@ -1,4 +1,4 @@
-% !TeX spellcheck = de_CH
+% !TeX spellcheck = <none>
 \documentclass[11pt,a4paper,english,oneside]{book}
 
 \usepackage{etex} %Because of many packages --> Extended TeX.
@@ -446,7 +446,7 @@ eprint=false
 	\subsection{Access Layer}
 	Der Access Layer enthält Klassen für den Zugriff auf den Socket Server, sowie das File System. Es Ist für das Parsen von eingehenden XML Files zuständig und für deren Umwandlung in Domainobjekte.
 
-	\section{Refactoring Konzept}
+	\section{Refactoring Konzept} \label{sec:refactroing-conpet}
 	Im Rahmen dieser Studienarbeit soll die GVS 1.0 Applikation ein umfangreiches Refactoring erfahren. In diesem Unterkapitel wird beschrieben, wie dabei vorgegangen wird.
 	
 	\subsection{Ablauf}\label{ssec:ablauf}
@@ -536,10 +536,10 @@ eprint=false
 	Entwurf des Soll-Zustand von GVS 2.0: Eine klassische 3-Schichten Architektur wird entworfen. Es wird spezifiziert, welche GVS 1.0 Komponenten durch welche GVS 2.0 Komponenten ersetzt werden. Die in der Aufgabenstellung (\ref{aufgabenstellung}) geforderten Requirements werden festgehalten.
 	
 	\subsubsection{Meilenstein 3: Release 1}
-	Erste Funktionalitäten sind implementiert.
+	Der Presentation Layer ist vollständig gemäss Refactroing Konzept (\ref{sec:refactroing-conpet}) umgesetzt.
 	
 	\subsubsection{Meilenstein 4: Release 2}
-	Weitere Funktionalitäten sind implementiert. Das mit dem Enterprise Architekt erstellte Klassendiagramm ist mit dem Stand der GVS 2.0 Software synchron.
+	Die im Refactoring Konzept (\ref{sec:refactroing-conpet}) beschlossenen Änderungen sind umgesetzt. Das mit dem Enterprise Architekt erstellte Klassendiagramm ist mit dem Stand der GVS 2.0 Software synchron.
 	
 	\subsubsection{Meilenstein 5: Release 3}
 	Alle im Meilenstein 2 definierten Requirements wurden umgesetzt. Die GVS 2.0 Software ist für den Einsatz im Unterricht bereit.
@@ -562,16 +562,14 @@ eprint=false
 			4 & Release 2 & GVS 2.0.2 & 06.12.2017 \\
 			\midrule
 			5 & Release 3 & GVS 2.0.3 & 22.12.2017 \\
-			
 			\bottomrule 
 		\end{tabular} 
-		\caption{Legende Risiken} 
+		\caption{Meilensteine} 
 	\end{table}
 	
 	\subsection{Artefact Overview}
-	%TODO Artefact Overview einfügen
-
-	
+	Im Artefact Overview sind sämtliche zu erbringende Arbeitsergebnisse mit ihren Fertigstellungsdaten aufgelistet. Wenn nötig sind verschiedene Versionen gekennzeichnet.
+	\includepdf[landscape]{assets/pdf/artefact_overview.pdf}
 	
 	\section{Zeitplanung}
 	
@@ -582,19 +580,18 @@ eprint=false
 	Als Projektmanagement Software wird Jira \cite{jira} eingesetzt. In Jira werden alle Requirements als Issues erfasst und in den Product Backlog eingepflegt. Pro Iteration sollen jeweils so viele Issues eingeplant werden, wie unter Berücksichtigung von administrativen Aufgaben abgearbeitet werden können. Dabei spielt der Teamspeed eine grosse Rolle, welcher sich über die Projektdauer einpendeln soll. 
 
 	
-	
 	\subsection{Iterationsplanung}
-	
-	Die Iterationsplanung orientiert sich grob am \gls{rup} und ist unterteilt in eine Inception-, Elaboration-, Construction- sowie eine Transition-Phase. Jede Phase besteht aus einer oder mehreren Iterationen, die jeweils 1-2 Wochen dauern und am Freitag enden. Am Anfang des Projekt sind die Sprints bewusst nur 1 Woche lang, da sich dort die Anforderungen schnell ändern können. Eine Iteration wird nach \gls{scrum} organisiert. Am Anfang des Sprints definiert das Projektteam die zu erledigenden Issues und schätzt deren Aufwand. (Siehe \ref{sec:estimations}) Jeweils am Ende eines Sprint wird die geleistete Arbeit reflektiert. Entsprechende Erkenntnisse und Verbesserungen werden fortlaufend in die Projektorganisation aufgenommen. 
+	Die Iterationsplanung orientiert sich grob am \gls{rup} und ist unterteilt in eine Inception-, Elaboration-, Construction- sowie eine Transition-Phase. Jede Phase besteht aus einer oder mehreren Iterationen, die jeweils 1 Wochen dauern und am Freitag enden. Die Sprints sind bewusst nur 1 Woche lang, um eventuell ändernden Anforderungen gerecht zu werden. Zudem bringen die Wochenmeetings (\ref{ssec:meeting}) jeweils neuen Input, welcher dann direkt in den nächsten Sprint einfliessen kann.\\
+	Eine Iteration wird nach \gls{scrum} organisiert. Am Anfang des Sprints definiert das Projektteam die zu erledigenden Issues und schätzt deren Aufwand. (Siehe \ref{sec:estimations}) Jeweils am Ende eines Sprints wird die geleistete Arbeit reflektiert. Entsprechende Erkenntnisse und Verbesserungen werden fortlaufend in die Projektorganisation aufgenommen. 
 		
 	\subsection{Schätzungen}
 	\label{sec:estimations}
 	Issues werden auf Basis von Story Points geschätzt. Dieses Vorgehen hat sich mit SCRUM etabliert. Die Nutzung von Story Points führt dazu, dass nicht die individuell unterschiedliche Bearbeitungszeit, sondern die Komplexität einer User Story geschätzt wird. Dies vereinfacht  und homogenisiert die Schätzungen und hilft den Teamspeed zu bestimmen.\cite{storypoints, storypoints2}
 	
 	\subsection{Zeitauswertung}
-	Für die Zeitauswertung wird das Jira Plugin Tempo \cite{jiratempo} verwendet. Dieses bietet umfassende Auswertungsmöglichkeiten, sowie Exports nach MS Excel. Die Auswertungen dieser Arbeit befinden sich im Anhang \ref{zeitauswertung}.
+	Für die Zeitauswertung wird das Jira Plugin Tempo \cite{jiratempo} verwendet. Dieses bietet umfassende Auswertungsmöglichkeiten, sowie Exports nach MS Excel. Die Reports zur geleisteten Zeit befinden sich im Anhang \ref{zeitauswertung}.
 	
-	\subsection{Meetings}
+	\subsection{Meetings} \label{ssec:meeting}
 	Über die gesamte Projektdauer findet jeweils am Mittwoch um 17:15 ein wöchentliches Standortmeeting statt. Die Beschlüsse aus den Meetings werden protokolliert und bis spätestens 24h später an alle Teilnehmer versendet. Allfälliges Feedback wird nachträglich eingepflegt und versioniert abgelegt.
 	
 	\subsection{Branch Konzept}
@@ -611,10 +608,10 @@ eprint=false
 
 	\section{Frameworks}
 	%TODO any additional libraries? 
-	Als UI Framework wird gemäss Aufgabenstellung \gls{javafx} eingesetzt (siehe Anhang \ref{aufgabenstellung}). \gls{javafx} gilt seit 2014 als Standardlösung für grafische Java Anwendungen. \gls{javafx} ist eine komplette Neuentwicklung und der offizielle Nachfolger vom \gls{awt} \cite{awt} und Swing \cite{swing}. 
+	Als UI Framework wird gemäss Aufgabenstellung \gls{javafx} eingesetzt (siehe Anhang \ref{aufgabenstellung}). \gls{javafx} gilt seit 2014 als Standardlösung für grafische Java Anwendungen.Es ist eine komplette Neuentwicklung und der offizielle Nachfolger vom \gls{awt} \cite{awt} und \gls{swing} \cite{swing}. 
 
 	\section{Repositories}
-	Die Artefakte werden in verschiedenen Repositories auf GitHub versioniert abgelegt. So gibt es für die Dokumentation, die Meetingprotokolle und den Sourcecode jeweils ein eigenes Repository.
+	Die Artefakte werden in verschiedenen Repositories auf GitHub versioniert abgelegt. So gibt es für die Dokumentation, die Meetings-Protokolle und den Sourcecode jeweils ein eigenes Repository.
 
 	\section{Continuous Integration}
 	Die Software wird nach jedem Commit mit Travis CI \cite{travisci} gebuildet. Dies garantiert, dass sämtliche Qualitätsmassnahmen stets eingehalten werden. (Siehe \ref{sec:qualitymeasures})
@@ -627,7 +624,7 @@ eprint=false
 	\label{sec:qualitymeasures}
 	
 	\subsection{Unit Tests}
-	Zur Sicherung der Software Qualität sind gute Tests unerlässlich. Der Business Layer soll mit einer hinreichenden Testabdeckung abgedeckt sein. Der Schwerpunkt liegt dabei bei der Qualität und nicht bei einer möglichst hohen Testabdeckung.
+	Zur Sicherung der Software Qualität sind gute Tests unerlässlich. Da jedoch ein grosser Teil des Business Layers von GVS 1.0 übernommen wird, ist es nicht realistisch, für sämtliche Klassen Unit Tests nachzureichen. Klassen die neu erstellt oder einem weitreichendem Refactroing unterzogen werden, sollen hinreichenden mit Tests abgedeckt sein. Der Schwerpunkt liegt dabei auf der Qualität und nicht auf einer möglichst hohen Testabdeckung.
 	
 	\subsection{Definition of Done}
 	Source Code wird erst zum Review freigegeben, wenn folgende Kriterien erfüllt sind.
@@ -640,7 +637,7 @@ eprint=false
 	\end{itemize}
 		
 	\subsection{Review}
-	Nach Abschluss eines Issues wird dieses in Form eines Pull-Request an den Teampartner zum Review freigegeben. Durch das Vier-Augen-Prinzip kann die Qualität des Produktes hoch gehalten werden. Zusätzlich haben beide Teampartner stets den selben Wissensstand.
+	Nach Abschluss eines Issues wird dieses in Form eines Pull-Request an den Teampartner zum Review übergeben. Durch das Vier-Augen-Prinzip kann die Qualität des Produktes hoch gehalten werden. Zusätzlich haben beide Teampartner stets den selben Wissensstand.
 	
 	\subsection{Metriken}
 	\subsubsection{Code Style}
@@ -649,7 +646,6 @@ eprint=false
 	\subsubsection{Code Climate}
 	%TODO Check technical debt
 	Zur Überwachung des Technical Debt und der Testabdeckung wird die Github App Code Climate \cite{codeclimate} eingesetzt.  
-
 
 	\section{Risikomanagement}
 	Nachfolgend sind die wichtigsten Risiken für diese Arbeit aufgelistet. Gewichtet werden die Risiken nach Eintrittswahrscheinlichkeit und Schadenshöhe. \cite{risikomanagement}
