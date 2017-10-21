@@ -1,4 +1,4 @@
-% !TeX spellcheck = <none>
+% !TeX spellcheck = de_CH
 \documentclass[11pt,a4paper,english,oneside]{book}
 
 \usepackage{etex} %Because of many packages --> Extended TeX.
@@ -241,19 +241,19 @@ eprint=false
 			28.09.17 & 1.0 & Grundgerüst erstellt & mwieland \\
 			17.10.17 & 1.1 & Sequenzdiagramme eingefügt & mtrentini \\
 			18.10.17 & 1.2 & Ausgangslage und Stakeholder eingefügt & mwieland \\
-			19.10.17 & 1.3 & Erkennisse: Stärken, Schwächen, Schlüsse beschrieben & mwieland \\
+			19.10.17 & 1.3 & Erkenntnisse: Stärken, Schwächen, Schlüsse beschrieben & mwieland \\
 			\bottomrule 
 		\end{tabularx} 
-		\caption{Versionshistory Anfoderungsanalyse} 
+		\caption{Versionshistory Anforderungsanalyse} 
 	\end{table}
 	
 	\section{Ausgangslage \& Problembeschreibung}
-	An der \gls{hsr} werden in den Modulen ''Algorithmen und Datenstrukturen 1'' und ''Algorithmen und Datenstrukturen 2'' die Funktionsweise von schwierig zu verstehenden Algorithmen unterrichtet. Zusätzlicher Bestandteil der Module ist das Erlernen der beiden Datenstrukturen ''Graph'' und ''Tree''. Die Implementierung derartiger Algorithmen und Datenstrukten ist oft mit grossem Aufwand verbunden. \\
-	Die Software \gls{gvs} unterstützt Studenten beim Erlernen der beiden Datenstrukturen, sowie der darauf anwendbaren Algorithmen. Damit sich die Studenten ausschliesslich auf das Kennnlernen der Algorithmen fokusisieren können, bietet \gls{gvs} eine clientseitige Library, welche repetitive Implementierungsarbeiten den Studenten abnimmt. Der wichtigste Aspekt ist jedoch die Visualisierung der Arbeitsweise von Datenstrukturen und Algorithmen. So zeigt die Software zum Beispiel den schrittweisen Aufbau eines Baumes oder den Ablauf des Path Finding Algorithmus ''Dijkstra''. \\
+	An der \gls{hsr} werden in den Modulen ''Algorithmen und Datenstrukturen 1'' und ''Algorithmen und Datenstrukturen 2'' die Funktionsweise von schwierig zu verstehenden Algorithmen unterrichtet. Zusätzlicher Bestandteil der Module ist das Erlernen der beiden Datenstrukturen ''Graph'' und ''Tree''. Die Implementierung derartiger Algorithmen und Datenstrukturen ist oft mit grossem Aufwand verbunden. \\
+	Die Software \gls{gvs} unterstützt Studenten beim Erlernen der beiden Datenstrukturen, sowie der darauf anwendbaren Algorithmen. Damit sich die Studenten ausschliesslich auf das Erlernen der Algorithmen fokussieren können, bietet \gls{gvs} eine clientseitige Library, welche repetitive Implementierungsarbeiten den Studenten abnimmt. Der wichtigste Aspekt ist jedoch die Visualisierung der Arbeitsweise von Datenstrukturen und Algorithmen. So zeigt die Software zum Beispiel den schrittweisen Aufbau eines Baumes oder den Ablauf des Path Finding Algorithmus ''Dijkstra''. \\
 	Die Software wurde 2005 bereits im Rahmen einer Bachelorarbeit umgesetzt. Der in die Jahre gekommene GVS 1.0 soll nun in einem Major-Upgrade aktualisiert werden.
 	
 	\subsection{Mehrwert}
-	\gls{gvs} wird im Rahmen dieser Studientarbeit auf den neusten Stand der Technik gebracht und profitiert von neueren Java Features wie Generics und Lambdas sowie einer erweiterbaren Schichtenarchitektur. 
+	\gls{gvs} wird im Rahmen dieser Studienarbeit auf den neusten Stand der Technik gebracht und profitiert von neueren Java Features wie Generics und Lambdas sowie einer erweiterbaren Schichtenarchitektur. 
 	Für den Endbenutzer ändert sich nur das User Interface. Dieses bekommt ein modernes und ansprechendes Design. Die Funktionalität soll beibehalten werden. 
 
 	
@@ -266,7 +266,7 @@ eprint=false
 		\item Punktuell müssen Verbesserungen vorgenommen werden.
 	\end{enumerate}
 
-	Eine genauere Definition der dritten Anforderung, hat das Projektteam zusammen mit dem Betreuer, Herr Letsch, festgelegt und ist dem Abschnitt Refactroing Ablauf (\ref{ssec:ablauf}) zu entnehmen.
+	Eine genauere Definition der dritten Anforderung, hat das Projektteam zusammen mit dem Betreuer, Herr Letsch, festgelegt und ist dem Abschnitt Refactoring Ablauf (\ref{ssec:ablauf}) zu entnehmen.
 	
 	\section{Domainanalyse}
 	In der Domainanalyse hat sich das Projektteam einen Überblick über den aktuellen Stand von GVS 1.0 verschafft. Die dabei gewonnen Erkenntnisse sind in die Designspezifikation eingeflossen.
@@ -344,7 +344,7 @@ eprint=false
 	\end{figure}
 
 	\subsubsection{GraphSessionController} \label{sssec:sessioncontroller}
-	Der \textit{GraphSessionController} wird vom \textit{ModelBuilder} und vom \textit{Persistor} angestossen, wenn ein oder mehrere neue Graphen geparsed wurden. Der \textit{GraphSessionController} ist dafür zuständig diese Graphen in eine neue oder bestehende Session einzufügen. Dabei unterscheidet sich der Programmablauf kaum. Übersichtshalber ist nur der Fall ''ein einzelner neuer Graph wurde empfangen'' abgebildet.\\
+	Der \textit{GraphSessionController} wird vom \textit{ModelBuilder} und vom \textit{Persistor} angestossen, wenn ein oder mehrere neue Graphen geparsed wurden. Der \textit{GraphSessionController} ist dafür zuständig diese Graphen in eine neue oder bestehende Session einzufügen. Dabei unterscheidet sich der Programmablauf kaum. Der besseren Übersicht halber ist nur der Fall ''ein einzelner neuer Graph wurde empfangen'' abgebildet.\\
 	Für Graphen die keine fix positionierte Vertices haben, wird in einem weiteren Schritt der \textit{LayoutController} aufgerufen. Dieser steuert die Funktionalität der Physics-Engine. Die Physics-Engine berechnet die Koordinaten von Vertices mittels anziehenden und abstossenden Kräften. (siehe \gls{forcedirecteddrawing}) Der \textit{GraphSessionController} wird  per Observer-Beziehung (siehe Glossar: \gls{observer}) informiert, sobald die Physics-Engine die Berechnung der Positionen abgeschlossen hat.\\
 	Der \textit{GraphSessionController} setzt den neuen Graphen als aktuellen Graphen auf dem \textit{VisualizationGraphModel}. Dieses informiert per Observer-Beziehung (siehe Glossar: \gls{observer}) das \textit{VisualiztionGraphPanel}, welches die für die Darstellung benötigten Vertex und Edge Komponenten erstellt.
 	\begin{figure}[h!]
