@@ -261,8 +261,8 @@ eprint=false
 	Die Anforderungen wurden massgeblich aus der offiziellen Aufgabenstellung entnommen. (siehe Anhang \ref{aufgabenstellung})
 	
 	\begin{enumerate}
-		\item Serverseitig muss das UI Framework Swing durch den offiziellen Nachfolger \gls{javafx} ersetzt werden.
-		\item Clientseitig muss die Java und .NET Library um Generics erweitert werden. 
+		\item In der \gls{gvsui} Komponente muss das Framework Swing durch den offiziellen Nachfolger \gls{javafx} ersetzt werden.
+		\item In der \gls{gvslib} Komponente muss die Java und .NET Library um Generics erweitert werden. 
 		\item Punktuell müssen Verbesserungen vorgenommen werden.
 	\end{enumerate}
 
@@ -290,15 +290,15 @@ eprint=false
 	\subsection{Aktoren} \label{ssec:actors}
 	Das System wird von zwei Aktoren beeinflusst
 	
-	\subsubsection{User} \label{sssec:actor-user}
-	Der User interagiert mit dem GVS Server über das User Interface. Er möchte die aktuelle Session auf das Filesystem speichern oder eine Session von dort laden. Wenn ein Graph visualisiert ist, kann er die Koordinaten der Vertices neu berechnen lassen.
+	\subsubsection{GVS User} \label{sssec:actor-user}
+	Der GVS User interagiert mit dem \gls{gvsui} über das User Interface. Er möchte die aktuelle Session auf das Filesystem speichern oder eine Session von dort laden. Wenn ein Graph visualisiert ist, kann er die Koordinaten der Vertices neu berechnen lassen.
 	
-	\subsubsection{Client Library} \label{sssec:actor-lib}
-	Die Client Library wird in das Software Projekt des GVS User eingebunden. Sie sendet in \gls{xml} beschriebene Datenstrukturen über eine Socket Verbindung an den GVS Server.
+	\subsubsection{GVS Lib} \label{sssec:actor-lib}
+	Die \gls{gvslib} Komponente wird in das Software Projekt des GVS User eingebunden. Sie sendet in \gls{xml} beschriebene Datenstrukturen über eine Socket Verbindung an das \gls{gvsui}.
 	
 	\subsection{Systemübersicht}
-	Der Aktor \textit{User} (\ref{sssec:actor-user}) interagiert mit dem GVS Server über das User Interface. Er kann die aktuelle Visualisierungs-Session per Knopfdruck auf das Filesystem speichern oder eine bestehende Session von dort laden.
-	Über den Access Layer verbindet sich der Aktor \textit{Client Library} (\ref{sssec:actor-lib}) mit dem GVS Server. Die Datenstrukturen werden als \gls{xml} an den Server gesendet und dort auf dem User Interface visualisiert.
+	Der Aktor \textit{GVS User} (\ref{sssec:actor-user}) interagiert mit dem \gls{gvsui} über das User Interface. Er kann die aktuelle Visualisierungs-Session per Knopfdruck auf das Filesystem speichern oder eine bestehende Session von dort laden.
+	Über den Access Layer verbindet sich der Aktor \textit{GVS Lib} (\ref{sssec:actor-lib}) mit dem \gls{gvsui}. Die Datenstrukturen werden als \gls{xml} an das \gls{gvsui} gesendet und dort auf dem User Interface visualisiert.
 	
 	\begin{figure}[h!]
 		\centering
@@ -315,7 +315,7 @@ eprint=false
 	Zum besseren Verständnis von GVS 1.0 hat das Projektteam die wichtigsten Systemabläufe analysiert und als Sequenzdiagramme aufgezeichnet.
 	
 	\subsubsection{Verbindungsaufbau}
-	Dieses Sequenzdiagramm zeigt den Verbindungsaufbau über den \textit{SocketServer} beim starten der Applikation. Der Start einer \textit{SeverConnectionXML} führt zu einem Locking mit Hilfe des \textit{ConnectionMonitors}. Dieses Locking verhindert, dass mehr als ein Client gleichzeitig mit einem Server kommuniziert. Nach dem Empfangen der Daten aus dem Socket, erstellt der \textit{ModelBuilder} einen Graphen oder Tree als Domain-Objekt. Dieser Ablauf ist auf dem Sequenzdiagramm \textbf{ModelBuilder} (siehe \ref{sssec:modelbuilder}) ersichtlich.
+	Dieses Sequenzdiagramm zeigt den Verbindungsaufbau über den \textit{SocketServer} beim starten der Applikation. Der Start einer \textit{SeverConnectionXML} führt zu einem Locking mit Hilfe des \textit{ConnectionMonitors}. Dieses Locking verhindert, dass mehr als eine \gls{gvslib} gleichzeitig mit einem \gls{gvsui} kommuniziert. Nach dem Empfangen der Daten aus dem Socket, erstellt der \textit{ModelBuilder} einen Graphen oder Tree als Domain-Objekt. Dieser Ablauf ist auf dem Sequenzdiagramm \textbf{ModelBuilder} (siehe \ref{sssec:modelbuilder}) ersichtlich.
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=\linewidth]{assets/images/verbindungsaufbau}
@@ -334,7 +334,7 @@ eprint=false
 
 	\subsubsection{ApplicationView: Load \& Save Session} \label{sssec:appView}
 	Wenn ein User eine Session lädt, wird das entsprechende \gls{xml} vom \textit{Persistor} geparsed. Dieser erstellt je nach Bedarf einen Vector aus Graphs oder Trees. Dieser Vector wird an den \textit{SessionController} übergeben. Der Ablauf innerhalb des \textit{SessionController}s ist im separaten Sequenzdiagramm \textbf{GraphSessionController} (siehe \ref{sssec:sessioncontroller}) dargestellt. \\
-	Nachdem die Session erstellt wurde, wird die \textit{ApplicationView} per Observer-Beziehung (siehe Glossar: \gls{observer}) notifiziert. Sie stellt darauf die neue Session im UI dar.\\
+	Nachdem die Session erstellt wurde, wird die \textit{ApplicationView} per Observer-Beziehung (siehe Glossar: \gls{observer}) notifiziert. Sie stellt darauf die neue Session im \gls{gvsui} dar.\\
 	Auffällig an der Klasse \textit{ApplicationView} ist, dass sie im Constructor einen \textit{Persistor} instanziert. Diese Instanz wird jedoch nicht direkt in der ApplicationView verwendet, sondern wird als Argument an den \textit{ApplicationController} geschickt, welcher dann mit dem Persistor Sessions speichert und lädt. In der Analyse des Projektteams ist unklar geblieben, wieso die Instanzierung des \textit{Persistor}s nicht direkt im \textit{ApplicationController} passiert.
 	\begin{figure}[h!]
 		\centering
@@ -361,7 +361,7 @@ eprint=false
 	Der GVS 1.0 weisst folgende Stärken auf:
 	
 	\subsubsection{Trennung Socket / Visualization}
-	Die angedachte Trennung zwischen Server und Visualisierung der Daten widerspiegelt sich klar im vorliegenden Code.
+	Die angedachte Trennung zwischen Socket Server und Visualisierung der Daten widerspiegelt sich klar im vorliegenden Code.
 	
 	\subsubsection{Layering}
 	Die meisten Klassen konnten bei der Analyse eindeutig einem Layer zugewiesen werden. Dies zeigt, dass die geplante Architektur mehrheitlich umgesetzt wurde.
