@@ -225,9 +225,7 @@ eprint=false
 
 	%TODO keine Vergangenheiten, keine beschreibungen was gemacht wurde, sondern was gemacht werden muss.
 	
-	%TODO check anleitung dokumentation ba_sa -> identifikation
-	
-	%TODO Handbuch und Installationsanleitung. Mü weiss mehr :)
+	%TODO Handbuch und Installationsanleitung. Kürzel in Fusszeile
 	
 	\newpage
 	\pagenumbering{arabic}
@@ -236,8 +234,7 @@ eprint=false
 	
 	%TODO die anforderungsspezifikation muss facts enthalten
 	%TODO was der kunde/auftraggeber will.
-	%TODO nicht in der verhangenheit schreiben
-	%TODO was sind die anforderunge!
+	%TODO was sind die anforderungen!
 	%TODO das klassendiagramm 1.0 gibt eine übersicht über die struktur.. bla bla
 	
 	\begin{table}[h!]
@@ -268,29 +265,20 @@ eprint=false
 	\section{Anforderungen}
 	Die Anforderungen wurden massgeblich aus der offiziellen Aufgabenstellung entnommen. (siehe Anhang \ref{aufgabenstellung})
 	
-	\begin{enumerate}
-		\item In der \gls{gvsui} Komponente muss das Framework Swing durch den offiziellen Nachfolger \gls{javafx} ersetzt werden.
-		\item In der \gls{gvslib} Komponente muss die Java und .NET Library um Generics erweitert werden. 
-		\item Punktuell müssen Verbesserungen vorgenommen werden.
-	\end{enumerate}
-
-	Eine genauere Definition der dritten Anforderung, hat das Projektteam zusammen mit dem Betreuer, Herr Letsch, festgelegt und ist dem Abschnitt Refactoring Ablauf (\ref{ssec:ablauf}) zu entnehmen.
-	
 	\subsection{Funktionale Anforderungen}
 	%TODO verweis auf doku 1.0. quellenverzeichnis
 	Die funktionalen Anforderungen werden vollständig von GVS 1.0 übernommen. Der Funktionsumfang der Applikation soll nicht verändert werden.
 	
 	\subsection{Nicht funktionale Anforderungen}
 	
-	\subsubsection{Usability}
-	Die Applikation muss intuitiv verwendbar sein. Die Benutzbarkeit soll von Studenten überprüft werden, die nicht im Projektteam sind.
-	
-	\subsubsection{Verständlichkeit}
-	%TODO Link Installationsanleitung
-	Ein Benutzer muss bei der erstmaligen Verwendung von GVS 2.0 die Software innerhalb von 15 Minuten in Betrieb nehmen können. Die Installationsanleitung soll eine entsprechende Unterstützung bieten.
-	
-	\subsubsection{Performance}
-	Die Software muss einen Datenstruktur innerhalb von 2 Sekunden darstellen. 	
+	\begin{enumerate}
+		\item In der \gls{gvsui} Komponente muss das Framework Swing durch \gls{javafx} ersetzt werden.
+		\item In der \gls{gvslib} Komponente muss die Java und .NET Library um Generics erweitert werden. 
+		\item Punktuell müssen Verbesserungen vorgenommen werden.
+	\end{enumerate}
+
+	Eine genauere Definition der dritten Anforderung, hat das Projektteam zusammen mit dem Betreuer, Herr Letsch, festgelegt und ist dem Abschnitt Refactoring Ablauf (\ref{ssec:ablauf}) zu entnehmen.
+
 	
 	\section{Domainanalyse}
 	In der Domainanalyse hat sich das Projektteam einen Überblick über den aktuellen Stand von GVS 1.0 verschafft. Die dabei gewonnen Erkenntnisse sind in die Designspezifikation eingeflossen.
@@ -332,13 +320,7 @@ eprint=false
 	\end{figure}
 	
 	\subsection{Klassendiagramm} \label{ssec:klassendiagramm-1}
-	%TODO GVS 1.0 hat die schichten zwar angedacht. Wiederspiegelt sich aber nicht in dem package design.
-	%TODO zeigt die alten klassen zugeteilt auf die entsprechenden layer
-	%TODO in diesem klassendiagramm ist die zuteilung auf die schichten dargestellt.
-	%TODO die schichten waren in den packages nicht genau abgebildet!
-	%TODO die zuteilung wurden vom projektteam gemacht!
-	
-	Das Klassendiagramm gibt eine Übersicht über die wichtigsten Klassen von GVS 1.0. Im vorhergehenden Projekt wurden die Schichten zwar angedacht, sie widerspiegeln sich aber kaum im Package Design. Um den Überblick zu verbessern, sollen die Klassen den entsprechenden Schichten zugewiesen werden. Dies erhöht die Verständlichkeit der Problemdomäne und vereinfacht den Übergang in die neue Schichtenarchitektur. Eine genaue Analyse der GVS 1.0 Klassen ist dem Abschnitt \ref{sec:erkenntnisse} zu entnehmen. 
+	Das Klassendiagramm gibt eine Übersicht über die wichtigsten Klassen von GVS 1.0. Im vorhergehenden Projekt wurden die Schichten zwar angedacht, sie widerspiegeln sich aber kaum im Package Design. Um den Überblick zu verbessern, sind die Klassen den entsprechenden Schichten zugewiesen. Dies erhöht die Verständlichkeit der Problemdomäne und vereinfacht den Übergang in die neue Schichtenarchitektur. Eine genaue Analyse der GVS 1.0 Klassen ist dem Abschnitt \ref{sec:erkenntnisse} zu entnehmen. 
 	
 	\includepdf[fitpaper]{assets/pdf/gvs1-0.pdf}
 		
@@ -387,48 +369,33 @@ eprint=false
 	
 	\section{Erkenntnisse} \label{sec:erkenntnisse}
 	Aus der Analysephase konnten wertvolle Erkenntnisse für das weitere Vorgehen gewonnen werden.
-	
-	\subsection{Stärken}
-	Der GVS 1.0 weisst folgende Stärken auf:
-	
-	\subsubsection{Trennung Socket / Visualization}
-	Die angedachte Trennung zwischen Socket Server und Visualisierung der Daten widerspiegelt sich klar im vorliegenden Code.
-	
-	\subsubsection{Layering}
-	Die meisten Klassen konnten bei der Analyse eindeutig einem Layer zugewiesen werden. Dies zeigt, dass die geplante Architektur mehrheitlich umgesetzt wurde.
-	%TODO angedachte Architektur aus GVS 1.0
 		
-	\subsection{Schwächen}
-	Der GVS 1.0 weisst folgende Schwächen auf:
+	\paragraph{Layering}
+	In GVS 1.0 wurde eine Schichtenarchitektur angedacht, sie widerspiegelt sich aber kaum im Package Design. Gut erkennbar ist die Trennung des Access Layers (Socket Server) zur restlichen Applikation. GUI spezifische Elemente ziehen sich durch mehrere Layer.
 	
-	\subsubsection{Swing/AWT Imports im Business Layer} 
+	\paragraph{Swing/AWT Imports im Business Layer} 
 	Im Business Layer wurden diverse Imports der UI Frameworks \gls{swing} rsp. \gls{awt} gefunden. Dies erschwert einen Austausch des eingesetzten UI Frameworks.
 	
-	\subsubsection{Tangles} Zwischen dem Presentation und Business Layer existieren \gls{tangle}s. Dies verhindert einen einfachen Austausch des Presentation Layers. 
+	\paragraph{Tangles} Zwischen dem Presentation und Business Layer existieren \gls{tangle}s. Dies verhindert einen einfachen Austausch des Presentation Layers. 
 	
-	\subsubsection{Magic Numbers} Viele Konstanten wurden ungenügend beschrieben. Der Zweck von vielen Zahlen ist daher nur schwer nachvollziehbar.
+	\paragraph{Magic Numbers} Viele Konstanten wurden ungenügend beschrieben. Der Zweck von vielen Zahlen ist daher nur schwer nachvollziehbar.
 	
-	\subsubsection{Namenskonvention}
+	\paragraph{Namenskonvention}
 	Eine Prüfung der Namenskonvention wurde offenbar nicht durchgeführt. Zum Beispiel sind veränderbare Variablen in Grossbuchstaben geschrieben, was normalerweise auf eine Konstante hindeutet.
 	
-	\subsubsection{Temporary Fields}
+	\paragraph{Temporary Fields}
 	Viele Klassen arbeiten stark mit Klassenvariablen die in diversen Methoden gesetzt und gelesen werden. Zusätzlich werden diese auch von lokalen Variablen überdeckt. Dies erschwert es, dem Programmfluss folgen zu können.
 	
-	\subsubsection{Duplicated Code}
+	\paragraph{Duplicated Code}
 	Klassen wie der \textit{ModelBuilder} und \textit{Persistor} übernehmen sehr ähnliche Aufgaben.
 	
-	\subsubsection{Long Classes}
+	\paragraph{Long Classes}
 	Einige Klassen überschreiten die Obergrenze von 250 Zeilen Code/Klasse. Dies hebt den Verdacht, dass die Klassen mehr als eine Aufgabe erledigen und somit das ''Single Responsibility Principle'' verletzen.
 	
-	\subsubsection{Keine Unit Tests} Im Projekt wurden keine Unit Tests geschrieben. Der Grund dafür ist vermutlich, dass JUnit zum Entwicklungszeitpunkt noch sehr jung war.
+	\paragraph{Keine Unit Tests} Im Projekt wurden keine Unit Tests geschrieben. Der Grund dafür ist vermutlich, dass JUnit zum Entwicklungszeitpunkt noch sehr jung war.
 	
-	\subsubsection{JavaDoc}
+	\paragraph{JavaDoc}
 	Das Verhalten von Klassen ist nicht durchgehend dokumentiert.  Ebenfalls fehlt es bei einigen Kommentaren an Aussagekraft.	
-		
-	\subsection{Schlüsse}
-	%TODO verschieben ins design
-	%TODO in den Projektplan: Refactoring wird vordlaufend gemacht.
-	Aufgrund der gewonnen Erkenntnisse hat das Projektteam Metriken (Siehe. \ref{ssec:metriken}) eingeführt. Somit kann während der Entwicklung geprüft werden, ob die Code Qualität den gesetzten Vorgaben entspricht. Ebenfalls wurden vor dem Start der Realisierungs-Phase erste Refactorings durchgeführt, um den alten Code an die neuen Konventionen anzugleichen.
 
 		
 	\chapter{Designspezifikation}
@@ -646,7 +613,7 @@ eprint=false
 	\section{Frameworks}
 	%TODO Verschieben in Anforderungsspezifikation
 	%TODO any additional libraries? 
-	Als UI Framework wird gemäss Aufgabenstellung \gls{javafx} eingesetzt (siehe Anhang \ref{aufgabenstellung}). \gls{javafx} gilt seit 2014 als Standardlösung für grafische Java Anwendungen.Es ist eine komplette Neuentwicklung und der offizielle Nachfolger vom \gls{awt} \cite{awt} und \gls{swing} \cite{swing}. 
+	%TODO add guice
 
 	\section{Repositories}
 	Die Artefakte werden in verschiedenen Repositories auf GitHub versioniert abgelegt. So gibt es für die Dokumentation, die Meetings-Protokolle und den Sourcecode jeweils ein eigenes Repository.
@@ -664,7 +631,7 @@ eprint=false
 	\subsection{Unit Tests}
 	Zur Sicherung der Software Qualität sind gute Tests unerlässlich. Da jedoch ein grosser Teil des Business Layers von GVS 1.0 übernommen wird, ist es nicht realistisch, für sämtliche Klassen Unit Tests nachzureichen. Klassen die neu erstellt oder einem weitreichendem Refactroing unterzogen werden, sollen hinreichenden mit Tests abgedeckt sein. Der Schwerpunkt liegt dabei auf der Qualität und nicht auf einer möglichst hohen Testabdeckung.
 	
-	\subsection{Definition of Done}
+	\subsection{Definition of Done} \label{ssec:dod}
 	Source Code wird erst zum Review freigegeben, wenn folgende Kriterien erfüllt sind.
 	\begin{itemize}
 		\item Die \gls{ide} rsp. Build Tool zeigt keine Warnungen und Fehler
@@ -678,12 +645,17 @@ eprint=false
 	Nach Abschluss eines Issues wird dieses in Form eines Pull-Request an den Teampartner zum Review übergeben. Durch das Vier-Augen-Prinzip kann die Qualität des Produktes hoch gehalten werden. Zusätzlich haben beide Teampartner stets den selben Wissensstand.
 	
 	\subsection{Metriken} \label{ssec:metriken}
+	Mit den Metriken kann während der Entwicklung geprüft werden, ob die Code Qualität den gesetzten Vorgaben (Siehe \ref{ssec:dod}) entspricht.
+	
 	\subsubsection{Code Style}
 	Als Styleguide wird eine angepasste Version des Sun Styleguide verwendet \cite{suncheckstyle}. Damit dieser im Projekt durchgängig eingehalten wird, wurde das Checkstyle Plugin \cite{checkstyle} in den Buildprozess integriert. (Siehe \ref{sec:buildprocess})	
 	
 	\subsubsection{Code Climate}
 	%TODO Check technical debt
 	Zur Überwachung des Technical Debt und der Testabdeckung wird die Github App Code Climate \cite{codeclimate} eingesetzt.  
+	
+	\subsection{Refactorings}
+	Aufgrund der erkannten Mängel in der Analysephase (Siehe \ref{sec:erkenntnisse}) werden fortlaufend Refactorings des migrierten Codes durchgeführt.
 
 	\section{Risikomanagement}
 	Nachfolgend sind die wichtigsten Risiken für diese Arbeit aufgelistet. Gewichtet werden die Risiken nach Eintrittswahrscheinlichkeit und Schadenshöhe. \cite{risikomanagement}
@@ -767,14 +739,9 @@ eprint=false
 	\hfill \\[2cm]
 	\dotbox{Ort, Datum} \hfill \dotbox{Unterschrift des/der Verfassers/in}
 	
-	\chapter{Vereinbarung}
+	\chapter{Vereinbarung über Urheber- und Nutzungsrechte}
 	
-	Mit dieser Vereinbarung werden die Rechte über die Verwendung und die Weiterentwicklung der Ergebnisse der Studienarbeit GVS von Muriele Trentini und Michael Wieland unter der Betreuung von Thomas Letsch geregelt.\\
-	Die Urheberrechte stehen der Studentin / dem Student zu.\\
-	Die Ergebnisse der Arbeit dürfen sowohl von der Studentin / dem Student wie von der HSR nach Abschluss der Arbeit verwendet und weiter entwickelt werden\\[2cm]
-	\dotbox{Ort, Datum} \hfill \dotbox{Unterschrift des/der Verfassers/in}
-	\hfill \\[2cm]
-	\dotbox{Ort, Datum} \hfill \dotbox{Unterschrift des/der Verfassers/in}
+	%TODO add scan
 	
 	\chapter{Aufgabenstellung}
 	\label{aufgabenstellung}
