@@ -273,13 +273,13 @@ eprint=false
 		\item Punktuell müssen Verbesserungen vorgenommen werden.
 	\end{enumerate}
 
-	Eine genaue Definition der dritten Anforderung ist im Abschnitt Refactoring Ablauf (\ref{ssec:ablauf}) genauer beschrieben.
+	Eine genaue Definition der dritten Anforderung ist im Abschnitt Refactoring Ablauf (\ref{ssec:ablauf}) beschrieben.
 	
 	\section{Domainanalyse}
-	In der Domainanalyse wird der GVS 1.0 genauer untersucht. Die Erkenntnisse fliessen in die Designspezifikation ein.
+	In der Domainanalyse wird der GVS 1.0 untersucht. Die Erkenntnisse fliessen in die Designspezifikation ein.
 		
 	\subsection{Stakeholder}
-	Stakeholder repräsentieren Personen, die ein Interesse an der vorliegenden Software haben. Aus den funktionalen Anforderungen (\ref{sec:functionalreq}) von GVS 1.0 können drei relevant Stakeholder ermittelt werden. Während der Realisierung soll überprüft werden, ob die Erwartungen der Stakeholder erfüllt werden können. Wegen der technischen Orientierung der vorliegenden Studienarbeit sollen speziell die Ansprüche zukünftiger Entwickler berücksichtigt werden.
+	Stakeholder repräsentieren Personen, die ein Interesse an der vorliegenden Software haben. Aus den funktionalen Anforderungen (\ref{sec:functionalreq}) von GVS 1.0 können drei relevant Stakeholder ermittelt werden. Während der Realisierung wird überprüft, ob die Erwartungen der Stakeholder erfüllt werden können. Wegen der technischen Orientierung der vorliegenden Studienarbeit werden speziell die Ansprüche zukünftiger Entwickler berücksichtigt.
 	
 	\begin{table}[h!]
 		\centering
@@ -315,7 +315,7 @@ eprint=false
 	\end{figure}
 	
 	\subsection{Klassendiagramm} \label{ssec:klassendiagramm-1}
-	Das Klassendiagramm gibt zeigt die wichtigsten Klassen von GVS 1.0. Im vorhergehenden Projekt wurden die Schichten zwar angedacht, sie widerspiegeln sich aber kaum im Package Design. Um den Überblick zu verbessern, sind die Klassen den entsprechenden Schichten zugewiesen. Dies erhöht die Verständlichkeit der Problemdomäne und vereinfacht den Übergang in die neue Schichtenarchitektur. Eine genaue Analyse der GVS 1.0 Klassen ist dem Abschnitt \ref{sec:erkenntnisse} zu entnehmen. 
+	Das Klassendiagramm zeigt die wichtigsten Klassen von GVS 1.0. Im vorhergehenden Projekt wurden die Schichten zwar angedacht, sie widerspiegeln sich aber kaum im Package Design. Um den Überblick zu verbessern, sind die Klassen in diesem Diagramm den entsprechenden Schichten zugewiesen. Dies erhöht die Verständlichkeit der Problemdomäne und vereinfacht den Übergang in die neue Schichtenarchitektur von GVS 2.0. Eine genaue Analyse der GVS 1.0 Klassen ist dem Abschnitt \ref{sec:erkenntnisse} zu entnehmen. 
 	
 	\includepdf[fitpaper]{assets/pdf/gvs1-0.pdf}
 		
@@ -376,7 +376,7 @@ eprint=false
 	\subsubsection{Magic Numbers} Viele Konstanten sind ungenügend beschrieben. Der Zweck von vielen Zahlen ist daher nur schwer nachvollziehbar.
 	
 	\subsubsection{Namenskonvention}
-	Es gibt keine durchgehende Namenskonvention. Den Variablen fehlt es oft an Informationsgehalt. Ebenfalls sind veränderbare Variablen in Grossbuchstaben geschrieben, was normalerweise auf Konstanten hindeutet. 
+	Es gibt keine durchgehende Namenskonvention. Den Variablen fehlt es oft an Informationsgehalt. Ebenfalls sind veränderbare Variablen in Grossbuchstaben geschrieben, was per Konvention \cite{jls-naming} den Konstanten vorbehalten ist.
 	
 	\subsubsection{Temporary Fields}
 	Viele Klassen arbeiten exzessiv mit Klassenvariablen, die in diversen Methoden gesetzt und gelesen werden. Des Weiteren werden die Klassenvariablen von Funktionsparameter und lokalen Variablen überdeckt.   
@@ -410,7 +410,7 @@ eprint=false
 	\end{table}
 	
 	\section{Klassendiagramm} \label{sec:class-diagram}
-	Das Klassendiagramm von GVS 2.0 orientiert sich stark an der Vorgängerversion des GVS 1.0. (Siehe \ref{ssec:klassendiagramm-1}). Mit dem Ziel möglichst viel Code wiederzuverwenden, wird der Access und Business Layer mehrheitlich beibehalten. Der Presentation wird vollständig durch die neu eingeführte \gls{mvvm} Struktur ersetzt. (Siehe \ref{sssec:mvvm})
+	Das Klassendiagramm von GVS 2.0 orientiert sich stark an der Vorgängerversion des GVS 1.0. (Siehe \ref{ssec:klassendiagramm-1}). Mit dem Ziel möglichst viel Code wiederzuverwenden, wird der Access und Business Layer mehrheitlich beibehalten. Der Presentation Layer wird vollständig durch die neu eingeführte \gls{mvvm} Struktur ersetzt. (Siehe \ref{sssec:mvvm})
 	
 	\includepdf[fitpaper]{assets/pdf/gvs2-1.pdf}
 	
@@ -445,7 +445,7 @@ eprint=false
 	Der Access Layer enthält Klassen für den Zugriff auf den Socket Server, sowie das File System. Es Ist für das Parsen von eingehenden XML Files zuständig und für deren Umwandlung in Domainobjekte.
 
 	\section{Refactoring Konzept} \label{sec:refactroing-conpet}
-	Das Refactoring des GVS 1.0 soll organisiert durchgeführt werden. Dazu werden die notwendigen Schritte Priorisiert aufgelistet.
+	Das Refactoring des GVS 1.0 soll organisiert durchgeführt werden. Dazu werden die notwendigen Schritte priorisiert aufgelistet.
 		
 	\subsection{Ablauf}\label{ssec:ablauf}
 	\begin{enumerate}
