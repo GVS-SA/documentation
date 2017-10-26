@@ -528,11 +528,12 @@ eprint=false
 	\label{sec:milestones}
 	
 	\subsubsection{Meilenstein 1: Analyse}
-	Analyse des Ist-Zustandes von GVS 1.0: Die Problemdomäne wird spezifiziert. Mehrere Diagramme zeigen die Schnittstelle zwischen dem Business Layer und dem Presentation Layer auf. Es ist ersichtlich, wie die einzelnen Komponenten miteinander kommunizieren bzw. wie die Daten von der Socket ans UI weiter gereicht werden.
+	Analyse des Ist-Zustandes von GVS 1.0: Die Problemdomäne wird spezifiziert. Mehrere Diagramme zeigen die Schnittstelle zwischen dem Business Layer und dem Presentation Layer auf. Es ist ersichtlich, wie die einzelnen Komponenten miteinander kommunizieren bzw. wie die Daten von der Socket ans UI weiter gereicht werden.\\
+	Die in der Aufgabenstellung (\ref{aufgabenstellung}) geforderten Requirements werden festgehalten.
 	
 	\subsubsection{Meilenstein 2: Entwurf}
 	\label{milestone2}
-	Entwurf des Soll-Zustand von GVS 2.0: Eine klassische 3-Schichten Architektur wird entworfen. Es wird spezifiziert, welche GVS 1.0 Komponenten durch welche GVS 2.0 Komponenten ersetzt werden. Die in der Aufgabenstellung (\ref{aufgabenstellung}) geforderten Requirements werden festgehalten.
+	Entwurf des Soll-Zustand von GVS 2.0: Eine klassische 3-Schichten Architektur wird entworfen. Es wird spezifiziert, welche GVS 1.0 Komponenten durch welche GVS 2.0 Komponenten ersetzt werden. 
 	
 	\subsubsection{Meilenstein 3: Release 1}
 	Der Presentation Layer ist vollständig gemäss Punkt 1 im Refactroing Konzept (\ref{sec:refactroing-conpet}) umgesetzt.
@@ -549,14 +550,16 @@ eprint=false
 			\toprule 
 			\# & Name & Artefakte & Datum \\
 			\toprule 
-			1 & Analyse & Domainmodell & 18.10.17 \\
+			1 & Analyse & Anforderungsspezifikation & 11.10.17 \\
+			& & Klassendiagramm 1.0 & \\
 			& & Sequenzdiagramme & \\
-			& &  Komponentendiagramm & \\
+			& &  Systemübersichts-Diagramm & \\
 			\midrule
-			2 & Entwurf  & Requirements & 25.10.17\\
-			& & Schichtendiagramm & \\
+			2 & Entwurf  & Designspezifikation & 25.10.17\\
+			& & Klassendiagramm 2.0 & \\
+			& & Migrationstabelle & \\
 			\midrule
-			3 & Release 1 & GVS 2.0.1 & 15.11.2017 \\
+			3 & Release 1 & GVS 2.0.1 & 22.11.2017 \\
 			\midrule
 			4 & Release 2 & GVS 2.0.2 & 06.12.2017 \\
 			\midrule
@@ -600,7 +603,6 @@ eprint=false
 	Als \gls{ide} wird Eclipse mit folgenden Plugins verwendet
 	\begin{itemize}
 		\item FindBugs \cite{findbugs} zur statischen Code Analyse
-		\item Cobertura \cite{cobertura} zur Überprüfung der Test Abdeckung
 		\item Stan4J \cite{stan4j} zur Überprüfung von zyklischen Abhängigkeiten
 		\item Checkstyle \cite{checkstyle} zur Überprüfung der Coding Richtlinien.
 	\end{itemize}
@@ -637,10 +639,11 @@ eprint=false
 	\end{itemize}
 		
 	\subsection{Review}
-	Nach Abschluss eines Issues wird dieses in Form eines Pull-Request an den Teampartner zum Review übergeben. Durch das Vier-Augen-Prinzip kann die Qualität des Produktes hoch gehalten werden. Zusätzlich haben beide Teampartner stets den selben Wissensstand.
+	Nach Abschluss eines Issues wird dieses an den Teampartner zum Review übergeben. Durch das Vier-Augen-Prinzip kann die Qualität des Produktes hoch gehalten werden. Zusätzlich haben beide Teampartner stets den selben Wissensstand.
 	
 	\subsection{Metriken} \label{ssec:metriken}
 	Mit den Metriken kann während der Entwicklung geprüft werden, ob die Code Qualität den gesetzten Vorgaben (Siehe \ref{ssec:dod}) entspricht.
+	%		\item Cobertura \cite{cobertura} zur Überprüfung der Test Abdeckung
 	
 	\subsubsection{Code Style}
 	Als Styleguide wird eine angepasste Version des Sun Styleguide verwendet \cite{suncheckstyle}. Damit dieser im Projekt durchgängig eingehalten wird, wird das Checkstyle Plugin \cite{checkstyle} in den Buildprozess integriert. (Siehe \ref{sec:buildprocess})	
