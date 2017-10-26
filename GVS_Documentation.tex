@@ -608,9 +608,9 @@ eprint=false
 	\end{itemize}
 
 	\section{Frameworks}
-	%TODO Verschieben in Anforderungsspezifikation
-	%TODO any additional libraries? 
-	%TODO add guice
+	
+	\subsection{Gluon Ignite mit Google Guice}
+	Gluon Ignite \cite{gluonignite} erweitert das verbreitete \gls{di}-Framework Guice \cite{guice} für den Einsatz in \gls{javafx} Applikationen. Mit Gluon Ignite lässt sich \gls{di} nicht nur im Business Layer, sondern auch für die \gls{fxml} Loader verwenden. \gls{di} verbessert die Testbarkeit und zentralisiert die Erzeugungslogik von Klassenobjekten.
 
 	\section{Repositories}
 	Die Artefakte werden in verschiedenen Repositories auf GitHub versioniert abgelegt. So gibt es für die Dokumentation, die Meetings-Protokolle und den Sourcecode jeweils ein eigenes Repository.
@@ -643,14 +643,13 @@ eprint=false
 	
 	\subsection{Metriken} \label{ssec:metriken}
 	Mit den Metriken kann während der Entwicklung geprüft werden, ob die Code Qualität den gesetzten Vorgaben (Siehe \ref{ssec:dod}) entspricht.
-	%		\item Cobertura \cite{cobertura} zur Überprüfung der Test Abdeckung
 	
 	\subsubsection{Code Style}
 	Als Styleguide wird eine angepasste Version des Sun Styleguide verwendet \cite{suncheckstyle}. Damit dieser im Projekt durchgängig eingehalten wird, wird das Checkstyle Plugin \cite{checkstyle} in den Buildprozess integriert. (Siehe \ref{sec:buildprocess})	
 	
 	\subsubsection{Code Climate}
 	%TODO Check technical debt
-	Zur Überwachung des Technical Debt und der Testabdeckung wird die Github App Code Climate \cite{codeclimate} eingesetzt.  
+	Zur Überwachung des Technical Debt und der Testabdeckung wird die Github App Code Climate \cite{codeclimate} eingesetzt. Code Climate visualisiert die mittels Cobertura \cite{cobertura} erstellten \gls{xml} Testabdeckung Files.
 	
 	\subsection{Refactorings}
 	Aufgrund der erkannten Mängel in der Analysephase (Siehe \ref{sec:erkenntnisse}) werden fortlaufend Refactorings des migrierten Codes durchgeführt.
