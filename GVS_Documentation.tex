@@ -501,6 +501,29 @@ eprint=false
 	\subsection{Screens}
 	%TODO add screens
 	
+	\section{Refactoring Layout Engine}
+	
+	\subsection{LayoutController} \label{ssec:layoutcontroller}
+	Der \textit{LayoutController} steuert die Berechnung der Koordinaten durch die Physik Engine. Sobald ein Graph gelayouted werden muss, wird ein \textit{AreaTicker} Thread gestartet, der in einem bestimmten Interval das Anzeigen der neuen Koordinaten veranlasst. Es läuft immer nur genau ein \textit{AreaTicker} Thread. Sobald sich die \textit{Particle} in der \textit{Area} stabilisiert haben, wird der \textit{AreaTicker} Thread terminiert. 
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\linewidth]{assets/images/sequence_layoutcontroller}
+		\caption{Sequenzdiagramm LayoutController}
+		\label{fig:sequencelayoutcontroller}
+	\end{figure}
+	
+	\subsection{Area} \label{ssec:area}
+	Die \textit{Area} dient als Container während dem dynamischen Layoutprozess. Sie beinhaltet mehrere \textit{Particle}s die von physischen Kräften bewegt werden. (\textit{Traction}s und \textit{RepulsiveForce}s) Ein \textit{Particle} entspricht einem Knote des Graphen oder Trees. Die Positionen der \textit{Particles} werden fortlaufend berechnet. Sobald ein Tick Event passiert werden die berechneten Koordinaten des Particles in den Business Vertex kopiert. Über eine Observer Beziehung wird das \textit{VertexViewModel} im Presentation Layer über die neuen Koordinaten notifziert. Dessen \gls{javafx} Properties sind über ein bidirektionales Binding mit dem UI \textit{Circle} verbunden. Dieser aktualisiert dann automatisch und visualisiert die Änderungen auf dem UI.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\linewidth]{assets/images/sequence_area}
+		\caption{Sequenzdiagramm Area}
+		\label{fig:sequencearea}
+	\end{figure}
+	
+	
 	\chapter{Ausblick}
 	
 	\section{UI Ausbau}
