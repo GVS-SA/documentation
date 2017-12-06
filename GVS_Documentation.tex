@@ -481,10 +481,54 @@ eprint=false
 		Datum & Version & Änderungen & Autor \\
 		\midrule
 		28.09.17 & 1.0 & Dokument erstellt, Logo beschrieben & mwieland \\
+		06.12.17 & 1.1 & Besondere Herausforderungen beschrieben & mtrentini \\
 		\bottomrule 
 	\end{tabularx} 
 	\caption{Versionshistory Realisierung} 
 	\end{table}
+	
+	\section{Besondere Herausforderungen}
+	In diesem Kapitel werden einige Features von GVS 2.0 genauer erläutert, welche sich als besondere Herausforderungen erwiesen haben.
+	
+	\subsection{Schnittpunkt von Edge und Vertex}
+	\subsubsection{Problem}
+	In einem ersten Stadium zeigt das GVS 2.0 nur ungerichtete Kanten an. Somit können Edges sehr einfach als Linien dargestellt werden, die zwei Vertex Mittelpunkte verbinden. In einem zweiten Stadium zeigt das GVS 2.0 auch gerichtete Kanten an. Somit genügt der einfach Lösungsansatz aus Stadium eins nicht mehr, denn bei diesem Ansatz werden Pfeilspitzen durch die darüber liegenden Vertices verdeckt.
+	
+	Um das Problem zu lösen, braucht es ein Algorithmus, der die Schnittpunkte zwischen einer Kante und dem Rand eines Vertex findet. Somit kann ein Pfeil zwischen zwei Schnittpunkten statt zwei Vertex Mittelpunkten gezeichnet werden. Zu beachten ist zudem, dass sich dieser Schnittpunkt ändert, wenn der betreffende Vertex vom User ''gedragged'' wird.
+	
+	\subsubsection{Lösung}
+	Die Lösung bietet ein Suchalgorithmus, der wie der \textit{Binary Search Algorithm} \cite{adbook} funktioniert. So wird ebenfalls mit zwei Endpunkten begonnen, welche in diesem Fall den Mittelpunkten des Start- und Endvertex der Kante entsprechen. Mittels Rekursion wird dann der Schnittpunkt gesucht. Dabei wird für die nächste Interation jeweils einerseits der Mittelpunkt der beiden Endpunkte bestimmt und zusammen mit einem der beiden Endpunkte übergeben, so dass immer einer der Punkte innerhalb und einer ausserhalb des Vertex zu liegen kommt. \\
+	Beispielhaft ist der Ablauf mit den verschiedenen Iterationen in Abbildung \ref{fig:binarySearch} dargestellt.
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{assets/images/binarySearch}
+		\caption{Algorithmus zur Suche eines Schnittpunktes}
+		\label{fig:binarySearch}
+	\end{figure}
+
+	Als Abbruchkriterium dient der Abstand beider Endpunkte, welcher kleiner als ein gewisser Mindest-Abstand sein muss.
+	
+	Die spezifische Implementierung dieses Suchalgorithmus ist dem Listing \ref{code:binarySearch} zu entnehmen.
+	
+	\begin{lstlisting}[language=java, frame=single,caption={Algorithmus Schnittpunkt Suche}, label={code:binarySearch}]
+		public Point2D findIntersectionPoint(Point2D outside, Point2D inside) {
+			Point2D middle = outside.midpoint(inside);
+		
+			double deltaX = outside.getX() - inside.getX();
+			double deltaY = outside.getY() - inside.getY();
+		
+			if (Math.hypot(deltaX, deltaY) < 1.) {
+				return middle;
+			} else {
+				if (ellipse.contains(middle)) {
+					return findIntersectionPoint(outside, middle);
+				} else {
+					return findIntersectionPoint(middle, inside);
+				}
+			}
+		}
+	\end{lstlisting}
 	
 	\section{UI Design}
 	
