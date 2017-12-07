@@ -481,10 +481,26 @@ eprint=false
 		Datum & Version & Änderungen & Autor \\
 		\midrule
 		28.09.17 & 1.0 & Dokument erstellt, Logo beschrieben & mwieland \\
+		07.12.17 & 1.2 & TreeLayouter beschrieben & mtrentin \\
 		\bottomrule 
 	\end{tabularx} 
 	\caption{Versionshistory Realisierung} 
 	\end{table}
+	
+	\subsection{Tree Layout Algorithmus}
+	Die Darstellung von Trees auf eine optisch ansprechende und leserliche Art und Weise bietet verschiedene Schwierigkeiten. bereits 1981 haben Reingold-Tilford \cite{reingold-tilford} zu diesem Zweck einen Algorithmus entwickelt, welcher binäre Bäume zeichnet. Dieser Algorithmus wurde von Walker weiter entwickelt, um n-ary Trees darzustellen und schlussendlich von Buchheim, Jünger und Leipert \cite{tree-algorithm} verbessert, um die Laufzeit auf O(n) zu beschränken. 
+	
+	Der von GVS 2.0 verwendete Algorithmus, basiert auf diesem neusten Tree-Algorithmus und genügt somit auch den fünf anerkannten Prinzipien, denen ein solcher Algorithmus genügen muss:
+	
+	\begin{itemize}
+		\item Das Tree Layout muss die hierarchische Struktur des Trees widerspiegeln. Das heisst konkret, dass die y-Koordinate eines Knoten durch seinen Level gegeben ist.
+		\item Die Knoten eines Levels sind so anzuordnen, dass sich ihre Edges nicht überkreuzen und die Knoten einen gewissen horizontalen Mindestabstand einhalten.
+		\item Das Zeichnen eines Subtrees hängt nicht davon ab, an welcher Stelle im Baum sich der Subtree befindet. Das bedeutet, dass isomorphe Subtrees identisch gezeichnet werden.
+		\item Die Reihenfolge von Kindern muss im Baum ersichtlich sein. Im Falle eines binären Trees heisst das, dass ein linkes Kind links des Eltern-Knoten gezeichnet wird.
+		\item Der Algorithmus arbeitet symmetrisch.
+	\end{itemize}
+	
+	Ein weiterer Vorteil dieses Algorithmus ist, dass er Bäume immer so zeichnet, dass sie eine minimale Breite besitzen. Dadurch werden auch Bäume mit sehr vielen Nodes schön dargestellt. Dies führt dazu, dass der in GVS 1.0 \cite{gvs1} verwendete \textit{Cluster Splitter} nicht mehr benötigt wird. 
 	
 	\section{UI Design}
 	
