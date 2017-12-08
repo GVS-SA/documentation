@@ -640,7 +640,7 @@ eprint=false
 	\end{lstlisting}
 	
 	\subsection{Graph und Tree Verschmelzung}
-	In theoretischer Hinsicht sind Bäume Spezialformen von Graphen. In GVS 1.0 sind diese beiden Strukturen jedoch über alle Layer hinweg getrennt betrachtet. GVS 2.0 vereinigt diese Strukturen soweit es technisch Sinn macht, mit dem Ziel, Code Duplikationen weit möglichst zu vermeiden.
+	In theoretischer Hinsicht sind Bäume Spezialformen von Graphen. In GVS 1.0 wurden diese beiden Strukturen jedoch durchgehend getrennt modelliert. GVS 2.0 vereinigt diese Strukturen soweit es technisch Sinn macht, mit dem Ziel, Code Duplikationen weit möglichst zu vermeiden.
 	
 	\subsubsection{Unterschiede}
 	\begin{itemize}
@@ -653,12 +653,11 @@ eprint=false
 	Auf Grund der oben genannten Unterschiede, bildet GVS 2.0 diese Strukturen wie folgt ab:
 	
 	\begin{itemize}
-		\item Trees und Graphen werden in einer Struktur \textit{Graph} vereinigt. Der \textit{ModelBuilder} erstellt für empfangene Bäume sämtliche impliziten Edges.
+		\item Trees und Graphen werden in der Struktur \textit{Graph} vereinigt. Der \textit{ModelBuilder} erstellt für empfangene Bäume sämtliche impliziten Edges.
 		\item Ein \textit{Graph} besitzt eine Liste von Vertices. Diese müssen das Interface \textit{IVertex} implementieren. Es gibt drei konkrete Implementierungen dieses Interfaces. Für reine Graphen wird die Klasse \textit{GraphVertex} benutzt. Die Klassen \textit{TreeVertex} und \textit{LeafVertex} bieten Tree-spzifische Attribute.
 		\item Eine \textit{Session} umfasst jeweils mehrere \textit{Graphen}. Um einer \textit{Session} den richtigen \textit{Layouter} zuzuweisen, besitzt sie einen \textit{SessionType} der beschreibt, ob die enthaltenen Graphen effektive Graphen oder Trees sind.
 		\item Nach dem Abschliessen des Layoutingprozesses ist keine Unterscheidung zwischen Trees und Graphen mehr nötig. Dies führt dazu, dass die Strukturen im Presentation Layer vollständig zusammengeführt sind.
 	\end{itemize}
-	
 		
 	\chapter{Ausblick}
 	
