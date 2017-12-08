@@ -481,6 +481,7 @@ eprint=false
 		Datum & Version & Änderungen & Autor \\
 		\midrule
 		28.09.17 & 1.0 & Dokument erstellt, Logo beschrieben & mwieland \\
+		08.12.17 & 1.0 & Multithreading beschrieben & mwieland \\
 		\bottomrule 
 	\end{tabularx} 
 	\caption{Versionshistory Realisierung} 
@@ -522,15 +523,69 @@ eprint=false
 		\caption{Sequenzdiagramm Area}
 		\label{fig:sequencearea}
 	\end{figure}
+
+	\section{Multithreading} \label{sec:threading}
+	Um die Oberfläche reaktiv zu halten und gleichzeitig auf Datenübertragungen von der Client Lib zu reagieren werden mehrere Threads benötigt. Daher müssen Synchronisationspunkte eingerichtet werden, damit typische Gefahren der Nebenläufigkeit (z.B Race Conditions) nicht auftreten können. Im GVS 2.0 sind folgende Klassen als eigenständige Threads konzipiert.
+	
+	\subsection{Nebenläufige Klassen}
+	
+	\begin{table}[h!]
+		\centering
+		\begin{tabularx}{\linewidth}{l X X}
+			\toprule 
+			Klasse & Beschreibung & Lebensdauer \\
+			\midrule
+			\textit{GVSApplication} & Läuft im Java Main Thread. Startet den JavaFX UI Thread sowie den SocketServer Thread & Programmstart bis App Terminierung. \\
+			UI Klassen & Alle UI Klassen laufen im JavaFX Thread & Programmstart bis App Terminierung \\
+			\textit{SocketServer} & Startet einen \textit{SocketServer} auf einen konfigurierbaren Port und erstellt \textit{ClientConnection} Instanzen für jede eingehende Anfrage. & Programmstart bis App Terminierung. \\
+			\textit{ClientConnection} & Interpretiert die eingehende Verbindung und leitet die XML Daten an den ModelBuilder weiter & Während einer Client Verbindung \\
+			\textit{Watchdog} & Verhindert dass ein Client den Server nur so lange reserviert wie auch Daten übertragen werden & Während einer Client Verbindung \\
+			\textit{AreaTicker} & Representiert einen Layouting Pulse. Definiert wie oft die View während dem Layouting eines Graphen aktualisiert wird. & Während dem Layout Prozess eines Graphen \\
+			SessionReplay & Gibt Graph Snapshots in einem konfigurierbaren Interval wieder & Solange die Session existiert \\
+			\bottomrule 
+		\end{tabularx} 
+		\caption{Übersicht nebenläufige Klassen} 
+	\end{table}
+
+	\subsection{Synchronisationspunkte}
+	
+	Die nebenläufigen Klassen werden von speziellen Synchronisationspunkten serialisiert. Alle Klassen wurden als Singleton implementiert.
+	
+	\begin{table}[h!]
+		\centering
+		\begin{tabularx}{\linewidth}{l X X}
+			\toprule 
+			Klasse & Beschreibung & Lebendauer \\
+			\midrule
+			\textit{ConnectionMonitor} & Garantiert dass immer nur ein Client den GVS Service reservieren kann & Programmstart bis App Terminierung. \\
+			\textit{ApplicationController} & Zentraler Eintrittspunkt für manipulationen durch das UI sowie durch die Socket Verbindung & Programmstart bis App Terminierung. \\
+			\textit{GraphLayouter} & Überwacht die Lebensdauer des TickerThread & Programmstart bis App Terminierung. \\
+			\bottomrule 
+		\end{tabularx} 
+		\caption{Übersicht nebenläufige Klassen} 
+	\end{table}
+
+	\subsection{UI Thread}
+
+	Wichtig ist, dass alle Änderungen am User Interface ausschliesslich vom JavaFX UI Thread durchgeführt werden. Dazu werden bei allen Eintrittspunkten in den Presentation Layer ein \lstinline|runLater()| ausgeführt. Dies veranlasst einen Thread Wechsel zum UI Thread. 
+		
+	\begin{lstlisting}[language=java, frame=single, caption={Java FX UI Thread}, label={code:uithread}]
+	@Override
+	public void update(Observable o, Object arg) {
+		// Hand updates over to JavaFX Thread
+		Platform.runLater(() -> {
+			doUIManipulation();
+		});
+	}
+	\end{lstlisting}
+			
 	
 	
 	\chapter{Ausblick}
 	
 	\section{UI Ausbau}
 	
-	\subsection{Threading Konzept}
-	%TODO Multi or Single Threading?
-	%TODO 4+1 Process View.
+	\subsection{Unit Testing}
 	
 	\section{Lib Ausbau}
 	
