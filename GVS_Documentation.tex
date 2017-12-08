@@ -467,10 +467,10 @@ eprint=false
 	\end{enumerate}
 
 	\subsection{Migrations Liste}
-	\label{ssec:class-refactroing-list}
-	Die folgende Liste zeigt, welche Klassen aus GVS 1.0 übernommen werden und welche Klassen in welcher Art und Weise verändert oder neu erstellt werden.
+		\label{ssec:class-refactroing-list}
+		Die folgende Liste zeigt, welche Klassen aus GVS 1.0 übernommen werden und welche Klassen in welcher Art und Weise verändert oder neu erstellt werden.
 	
-	\includepdf[fitpaper]{assets/pdf/Migration_Replacements.pdf}
+		\includepdf[fitpaper]{assets/pdf/Migration_Replacements.pdf}
 	
 	\chapter{Realisierung}
 		
@@ -490,7 +490,7 @@ eprint=false
 	\section{UI Design}
 	
 	\subsection{Logo}
-	Das Logo wurde von den Eigenschaften des Kraken \cite{kraken} inspiriert. Kraken sind bekannt dafür, dass sie viele Irrgarten-Probleme effizient lösen können. Dies ist eine Anspielung an die Algorithmen, die vom \gls{gvs} unterstützt werden. Ebenfalls wurden die Saugnäpfe des Kraken als Graph Nodes visualisiert und auf der Stirn ist ein binärer Baum zu erkennen. 
+		Das Logo wurde von den Eigenschaften des Kraken \cite{kraken} inspiriert. Kraken sind bekannt dafür, dass sie viele Irrgarten-Probleme effizient lösen können. Dies ist eine Anspielung an die Algorithmen, die vom \gls{gvs} unterstützt werden. Ebenfalls wurden die Saugnäpfe des Kraken als Graph Nodes visualisiert und auf der Stirn ist ein binärer Baum zu erkennen. 
 	
 	\begin{figure}[h!]
 		\centering
@@ -505,7 +505,7 @@ eprint=false
 	\section{Refactoring Graph Layouter}
 	
 	\subsection{GraphLayouter} \label{ssec:layoutcontroller}
-	Für das Layouting der Graphen wurde ein Force-Directed Drawing Algorithm verwendet. Dieser wurde mehrheitlich von GVS 1.0 übernommen. Der Algorithmus ordnet die Vertices so an, dass es möglichst wenig überschneidende Kanten gibt. Dazu wird für jeden Vertex ein \textit{Particle} erstellt, welcher während der dynamischen Plazierung auf der \textit{Area} bewegt wird. Zu Beginn des Layout Prozess wird ein Particle pseudo-zufällig platziert. GVS 2.0 unterstützt zwei Varianten von pseudo-zufällig: Je nach gewählter Option wird ein Particle immer gleich zufällig plaziert (Seeded Random) oder die Koordinaten werden durchgehend zufällig platziert. Sobald ein Graph gelayouted werden muss, wird ein \textit{AreaTicker} Thread gestartet, der in einem bestimmten Interval die Darstellung der neuen Koordinaten im UI veranlasst. Es läuft immer nur genau ein \textit{AreaTicker} Thread. Sobald sich die \textit{Particle} in der \textit{Area} stabilisiert haben, wird der \textit{AreaTicker} Thread terminiert. Das Sequenzdiagramm \ref{fig:sequencegraphlayouter} zeigt den grundlegenden Ablauf beim Starten des Graph Layout Prozess.
+		Für das Layouting der Graphen wurde ein Force-Directed Drawing Algorithm verwendet. Dieser wurde mehrheitlich von GVS 1.0 übernommen. Der Algorithmus ordnet die Vertices so an, dass es möglichst wenig überschneidende Kanten gibt. Dazu wird für jeden Vertex ein \textit{Particle} erstellt, welcher während der dynamischen Plazierung auf der \textit{Area} bewegt wird. Zu Beginn des Layout Prozess wird ein Particle pseudo-zufällig platziert. GVS 2.0 unterstützt zwei Varianten von pseudo-zufällig: Je nach gewählter Option wird ein Particle immer gleich zufällig plaziert (Seeded Random) oder die Koordinaten werden durchgehend zufällig platziert. Sobald ein Graph gelayouted werden muss, wird ein \textit{AreaTicker} Thread gestartet, der in einem bestimmten Interval die Darstellung der neuen Koordinaten im UI veranlasst. Es läuft immer nur genau ein \textit{AreaTicker} Thread. Sobald sich die \textit{Particle} in der \textit{Area} stabilisiert haben, wird der \textit{AreaTicker} Thread terminiert. Das Sequenzdiagramm \ref{fig:sequencegraphlayouter} zeigt den grundlegenden Ablauf beim Starten des Graph Layout Prozess.
 	
 	\begin{figure}[h!]
 		\centering
@@ -525,7 +525,7 @@ eprint=false
 	\end{figure}
 
 	\section{Multithreading} \label{sec:threading}
-	Um die Benutzeroberfläche reaktiv zu behalten und gleichzeitig auf Datenübertragungen von der Client Lib zu reagieren werden mehrere Threads benötigt. Daher müssen Synchronisationspunkte eingerichtet werden, damit typische Gefahren der Nebenläufigkeit (z.B Race Conditions) nicht auftreten können. Im GVS 2.0 sind folgende Klassen als eigenständige Threads konzipiert.
+		Um die Benutzeroberfläche reaktiv zu halten und gleichzeitig auf Datenübertragungen von der Client Lib zu reagieren werden mehrere Threads benötigt. Daher müssen Synchronisationspunkte eingerichtet werden, damit typische Gefahren der Nebenläufigkeit (z.B Race Conditions) nicht auftreten können. Im GVS 2.0 sind folgende Klassen als eigenständige Threads konzipiert.
 	
 	\subsection{Nebenläufige Klassen}
 	
@@ -557,12 +557,12 @@ eprint=false
 			\toprule 
 			Klasse & Beschreibung & Lebendauer \\
 			\midrule
-			\textit{ConnectionMonitor} & Garantiert dass immer nur ein Client den GVS Service reservieren kann & Programmstart bis App Terminierung. \\
-			\textit{ApplicationController} & Zentraler Eintrittspunkt für manipulationen durch das UI sowie durch die Socket Verbindung & Programmstart bis App Terminierung. \\
-			\textit{GraphLayouter} & Überwacht die Lebensdauer des TickerThread & Programmstart bis App Terminierung. \\
+			\textit{ConnectionMonitor} & Garantiert, dass immer nur ein Client den GVS Service reservieren kann & Programmstart bis App Terminierung. \\
+			\textit{ApplicationController} & Zentraler Eintrittspunkt für Manipulationen durch das UI sowie durch die Socket Verbindung & Programmstart bis App Terminierung. \\
+			\textit{GraphLayouter} & Überwacht die Lebensdauer des TickerThreads & Programmstart bis App Terminierung. \\
 			\bottomrule 
 		\end{tabularx} 
-		\caption{Übersicht nebenläufige Klassen} 
+		\caption{Übersicht Synchronisationspunkte} 
 	\end{table}
 
 	\subsection{UI Thread}
