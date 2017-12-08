@@ -499,7 +499,7 @@ eprint=false
 		\item[Watchdog] \hfill \\ Behebt ein Usability Problem. Mehr dazu in Abschnitt \ref{ssec:watchdog}
 		\item[SessionType] \hfill \\ Trees und Graphen werden völlig unterschiedlich gelayoutet. Dennoch werden die gleichen Klassen für die Darstellung im Presentation Layer verwendet. Somit wird eine Klasse benötigt, die eine Typunterscheidung zulässt und den korrekten Layouter bereitstellt.
 		\item[TreeVertex \& LeafVertex] \hfill \\ 
-		In der Designphase wurde das Zusammenführen von Graphen und Trees angedacht. In der Realisierung hat sich aber gezeigt, dass einerseits die Layouter sowie infolgedessen auch die Vertices unterschieden werden müssen. (siehe \ref{ssec:graphs-and-trees}) Für den Tree Layouter (\ref{ssec:tree-layouter}) wird deshalb neben dem \textit{TreeVertex} auch ein \textit{LeafVertex} benötigt.  Blattknoten dienen als Platzhalter und werden nicht dargestellt. Sie vereinfachen die Berechnung des Tree Layouts aber stark.
+		In der Designphase wurde das Zusammenführen von Graphen und Trees angedacht. In der Realisierung hat sich aber gezeigt, dass einerseits die Layouter sowie infolgedessen auch die Vertices unterschieden werden müssen. (siehe \ref{ssec:graphs-and-trees}) Für den Tree Layouter (\ref{ssec:treelayouter}) wird deshalb neben dem \textit{TreeVertex} auch ein \textit{LeafVertex} benötigt.  Blattknoten dienen als Platzhalter und werden nicht dargestellt. Sie vereinfachen die Berechnung des Tree Layouts aber stark.
 		\item[ScalablePane] \hfill \\  Während der Realisierungsphase hat sich gezeigt, dass die Grösse von Trees und Graphen einen grossen Einfluss auf ihre Darstellung hat. Um diesen Ansprüchen gerecht zu werden, bietet GVS 2.0 eine Zeichenfläche, welche ihre Inhalte automatisch skaliert und zentriert. Dadruch werden zum Beispiel grosse Trees leserlich abgebildet und kleine Graphen verwenden die gesamte Bildschirmbreite. 
 	\end{description}
 	
@@ -548,8 +548,9 @@ eprint=false
 	\end{lstlisting}
 
 
-	\subsection{Tree Layout Algorithmus} \label{ssec:tree-layouter}
-	Die Darstellung von Trees auf eine optisch ansprechende und leserliche Art und Weise bietet verschiedene Schwierigkeiten. bereits 1981 haben Reingold-Tilford \cite{reingold-tilford} zu diesem Zweck einen Algorithmus entwickelt, welcher binäre Bäume zeichnet. Dieser Algorithmus wurde von Walker weiter entwickelt, um n-ary Trees darzustellen und schlussendlich von Buchheim, Jünger und Leipert \cite{tree-algorithm} verbessert, um die Laufzeit auf O(n) zu beschränken. 
+	\subsection{Tree Layout Algorithmus} \label{ssec:treelayouter}
+
+	Die Darstellung von Trees auf eine optisch ansprechende und leserliche Art und Weise bietet verschiedene Schwierigkeiten. bereits 1981 haben Reingold-Tilford \cite{reingold-tilford} zu diesem Zweck einen Algorithmus entwickelt, welcher binäre Bäume zeichnet. Dieser Algorithmus wurde von Walker weiter entwickelt, um n-ary Trees darzustellen und schlussendlich von Buchheim, Jünger und Leipert \cite{tree-algorithm} verbessert, um die Laufzeit auf $\mathcal{O}(n)$ zu beschränken. 
 	
 	Der von GVS 2.0 verwendete Algorithmus, basiert auf diesem neusten Tree-Algorithmus und genügt somit auch den fünf anerkannten Prinzipien, denen ein solcher Algorithmus genügen muss:
 	
@@ -578,9 +579,31 @@ eprint=false
 	\subsection{Screens}
 	%TODO add screens
 	
+	
+	
+	\subsection{Graph und Tree Verschmelzung}
+	In theoretischer Hinsicht sind Bäume Spezialformen von Graphen. In GVS 1.0 wurden diese beiden Strukturen jedoch durchgehend getrennt modelliert. GVS 2.0 vereinigt diese Strukturen soweit es technisch Sinn macht, mit dem Ziel, Code Duplikationen weit möglichst zu vermeiden.
+	
+	\subsubsection{Unterschiede}
+	\begin{itemize}
+		\item Ein Graph besitzt Edges und Vertices. Ein Baum hingegen besitzt nur Vertices, denn seine Edges sind durch die Vater-Kind Beziehung der Vertices implizit gegeben. 
+		\item Ein Tree Vertex besitzt zusätzliche Attribute wie Vater-Kind Beziehungen und \textit{isRoot()}
+		\item Die benötigten Layout Algorithmen unterscheiden sich stark. (siehe \ref{ssec:graphlayouter} für GraphLayouter und \ref{ssec:treelayouter} für TreeLayouter)
+	\end{itemize}
+	
+	\subsubsection{Umsetzung}
+	Auf Grund der oben genannten Unterschiede, bildet GVS 2.0 diese Strukturen wie folgt ab:
+	
+	\begin{itemize}
+		\item Trees und Graphen werden in der Struktur \textit{Graph} vereinigt. Der \textit{ModelBuilder} erstellt für empfangene Bäume sämtliche impliziten Edges.
+		\item Ein \textit{Graph} besitzt eine Liste von Vertices. Diese müssen das Interface \textit{IVertex} implementieren. Es gibt drei konkrete Implementierungen dieses Interfaces. Für reine Graphen wird die Klasse \textit{GraphVertex} benutzt. Die Klassen \textit{TreeVertex} und \textit{LeafVertex} bieten Tree-spzifische Attribute.
+		\item Eine \textit{Session} umfasst jeweils mehrere \textit{Graphen}. Um einer \textit{Session} den richtigen \textit{Layouter} zuzuweisen, besitzt sie einen \textit{SessionType} der beschreibt, ob die enthaltenen Graphen effektive Graphen oder Trees sind.
+		\item Nach dem Abschliessen des Layoutingprozesses ist keine Unterscheidung zwischen Trees und Graphen mehr nötig. Dies führt dazu, dass die Strukturen im Presentation Layer vollständig zusammengeführt sind.
+	\end{itemize}
+	
 	\section{Refactoring Graph Layouter}
 	
-	\subsection{GraphLayouter} \label{ssec:layoutcontroller}
+	\subsection{GraphLayouter} \label{ssec:graphlayouter}
 		Für das Layouting der Graphen wurde ein Force-Directed Drawing Algorithm verwendet. Dieser wurde mehrheitlich von GVS 1.0 übernommen. Der Algorithmus ordnet die Vertices so an, dass es möglichst wenig überschneidende Kanten gibt. Dazu wird für jeden Vertex ein \textit{Particle} erstellt, welcher während der dynamischen Plazierung auf der \textit{Area} bewegt wird. Zu Beginn des Layout Prozess wird ein Particle pseudo-zufällig platziert. GVS 2.0 unterstützt zwei Varianten von pseudo-zufällig: Je nach gewählter Option wird ein Particle immer gleich zufällig plaziert (Seeded Random) oder die Koordinaten werden durchgehend zufällig platziert. Sobald ein Graph gelayouted werden muss, wird ein \textit{AreaTicker} Thread gestartet, der in einem bestimmten Interval die Darstellung der neuen Koordinaten im UI veranlasst. Es läuft immer nur genau ein \textit{AreaTicker} Thread. Sobald sich die \textit{Particle} in der \textit{Area} stabilisiert haben, wird der \textit{AreaTicker} Thread terminiert. Das Sequenzdiagramm \ref{fig:sequencegraphlayouter} zeigt den grundlegenden Ablauf beim Starten des Graph Layout Prozess.
 	
 	\begin{figure}[h!]
@@ -642,7 +665,6 @@ eprint=false
 	\end{table}
 
 	\subsection{UI Thread}
-
 	Wichtig ist, dass alle Änderungen am User Interface ausschliesslich vom JavaFX UI Thread durchgeführt werden. Dazu wird bei allen Eintrittspunkten in den Presentation Layer ein \lstinline|runLater()| ausgeführt. Dies veranlasst einen Thread Wechsel zum UI Thread. 
 		
 	\begin{lstlisting}[language=java, frame=single, caption={Java FX UI Thread}, label={code:uithread}]
@@ -680,6 +702,7 @@ eprint=false
 
 
 	\chapter{Ausblick} \label{ch:ausblick}
+
 	
 	\section{UI Ausbau}
 	
