@@ -467,10 +467,10 @@ eprint=false
 	\end{enumerate}
 
 	\subsection{Migrations Liste}
-	\label{ssec:class-refactroing-list}
-	Die folgende Liste zeigt, welche Klassen aus GVS 1.0 übernommen werden und welche Klassen in welcher Art und Weise verändert oder neu erstellt werden.
+		\label{ssec:class-refactroing-list}
+		Die folgende Liste zeigt, welche Klassen aus GVS 1.0 übernommen werden und welche Klassen in welcher Art und Weise verändert oder neu erstellt werden.
 	
-	\includepdf[fitpaper]{assets/pdf/Migration_Replacements.pdf}
+		\includepdf[fitpaper]{assets/pdf/Migration_Replacements.pdf}
 	
 	\chapter{Realisierung}
 		
@@ -483,6 +483,8 @@ eprint=false
 		28.09.17 & 1.0 & Dokument erstellt, Logo beschrieben & mwieland \\
 		06.12.17 & 1.1 & Besondere Herausforderungen beschrieben & mtrentini \\
 		07.12.17 & 1.2 & TreeLayouter beschrieben & mtrentin \\
+		08.12.17 & 1.3 & Graph Layouter beschrieben & mwieland \\
+		08.12.17 & 1.4 & Multithreading beschrieben & mwieland \\
 		\bottomrule 
 	\end{tabularx} 
 	\caption{Versionshistory Realisierung} 
@@ -549,7 +551,7 @@ eprint=false
 	\section{UI Design}
 	
 	\subsection{Logo}
-	Das Logo wurde von den Eigenschaften des Kraken \cite{kraken} inspiriert. Kraken sind bekannt dafür, dass sie viele Irrgarten-Probleme effizient lösen können. Dies ist eine Anspielung an die Algorithmen, die vom \gls{gvs} unterstützt werden. Ebenfalls wurden die Saugnäpfe des Kraken als Graph Nodes visualisiert und auf der Stirn ist ein binärer Baum zu erkennen. 
+		Das Logo wurde von den Eigenschaften des Kraken \cite{kraken} inspiriert. Kraken sind bekannt dafür, dass sie viele Irrgarten-Probleme effizient lösen können. Dies ist eine Anspielung an die Algorithmen, die vom \gls{gvs} unterstützt werden. Ebenfalls wurden die Saugnäpfe des Kraken als Graph Nodes visualisiert und auf der Stirn ist ein binärer Baum zu erkennen. 
 	
 	\begin{figure}[h!]
 		\centering
@@ -561,13 +563,90 @@ eprint=false
 	\subsection{Screens}
 	%TODO add screens
 	
+	\section{Refactoring Graph Layouter}
+	
+	\subsection{GraphLayouter} \label{ssec:layoutcontroller}
+		Für das Layouting der Graphen wurde ein Force-Directed Drawing Algorithm verwendet. Dieser wurde mehrheitlich von GVS 1.0 übernommen. Der Algorithmus ordnet die Vertices so an, dass es möglichst wenig überschneidende Kanten gibt. Dazu wird für jeden Vertex ein \textit{Particle} erstellt, welcher während der dynamischen Plazierung auf der \textit{Area} bewegt wird. Zu Beginn des Layout Prozess wird ein Particle pseudo-zufällig platziert. GVS 2.0 unterstützt zwei Varianten von pseudo-zufällig: Je nach gewählter Option wird ein Particle immer gleich zufällig plaziert (Seeded Random) oder die Koordinaten werden durchgehend zufällig platziert. Sobald ein Graph gelayouted werden muss, wird ein \textit{AreaTicker} Thread gestartet, der in einem bestimmten Interval die Darstellung der neuen Koordinaten im UI veranlasst. Es läuft immer nur genau ein \textit{AreaTicker} Thread. Sobald sich die \textit{Particle} in der \textit{Area} stabilisiert haben, wird der \textit{AreaTicker} Thread terminiert. Das Sequenzdiagramm \ref{fig:sequencegraphlayouter} zeigt den grundlegenden Ablauf beim Starten des Graph Layout Prozess.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.6\linewidth]{assets/images/sequence_graph_layouter}
+		\caption{Sequenzdiagramm Graph Layouter}
+		\label{fig:sequencegraphlayouter}
+	\end{figure}
+	
+	\subsection{Area} \label{ssec:area}
+		Die \textit{Area} dient als Container während dem dynamischen Layout Prozess. Sie beinhaltet mehrere \textit{Particle}s die von physischen Kräften bewegt werden (\textit{Traction}s und \textit{RepulsiveForce}s). Ein \textit{Particle} repräsentiert einen Vertex. Die Positionen der \textit{Particles} werden fortlaufend berechnet. Sobald ein Tick Event passiert, werden die aktuellen Koordinaten des Particles in den \textit{GraphVertex} im Business Layer kopiert. 	Über eine Observer Beziehung wird das \textit{VertexViewModel} im Presentation Layer über die neuen Koordinaten notifziert. Dessen X/Y Properties sind über ein bidirektionales Binding mit dem UI Element (z.B \textit{Ellipse}) verbunden. Die neuen Koordinaten werden auf der Oberfläche dargestellt. 
+		
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.6\linewidth]{assets/images/sequence_area}
+		\caption{Sequenzdiagramm Area}
+		\label{fig:sequencearea}
+	\end{figure}
+
+	\section{Multithreading} \label{sec:threading}
+		Um die Benutzeroberfläche reaktiv zu halten und gleichzeitig auf Datenübertragungen von der Client Lib zu reagieren werden mehrere Threads benötigt. Daher müssen Synchronisationspunkte eingerichtet werden, damit typische Gefahren der Nebenläufigkeit (z.B Race Conditions) nicht auftreten können. Im GVS 2.0 sind folgende Klassen als eigenständige Threads konzipiert.
+	
+	\subsection{Nebenläufige Klassen}
+	
+	\begin{table}[h!]
+		\centering
+		\begin{tabularx}{\linewidth}{l X X}
+			\toprule 
+			Klasse & Beschreibung & Lebensdauer \\
+			\midrule
+			\textit{GVSApplication} & Läuft im Java Main Thread. Startet den JavaFX UI Thread sowie den SocketServer Thread & Programmstart bis App Terminierung. \\
+			UI Klassen & Alle UI Klassen laufen im JavaFX Thread & Programmstart bis App Terminierung \\
+			\textit{SocketServer} & Startet einen \textit{SocketServer} auf einen konfigurierbaren Port und erstellt \textit{ClientConnection} Instanzen für jede eingehende Anfrage. & Programmstart bis App Terminierung. \\
+			\textit{ClientConnection} & Interpretiert mit Hilfe des \textit{GvsXmlReaders} die eingehende Verbindung und leitet die XML Daten an den ModelBuilder weiter & Während einer Client Verbindung \\
+			\textit{Watchdog} & Ermöglicht, dass ein Client den Server nur so lange reserviert wie auch Daten übertragen werden & Während einer Client Verbindung \\
+			\textit{AreaTicker} & Representiert einen Layouting Pulse. Definiert wie oft die View während dem Layouting eines Graphen aktualisiert wird. & Während dem Layout Prozess eines Graphen \\
+			SessionReplay & Gibt Graph Snapshots in einem konfigurierbaren Interval wieder & Solange die Session existiert \\
+			\bottomrule 
+		\end{tabularx} 
+		\caption{Übersicht nebenläufige Klassen} 
+	\end{table}
+
+	\subsection{Synchronisationspunkte}
+	
+	Die nebenläufigen Klassen werden von speziellen Synchronisationspunkten serialisiert. Alle Klassen wurden als Singleton implementiert.
+	
+	\begin{table}[h!]
+		\centering
+		\begin{tabularx}{\linewidth}{l X X}
+			\toprule 
+			Klasse & Beschreibung & Lebendauer \\
+			\midrule
+			\textit{ConnectionMonitor} & Garantiert, dass immer nur ein Client den GVS Service reservieren kann & Programmstart bis App Terminierung. \\
+			\textit{ApplicationController} & Zentraler Eintrittspunkt für Manipulationen durch das UI sowie durch die Socket Verbindung & Programmstart bis App Terminierung. \\
+			\textit{GraphLayouter} & Überwacht die Lebensdauer des TickerThreads & Programmstart bis App Terminierung. \\
+			\bottomrule 
+		\end{tabularx} 
+		\caption{Übersicht Synchronisationspunkte} 
+	\end{table}
+
+	\subsection{UI Thread}
+
+	Wichtig ist, dass alle Änderungen am User Interface ausschliesslich vom JavaFX UI Thread durchgeführt werden. Dazu wird bei allen Eintrittspunkten in den Presentation Layer ein \lstinline|runLater()| ausgeführt. Dies veranlasst einen Thread Wechsel zum UI Thread. 
+		
+	\begin{lstlisting}[language=java, frame=single, caption={Java FX UI Thread}, label={code:uithread}]
+	@Override
+	public void update(Observable o, Object arg) {
+		// Hand updates over to JavaFX Thread
+		Platform.runLater(() -> {
+			doUIManipulation();
+		});
+	}
+	\end{lstlisting}
+			
+	
+	
 	\chapter{Ausblick}
 	
 	\section{UI Ausbau}
 	
-	\subsection{Threading Konzept}
-	%TODO Multi or Single Threading?
-	%TODO 4+1 Process View.
+	\subsection{Unit Testing}
 	
 	\section{Lib Ausbau}
 	
