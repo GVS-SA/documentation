@@ -502,21 +502,21 @@ eprint=false
 	\subsection{Screens}
 	%TODO add screens
 	
-	\section{Refactoring Layout Engine}
+	\section{Refactoring Graph Layouter}
 	
-	\subsection{LayoutController} \label{ssec:layoutcontroller}
-	Der \textit{LayoutController} steuert die Berechnung der Koordinaten durch die Physik Engine. Sobald ein Graph gelayouted werden muss, wird ein \textit{AreaTicker} Thread gestartet, der in einem bestimmten Interval das Anzeigen der neuen Koordinaten veranlasst. Es läuft immer nur genau ein \textit{AreaTicker} Thread. Sobald sich die \textit{Particle} in der \textit{Area} stabilisiert haben, wird der \textit{AreaTicker} Thread terminiert. 
+	\subsection{GraphLayouter} \label{ssec:layoutcontroller}
+	Für das Layouting der Graphen wurde ein Force-Directed Drawing Algorithm verwendet. Dieser wurde mehrheitlich von GVS 1.0 übernommen. Der Algorithmus ordnet die Vertices so an, dass es möglichst wenig überschneidende Kanten gibt. Dazu wird für jeden Vertex ein \textit{Particle} erstellt, welcher während der dynamischen Plazierung auf der \textit{Area} bewegt wird. Zu Beginn des Layout Prozess wird ein Particle pseudo-zufällig platziert. GVS 2.0 unterstützt zwei Varianten von pseudo-zufällig: Je nach gewählter Option wird ein Particle immer gleich zufällig plaziert (Seeded Random) oder die Koordinaten werden durchgehend zufällig platziert. Sobald ein Graph gelayouted werden muss, wird ein \textit{AreaTicker} Thread gestartet, der in einem bestimmten Interval die Darstellung der neuen Koordinaten im UI veranlasst. Es läuft immer nur genau ein \textit{AreaTicker} Thread. Sobald sich die \textit{Particle} in der \textit{Area} stabilisiert haben, wird der \textit{AreaTicker} Thread terminiert. Das Sequenzdiagramm \ref{fig:sequencegraphlayouter} zeigt den grundlegenden Ablauf beim Starten des Graph Layout Prozess.
 	
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[width=0.7\linewidth]{assets/images/sequence_layoutcontroller}
-		\caption{Sequenzdiagramm LayoutController}
-		\label{fig:sequencelayoutcontroller}
+		\includegraphics[width=0.5\linewidth]{assets/images/sequence_graph_layouter}
+		\caption{Sequenzdiagramm Graph Layouter}
+		\label{fig:sequencegraphlayouter}
 	\end{figure}
 	
 	\subsection{Area} \label{ssec:area}
-	Die \textit{Area} dient als Container während dem dynamischen Layoutprozess. Sie beinhaltet mehrere \textit{Particle}s die von physischen Kräften bewegt werden. (\textit{Traction}s und \textit{RepulsiveForce}s) Ein \textit{Particle} entspricht einem Knote des Graphen oder Trees. Die Positionen der \textit{Particles} werden fortlaufend berechnet. Sobald ein Tick Event passiert, werden die berechneten Koordinaten des Particles in den Business Vertex kopiert. Über eine Observer Beziehung wird das \textit{VertexViewModel} im Presentation Layer über die neuen Koordinaten notifziert. Dessen \gls{javafx} Properties sind über ein bidirektionales Binding mit dem UI \textit{Circle} verbunden. Dieser aktualisiert sich automatisch und visualisiert die Änderungen auf dem UI.
-	
+		Die \textit{Area} dient als Container während dem dynamischen Layout Prozess. Sie beinhaltet mehrere \textit{Particle}s die von physischen Kräften bewegt werden (\textit{Traction}s und \textit{RepulsiveForce}s). Ein \textit{Particle} repräsentiert einen Vertex. Die Positionen der \textit{Particles} werden fortlaufend berechnet. Sobald ein Tick Event passiert, werden die aktuellen Koordinaten des Particles in den \textit{GraphVertex} im Business Layer kopiert. 	Über eine Observer Beziehung wird das \textit{VertexViewModel} im Presentation Layer über die neuen Koordinaten notifziert. Dessen X/Y Properties sind über ein bidirektionales Binding mit dem UI Element (z.B \textit{Ellipse}) verbunden. Die neuen Koordinaten werden auf der Oberfläche dargestellt. 
+		
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=0.7\linewidth]{assets/images/sequence_area}
