@@ -567,7 +567,7 @@ eprint=false
 	\section{UI Design}
 	
 	\subsection{Logo}
-		Das Logo wurde von den Eigenschaften des Kraken \cite{kraken} inspiriert. Kraken sind bekannt dafür, dass sie viele Irrgarten-Probleme effizient lösen können. Dies ist eine Anspielung an die Algorithmen, die vom \gls{gvs} unterstützt werden. Ebenfalls wurden die Saugnäpfe des Kraken als Graph Nodes visualisiert und auf der Stirn ist ein binärer Baum zu erkennen. 
+	Das Logo wurde von den Eigenschaften des Kraken \cite{kraken} inspiriert. Kraken sind bekannt dafür, dass sie Irrgarten-Probleme effizient lösen können. Dies ist eine Anspielung an die Algorithmen, die vom \gls{gvs} 2.0 unterstützt werden. Ebenfalls wurden die Saugnäpfe des Kraken als Graph Nodes visualisiert und auf der Stirn ist ein binärer Baum zu erkennen. 
 	
 	\begin{figure}[h!]
 		\centering
@@ -576,22 +576,53 @@ eprint=false
 		\label{fig:logo}
 	\end{figure}
 	
-	\subsection{Screens}
-	%TODO add screens
+
+	\subsection{Farbwahl}
+	Für den Hintergrund kommen bewusst dunkle Farben zum Einsatz. Dadurch werden z.B die gefundenen Pfade eines Algorithmus verstärkt farblich hervorgehoben. 
 	
+	\subsection{Drag Support}
+	Bei Graphen können alle Vertices beliebig mit der Maus positioniert werden. Sobald alle Vertices manuell positioniert wurden, ist die Autolayout Funktion nicht mehr verfügbar. Trees können nicht manuell positioniert werden. Eine entsprechende Meldung wird angezeigt.
 	
+	\subsection{Zoom Pane}
+	Die Zeichenfläche auf der die Graphen und Trees gezeichnet werden, wird automatisch gezoomt und zentriert. 
 	
-	\subsection{Graph und Tree Verschmelzung}
+	\subsection{User Interface}
+	Das User Interface orientiert sich am Aussehen von GVS 1.0. Neu sind alle wichtigen Funktionen direkt über die Toolbar zugreifbar und alle Buttons verfügen über Tooltips. Ebenfalls wurden die Zahlen des Replay Slider durch sprechende Namen ersetzt.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\linewidth]{assets/images/gvs-ui-graph}
+		\caption{User Interface GVS 2.0}
+		\label{fig:gvs-ui-graph}
+	\end{figure}
+	
+	\subsubsection{1. Toolbar}
+	Über die Toolbar, die am oberen Fensterrand dargestellt wird, sind die grundlegenden Aktionen schnell und einfach zugreifbar. So kann ein Benutzer eine gespeicherte Session vom Dateisystem laden, die aktuelle Session speichern oder löschen und zwischen den aktuellen Session aus der Dropdown-Box wechseln. 
+	
+	\subsubsection{2. Step Buttons und Fortschrittsanzeige}
+	Die Step Buttons bilden zusammen mit der Replay Funktionalität ein wichtiges Werkzeug um die Funktionsweise eines Algorithmus schrittweise zu analysieren und verstehen. Über die Buttons können die einzelnen Momentaufnahmen einer Session einzeln durchgeschaut werden.
+	
+	\subsubsection{3. Snapshot Description}
+	Zur der aktuellen Momentaufnahme können Notizen erfasst werden. Beim Speichern der Session werden diese ebenfalls gespeichert und können zu einem späteren Zeitpunkt wieder geladen werden.
+			
+	\subsubsection{4. Replay}
+	Die Replay Funktionalität automatisiert die Aktionen der Step Buttons in einer bestimmten Geschwindigkeit. Standardmässig zur nächsten Momentaufnahme gewechselt. Das Replay kann nach belieben gestoppt, gestartet und abgebrochen werden.
+
+	
+	\subsubsection{5. Autolayout}
+	Das Autolayout steht nur für Graphen zur Verfügung. Alle Knoten die noch nicht mit der Maus positioniert wurden, werden vom Graph Layouter so positioniert, dass es möglichst wenig Überschneidungen der Edges gibt. Standardmässig verwendet der Graph Layouter immer zufällige Startkoordinaten. Dies kann über den ToggleButton deaktiviert werden, damit immer die gleichen zufälligen Koordinaten verwendet werden.
+	
+	\section{Graph und Tree Verschmelzung}
 	In theoretischer Hinsicht sind Bäume Spezialformen von Graphen. In GVS 1.0 wurden diese beiden Strukturen jedoch durchgehend getrennt modelliert. GVS 2.0 vereinigt diese Strukturen soweit es technisch Sinn macht, mit dem Ziel, Code Duplikationen weit möglichst zu vermeiden.
 	
-	\subsubsection{Unterschiede}
+	\subsection{Unterschiede}
 	\begin{itemize}
 		\item Ein Graph besitzt Edges und Vertices. Ein Baum hingegen besitzt nur Vertices, denn seine Edges sind durch die Vater-Kind Beziehung der Vertices implizit gegeben. 
 		\item Ein Tree Vertex besitzt zusätzliche Attribute wie Vater-Kind Beziehungen und \textit{isRoot()}
 		\item Die benötigten Layout Algorithmen unterscheiden sich stark. (siehe \ref{ssec:graphlayouter} für GraphLayouter und \ref{ssec:treelayouter} für TreeLayouter)
 	\end{itemize}
 	
-	\subsubsection{Umsetzung}
+	\subsection{Umsetzung}
 	Auf Grund der oben genannten Unterschiede, bildet GVS 2.0 diese Strukturen wie folgt ab:
 	
 	\begin{itemize}
