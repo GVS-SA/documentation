@@ -485,10 +485,25 @@ eprint=false
 		07.12.17 & 1.2 & TreeLayouter beschrieben & mtrentin \\
 		08.12.17 & 1.3 & Graph Layouter beschrieben & mwieland \\
 		08.12.17 & 1.4 & Multithreading beschrieben & mwieland \\
+		08.12.17 & 1.5 & Klassendiagramm GVS 2.0 & mtrentini \\
 		\bottomrule 
 	\end{tabularx} 
 	\caption{Versionshistory Realisierung} 
 	\end{table}
+
+	\section{Architektur}
+	Das Klassendiagramm \ref{pdf:classdiagramm} zeigt einen Überblick über die wichtigsten Klassen in GVS 2.0 sowie die umgesetzte Schichtenarchitektur (vgl. \ref{ssec:layer-architecture}). Liste \ref{desc:architecture-changes} zeigt die wichtigsten Änderungen zum Klassendiagramm aus der Entwurfsphase \ref{label} auf. Ansonsten wiederspiegelt GVS 2.0 die angedachte Architektur und Klassenhirarchie.
+	
+	\begin{description} \label{desc:architecture-changes}
+		\item[GvsXmlReader \& ClientConnection ] \hfill \\ Diese Klassen entstanden durch ein Refactoring der GVS 1.0 Klasse \textit{ServerConnectionXML}. Die Trennung dieser Klasse führt dazu, dass das \gls{single-responsibility}  eingehalten wird. 
+		\item[Watchdog] \hfill \\ Behebt ein Usability Problem. Mehr dazu in Abschnitt \ref{ssec:watchdog}
+		\item[SessionType] \hfill \\ Trees und Graphen werden völlig unterschiedlich gelayoutet. Dennoch werden die gleichen Klassen für die Darstellung im Presentation Layer verwendet. Somit wird eine Klasse benötigt, die eine Typunterscheidung zulässt und den korrekten Layouter bereitstellt.
+		\item[TreeVertex \& LeafVertex] \hfill \\ 
+		In der Designphase wurde das Zusammenführen von Graphen und Trees angedacht. In der Realisierung hat sich aber gezeigt, dass einerseits die Layouter sowie infolgedessen auch die Vertices unterschieden werden müssen. (siehe \ref{ssec:graphs-and-trees}) Für den Tree Layouter (\ref{ssec:tree-layouter}) wird deshalb neben dem \textit{TreeVertex} auch ein \textit{LeafVertex} benötigt.  Blattknoten dienen als Platzhalter und werden nicht dargestellt. Sie vereinfachen die Berechnung des Tree Layouts aber stark.
+		\item[ScalablePane] \hfill \\  Während der Realisierungsphase hat sich gezeigt, dass die Grösse von Trees und Graphen einen grossen Einfluss auf ihre Darstellung hat. Um diesen Ansprüchen gerecht zu werden, bietet GVS 2.0 eine Zeichenfläche, welche ihre Inhalte automatisch skaliert und zentriert. Dadruch werden zum Beispiel grosse Trees leserlich abgebildet und kleine Graphen verwenden die gesamte Bildschirmbreite. 
+	\end{description}
+	
+	\includepdf[fitpaper]{assets/pdf/classdiagramm-ui-A3.pdf} \label{pdf:classdiagramm}
 	
 	\section{Besondere Herausforderungen}
 	In diesem Kapitel werden einige Features von GVS 2.0 genauer erläutert, welche sich als besondere Herausforderungen erwiesen haben.
@@ -533,7 +548,7 @@ eprint=false
 	\end{lstlisting}
 
 
-	\subsection{Tree Layout Algorithmus}
+	\subsection{Tree Layout Algorithmus} \label{ssec:tree-layouter}
 	Die Darstellung von Trees auf eine optisch ansprechende und leserliche Art und Weise bietet verschiedene Schwierigkeiten. bereits 1981 haben Reingold-Tilford \cite{reingold-tilford} zu diesem Zweck einen Algorithmus entwickelt, welcher binäre Bäume zeichnet. Dieser Algorithmus wurde von Walker weiter entwickelt, um n-ary Trees darzustellen und schlussendlich von Buchheim, Jünger und Leipert \cite{tree-algorithm} verbessert, um die Laufzeit auf O(n) zu beschränken. 
 	
 	Der von GVS 2.0 verwendete Algorithmus, basiert auf diesem neusten Tree-Algorithmus und genügt somit auch den fünf anerkannten Prinzipien, denen ein solcher Algorithmus genügen muss:
