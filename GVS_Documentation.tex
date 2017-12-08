@@ -486,6 +486,7 @@ eprint=false
 		08.12.17 & 1.3 & Graph Layouter beschrieben & mwieland \\
 		08.12.17 & 1.4 & Multithreading beschrieben & mwieland \\
 		08.12.17 & 1.5 & Klassendiagramm GVS 2.0 & mtrentini \\
+		08.12.17 & 1.5 & UI Design beschrieben & mwieland \\
 		\bottomrule 
 	\end{tabularx} 
 	\caption{Versionshistory Realisierung} 
@@ -607,7 +608,6 @@ eprint=false
 			
 	\subsubsection{4. Replay}
 	Die Replay Funktionalität automatisiert die Aktionen der Step Buttons in einer bestimmten Geschwindigkeit. Standardmässig zur nächsten Momentaufnahme gewechselt. Das Replay kann nach belieben gestoppt, gestartet und abgebrochen werden.
-
 	
 	\subsubsection{5. Autolayout}
 	Das Autolayout steht nur für Graphen zur Verfügung. Alle Knoten die noch nicht mit der Maus positioniert wurden, werden vom Graph Layouter so positioniert, dass es möglichst wenig Überschneidungen der Edges gibt. Standardmässig verwendet der Graph Layouter immer zufällige Startkoordinaten. Dies kann über den ToggleButton deaktiviert werden, damit immer die gleichen zufälligen Koordinaten verwendet werden.
@@ -713,10 +713,16 @@ eprint=false
 	
 	\subsection{Änderungen}
 	\begin{description}
-		\item[MaxLabelLength] \hfill \\ In GVS 1.0 wurde eine MaxLabelLength vom Client an den Server übermittelt. In GVS 2.0 ist dieser Wert in der \textit{Configuration} Klasse als Konstante definiert. Da er vor allem Einfluss auf das Layout der Trees hat, ist dieser Wert in GVS 2.0 nicht mehr konfigurierbar. Erhält GVS 2.0 Label mit höheren Längen, werden diese automatisch durch Auslassungspunkte in der Mitte des Labels gekürzt.
-		\item[Background] \hfill \\ Für Graphen bestand in GSV 1.0 die Möglichkeit, ein Background Bild festzulegen. Diese Funktionalität ist nach Rücksprache mit dem Betreuer ersatzlos entfernt worden.
-		\item[Icon \& IconVertex] \hfill \\ Anstelle der Icon Bilder, die für Knoten in GVS 1.0 ausgewählt werden konnten, bietet GVS 2.0 neu sämtliche Icons von \gls{fontawesome} \cite{fontawesome} an. Zudem gibt es serverseitig keine Unterscheidung zwischen "normalen" Vertices und IconVertex mehr.
-		\item[CORBA] \hfill \\Gemäss Vereinbarung mit dem Betreuer (siehe Anhang \ref{ch:minutes}) wurde die Verbindungsoption über CORBA entfernt.
+		\item[MaxLabelLength] \hfill \\
+		In GVS 1.0 wurde eine MaxLabelLength vom Client an den Server übermittelt. In GVS 2.0 ist dieser Wert in der \textit{Configuration} Klasse als Konstante definiert. Da er vor allem Einfluss auf das Layout der Trees hat, ist dieser Wert in GVS 2.0 nicht mehr konfigurierbar. Erhält GVS 2.0 Label mit höheren Längen, werden diese automatisch durch Auslassungspunkte in der Mitte des Labels gekürzt.
+		\item[Background] \hfill \\ 
+		Für Graphen bestand in GSV 1.0 die Möglichkeit, ein Background Bild festzulegen. Diese Funktionalität ist nach Rücksprache mit dem Betreuer ersatzlos entfernt worden.
+		\item[Icon \& IconVertex] \hfill \\
+		Anstelle der Icon Bilder, die für Knoten in GVS 1.0 ausgewählt werden konnten, bietet GVS 2.0 neu sämtliche Icons von \gls{fontawesome} \cite{fontawesome} an. Zudem gibt es serverseitig keine Unterscheidung zwischen "normalen" Vertices und IconVertex mehr.
+		\item[CORBA] \hfill \\
+		Gemäss Vereinbarung mit dem Betreuer (siehe Anhang \ref{ch:minutes}) wurde die Verbindungsoption über CORBA entfernt.
+		\item[Log Level Konfiguration] \hfill \\
+		Die Log Level können in GVS 2.0 nicht mehr über das User Interface konfiguriert werden. Stattdessen kann das Log Level mittels \gls{jmx} und der JConsole oder durch Anpassen der Logback Konfiguration verändert werden. Dieses Vorgehen ist in der Benutzeranleitung genauer beschrieben.
 	\end{description}
 
 	\subsection{Neuerungen}
