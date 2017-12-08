@@ -566,8 +566,8 @@ eprint=false
 	
 	\subsection{Änderungen}
 	\begin{description}
-		\item[MaxLabelLength] \hfill \\ In GVS 1.0 wurde eine MaxLabelLength vom Client an den Server übermittelt. In GVS 2.0 ist dieser Wert in der \textit{Configuration} Klassse als Konstante definiert. Da er vor allem Einfluss auf das Layout der Trees hat, ist dieser Wert in GVS 2.0 nicht User-definiert. Erhält GVS 2.0 UI Label mit höheren Längen, werden diese automatisch durch Auslassungspunkte inder Mitte des Labels gekürzt.
-		\item[Background] \hfill \\ Für Graphen bestand in GSV 1.0 die Möglichkeit, ein Background Bild festzulegen. Diese Funktionalität ist in GVS 2.0 ersatzlos entfernt.
+		\item[MaxLabelLength] \hfill \\ In GVS 1.0 wurde eine MaxLabelLength vom Client an den Server übermittelt. In GVS 2.0 ist dieser Wert in der \textit{Configuration} Klasse als Konstante definiert. Da er vor allem Einfluss auf das Layout der Trees hat, ist dieser Wert in GVS 2.0 nicht mehr konfigurierbar. Erhält GVS 2.0 Label mit höheren Längen, werden diese automatisch durch Auslassungspunkte in der Mitte des Labels gekürzt.
+		\item[Background] \hfill \\ Für Graphen bestand in GSV 1.0 die Möglichkeit, ein Background Bild festzulegen. Diese Funktionalität ist nach Rücksprache mit dem Betreuer ersatzlos entfernt worden.
 		\item[Icon \& IconVertex] \hfill \\ Anstelle der Icon Bilder, die für Knoten in GVS 1.0 ausgewählt werden konnten, bietet GVS 2.0 neu sämtliche Icons von \gls{fontawesome} \cite{fontawesome} an. Zudem gibt es serverseitig keine Unterscheidung zwischen "normalen" Vertices und IconVertex mehr.
 		\item[CORBA] \hfill \\Gemäss Vereinbarung mit dem Betreuer (siehe Anhang \ref{ch:minutes}) wurde die Verbindungsoption über CORBA entfernt.
 	\end{description}
@@ -579,7 +579,7 @@ eprint=false
 	
 	\subsection{Fehlerbehebungen}
 	\begin{description}
-		\item[Watchog] \hfill \\ In GVS 1.0 haben Exceptions im Code, der die GVS Lib benutzt, nicht zu einem Verbindungsabbruch geführt. Der Server blieb reserviert und ein neu gestarteter Client konnte keine Verbindung aufbauen. Für den User war nicht ersichtlich, wieso der Server auf den neuen Input nicht reagiert. Um dieses Usability Problem zu beheben bietet GVS 2.0 einen Watchdog Thread. Dieser überwacht die Verbindung und erzwingt einen Verbindungsabbruch, wenn sich der Client längere Zeit nicht mehr meldet.
+		\item[Watchog] \hfill \\ In GVS 1.0 haben Exceptions im Client Code (der die GVS Lib benutzt) nicht zu einem Verbindungsabbruch geführt. Der Server blieb reserviert und ein neu gestarteter Client konnte keine Verbindung aufbauen. Für den User war nicht ersichtlich, wieso der Server auf den neuen Input nicht reagiert. Um dieses Usability Problem zu beheben bietet GVS 2.0 einen Watchdog Thread. Dieser überwacht die Verbindung und erzwingt einen Verbindungsabbruch, wenn sich der Client längere Zeit nicht mehr meldet.
 		\item[Speicherort]  \hfill \\ Der Speicherort für Sessions war in GVS 1.0 hart kodiert. Dies führte auf UNIX Systemen zu einem Fehlverhalten. In GVS 2.0 kann der User den Speicherort für seine Sessions selber wählen.
 		\item[Entfernung der Root] \hfill \\ Die GVS Lib bietet zwei Unterschiedliche Strukturen um Trees darzustellen. Bei Benutzung der Struktur \textit{GVSTreeWithRoot} kam es zu Fehlern, wenn die Root auf \textit{null} gesetzt wurde. In GVS 2.0 ist dieser Fehler behoben.
 	\end{description}
