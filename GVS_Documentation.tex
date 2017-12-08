@@ -492,13 +492,15 @@ eprint=false
 	
 	\subsection{Schnittpunkt von Edge und Vertex}
 	\subsubsection{Problem}
-	In einem ersten Stadium zeigt das GVS 2.0 nur ungerichtete Kanten an. Somit können Edges sehr einfach als Linien dargestellt werden, die zwei Vertex Mittelpunkte verbinden. In einem zweiten Stadium zeigt das GVS 2.0 auch gerichtete Kanten an. Somit genügt der einfach Lösungsansatz aus Stadium eins nicht mehr, denn bei diesem Ansatz werden Pfeilspitzen durch die darüber liegenden Vertices verdeckt.
+	In einem ersten Stadium hat GVS 2.0 nur ungerichtete Kanten angezeigt. Somit konnten Edges sehr einfach als Linien dargestellt werden, die zwei Vertex Mittelpunkte verbinden. Im endgültigen Stadium zeigt das GVS 2.0 auch gerichtete Kanten an. Somit genügt der einfach Lösungsansatz aus Stadium eins nicht mehr, denn bei diesem Ansatz werden Pfeilspitzen durch die darüber liegenden Vertices verdeckt.
 	
-	Um das Problem zu lösen, braucht es ein Algorithmus, der die Schnittpunkte zwischen einer Kante und dem Rand eines Vertex findet. Somit kann ein Pfeil zwischen zwei Schnittpunkten statt zwei Vertex Mittelpunkten gezeichnet werden. Zu beachten ist zudem, dass sich dieser Schnittpunkt ändert, wenn der betreffende Vertex vom User ''gedragged'' wird.
+	Um das Problem zu lösen, braucht es ein Algorithmus, der die Schnittpunkte zwischen einer Kante und dem Rand eines Vertex findet. Damit kann ein Pfeil zwischen zwei Schnittpunkten statt zwei Vertex Mittelpunkten gezeichnet werden. Zu beachten ist zudem, dass sich diese Schnittpunkte ändern, wenn die betreffenden Vertices vom User ''gedragged'' werden.
 	
 	\subsubsection{Lösung}
-	Die Lösung bietet ein Suchalgorithmus, der wie der \textit{Binary Search Algorithm} \cite{adbook} funktioniert. So wird ebenfalls mit zwei Endpunkten begonnen, welche in diesem Fall den Mittelpunkten des Start- und Endvertex der Kante entsprechen. Mittels Rekursion wird dann der Schnittpunkt gesucht. Dabei wird für die nächste Interation jeweils einerseits der Mittelpunkt der beiden Endpunkte bestimmt und zusammen mit einem der beiden Endpunkte übergeben, so dass immer einer der Punkte innerhalb und einer ausserhalb des Vertex zu liegen kommt. \\
-	Beispielhaft ist der Ablauf mit den verschiedenen Iterationen in Abbildung \ref{fig:binarySearch} dargestellt.
+	Die Lösung bietet ein Suchalgorithmus, der wie der \textit{Binary Search Algorithm} \cite{adbook} funktioniert. So wird ebenfalls mit zwei Endpunkten begonnen, welche in diesem Fall den Mittelpunkten des Start- und Endvertex der Kante entsprechen. Mittels Rekursion wird dann der Schnittpunkt gesucht. Beispielhaft ist der Ablauf mit den verschiedenen Iterationen in Abbildung \ref{fig:binarySearch} dargestellt. \\
+	In einem ersten Schritt wird der Mittelpunkt zwischen den beiden Endpunkten bestimmt (in Abbildung  \ref{fig:binarySearch} grün respektive orange eingezeichnet). Dann wird getestet, ob sich der Mittelpunkt innerhalb oder ausserhalb des Vertex befindet, denn für jede Iteration wird ein Punkt innerhalb und ein Punkt ausserhalb des Vertex benötigt. \\
+	Für die nächste Iteration wird der neu bestimmte Mittelpunkt plus einer der Endpunkte übergeben. In Abbildung  \ref{fig:binarySearch} zeigen Iterationen eins bis drei den Fall, dass der Mittelpunkt ausserhalb des Vertex zu liegen kommt. Ab Iteration vier wechselt das Szenario, da der Mittelpunkt innerhalb des Vertex zu liegen kommt. In Iteration sechs ist der Abstand zwischen den Endpunkten so klein, dass die Abbruch Bedingung der Rekursion zu tragen kommt und der gesuchte Schnittpunkt gefunden ist. \\
+	
 	
 	\begin{figure}
 		\centering
@@ -506,8 +508,6 @@ eprint=false
 		\caption{Algorithmus zur Suche eines Schnittpunktes}
 		\label{fig:binarySearch}
 	\end{figure}
-
-	Als Abbruchkriterium dient der Abstand beider Endpunkte, welcher kleiner als ein gewisser Mindest-Abstand sein muss.
 	
 	Die spezifische Implementierung dieses Suchalgorithmus ist dem Listing \ref{code:binarySearch} zu entnehmen.
 	
