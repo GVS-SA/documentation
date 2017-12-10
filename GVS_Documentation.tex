@@ -62,11 +62,8 @@ eprint=false
 \usepackage{arydshln} %Due to the capability to draw horizontal/vertical dash-lines.
 \usepackage{array,hhline} %To create tables and matrices.
 \usepackage{rotating} %To rotate a table.
-\usepackage{tabularx} %An extended version of tabular.
+\usepackage{dcolumn, tabularx, multirow} %An extended version of tabular.
 \renewcommand{\arraystretch}{1.25}
-
-
-
 
 %Setup of the reference links.
 \hypersetup{
@@ -486,6 +483,7 @@ eprint=false
 		08.12.17 & 1.3 & Graph Layouter beschrieben & mwieland \\
 		08.12.17 & 1.4 & Multithreading beschrieben & mwieland \\
 		08.12.17 & 1.5 & Klassendiagramm GVS 2.0 & mtrentini \\
+		10.12.17 & 1.6 & Client Refactoring beschrieben & mwieland \\
 		\bottomrule 
 	\end{tabularx} 
 	\caption{Versionshistory Realisierung} 
@@ -699,6 +697,47 @@ eprint=false
 		\item[Speicherort]  \hfill \\ Der Speicherort für Sessions war in GVS 1.0 hart kodiert. Dies führte auf UNIX Systemen zu einem Fehlverhalten. In GVS 2.0 kann der User den Speicherort für seine Sessions selber wählen.
 		\item[Entfernung der Root] \hfill \\ Die GVS Lib bietet zwei Unterschiedliche Strukturen um Trees darzustellen. Bei Benutzung der Struktur \textit{GVSTreeWithRoot} kam es zu Fehlern, wenn die Root auf \textit{null} gesetzt wurde. In GVS 2.0 ist dieser Fehler behoben.
 	\end{description}
+
+
+	\section{Client Library Upgrade}
+	Für den GVS stehen Client Libraries für Java und C\# zur Verfügung. Beide Clients wurden aufgeräumt und in ein neues, versioniertes Projekt verschoben.
+	
+	\subsection{Generics}
+	Gemäss der Aufgabenstellung (siehe Anhang \ref{aufgabenstellung}) müssen beide Clients um Generics erweitert werden. Es hat sich aber gezeigt, dass Generics auf der Schnittstelle keinen Mehrwert bieten würden. Schlussendlich wurden deshalb nur die intern verwendeten Datenstrukturen um Generics erweitert.
+	
+	\subsection{Styles und Icons}
+	Die von GVS 1.0 unterstützten Style-Typen wurden durch einen generellen GVS 2.0 Style ersetzt. Die Typ Klassen aus GVS 1.0 haben nur marginale Unterschiede untereinander. Mit der generellen \textit{GVSStyle} Klasse sowie vier weiteren Enums, konnte damit sehr viele duplizierten Code entfernt werden. Des Weiteren wurden die GVS 1.0 Icons durch FontAwesome Icons ersetzt. Eine Übersicht der migrierten Klassen ist der Tabelle \ref{tbl:styles} zu entnehmen.
+	
+	\begin{table}[h!]
+		\centering
+		\begin{tabularx}{\linewidth}{X X}
+			\toprule 
+			Klasse GVS 2.0 & Klasse GVS 1.0\\
+			\midrule
+			\multirow{6}{*}{GVSStyle} & 
+			GVSEdgeTyp \\ & 
+			GVSNodeTyp \\ & 
+			GVSGraphTyp  \\ &
+			GVSVertexTyp  \\ &
+			GVSEllipseVertexTyp \\ &
+			GVSEdgeTyp \\
+			\midrule
+			\multirow{2}{*}{GVSColor} & GVSEllipseVertexTyp.FillColor \\ &
+			GVSDefaultTyp.LineColor \\
+			\midrule
+			GVSIcon & GVSIconVertexTyp \\
+			GVSLineStyle & GVSDefaultTyp.LineStyle \\
+			GVSLineThickness & GVSDefaultTyp.LineThickness \\
+			\bottomrule 
+		\end{tabularx} 
+		\caption{GVS Lib: Übersicht Style Klassen} 
+		\label{tbl:styles}
+	\end{table}
+	
+	\subsection{C\# Lib Refactoring}
+	In der C\# Library wurden die gleichen Änderungen wie in der Java Library durchgeführt. Zusätzlich wurde der Code um aktuelle C\# Best Practices erweitert. So wurde durchgehend implizit typisierte Variablen (\lstinline|var|) verwendet sowie der um Null-Coalescing Operator (\lstinline|??|) eingesetzt. 
+	
+
 
 
 	\chapter{Ausblick} \label{ch:ausblick}
