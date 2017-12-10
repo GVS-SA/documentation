@@ -703,10 +703,10 @@ eprint=false
 	Für den GVS stehen Client Libraries für Java und C\# zur Verfügung. Beide Clients wurden aufgeräumt und in ein neues, versioniertes Projekt verschoben.
 	
 	\subsection{Generics}
-	Gemäss der Aufgabenstellung (siehe Anhang \ref{aufgabenstellung}) müssen beide Clients um Generics erweitert werden. Es hat sich aber gezeigt, dass Generics auf der Schnittstelle keinen Mehrwert bieten würden. Schlussendlich wurden deshalb nur die intern verwendeten Datenstrukturen um Generics erweitert.
+	Gemäss der Aufgabenstellung (siehe Anhang \ref{aufgabenstellung}) müssen beide Clients um Generics erweitert werden. Es hat sich aber gezeigt, dass Generics auf der Schnittstelle keinen Mehrwert bieten würden (siehe Beschluss in Sitzungsprotokoll Woche 11, Anhang \ref{ch:minutes}). Schlussendlich wurden deshalb nur die intern verwendeten Datenstrukturen um Generics erweitert.
 	
 	\subsection{Styles und Icons}
-	Die von GVS 1.0 unterstützten Style-Typen wurden durch einen generellen GVS 2.0 Style ersetzt. Die Typ Klassen aus GVS 1.0 haben nur marginale Unterschiede untereinander. Mit der generellen \textit{GVSStyle} Klasse sowie vier weiteren Enums, konnte damit sehr viele duplizierten Code entfernt werden. Des Weiteren wurden die GVS 1.0 Icons durch FontAwesome Icons ersetzt. Eine Übersicht der migrierten Klassen ist der Tabelle \ref{tbl:styles} zu entnehmen.
+	Die von GVS 1.0 unterstützten Style-Typen wurden durch einen generellen GVS 2.0 Style ersetzt. Die Typ Klassen aus GVS 1.0 haben nur marginale Unterschiede untereinander. Mit der generellen \textit{GVSStyle} Klasse sowie vier weiteren Enums, konnte damit sehr viele duplizierter Code entfernt werden. Des Weiteren wurden die GVS 1.0 Icons durch FontAwesome Icons ersetzt. Eine Übersicht der migrierten Klassen ist der Tabelle \ref{tbl:styles} zu entnehmen.
 	
 	\begin{table}[h!]
 		\centering
@@ -726,7 +726,9 @@ eprint=false
 			GVSDefaultTyp.LineColor \\
 			\midrule
 			GVSIcon & GVSIconVertexTyp \\
+			\midrule
 			GVSLineStyle & GVSDefaultTyp.LineStyle \\
+			\midrule
 			GVSLineThickness & GVSDefaultTyp.LineThickness \\
 			\bottomrule 
 		\end{tabularx} 
@@ -735,10 +737,7 @@ eprint=false
 	\end{table}
 	
 	\subsection{C\# Lib Refactoring}
-	In der C\# Library wurden die gleichen Änderungen wie in der Java Library durchgeführt. Zusätzlich wurde der Code um aktuelle C\# Best Practices erweitert. So wurde durchgehend implizit typisierte Variablen (\lstinline|var|) verwendet sowie der um Null-Coalescing Operator (\lstinline|??|) eingesetzt. 
-	
-
-
+	In der C\# Library wurden die gleichen Änderungen wie in der Java Library durchgeführt. Zusätzlich wurde der Code um aktuelle C\# Best Practices erweitert. So werden durchgehend implizit typisierte Variablen (\lstinline|var|) verwendet, sowie der Null-Coalescing Operator (\lstinline|??|) eingesetzt. 
 
 	\chapter{Ausblick} \label{ch:ausblick}
 
