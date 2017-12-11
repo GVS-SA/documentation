@@ -327,7 +327,7 @@ eprint=false
 	
 	\includepdf[fitpaper]{assets/pdf/gvs1-0.pdf}
 		
-	\subsection{Sequenzdiagramme}
+	\subsection{Sequenzdiagramme} \label{ssec:sequence-1}
 	Um schwierig zu verstehende Systemabläufe zu abstrahieren, werden Systemdiagramme erstellt. Sie zeigen die wichtigsten Abläufe in GVS 1.0.
 	
 	\subsubsection{Verbindungsaufbau}
@@ -504,6 +504,49 @@ eprint=false
 	
 	\includepdf[fitpaper]{assets/pdf/classdiagramm-ui-A3.pdf} \label{pdf:classdiagramm}
 	
+	\subsection{Sequenzdiagramme}
+	Während der Analyse-Phase dieses Projekts wurden die Programmabläufe in GVS 1.0 untersucht (siehe \ref{ssec:sequence-1}). Um Änderungen im Programmablauf aufzuzeigen, finden sich in diesem Kapitel neue Sequenzdiagramme, die die selben Abläufe in GVS 2.0 abbilden. 
+	
+	\subsubsection{Verbindungsaufbau}
+	Abbildung \ref{fig:sd-verbindungsaufbau-2} zeigt den Start der GVS 2.0 Applikation über die \textit{GVSApplication} sowie das Empfangen von Daten über die Socket. Änderungen gegenüber GVS 1.0 finden sich in folgender Liste:
+	\begin{description}
+		\item[\gls{di}] \hfill \\
+		GVS 2.0 setzt an vielen Orten auf \gls{di} (siehe \ref{DI})
+	\end{description}
+
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\linewidth]{assets/images/sequence_Verbindungsaufbau}
+		\caption{Sequenzdiagramm: Verbindungsaufbau}
+		\label{fig:sd-verbindungsaufbau-2}
+	\end{figure}
+	
+	
+	\subsubsection{ModelBuilder}
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\linewidth]{assets/images/sequence_ModelBuilder}
+		\caption{Sequenzdiagramm: ModelBuilder}
+		\label{fig:sd-modelbuilder-2}
+	\end{figure}	
+
+	\subsubsection{Load \& Save Session}
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\linewidth]{assets/images/sequence_LoadSave_Session}
+		\caption{Sequenzdiagramm: Load \& Save Session}
+		\label{fig:sd-load_save_session-2}
+	\end{figure}
+	
+	
+	\subsubsection{Session}	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=\linewidth]{assets/images/sequence_Session}
+		\caption{Sequenzdiagramm: Session}
+		\label{fig:sd-session-2}
+	\end{figure}
+	
 	\section{Besondere Herausforderungen}
 	In diesem Kapitel werden einige Features von GVS 2.0 genauer erläutert, welche sich als besondere Herausforderungen erwiesen haben.
 	
@@ -647,7 +690,7 @@ eprint=false
 		
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[width=0.6\linewidth]{assets/images/sequence_area}
+		\includegraphics[width=0.8\linewidth]{assets/images/sequence_area}
 		\caption{Sequenzdiagramm Area}
 		\label{fig:sequencearea}
 	\end{figure}
@@ -894,8 +937,8 @@ eprint=false
 
 	\section{Frameworks}
 	
-	\subsection{Gluon Ignite mit Google Guice}
-	Gluon Ignite \cite{gluonignite} erweitert das verbreitete \gls{di}-Framework Guice \cite{guice} für den Einsatz in \gls{javafx} Applikationen. Mit Gluon Ignite lässt sich \gls{di} nicht nur im Business Layer, sondern auch für die \gls{fxml} Loader verwenden. \gls{di} verbessert die Testbarkeit und zentralisiert die Erzeugungslogik von Klassenobjekten.
+	\subsection{Gluon Ignite mit Google Guice} \label{DI}
+	Gluon Ignite \cite{gluonignite} erweitert das verbreitete \gls{di}-Framework Guice \cite{guice} für den Einsatz in \gls{javafx} Applikationen. Mit Gluon Ignite lässt sich \gls{di} nicht nur im Business Layer, sondern auch für die \gls{fxml} Loader verwenden. \gls{di} verringert die Kopplung zwischen Komponenten, verbessert die Testbarkeit und zentralisiert die Erzeugungslogik von Klassenobjekten.
 
 	\section{Repositories}
 	Die Artefakte werden in verschiedenen Repositories auf GitHub versioniert abgelegt. So gibt es für die Dokumentation, die Meetings-Protokolle und den Sourcecode jeweils ein eigenes Repository.
