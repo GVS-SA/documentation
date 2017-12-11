@@ -649,7 +649,7 @@ eprint=false
 	\subsubsection{2. Step Buttons und Fortschrittsanzeige}
 	Die Step Buttons bilden zusammen mit der Replay Funktionalität ein wichtiges Werkzeug, um die Funktionsweise eines Algorithmus schrittweise zu analysieren und zu verstehen. Über die Buttons können die einzelnen Momentaufnahmen einer Session durchgeschaut werden.
 	
-	\subsubsection{3. Snapshot Description}
+	\subsubsection{3. Snapshot Description} \label{sssec:snapshotDesc}
 	Zur aktuellen Momentaufnahme können Notizen erfasst werden. Beim Speichern der Session werden diese ebenfalls gespeichert und werden beim laden der Session wieder angezeigt.
 			
 	\subsubsection{4. Replay}
@@ -825,8 +825,8 @@ eprint=false
 	In der C\# Library wurden die gleichen Änderungen wie in der Java Library durchgeführt. Zusätzlich wurde der Code um aktuelle C\# Best Practices erweitert. So werden durchgehend implizit typisierte Variablen (\lstinline|var|) verwendet, sowie der Null-Coalescing Operator (\lstinline|??|) eingesetzt. 
 	
 	
-	\section{Software Metriken}
-	In der Analayse Phase wurden mehrere Code Smells in GVS 1.0 erkannt. (Siehe Abschnitt \ref{sec:erkenntnisse}) In der Design Phase wurde deshalb ein Konzept ausgearbeitet, damit das Refactoring strukturiert ablaufen wird. (Siehe Abschnitt \ref{sec:refactroing-concept}) Die Refactorings wurden damals aus Zeitgründen tief priorisiert. Es hat sich aber gezeigt, dass bereits am Anfang der Realisations Phase viele Refactorings durchgeführt werden müssen. Dies nicht zuletzt deshalb, da der bestehende Code sehr schwer zu lesen war. Durch die Refactorings konnte die Verständlichkeit des Codes enorm verbessert werden. Dies spiegelt sich auch in den erhobenen Software Metriken wieder. Im folgenden Abschnitt sind dieser genauer beschrieben.
+	\section{Software Metriken} \label{sec:metrics-2}
+	In der Analyse Phase wurden mehrere Code Smells in GVS 1.0 erkannt. (Siehe Abschnitt \ref{sec:erkenntnisse}) In der Design Phase wurde deshalb ein Konzept ausgearbeitet, damit das Refactoring strukturiert ablaufen wird. (Siehe Abschnitt \ref{sec:refactroing-concept}) Die Refactorings wurden damals aus Zeitgründen tief priorisiert. Es hat sich aber gezeigt, dass bereits am Anfang der Realisations Phase viele Refactorings durchgeführt werden müssen. Dies nicht zuletzt deshalb, da der bestehende Code sehr schwer zu lesen war. Durch die Refactorings konnte die Verständlichkeit des Codes enorm verbessert werden. Dies spiegelt sich auch in den erhobenen Software Metriken wieder. Im folgenden Abschnitt sind dieser genauer beschrieben.
 	
 	\subsection{Wartbarkeit}
 	In der Wartbarkeits-Metrik \cite{metric-maintainability} ist klar zu erkennen, dass die Wartbarkeit der meisten Klassen gut ist. Auf der X-Achse ist der Churn \cite{metric-churn} abgebildet, also wie oft eine Klasse verändert wurde. Klassen die oft angepasst werden, erledigen potentiell zu viele Aufgaben. Auf der Y-Achse ist die Wartbarkeit angezeigt. Diese errechnet sich aus Code-Duplikationen, zyklomatischer Komplexität von McCabe \cite{mccabe} und der Kognitiven Komplexität \cite{metric-cognitive-complexity} einer Klasse. Die beiden Klassen \textit{Persistor} und \textit{ModelBuilder} weisen die schlechtesten Werte auf. (oben rechts)
@@ -857,23 +857,61 @@ eprint=false
 	
 
 	\chapter{Ausblick} \label{ch:ausblick}
+	\begin{table}[h!]
+		\centering
+		\begin{tabularx}{\linewidth}{l l X l}
+			\toprule 
+			Datum & Version & Änderungen & Autor \\
+			\midrule
+			11.12.17 & 1.0 & Ausblick geschrieben & mtrentini \\
+			\bottomrule 
+		\end{tabularx} 
+		\caption{Versionshistory Ausblick} 
+	\end{table}
+	
+	Obwohl viel erreicht wurde im GVS 2.0 Projekt, konnten nicht all Ideen umgesetzt und sämtliches Verbesserungspotential ausgeschöpft werden.
+	
+	Dieses Kapitel bietet eine Übersicht, welche Aufgaben in einem nächsten GVS Major Update angegangen werden könnten. 
+	
+	\section{Nicht umgesetzte Ideen für GVS 2.0}
 
+	\subsubsection{N-ary Trees}
+	Der in GVS 2.0 neu eingeführte Algorithmus zum Zeichnen von optisch ansprechenden Bäumen ist fähig n-ary Trees darzustellen (siehe \ref{ssec:treelayouter}). Da GVS 1.0 jedoch ausschliesslich Binary Trees unterstütze, sieht die Client Lib diese Erweiterung nicht vor.
 	
-	\section{UI Ausbau}
+	GVS 3.0 soll die GVS Lib für n-ary Trees erweitern.
 	
-	\subsection{Unit Testing}
+	\subsubsection{Refactoring ModelBuilder und Persistor}
+	Die Klassen \textit{ModelBuilder} und \textit{Persistor} besitzen sehr ähnliche Funktionalität und somit viel \textit{duplicated Code}. Obwohl diese Klassen in GVS 2.0 einem Refactoring unterzogen wurden, besteht das Problem weiterhin (siehe Abschnitt \ref{sec:metrics-2}).
 	
-	\section{Lib Ausbau}
+	GVS 3.0 sollte diese Klassen soweit refactoren, dass kein \textit{duplicated Code} mehr vorhanden ist.
 	
-	\subsection{Algorithmen Library}
+	\subsubsection{Automated Testing}
+	GVS 1.0 besitzt keine automatisierten Tests. Auch in GVS 2.0 konnte diese Altlast nicht beseitigt werden. Es wurde nur eine sehr kleine Test Coverage erreicht, da die Erstellung von automatisierten Tests tief priorisiert wurde.
 	
-	\subsection{Annotations}
+	GVS 3.0 sollte das Business Layer und Teile des Access Layers sinnvoll mit Tests abdecken.
 	
+	\section{Verbesserungspotential GVS 1.0}
+	Während der Verwendung von GVS 1.0 wurden verschiedenste Dinge bemerkt, die nicht optimal funktionieren. Diese wurden vom Betreuer in einer Liste festgehalten und an das Projektteam überreicht. Gemäss einer Besprechung wurden diese Änderungen mit tiefer Priorität in den Backlog eingepflegt (siehe Anhang \ref{ch:minutes}). Dieses Kapitel zeigt auf, welche Punkte bis zum Abschluss des Projekts offen geblieben sind.
 	
+	\subsubsection{Environment-Variable}
+	GVS 3.0 sollte eine einfache Möglichkeit bieten, ein Programm auch ohne laufenden Sever auszuführen. Dies könnte zum Beispiel mit dem setzen und auslesen einer Environment-Variable umgesetzt werden.
+	
+	\subsubsection{Font Size}
+	GVS 3.0 sollte es dem User erlauben die Font Size der Labels zu verändern, ohne den Code von GVS UI zu bearbeiten. Eignen würde sich entweder ein Menü-Eintrag ''Einstellungen'' oder das setzen von der Font Size im \textit{GVSStyle}.
+	
+	\subsubsection{Unicode Labels}
+	GVS 3.0 sollte die Darstellung von Unicode Zeichen in Labels unterstützen.
+	
+	\subsubsection{Snapshot Description}
+	GVS 2.0 bietet einem User die Möglichkeit, eine Notiz zu einem Snapshot zu verfassen (siehe \ref{sssec:snapshotDesc}).
+	
+	GVS 3.0 sollte das verwendete Protokoll und die GVS Lib Klassen so anpassen, dass solche Notizen direkt im Client erstellt und mit den Graphen mitgeschickt werden können.
+	
+	\subsubsection{Schnelle Beendung von GVS Lib}
+	Wenn die \textit{main} Methode des Programms, welches GVS Lib verwendet sehr schnell beendet, gehen Daten bei der Übertragung verloren. Dies sollte bei GVS 3.0 verhindert werden.
 	
 	\chapter{Projektplanung}
-	
-	
+
 	\begin{table}[h!]
 		\centering
 		\begin{tabularx}{\linewidth}{l l X l}
