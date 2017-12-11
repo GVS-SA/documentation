@@ -509,7 +509,7 @@ eprint=false
 	Während der Analyse-Phase dieses Projekts wurden die Programmabläufe in GVS 1.0 untersucht (siehe \ref{ssec:sequence-1}). Um Änderungen im Programmablauf aufzuzeigen, finden sich in diesem Kapitel neue Sequenzdiagramme, die die selben Abläufe in GVS 2.0 abbilden. 
 	
 	\subsubsection{Verbindungsaufbau}
-	Abbildung \ref{fig:sd-verbindungsaufbau-2} zeigt den Start der GVS 2.0 Applikation über die \textit{GVSApplication} sowie das Empfangen von Daten über die Socket. Im Diagramm nicht ersichtlich ist, dass GVS 2.0 an vielen Orten auf \gls{di} setzt (siehe \ref{DI}). Zum Beispiel werden die vier Klassen \textit{Watchdog},  \textit{ConnectionMonitor},  \textit{GvsXmlReader} und  \textit{ModelBuilder} (rechts im Diagramm) in den Constructor der  \textit{ClientConnection} ''injected''.
+	Abbildung \ref{fig:sd-verbindungsaufbau-2} zeigt den Start der GVS 2.0 Applikation über die \textit{GVSApplication} sowie das Empfangen von Daten über die Socket. Nicht ersichtlich ist im Diagramm, dass GVS 2.0 an vielen Orten auf \gls{di} setzt (siehe \ref{DI}). Zum Beispiel werden die vier Klassen \textit{Watchdog},  \textit{ConnectionMonitor},  \textit{GvsXmlReader} und  \textit{ModelBuilder} (rechts im Diagramm) in den Constructor der  \textit{ClientConnection} ''injected''.
 	
 	Details zu den genauen Änderungen gegenüber GVS 1.0 finden sich im Abschnitt \ref{label}. %TODO: ergänzen welcher Abschnitt, wenn klar ist, wie Realisations Kapitel strukturiert ist, änderungen sind watchdog, clientConnection&gvsxmlreader,...
 
@@ -521,7 +521,7 @@ eprint=false
 	\end{figure}
 	
 	\subsubsection{ModelBuilder}
-	Das Sequenzdiagramm in Abbildung \ref{fig:sd-modelbuilder-2} zeigt, wie aus einem empfangenen XML File \gls{pojo}s des Business Layers erstellt werden. Sehr klar ist ersichtlich, dass im Vergleich zu GVS 1.0 die Trennung zwischen Graph und Tree viel weniger ausgeprägt ist, um \textit{duplicated Code} zu vermeiden (siehe \ref{graph-vs-tree}).
+	Das Sequenzdiagramm in Abbildung \ref{fig:sd-modelbuilder-2} zeigt, wie aus einem empfangenen XML File \gls{pojo}s des Business Layers erstellt werden. Sehr gut erkennbar ist, dass im Vergleich zu GVS 1.0 die Trennung zwischen Graph und Tree viel weniger ausgeprägt ist, um \textit{duplicated Code} zu vermeiden (siehe \ref{graph-vs-tree}).
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=\linewidth]{assets/images/sequence_ModelBuilder}
