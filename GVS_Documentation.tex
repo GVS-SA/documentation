@@ -452,7 +452,7 @@ eprint=false
 	\subsection{Access Layer}
 	Der Access Layer enthält Klassen für den Zugriff auf den Socket Server, sowie das File System. Es Ist für das Parsen von eingehenden XML Files zuständig und für deren Umwandlung in Domainobjekte.
 
-	\section{Refactoring Konzept} \label{sec:refactroing-conpet}
+	\section{Refactoring Konzept} \label{sec:refactroing-concept}
 	Das Refactoring des GVS 1.0 soll organisiert durchgeführt werden. Dazu werden die notwendigen Schritte priorisiert aufgelistet.
 		
 	\subsection{Ablauf}\label{ssec:ablauf}
@@ -775,6 +775,38 @@ eprint=false
 	
 	\subsection{C\# Lib Refactoring}
 	In der C\# Library wurden die gleichen Änderungen wie in der Java Library durchgeführt. Zusätzlich wurde der Code um aktuelle C\# Best Practices erweitert. So werden durchgehend implizit typisierte Variablen (\lstinline|var|) verwendet, sowie der Null-Coalescing Operator (\lstinline|??|) eingesetzt. 
+	
+	
+	\section{Software Metriken}
+	In der Analayse Phase wurden mehrere Code Smells in GVS 1.0 erkannt. (Siehe Abschnitt \ref{sec:erkenntnisse}) In der Design Phase wurde deshalb ein Konzept ausgearbeitet, damit das Refactoring strukturiert ablaufen wird. (Siehe Abschnitt \ref{sec:refactroing-concept}) Die Refactorings wurden damals aus Zeitgründen tief priorisiert. Es hat sich aber gezeigt, dass bereits am Anfang der Realisations Phase viele Refactorings durchgeführt werden müssen. Dies nicht zuletzt deshalb, da der bestehende Code sehr schwer zu lesen war. Durch die Refactorings konnte die Verständlichkeit des Codes enorm verbessert werden. Dies spiegelt sich auch in den erhobenen Software Metriken wieder. Im folgenden Abschnitt sind dieser genauer beschrieben.
+	
+	\subsection{Wartbarkeit}
+	In der Wartbarkeits-Metrik \cite{metric-maintainability} ist klar zu erkennen, dass die Wartbarkeit der meisten Klassen gut ist. Auf der X-Achse ist der Churn \cite{metric-churn} abgebildet, also wie oft eine Klasse verändert wurde. Klassen die oft angepasst werden, erledigen potentiell zu viele Aufgaben. Auf der Y-Achse ist die Wartbarkeit angezeigt. Diese errechnet sich aus Code-Duplikationen, zyklomatischer Komplexität von McCabe \cite{mccabe} und der Kognitiven Komplexität \cite{metric-cognitive-complexity} einer Klasse. Die beiden Klassen \textit{Persistor} und \textit{ModelBuilder} weisen die schlechtesten Werte auf. (oben rechts)
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\linewidth]{assets/images/metrics/maintainability}
+		\caption{Wartbarkeit Metrik}
+		\label{fig:metric-maintainability}
+	\end{figure}
+	
+	\subsection{Technische Schulden}
+	Technischen Schulden (Abb. \ref{fig:metric-technical-debt}) beschreiben den zusätzlichen Aufwand, welcher für die Korrektur von schlecht geschriebenen Software aufgewendet werden muss. Die Metrik korreliert mit den Anzahl Zeilen an Source Code (Siehe \ref{ssec:lines-code}). Auch gut zu erkennen ist, dass die technischen Schulden trotz weiteren Anpassungen nicht mehr zugenommen hat.
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\linewidth]{assets/images/metrics/technical_debt}
+		\caption{Technische Schulden Metrik}
+		\label{fig:metric-technical-debt}
+	\end{figure}
+	
+	\subsection{Lines of Code} \label{ssec:lines-code}
+	Interessant zu beobachten ist, dass beinahe die selbe Funktionalität mit viel weniger Zeilen Code erreicht wurde. Dies ist insbesondere durch das entfernen von dupliziertem Code möglich. Ein weiterer Einfluss hat der Einsatz von modernen Lamda Ausdrücken, die zur Zeit der Entwicklung von GVS 1.0 nicht zur Verfügung standen.
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\linewidth]{assets/images/metrics/lines_of_code}
+		\caption{Lines of Code Metrik}
+		\label{metric-linesofcode}
+	\end{figure}	
+	
 
 	\chapter{Ausblick} \label{ch:ausblick}
 
@@ -821,7 +853,7 @@ eprint=false
 	Entwurf des Soll-Zustand von GVS 2.0: Eine klassische 3-Schichten Architektur wird entworfen. Es wird spezifiziert, welche GVS 1.0 Komponenten durch welche GVS 2.0 Komponenten ersetzt werden. 
 	
 	\subsubsection{Meilenstein 3: Release 1}
-	Der Presentation Layer ist vollständig gemäss Punkt 1 im Refactroing Konzept (\ref{sec:refactroing-conpet}) umgesetzt.
+	Der Presentation Layer ist vollständig gemäss Punkt 1 im Refactroing Konzept (\ref{sec:refactroing-concept}) umgesetzt.
 	
 	\subsubsection{Meilenstein 4: Release 2}
 	Die im Refactoring Konzept (\ref{sec:refactroing-conpet}) beschlossenen Änderungen sind umgesetzt. Das mit dem Enterprise Architekt erstellte Klassendiagramm ist mit dem Stand der GVS 2.0 Software synchron.
