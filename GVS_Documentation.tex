@@ -508,11 +508,9 @@ eprint=false
 	Während der Analyse-Phase dieses Projekts wurden die Programmabläufe in GVS 1.0 untersucht (siehe \ref{ssec:sequence-1}). Um Änderungen im Programmablauf aufzuzeigen, finden sich in diesem Kapitel neue Sequenzdiagramme, die die selben Abläufe in GVS 2.0 abbilden. 
 	
 	\subsubsection{Verbindungsaufbau}
-	Abbildung \ref{fig:sd-verbindungsaufbau-2} zeigt den Start der GVS 2.0 Applikation über die \textit{GVSApplication} sowie das Empfangen von Daten über die Socket. Änderungen gegenüber GVS 1.0 finden sich in folgender Liste:
-	\begin{description}
-		\item[\gls{di}] \hfill \\
-		GVS 2.0 setzt an vielen Orten auf \gls{di} (siehe \ref{DI})
-	\end{description}
+	Abbildung \ref{fig:sd-verbindungsaufbau-2} zeigt den Start der GVS 2.0 Applikation über die \textit{GVSApplication} sowie das Empfangen von Daten über die Socket. Im Diagramm nicht ersichtlich ist, dass GVS 2.0 an vielen Orten auf \gls{di} setzt (siehe \ref{DI}). Zum Beispiel werden die vier Klassen \textit{Watchdog},  \textit{ConnectionMonitor},  \textit{GvsXmlReader} und  \textit{ModelBuilder} (rechts im Diagramm) in den Constructor der  \textit{ClientConnection} ''injected''.
+	
+	Details zu den genauen Änderungen gegenüber GVS 1.0 finden sich im Abschnitt \ref{label}. %TODO: ergänzen welcher Abschnitt, wenn klar ist, wie Realisations Kapitel strukturiert ist, änderungen sind watchdog, clientConnection&gvsxmlreader,...
 
 	\begin{figure}[h!]
 		\centering
@@ -521,8 +519,8 @@ eprint=false
 		\label{fig:sd-verbindungsaufbau-2}
 	\end{figure}
 	
-	
 	\subsubsection{ModelBuilder}
+	Das Sequenzdiagramm in Abbildung \ref{fig:sd-modelbuilder-2} zeigt, wie aus einem empfangenen XML File \gls{pojo}s des Business Layers erstellt werden. Sehr klar ist ersichtlich, dass im Vergleich zu GVS 1.0 die Trennung zwischen Graph und Tree viel weniger ausgeprägt ist, um \textit{duplicated Code} zu vermeiden (siehe \ref{graph-vs-tree}).
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=\linewidth]{assets/images/sequence_ModelBuilder}
@@ -531,6 +529,10 @@ eprint=false
 	\end{figure}	
 
 	\subsubsection{Load \& Save Session}
+	Ein User von GVS 2.0 hat die Möglichkeit Sessions zu speichern und vorherige Sessions zu laden. Was sich dabei hinter den Kulissen abspielt, zeigt Abbildung \ref{fig:sd-load_save_session-2}. Die links eingezeichnete blaue Klasse \textit{JavaFX} widerspiegelt UI Events, welche per \textit{EventHandler} an die \textit{AppView} weitergeleitet werden.
+	
+	Durch die komplette Ersetzung des Presentation Layers sowie eine klarere Trennung der verschiedenen Schichten unterscheidet sich dieses Sequenzdiagramm stark zum entsprechenden Pendant in GVS 1.0 (\ref{fig:sd-applicationview}). Sie decken jedoch beide die gleichen Use Cases ab.
+	
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=\linewidth]{assets/images/sequence_LoadSave_Session}
@@ -540,6 +542,8 @@ eprint=false
 	
 	
 	\subsubsection{Session}	
+	Auch in Abbildung \ref{fig:sd-session-2} zeigen sich die Änderungen im Presentation Layer und die strukturellen Änderungen an der gesamten Applikation stark. So ist nicht direkt auf den ersten Blick ersichtlich, dass Abbildung \ref{fig:sd-graphsessioncontroller} und Abbildung \ref{fig:sd-session-2} die gleiche Programmlogik aufzeigen, nämlich wie \gls{pojo}s des Business Layers an das Presentation Layer gelangen und auf dem UI dargestellt werden.
+	
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=\linewidth]{assets/images/sequence_Session}
@@ -653,7 +657,7 @@ eprint=false
 	\subsubsection{5. Autolayout}
 	Das Autolayout steht nur für Graphen zur Verfügung. Alle Vertices die noch nicht mit der Maus positioniert wurden, werden vom Graph Layouter so positioniert, dass es möglichst wenig Überschneidungen der Edges gibt. Standardmässig verwendet der Graph Layouter immer zufällige Startkoordinaten. Dies kann über den ToggleButton deaktiviert werden, damit immer das gleiche Layout resultiert.
 	
-	\section{Graph und Tree Verschmelzung}
+	\section{Graph und Tree Verschmelzung} \label{graph-vs-tree}
 	In theoretischer Hinsicht sind Bäume Spezialformen von Graphen. In GVS 1.0 wurden diese beiden Strukturen jedoch durchgehend getrennt modelliert. GVS 2.0 vereinigt diese Strukturen soweit es technisch Sinn macht, mit dem Ziel, Code Duplikationen weit möglichst zu vermeiden.
 	
 	\subsection{Unterschiede}
@@ -669,7 +673,7 @@ eprint=false
 	\begin{itemize}
 		\item Trees und Graphen werden in der Struktur \textit{Graph} vereinigt. Der \textit{ModelBuilder} erstellt für empfangene Bäume sämtliche impliziten Edges.
 		\item Ein \textit{Graph} besitzt eine Liste von Vertices. Diese müssen das Interface \textit{IVertex} implementieren. Es gibt drei konkrete Implementierungen dieses Interfaces. Für reine Graphen wird die Klasse \textit{GraphVertex} benutzt. Die Klassen \textit{TreeVertex} und \textit{LeafVertex} bieten Tree-spzifische Attribute.
-		\item Eine \textit{Session} umfasst jeweils mehrere \textit{Graphen}. Um einer \textit{Session} den richtigen \textit{Layouter} zuzuweisen, besitzt sie einen \textit{SessionType} der beschreibt, ob die enthaltenen Graphen effektive Graphen oder Trees sind.
+		\item Eine \textit{Session} umfasst jeweils mehrere \textit{Graphen}. Es gibt keine Unterscheidung zwischen Graph-Sessions und Tree-Sessions. Um einer \textit{Session} den richtigen \textit{Layouter} zuzuweisen, besitzt sie einen \textit{SessionType} der beschreibt, ob die enthaltenen Graphen effektive Graphen oder Trees sind.
 		\item Nach dem Abschliessen des Layoutingprozesses ist keine Unterscheidung zwischen Trees und Graphen mehr nötig. Dies führt dazu, dass die Strukturen im Presentation Layer vollständig zusammengeführt sind.
 	\end{itemize}
 	
