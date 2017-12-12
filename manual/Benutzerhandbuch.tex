@@ -46,6 +46,7 @@ eprint=false
 \usepackage{datetime} %For the specification of the date.
 %\usepackage{tocloft} %The ToC, LoF and LoT each appear not necessarily on a new page.
 \usepackage{graphicx,listings,xcolor,textcomp} %For the graphics, listings etc.
+\usepackage{adjustbox} %for step-by-step instructions
 \usepackage{mcode} %To implement a Matlab code.
 \usepackage[margin=10pt, font=small, labelfont=bf, labelsep=endash]{caption} %Customize the captions.
 \usepackage{chngcntr} %To use counterwithout.
@@ -59,11 +60,7 @@ eprint=false
 \usepackage{dcolumn, tabularx, multirow} %An extended version of tabular.
 \renewcommand{\arraystretch}{1.25}
 
-\NewDocumentCommand{\codeword}{v}{%
-	\texttt{\textcolor{blue}{#1}}%
-}%for inline code
-
-\lstset{language=Java,keywordstyle={\bfseries \color{blue}}}
+\lstset{language=Java,keywordstyle={\bfseries \color{blue}}}%for inline code
 
 %Setup of the reference links.
 \hypersetup{
@@ -91,6 +88,13 @@ eprint=false
 %New command for the GVS logo.
 \newcommand*{\plogo}{\includegraphics{logo.png}}
 
+%New command for step-by-step instructions
+\newenvironment{explanation}[2][]
+{\begin{flushleft}
+		\adjustbox{center=11cm,valign=c}{\includegraphics[width=10cm,#1]{#2}}%
+		\begin{minipage}[c]{\dimexpr\textwidth-11cm\relax}}
+		{\end{minipage}\end{flushleft}}
+
 %New command for the differential d to have an ordinary d.
 \makeatletter
 \newcommand{\ud}{\mathrm{d}}
@@ -100,6 +104,8 @@ eprint=false
 \makeatletter
 \patchcmd{\@chap@pppage}{\thispagestyle{plain}}{\thispagestyle{empty}}{}{}
 \makeatother
+
+
 
 %Declare Definitions, Theorems etc.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -133,14 +139,14 @@ eprint=false
 	\rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt} %Thin horizontal line.
 	\rule{\textwidth}{1.6pt}\\[2\baselineskip] %Thick horizontal line.
 	\scshape %Small caps.
-	\large Benutzerhandbuch
+	\Large Benutzerhandbuch
 	\vspace*{2\baselineskip}
 	
 	
 	Autoren\\
-	{\Large  Michael Wieland  \\ [5pt]}
+	{\large  Michael Wieland  \\ [5pt]}
 	
-	{\Large Murièle Trentini \\ [5pt]}
+	{\large Murièle Trentini \\ [5pt]}
 	
 	\vfill
 	\endgroup}
@@ -197,7 +203,7 @@ eprint=false
 	\pagenumbering{arabic}
 	
 	\chapter{Anforderungen}
-	Das Benutzen von GVS 2.0 benötigt ein Java SE Runtime Environment 1.8 oder höher.
+	Das Benutzen von GVS 2.0 benötigt JDK 1.8 oder höher.
 	
 	Für das Aufsetzen der Entwicklungsumgebung werden Grundkenntnisse von git vorausgesetzt. Das verwenden von Eclipse ist empfohlen. Sämtliche Anleitungen sind für Eclipse geschrieben.
 
@@ -385,19 +391,28 @@ eprint=false
 	
 	v1.setStyle(vertexStyle);
 	e.setStyle(edgeStyle);
+	\end{lstlisting}
+	
+	\subsection{Icons verwenden}
+	GVS 2.0 nutzt zur Darstellung von Icons auf Vertices die Schriftart Fontawesome. Code Abschnitt \ref{lst:icons} zeigt, wie die Icons für Vertices verwendet werden können.
+	
+	\begin{lstlisting}[language=java, frame=single, caption={Icons benutzen}, label={lst:icons}]
+	GVSStyle iconStyle = new GVSStyle(GVSColor.STANDARD, GVSLineStyle.THROUGH,
+	GVSLineThickness.STANDARD, GVSColor.STANDARD, GVSIcon.BICYCLE);
+	v1.setStyle(iconStyle);
+	graph.display();
 	\end{lstlisting}	
 	
-	
 	\section{GVS UI}
-	\subsection{User Interface}
-	Das User Interface orientiert sich am Aussehen von GVS 1.0. Neu sind alle wichtigen Funktionen direkt über die Toolbar zugreifbar und alle Buttons verfügen über Tooltips. Ebenfalls wurden die Zahlen des Replay Sliders durch sprechende Namen ersetzt.
-	
-	\begin{figure}[h!]
+		\begin{figure}[h!]
 		\centering
 		\includegraphics[width=0.7\linewidth]{assets/images/gvs-ui-graph}
 		\caption{User Interface GVS 2.0}
 		\label{fig:gvs-ui-graph}
 	\end{figure}
+
+	\subsection{User Interface}
+	Alle wichtigen Funktionen von GVS 2.0 sind direkt über die Toolbar zugreifbar und alle Buttons verfügen über Tooltips. 
 	
 	\subsubsection{1. Toolbar}
 	Über die Toolbar, die am oberen Fensterrand dargestellt wird, sind die grundlegenden Aktionen schnell und einfach zugänglich. So kann ein Benutzer eine gespeicherte Session vom Dateisystem laden, die aktuelle Session speichern oder löschen und zwischen den aktuellen Sessions aus der Dropdown-Box wechseln. 
@@ -419,5 +434,96 @@ eprint=false
 	
 	\subsection{Zoom Pane}
 	Die Zeichenfläche auf der die Graphen und Trees gezeichnet werden, wird automatisch gezoomt und zentriert. 
+	
+	\section{Einstellungsänderungen}
+	Um Änderungen an Files durchzuführen die im JAR File enthalten sind, soll folgende Anleitung befolgt werden:
+	
+	\begin{enumerate}
+		\item JAR mit einem beliebigen File Archiver entpacken
+		\item In den entstandenen Ordner wechseln
+		\begin{enumerate}
+			\item \lstinline{cd gvs-ui}
+		\end{enumerate}
+		\item gewünschte Files verändern
+		\item Files packetieren
+		\begin{enumerate}
+			\item \lstinline{jar cfm ../gvs-ui.jar META-INF/MANIFEST.MF gvs/GVSApplication.class *}
+		\end{enumerate}
+	\end{enumerate}
+
+	Folgende Einstellungen können vorgenommen werden:
+	
+		\begin{table}[h!]
+		\centering
+		\begin{tabularx}{\linewidth}{l X}
+			\toprule 
+			File & Einstellung \\
+			\midrule
+			config.xml & Festlegen des Startports. Default: \lstinline{3000} \\
+			gvs/ui/view/app/AppView.css & Farben, Dicke von Edges und Vertex-Rändern\\
+			gvs/ui/view/session/SessionView.css & Schriftgrösse für Vertices und Edges\\
+			logback.xml & Festlegen des Log-Levels (siehe \ref{ssec:logger})\\
+			\bottomrule 
+		\end{tabularx} 
+		\caption{GVS Lib 2.0 Interfaces} 
+		\label{tbl:preferences}
+	\end{table}
+	
+	\subsection{Änderungen am Log-Level} \label{ssec:logger}
+	\subsubsection{Im XML File}
+	Der applikations-übergreifende Log Level kann wie folgt verändert werden:
+	
+	\begin{lstlisting}[language=xml, frame=single, caption={Root Log Level verändern}, label={lst:root-log-level}]
+	<root level="DEBUG"> <!-- Log Level  -->
+		<appender-ref ref="FILE" /> <!--  Log Output-->
+		<appender-ref ref="STDOUT" /> <!--  Log Output-->
+	</root>
+	\end{lstlisting}
+	
+	Mögliche Level sind:
+	\begin{itemize}
+		\item OFF
+		\item TRACE
+		\item DEBUG
+		\item INFO
+		\item WARN
+		\item ERROR
+	\end{itemize}
+
+	Wie das Log-Level package-spezifisch festgelegt werden kann, zeigt der Code Ausschnitt \ref{lst:log-level}.
+	
+	\begin{lstlisting}[language=xml, frame=single, caption={Root Log Level verändern}, label={lst:log-level}]
+	<logger name="gvs.access" level="DEBUG">
+		<appender-ref ref="FILE" />
+	</logger>
+	\end{lstlisting}	
+
+	\subsubsection{Zur Laufzeit}
+	Über die JConsole kann das Log Level auch zur Laufzeit verändert werden. Die JConsole kann einfach über die Konsole geöffnet werden: \lstinline{$ jconsole}
+	
+	\begin{explanation}{assets/images/jconsole-1}
+		gvs-ui aus Liste auswählen und mit \lstinline{Connect} bestätigen
+	\end{explanation}
+	\begin{explanation}{assets/images/jconsole-warning}
+		Warnung über unsichere Verbindung bestätigen
+	\end{explanation}
+	\begin{explanation}{assets/images/jconsole-overview}
+		Ansicht \textit{Overview} erscheint
+	\end{explanation}
+	\begin{explanation}{assets/images/jconsole-mbeans}
+		Zu Ansicht MBeans wechseln
+	\end{explanation}
+	\begin{explanation}{assets/images/jconsole-setlevel}
+		Links im Verzeichnis-Baum zu \lstinline{ch.qos.logback.classic >} \lstinline{GVS-Loggers >} \lstinline{Operations >} \lstinline{setLoggerLevel} wechseln
+	\end{explanation}
+	\begin{explanation}{assets/images/jconsole-parameters}
+		Im oberen Fenster-Bereich unter \textit{Operation invocation} gewünschte Parameter angeben
+		\begin{enumerate}
+			\item Parameter: package (e.g. \lstinline{gvs.ui})
+			\item Parameter: Log Level (e.g. \lstinline{WARN})
+		\end{enumerate}
+		Mit \lstinline{setLoggerLevel} bestätigen
+	\end{explanation}
+		
 \end{document}
 
