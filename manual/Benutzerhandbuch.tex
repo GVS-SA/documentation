@@ -212,7 +212,7 @@ eprint=false
 
 	\chapter{Installationsanleitung}
 	\section{GVS UI ausführen}
-	\subsection{Windows \& mac OS}
+	\subsection{Windows \& macOS}
 	Das JAR File kann direkt per Doppelklick oder über die Konsole ausgeführt werden.
 	
 	\lstinline{java -jar gvs-ui.jar}
@@ -246,7 +246,7 @@ eprint=false
 	\subsection{Gradle}
 	\begin{enumerate}
 		\item gvs-lib-java JAR File in den Ordner \lstinline{src/main/resources/} kopieren
-		\item Im \textit{build.gradle} File Dependency hinzufügen
+		\item In der Datei \textit{build.gradle}, die GVS Lib als Dependency hinzufügen
 \begin{lstlisting}
 dependencies {
 	compile files('src/main/resources/libs/gvs-lib-java.jar')
@@ -271,7 +271,7 @@ dependencies {
 			Interface & Nutzen \\
 			\midrule
 			GVSGraph & Ein Graph \\
-			GVSDefaultVertex & Ein Graph Vertex ohne Koordinaten \\
+			GVSDefaultVertex & Ein Vertex ohne Koordinaten. \\
 			GVSRelativeVertex & Ein Vertex mit fixen Koordinaten (in Prozent) \\
 			GVSDirectedEdge & Eine gerichtete Kante für Graphen \\
 			GVSUndirectedEdge & Eine ungerichtete Kante für Graphen \\
@@ -350,8 +350,8 @@ public class TestDefaultVertex implements GVSDefaultVertex {
 			\toprule 
 			Interface & Nutzen \\
 			\midrule
-			GVSTreeWithRoot & Erstellt einen Tree anhand der Root Node und den Kind Beziehungen \\
-			GVSTreeWithCollection & Erstellt einen Tree anhand der Root Node und den Kind Beziehungen. Die Collection muss manuell gefüllt werden.  \\
+			GVSTreeWithRoot & Erstellt einen Tree anhand der Root Node und deren Kind Beziehungen \\
+			GVSTreeWithCollection & Erstellt einen Tree anhand der Root Node und deren Kind Beziehungen. Die Collection muss manuell gefüllt werden.  \\
 			GVSBinaryNode & Ein Vertex für Binary Trees \\
 			\bottomrule 
 		\end{tabularx} 
@@ -447,7 +447,7 @@ public class TestBinaryNode implements GVSBinaryTreeNode {
 	\clearpage
 	
 	\subsection{Styles ändern}
-	Um komplexe Algorithmen darzustellen, bietet GVS 2.0 eine Style Klasse an. Wie Styles von Edges und Vertices verändert werden können, zeigt Code Ausschnitt \ref{lst:styles}
+	Um komplexe Algorithmen farblich zu visualisieren, bietet GVS 2.0 eine Style Klasse an. Wie Styles von Edges und Vertices verändert werden können, zeigt Code Ausschnitt \ref{lst:styles}
 	
 	\begin{lstlisting}[language=java, frame=single, caption={Styles verändern}, label={lst:styles}]
 	// lineColor, lineStyle, lineThickness
@@ -493,12 +493,13 @@ public class TestBinaryNode implements GVSBinaryTreeNode {
 	Die Step Buttons bilden zusammen mit der Replay Funktionalität ein wichtiges Werkzeug, um die Funktionsweise eines Algorithmus schrittweise zu analysieren und zu verstehen. Über die Buttons können die einzelnen Momentaufnahmen einer Session durchgeschaut werden.
 	
 	\subsubsection{3. Snapshot Description}
-	Zur aktuellen Momentaufnahme können Notizen erfasst werden. Beim Speichern der Session werden diese ebenfalls gespeichert und werden beim laden der Session wieder angezeigt.
+	Zur aktuellen Momentaufnahme können Notizen erfasst werden. Beim Speichern der Session werden diese ebenfalls gespeichert und werden beim Laden der Session wieder angezeigt.
 	
 	\subsubsection{4. Replay}
 	Die Replay Funktionalität automatisiert die Aktionen der Step Buttons in einer bestimmten Geschwindigkeit. Standardmässig wird jede Sekunde zur nächsten Momentaufnahme gewechselt. Das Replay kann nach belieben gestoppt, gestartet und abgebrochen werden.
 	
 	\subsubsection{5. Autolayout}
+	%TODO update description to new functionality (force layout)
 	Das Autolayout steht nur für Graphen zur Verfügung. Alle Vertices die noch nicht mit der Maus positioniert wurden, werden vom Graph Layouter so positioniert, dass es möglichst wenig Überschneidungen der Edges gibt. Standardmässig verwendet der Graph Layouter immer zufällige Startkoordinaten. Dies kann über den ToggleButton deaktiviert werden, damit immer das gleiche Layout resultiert.
 	
 	\subsection{Drag Support}
@@ -516,7 +517,7 @@ public class TestBinaryNode implements GVSBinaryTreeNode {
 			\item \lstinline{cd gvs-ui}
 		\end{enumerate}
 		\item gewünschte Files verändern
-		\item Files packetieren
+		\item Files wieder packetieren
 		\begin{enumerate}
 			\item \lstinline{jar cfm ../gvs-ui.jar META-INF/MANIFEST.MF gvs/GVSApplication.class *}
 		\end{enumerate}
