@@ -824,6 +824,9 @@ eprint=false
 	\subsection{C\# Lib Refactoring}
 	In der C\# Library wurden die gleichen Änderungen wie in der Java Library durchgeführt. Zusätzlich wurde der Code um aktuelle C\# Best Practices erweitert. So werden durchgehend implizit typisierte Variablen (\lstinline|var|) verwendet, sowie der Null-Coalescing Operator (\lstinline|??|) eingesetzt. 
 	
+	\subsection{Layering}
+	Auch in den Client Libraries wurde ein einfaches Layering eingeführt. Des Weiteren sind alle verfügbaren Client Klassen dem folgenden Klassendiagramm zu entnehmen.
+	\includepdf{assets/pdf/gvs-lib.pdf}
 	
 	\section{Software Metriken} \label{sec:metrics-2}
 	In der Analyse Phase wurden mehrere Code Smells in GVS 1.0 erkannt. (Siehe Abschnitt \ref{sec:erkenntnisse}) In der Design Phase wurde deshalb ein Konzept ausgearbeitet, damit das Refactoring strukturiert ablaufen wird. (Siehe Abschnitt \ref{sec:refactroing-concept}) Die Refactorings wurden damals aus Zeitgründen tief priorisiert. Es hat sich aber gezeigt, dass bereits am Anfang der Realisations Phase viele Refactorings durchgeführt werden müssen. Dies nicht zuletzt deshalb, da der bestehende Code sehr schwer zu lesen war. Durch die Refactorings konnte die Verständlichkeit des Codes enorm verbessert werden. Dies spiegelt sich auch in den erhobenen Software Metriken wieder. Im folgenden Abschnitt sind dieser genauer beschrieben.
