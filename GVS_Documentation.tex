@@ -258,13 +258,13 @@ eprint=false
 	
 	\section{Problembeschreibung}
 	An der \gls{hsr} werden in den Modulen ''Algorithmen und Datenstrukturen 1'' und ''Algorithmen und Datenstrukturen 2'' die Funktionsweise von schwierig zu verstehenden Algorithmen unterrichtet. Zusätzlicher Bestandteil der Module ist das Erlernen der beiden Datenstrukturen ''Graph'' und ''Tree''. Die Implementierung derartiger Algorithmen und Datenstrukturen ist oft mit grossem Aufwand verbunden. \\
-	Die Software \gls{gvs} unterstützt Studenten beim Erlernen der beiden Datenstrukturen, sowie der darauf anwendbaren Algorithmen. Damit sich die Studenten ausschliesslich auf das Erlernen der Algorithmen fokussieren können, bietet \gls{gvs} eine Library, welche repetitive Implementierungsarbeiten den Studenten abnimmt. Der wichtigste Aspekt ist jedoch die Visualisierung der Arbeitsweise von Datenstrukturen und Algorithmen. So zeigt die Software zum Beispiel den schrittweisen Aufbau eines Baumes oder den Ablauf des Path Finding Algorithmus ''Dijkstra''. \\
+	Die Software \gls{gvs} unterstützt Studenten beim Erlernen der beiden Datenstrukturen sowie der darauf anwendbaren Algorithmen. Damit sich die Studenten ausschliesslich auf das Erlernen der Algorithmen fokussieren können, bietet \gls{gvs} eine Library, welche den Studenten repetitive Implementierungsarbeiten abnimmt. Der wichtigste Aspekt ist jedoch die Visualisierung der Arbeitsweise von Datenstrukturen und Algorithmen. So zeigt die Software zum Beispiel den schrittweisen Aufbau eines Baumes oder den Ablauf des Path Finding Algorithmus ''Dijkstra''. \\
 	Die Software wurde 2005 bereits im Rahmen einer Bachelorarbeit umgesetzt. Der in die Jahre gekommene GVS 1.0 soll nun in einem Major-Upgrade aktualisiert werden.
 	
 	\section{Mehrwert}
 	\gls{gvs} wird im Rahmen dieser Studienarbeit auf den neusten Stand der Technik gebracht und profitiert von neueren Java Features wie Generics und Lambdas sowie einer erweiterbaren Schichtenarchitektur. 
-	Für den Endbenutzer ändert sich nur das User Interface. Dieses bekommt ein modernes und ansprechendes Design.
-	
+	Für den Endbenutzer ändert sich hauptsächlich das User Interface. Dieses bekommt ein modernes und ansprechendes Design. Zudem hat die Applikation durch das Einführen eines Watchdogs eine höhere Fehlertoleranz. 
+	%TODO: ausführen!!
 	
 	\chapter{Anforderungsspezifikation}
 	
@@ -327,7 +327,7 @@ eprint=false
 	Der GVS User interagiert mit dem \gls{gvsui} über das User Interface. Er kann die aktuelle Visualisierungs-Session per Knopfdruck auf das Filesystem speichern oder eine bestehende Session von dort laden. Wenn ein Graph visualisiert ist, kann er die Koordinaten der Vertices neu berechnen lassen.
 	
 	\subsubsection{GVS Lib} \label{sssec:actor-lib}
-	Die \gls{gvslib} Komponente wird in das Software Projekt des GVS User (\ref{sssec:actor-user}) eingebunden. Sie sendet in \gls{xml} beschriebene Datenstrukturen über eine Socket Verbindung an das \gls{gvsui}. Die Daten werden vom \gls{gvsui} auf dem Access Layer empfangen und auf dem User Interface visualisiert.
+	Die \gls{gvslib} Komponente wird in das Software Projekt des GVS Users eingebunden. Sie sendet in \gls{xml} beschriebene Datenstrukturen über eine Socket Verbindung an das \gls{gvsui}. Die Daten werden vom \gls{gvsui} auf dem Access Layer empfangen und auf dem User Interface visualisiert.
 	
 	\subsection{Systemübersicht}
 	Die Systemübersicht zeigt schematisch wie die beiden Aktoren (Siehe \ref{ssec:actors}) mit dem  die \gls{gvsui} interagieren.
@@ -346,7 +346,7 @@ eprint=false
 	Um schwierig zu verstehende Systemabläufe zu abstrahieren, werden Systemdiagramme erstellt. Sie zeigen die wichtigsten Abläufe in GVS 1.0.
 	
 	\subsubsection{Verbindungsaufbau}
-	Dieses Sequenzdiagramm zeigt den Verbindungsaufbau über den \textit{SocketServer} beim starten der Applikation. Der Start einer \textit{SeverConnectionXML} führt zu einem Locking mit Hilfe des \textit{ConnectionMonitors}. Dieses Locking verhindert, dass mehr als eine \gls{gvslib} gleichzeitig mit einem \gls{gvsui} kommuniziert. Nach dem Empfangen der Daten aus dem Socket, erstellt der \textit{ModelBuilder} einen Graphen oder Tree als Domain-Objekt. Dieser Ablauf ist auf dem Sequenzdiagramm \textbf{ModelBuilder} (siehe \ref{sssec:modelbuilder}) ersichtlich.
+	Das Sequenzdiagramm	\ref{fig:sd-verbindungsaufbau} zeigt den Verbindungsaufbau über den \textit{SocketServer} beim starten der Applikation. Der Start einer \textit{SeverConnectionXML} führt zu einem Locking mit Hilfe des \textit{ConnectionMonitors}. Dieses Locking verhindert, dass mehr als eine \gls{gvslib} gleichzeitig mit einem \gls{gvsui} kommuniziert. Nach dem Empfangen der Daten aus dem Socket, erstellt der \textit{ModelBuilder} einen Graphen oder Tree als Domain-Objekt. Dieser Ablauf ist auf dem Sequenzdiagramm \textbf{ModelBuilder} (siehe \ref{sssec:modelbuilder}) ersichtlich.
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=\linewidth]{assets/images/verbindungsaufbau}
@@ -355,7 +355,7 @@ eprint=false
 	\end{figure}
 
 	\subsubsection{ModelBuilder} 	\label{sssec:modelbuilder}
-	Der \textit{ModelBuilder} parsed aus den empfangenen \gls{xml} Dokumenten das entsprechende Domain-Objekt. Dabei wird zwischen Graphen und Trees unterschieden. Nach Fertigstellung des Parse-Vorgangs, wird das Model an den entsprechenden \textit{SessionController} übergeben. Der weitere Ablauf befindet sich im separaten Sequenzdiagramm \textbf{GraphSessionController} (siehe \ref{sssec:sessioncontroller})
+	Wie im Sequenzdiagramm \ref{fig:sd-modelbuilder} parsed der \textit{ModelBuilder} aus den empfangenen \gls{xml} Dokumenten das entsprechende Domain-Objekt. Dabei wird zwischen Graphen und Trees unterschieden. Nach Fertigstellung des Parse-Vorgangs, wird das Model an den entsprechenden \textit{SessionController} übergeben. Der weitere Ablauf befindet sich im separaten Sequenzdiagramm \textbf{GraphSessionController} (siehe \ref{sssec:sessioncontroller})
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=\linewidth]{assets/images/modelbuilder}
@@ -364,7 +364,8 @@ eprint=false
 	\end{figure}
 
 	\subsubsection{ApplicationView: Load \& Save Session} \label{sssec:appView}
-	Wenn ein User eine Session lädt, wird das entsprechende \gls{xml} vom \textit{Persistor} geparsed. Dieser erstellt je nach Bedarf einen Vector aus Graphs oder Trees. Dieser Vector wird an den \textit{SessionController} übergeben. Der Ablauf innerhalb des \textit{SessionController}s ist im separaten Sequenzdiagramm \textbf{GraphSessionController} (siehe \ref{sssec:sessioncontroller}) dargestellt. \\
+	Der Programmablauf beim Laden und Speichern einer Session ist im Sequenzdiagramm \ref{fig:sd-applicationview} dargestellt. \\
+	Wenn ein User eine Session lädt, wird das entsprechende \gls{xml} vom \textit{Persistor} geparsed. Je nach Bedarf wird ein Vector aus Graphs oder Trees erstellt. Dieser Vector wird an den \textit{SessionController} übergeben. Der Ablauf innerhalb des \textit{SessionController}s ist im separaten Sequenzdiagramm \textbf{GraphSessionController} (siehe \ref{sssec:sessioncontroller}) dargestellt. \\
 	Nachdem die Session erstellt wurde, wird die \textit{ApplicationView} per Observer-Beziehung (siehe Glossar: \gls{observer}) notifiziert. Sie stellt darauf die neue Session im \gls{gvsui} dar.\\
 	Auffällig an der Klasse \textit{ApplicationView} ist, dass sie im Constructor einen \textit{Persistor} instanziert. Diese Instanz wird jedoch nicht direkt in der ApplicationView verwendet, sondern wird als Argument an den \textit{ApplicationController} geschickt, welcher dann mit dem Persistor Sessions speichert und lädt. In der Analyse des Projektteams ist unklar geblieben, wieso die Instanzierung des \textit{Persistor}s nicht direkt im \textit{ApplicationController} passiert.
 	\begin{figure}[h!]
@@ -375,7 +376,7 @@ eprint=false
 	\end{figure}
 
 	\subsubsection{GraphSessionController} \label{sssec:sessioncontroller}
-	Der \textit{GraphSessionController} wird vom \textit{ModelBuilder} und vom \textit{Persistor} angestossen, wenn ein oder mehrere neue Graphen geparsed wurden. Der \textit{GraphSessionController} ist dafür zuständig diese Graphen in eine neue oder bestehende Session einzufügen. Dabei unterscheidet sich der Programmablauf kaum. Der besseren Übersicht halber ist nur der Fall ''ein einzelner neuer Graph wurde empfangen'' abgebildet.\\
+	Wie das Seuquenzdiagramm \ref{fig:sd-graphsessioncontroller} zeigt, wird der \textit{GraphSessionController} vom \textit{ModelBuilder} und vom \textit{Persistor} angestossen, wenn ein oder mehrere neue Graphen geparsed wurden. Der \textit{GraphSessionController} ist dafür zuständig diese Graphen in eine neue oder bestehende Session einzufügen. Dabei unterscheidet sich der Programmablauf kaum. Der besseren Übersicht halber ist nur der Fall ''ein einzelner neuer Graph wurde empfangen'' abgebildet.\\
 	Für Graphen die keine fix positionierte Vertices haben, wird in einem weiteren Schritt der \textit{LayoutController} aufgerufen. Dieser steuert die Funktionalität der Physics-Engine. Die Physics-Engine berechnet die Koordinaten von Vertices mittels anziehenden und abstossenden Kräften. (siehe \gls{forcedirecteddrawing}) Der \textit{GraphSessionController} wird  per Observer-Beziehung (siehe Glossar: \gls{observer}) informiert, sobald die Physics-Engine die Berechnung der Positionen abgeschlossen hat.\\
 	Der \textit{GraphSessionController} setzt den neuen Graphen als aktuellen Graphen auf dem \textit{VisualizationGraphModel}. Dieses informiert per Observer-Beziehung (siehe Glossar: \gls{observer}) das \textit{VisualiztionGraphPanel}, welches die für die Darstellung benötigten Vertex und Edge Komponenten erstellt.
 	\begin{figure}[h!]
