@@ -323,9 +323,7 @@ eprint=false
 	\end{figure}
 	
 	\subsection{Klassendiagramm} \label{ssec:klassendiagramm-1}
-	Das Klassendiagramm zeigt die wichtigsten Klassen von GVS 1.0. Im vorhergehenden Projekt wurden die Schichten zwar angedacht, sie widerspiegeln sich aber kaum im Package Design. Um den Überblick zu verbessern, sind die Klassen in diesem Diagramm den entsprechenden Schichten zugewiesen. Dies erhöht die Verständlichkeit der Problemdomäne und vereinfacht den Übergang in die neue Schichtenarchitektur von GVS 2.0. Eine genaue Analyse der GVS 1.0 Klassen ist dem Abschnitt \ref{sec:erkenntnisse} zu entnehmen. 
-	
-	\includepdf[fitpaper]{assets/pdf/gvs1-0.pdf}
+	Das Klassendiagramm 1 \textit{''Klassendiagramm Analyse''} im Anhang \ref{ch:class-diagram} zeigt die wichtigsten Klassen von GVS 1.0. Im vorhergehenden Projekt wurden die Schichten zwar angedacht, sie widerspiegeln sich aber kaum im Package Design. Um den Überblick zu verbessern, sind die Klassen in diesem Diagramm den entsprechenden Schichten zugewiesen. Dies erhöht die Verständlichkeit der Problemdomäne und vereinfacht den Übergang in die neue Schichtenarchitektur von GVS 2.0. Eine genaue Analyse der GVS 1.0 Klassen ist dem Abschnitt \ref{sec:erkenntnisse} zu entnehmen. 
 		
 	\subsection{Sequenzdiagramme} \label{ssec:sequence-1}
 	Um schwierig zu verstehende Systemabläufe zu abstrahieren, werden Systemdiagramme erstellt. Sie zeigen die wichtigsten Abläufe in GVS 1.0.
@@ -418,9 +416,7 @@ eprint=false
 	\end{table}
 	
 	\section{Klassendiagramm} \label{sec:class-diagram}
-	Das Klassendiagramm von GVS 2.0 orientiert sich stark an der Vorgängerversion des GVS 1.0. (Siehe \ref{ssec:klassendiagramm-1}). Mit dem Ziel möglichst viel Code wiederzuverwenden, wird der Access und Business Layer mehrheitlich beibehalten. Der Presentation Layer wird vollständig durch die neu eingeführte \gls{mvvm} Struktur ersetzt. (Siehe \ref{sssec:mvvm})
-	
-	\includepdf[fitpaper]{assets/pdf/gvs2-1.pdf}
+	Das Klassendiagramm 2 \textit{''Klassendiagramm Entwurf''} im Anhang \ref{ch:class-diagram} orientiert sich stark an der Vorgängerversion des GVS 1.0. (Siehe \ref{ssec:klassendiagramm-1}). Mit dem Ziel möglichst viel Code wiederzuverwenden, wird der Access und Business Layer mehrheitlich beibehalten. Der Presentation Layer wird vollständig durch die neu eingeführte \gls{mvvm} Struktur ersetzt (Siehe \ref{sssec:mvvm}).
 	
 	\section{Schichtenstruktur} \label{ssec:layer-architecture}
 	
@@ -492,7 +488,7 @@ eprint=false
 	\end{table}
 
 	\section{Architektur}
-	Das Klassendiagramm \ref{pdf:classdiagramm} zeigt einen Überblick über die wichtigsten Klassen in GVS 2.0 sowie die umgesetzte Schichtenarchitektur (vgl. \ref{ssec:layer-architecture}). Liste \ref{desc:architecture-changes} zeigt die wichtigsten Änderungen zum Klassendiagramm aus der Entwurfsphase \ref{label} auf. Ansonsten wiederspiegelt GVS 2.0 die angedachte Architektur und Klassenhirarchie.
+	Das Klassendiagramm 3 \textit{''Klassendiagramm Realisierung''} im Anhang \ref{ch:class-diagram} zeigt einen Überblick über die wichtigsten Klassen in GVS 2.0 sowie die umgesetzte Schichtenarchitektur (vgl. \ref{ssec:layer-architecture}). Liste \ref{desc:architecture-changes} zeigt die wichtigsten Änderungen zum Klassendiagramm aus der Entwurfsphase \ref{label} auf. Ansonsten wiederspiegelt GVS 2.0 die angedachte Architektur und Klassenhirarchie.
 	
 	\begin{description} \label{desc:architecture-changes}
 		\item[GvsXmlReader \& ClientConnection ] \hfill \\ Diese Klassen entstanden durch ein Refactoring der GVS 1.0 Klasse \textit{ServerConnectionXML}. Die Trennung dieser Klasse führt dazu, dass das \gls{single-responsibility}  eingehalten wird. 
@@ -502,8 +498,6 @@ eprint=false
 		In der Designphase wurde das Zusammenführen von Graphen und Trees angedacht. In der Realisierung hat sich aber gezeigt, dass einerseits die Layouter sowie infolgedessen auch die Vertices unterschieden werden müssen. (siehe \ref{ssec:graphs-and-trees}) Für den Tree Layouter (\ref{ssec:treelayouter}) wird deshalb neben dem \textit{TreeVertex} auch ein \textit{LeafVertex} benötigt.  Blattknoten dienen als Platzhalter und werden nicht dargestellt. Sie vereinfachen die Berechnung des Tree Layouts aber stark.
 		\item[ScalablePane] \hfill \\  Während der Realisierungsphase hat sich gezeigt, dass die Grösse von Trees und Graphen einen grossen Einfluss auf ihre Darstellung hat. Um diesen Ansprüchen gerecht zu werden, bietet GVS 2.0 eine Zeichenfläche, welche ihre Inhalte automatisch skaliert und zentriert. Dadruch werden zum Beispiel grosse Trees leserlich abgebildet und kleine Graphen verwenden die gesamte Bildschirmbreite. 
 	\end{description}
-	
-	\includepdf[fitpaper]{assets/pdf/classdiagramm-ui-A3.pdf} \label{pdf:classdiagramm}
 	
 	\subsection{Sequenzdiagramme}
 	Während der Analyse-Phase dieses Projekts wurden die Programmabläufe in GVS 1.0 untersucht (siehe \ref{ssec:sequence-1}). Um Änderungen im Programmablauf aufzuzeigen, finden sich in diesem Kapitel neue Sequenzdiagramme, die die selben Abläufe in GVS 2.0 abbilden. 
@@ -826,6 +820,18 @@ eprint=false
 	
 	\subsection{Layering}
 	Auch in den Client Libraries wurde ein einfaches Layering eingeführt. Des Weiteren sind alle verfügbaren Client Klassen dem folgenden Klassendiagramm zu entnehmen.
+	
+\newgeometry{margin=1cm}
+			\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.7\linewidth]{assets/images/metrics/maintainability}
+			\caption{Wartbarkeit Metrik}
+			\label{fig:metric-maintainability}
+		\end{figure}
+\restoregeometry
+
+
+	
 	\includepdf{assets/pdf/gvs-lib.pdf}
 	
 	\section{Software Metriken} \label{sec:metrics-2}
@@ -1156,8 +1162,17 @@ eprint=false
 		\listoftables
 	}
 	
+	\chapter{Klassendiagramme} \label{ch:class-diagram}
+	\begin{enumerate}
+		\item Klassendiagramm Analyse
+		\item Klassendiagramm Entwurf
+		\item Klassendiagramm Realisierung
+	\end{enumerate}
 	
-	
+	\includepdf[fitpaper]{assets/pdf/gvs1-0.pdf}
+	\includepdf[fitpaper]{assets/pdf/gvs2-1.pdf}
+	\includepdf[fitpaper]{assets/pdf/classdiagramm-ui-A3.pdf}
+		
 	\chapter{Eigenständigkeitserklärung}
 	Der/Die Verfasser/in erklärt hiermit, dass er/sie die vorliegende Arbeit selbständig, ohne fremde Hilfe und ohne Benutzung anderer als die angegebenen Hilfsmittel angefertigt hat. Die aus fremden Quellen (einschliesslich elektronischer Quellen) direkt oder indirekt übernommenen Gedanken sind ausnahmslos als solche kenntlich gemacht. Durch Copyright geschützte Materialien wurden in dieser Arbeit nicht in unerlaubter Weise genutzt. Die Arbeit ist in gleicher oder ähnlicher Form oder auszugsweise im Rahmen einer anderen Prüfung noch nicht vorgelegt worden.\\[2cm]
 	\dotbox{Ort, Datum} \hfill \dotbox{Unterschrift des/der Verfassers/in}
