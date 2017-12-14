@@ -237,7 +237,35 @@ eprint=false
 	
 	\newpage
 	\pagenumbering{arabic}
-	% \part{[ Part title ]}
+	
+	
+	\chapter{Ausgangslage}
+	
+	%TODO Enthält Anforderungen des Kuden/Auftrageber
+	
+	\begin{table}[h!]
+		\centering
+		\begin{tabularx}{\linewidth}{l l X l}
+			\toprule 
+			Datum & Version & Änderungen & Autor \\
+			\midrule
+			28.09.17 & 1.0 & Grundgerüst erstellt & mwieland, mtrentini \\
+			\bottomrule 
+		\end{tabularx} 
+		\caption{Versionshistory Anforderungsanalyse} 
+	\end{table}
+	
+	
+	\section{Problembeschreibung}
+	An der \gls{hsr} werden in den Modulen ''Algorithmen und Datenstrukturen 1'' und ''Algorithmen und Datenstrukturen 2'' die Funktionsweise von schwierig zu verstehenden Algorithmen unterrichtet. Zusätzlicher Bestandteil der Module ist das Erlernen der beiden Datenstrukturen ''Graph'' und ''Tree''. Die Implementierung derartiger Algorithmen und Datenstrukturen ist oft mit grossem Aufwand verbunden. \\
+	Die Software \gls{gvs} unterstützt Studenten beim Erlernen der beiden Datenstrukturen, sowie der darauf anwendbaren Algorithmen. Damit sich die Studenten ausschliesslich auf das Erlernen der Algorithmen fokussieren können, bietet \gls{gvs} eine Library, welche repetitive Implementierungsarbeiten den Studenten abnimmt. Der wichtigste Aspekt ist jedoch die Visualisierung der Arbeitsweise von Datenstrukturen und Algorithmen. So zeigt die Software zum Beispiel den schrittweisen Aufbau eines Baumes oder den Ablauf des Path Finding Algorithmus ''Dijkstra''. \\
+	Die Software wurde 2005 bereits im Rahmen einer Bachelorarbeit umgesetzt. Der in die Jahre gekommene GVS 1.0 soll nun in einem Major-Upgrade aktualisiert werden.
+	
+	\section{Mehrwert}
+	\gls{gvs} wird im Rahmen dieser Studienarbeit auf den neusten Stand der Technik gebracht und profitiert von neueren Java Features wie Generics und Lambdas sowie einer erweiterbaren Schichtenarchitektur. 
+	Für den Endbenutzer ändert sich nur das User Interface. Dieses bekommt ein modernes und ansprechendes Design.
+	
+	
 	\chapter{Anforderungsspezifikation}
 	
 	%TODO Enthält Anforderungen des Kuden/Auftrageber
@@ -248,24 +276,13 @@ eprint=false
 			\toprule 
 			Datum & Version & Änderungen & Autor \\
 			\midrule
-			28.09.17 & 1.0 & Grundgerüst erstellt & mwieland \\
-			17.10.17 & 1.1 & Sequenzdiagramme eingefügt & mtrentini \\
-			18.10.17 & 1.2 & Ausgangslage und Stakeholder eingefügt & mwieland \\
-			19.10.17 & 1.3 & Erkenntnisse: Stärken, Schwächen, Schlüsse beschrieben & mwieland \\
+			17.10.17 & 1.0 & Sequenzdiagramme eingefügt & mtrentini \\
+			18.10.17 & 1.1 & Stakeholder eingefügt & mwieland \\
+			19.10.17 & 1.2 & Erkenntnisse: Stärken, Schwächen, Schlüsse beschrieben & mwieland \\
 			\bottomrule 
 		\end{tabularx} 
 		\caption{Versionshistory Anforderungsanalyse} 
 	\end{table}
-	
-	\section{Ausgangslage \& Problembeschreibung}
-	An der \gls{hsr} werden in den Modulen ''Algorithmen und Datenstrukturen 1'' und ''Algorithmen und Datenstrukturen 2'' die Funktionsweise von schwierig zu verstehenden Algorithmen unterrichtet. Zusätzlicher Bestandteil der Module ist das Erlernen der beiden Datenstrukturen ''Graph'' und ''Tree''. Die Implementierung derartiger Algorithmen und Datenstrukturen ist oft mit grossem Aufwand verbunden. \\
-	Die Software \gls{gvs} unterstützt Studenten beim Erlernen der beiden Datenstrukturen, sowie der darauf anwendbaren Algorithmen. Damit sich die Studenten ausschliesslich auf das Erlernen der Algorithmen fokussieren können, bietet \gls{gvs} eine Library, welche repetitive Implementierungsarbeiten den Studenten abnimmt. Der wichtigste Aspekt ist jedoch die Visualisierung der Arbeitsweise von Datenstrukturen und Algorithmen. So zeigt die Software zum Beispiel den schrittweisen Aufbau eines Baumes oder den Ablauf des Path Finding Algorithmus ''Dijkstra''. \\
-	Die Software wurde 2005 bereits im Rahmen einer Bachelorarbeit umgesetzt. Der in die Jahre gekommene GVS 1.0 soll nun in einem Major-Upgrade aktualisiert werden.
-	
-	\subsection{Mehrwert}
-	\gls{gvs} wird im Rahmen dieser Studienarbeit auf den neusten Stand der Technik gebracht und profitiert von neueren Java Features wie Generics und Lambdas sowie einer erweiterbaren Schichtenarchitektur. 
-	Für den Endbenutzer ändert sich nur das User Interface. Dieses bekommt ein modernes und ansprechendes Design.
-
 	
 	\section{Anforderungen} \label{sec:functionalreq}
 	Die Anforderungen werden massgeblich aus der offiziellen Aufgabenstellung entnommen. (siehe Anhang \ref{aufgabenstellung})
@@ -399,7 +416,7 @@ eprint=false
 	Das Verhalten von Klassen ist nicht durchgehend dokumentiert.  Ebenfalls fehlt es bei einigen Kommentaren an Aussagekraft.	
 
 		
-	\chapter{Designspezifikation}
+	\chapter{Architektur und Designspezifikation}
 	
 	\begin{table}[h!]
 		\centering
@@ -465,7 +482,7 @@ eprint=false
 	
 		\includepdf[fitpaper]{assets/pdf/Migration_Replacements.pdf}
 	
-	\chapter{Realisierung}
+	\chapter{Umsetzung}
 		
 	\begin{table}[h!]
 	\centering
@@ -865,7 +882,7 @@ eprint=false
 	\end{figure}	
 	
 
-	\chapter{Ausblick} \label{ch:ausblick}
+	\chapter{Ergebnisse} \label{ch:ergebnisse}
 	\begin{table}[h!]
 		\centering
 		\begin{tabularx}{\linewidth}{l l X l}
@@ -878,11 +895,16 @@ eprint=false
 		\caption{Versionshistory Ausblick} 
 	\end{table}
 	
+	\section{Ergebnisdiskussion}
+	
+
+	\section{Ausblick}
 	Obwohl viel erreicht wurde im GVS 2.0 Projekt, konnten nicht all Ideen umgesetzt und sämtliches Verbesserungspotential ausgeschöpft werden.
 	
 	Dieses Kapitel bietet eine Übersicht, welche Aufgaben in einem nächsten GVS Major Update angegangen werden könnten. 
 	
-	\section{Nicht umgesetzte Ideen für GVS 2.0}
+	
+	\subsection{Nicht umgesetzte Ideen für GVS 2.0}
 
 	\subsubsection{N-ary Trees}
 	Der in GVS 2.0 neu eingeführte Algorithmus zum Zeichnen von optisch ansprechenden Bäumen ist fähig n-ary Trees darzustellen (siehe \ref{ssec:treelayouter}). Da GVS 1.0 jedoch ausschliesslich Binary Trees unterstütze, sieht die Client Lib diese Erweiterung nicht vor.
@@ -899,7 +921,7 @@ eprint=false
 	
 	GVS 3.0 sollte das Business Layer und Teile des Access Layers sinnvoll mit Tests abdecken.
 	
-	\section{Verbesserungspotential GVS 1.0}
+	\subsection{Verbesserungspotential GVS 1.0}
 	Während der Verwendung von GVS 1.0 sind einige Dinge aufgefallen, die nicht optimal funktionieren. Diese wurden vom Betreuer in einer Liste festgehalten und an das Projektteam überreicht. Gemäss der Besprechung vom 27.09.2017 wurden diese Änderungen mit tiefer Priorität in den Backlog eingepflegt (siehe Anhang \ref{ch:minutes}). Dieses Kapitel zeigt auf, welche Punkte bis zum Abschluss des Projekts offen geblieben sind.
 	
 	\subsubsection{Environment-Variable}
@@ -919,8 +941,15 @@ eprint=false
 	\subsubsection{Schnelle Beendung von GVS Lib}
 	Wenn die \textit{main} Methode des Programms, welches GVS Lib verwendet sehr schnell beendet, gehen Daten bei der Übertragung verloren. Dies sollte bei GVS 3.0 verhindert werden.
 	
-	\chapter{Projektplanung}
-
+	\newpage
+	
+	\appendix
+	\noappendicestocpagenum
+	\addappheadtotoc
+	\appendixpage
+	
+		\chapter{Projektplanung}
+	
 	\begin{table}[h!]
 		\centering
 		\begin{tabularx}{\linewidth}{l l X l}
@@ -989,16 +1018,16 @@ eprint=false
 	\section{Zeitplanung}
 	
 	Das Projekt wird im Rahmen der Studienarbeit durchgeführt. Insgesamt stehen 14 Wochen zur Verfügung in welchen jedes Teammitglied 240 Stunden leisten muss. Somit entstehen ca. 17 Stunden Arbeitsaufwand pro Woche und Teammitglied.
-		
+	
 	\section{Projektverwaltung}
 	
 	Als Projektmanagement Software wird Jira \cite{jira} eingesetzt. In Jira werden alle Requirements als Issues erfasst und in den Product Backlog eingepflegt. Pro Iteration sollen jeweils so viele Issues eingeplant werden, wie unter Berücksichtigung von administrativen Aufgaben abgearbeitet werden können. Dabei spielt der Teamspeed eine grosse Rolle, welcher sich über die Projektdauer einpendeln soll. 
-
+	
 	
 	\subsection{Iterationsplanung}
 	Die Iterationsplanung orientiert sich grob am \gls{rup} und ist unterteilt in eine Inception-, Elaboration-, Construction- sowie eine Transition-Phase. Jede Phase besteht aus einer oder mehreren Iterationen, die jeweils 1 Wochen dauern und am Donnerstag enden. Die Sprints sind bewusst nur 1 Woche lang, um eventuell ändernden Anforderungen gerecht zu werden. Zudem bringen die Wochenmeetings (\ref{ssec:meeting}) jeweils neuen Input, welcher dann direkt in den nächsten Sprint einfliessen kann.\\
 	Eine Iteration wird nach \gls{scrum} organisiert. Am Anfang des Sprints definiert das Projektteam die zu erledigenden Issues und schätzt deren Aufwand. (Siehe \ref{sec:estimations}) Jeweils am Ende eines Sprints wird die geleistete Arbeit reflektiert. Entsprechende Erkenntnisse und Verbesserungen werden fortlaufend in die Projektorganisation aufgenommen. 
-		
+	
 	\subsection{Schätzungen}
 	\label{sec:estimations}
 	Issues werden auf Basis von Story Points geschätzt. Dieses Vorgehen hat sich mit SCRUM etabliert. Die Nutzung von Story Points führt dazu, dass nicht die individuell unterschiedliche Bearbeitungszeit, sondern die Komplexität einer User Story geschätzt wird. Dies vereinfacht  und homogenisiert die Schätzungen und hilft den Teamspeed zu bestimmen.\cite{storypoints, storypoints2}
@@ -1019,22 +1048,22 @@ eprint=false
 		\item Stan4J \cite{stan4j} zur Überprüfung von zyklischen Abhängigkeiten
 		\item Checkstyle \cite{checkstyle} zur Überprüfung der Coding Richtlinien.
 	\end{itemize}
-
+	
 	\section{Frameworks}
 	
 	\subsection{Gluon Ignite mit Google Guice} \label{DI}
 	Gluon Ignite \cite{gluonignite} erweitert das verbreitete \gls{di}-Framework Guice \cite{guice} für den Einsatz in \gls{javafx} Applikationen. Mit Gluon Ignite lässt sich \gls{di} nicht nur im Business Layer, sondern auch für die \gls{fxml} Loader verwenden. \gls{di} verringert die Kopplung zwischen Komponenten, verbessert die Testbarkeit und zentralisiert die Erzeugungslogik von Klassenobjekten.
-
+	
 	\section{Repositories}
 	Die Artefakte werden in verschiedenen Repositories auf GitHub versioniert abgelegt. So gibt es für die Dokumentation, die Meetings-Protokolle und den Sourcecode jeweils ein eigenes Repository.
-
+	
 	\section{Continuous Integration}
 	Die Software wird nach jedem Commit mit Travis CI \cite{travisci} gebuildet. Dies garantiert, dass sämtliche Qualitätsmassnahmen stets eingehalten werden. (Siehe \ref{sec:qualitymeasures})
 	
 	\subsection{Buildprozess}
 	\label{sec:buildprocess}
 	Zur Erstellung der Software Artefakte wird Gradle \cite{gradle} eingesetzt. Gradle verwaltet alle externen Software Abhängigkeiten. Zusätzlich wird die Software nur dann gebuilded, wenn alle Metriktools grünes Licht geben. Es resultiert ein ausführbares \gls{jar}.
-		
+	
 	\section{Qualitätsmanagement}
 	\label{sec:qualitymeasures}
 	
@@ -1050,7 +1079,7 @@ eprint=false
 		\item Alle Metriken geben grünes Licht
 		\item Das Issue wurde in Jira \cite{jira} zum Review vermerkt
 	\end{itemize}
-		
+	
 	\subsection{Review}
 	Nach Abschluss eines Issues wird dieses an den Teampartner zum Review übergeben. Durch das Vier-Augen-Prinzip kann die Qualität des Produktes hoch gehalten werden. Zusätzlich haben beide Teampartner stets den selben Wissensstand.
 	
@@ -1066,7 +1095,7 @@ eprint=false
 	
 	\subsection{Refactorings}
 	Aufgrund der erkannten Mängel in der Analysephase (Siehe \ref{sec:erkenntnisse}) werden fortlaufend Refactorings des migrierten Codes durchgeführt.
-
+	
 	\section{Risikomanagement}
 	Nachfolgend sind die wichtigsten Risiken für diese Arbeit aufgelistet. Gewichtet werden die Risiken nach Eintrittswahrscheinlichkeit und Schadenshöhe. \cite{risikomanagement}
 	
@@ -1085,7 +1114,7 @@ eprint=false
 	\end{table}
 	\begin{landscape}		
 		\subsection{Mögliche Risiken}
-			\begin{table}[h!]
+		\begin{table}[h!]
 			\centering
 			\begin{tabularx}{\linewidth}{l X l l X X}
 				\toprule 
@@ -1104,11 +1133,11 @@ eprint=false
 			\end{tabularx} 
 			\caption{mögliche Risiken} 
 		\end{table}
-    \end{landscape}
-
+	\end{landscape}
+	
 	\subsection{Backups}
-		\label{sec:backup}
-		Zur Minimierung von allfälligen Datenverlusten wird wie folgt vorgegangen:
+	\label{sec:backup}
+	Zur Minimierung von allfälligen Datenverlusten wird wie folgt vorgegangen:
 	
 	\begin{enumerate}
 		\item Täglich automatisiertes Backup aller Projektdaten im JIRA \cite{jira} (Zeiterfassung, erstellte Issues, Jira Konfiguration)
@@ -1119,7 +1148,7 @@ eprint=false
 	\section{Verantwortlichkeiten}
 	Um Unklarheiten und Unstimmigkeiten zu vermeiden sind folgende Verantwortlichkeiten zugeteilt:
 	
-		\begin{table}[h!]
+	\begin{table}[h!]
 		\centering
 		\begin{tabular}{l l}
 			\toprule 
@@ -1138,12 +1167,55 @@ eprint=false
 	Alle Team-Mitglieder arbeiten jedoch in allen Bereichen des Projekts mit. 
 	Die genaue Arbeitsteilung ist der git-History, den Java-Docs sowie den Änderungshistories in der Projektdokumentation zu entnehmen.
 	
-	\newpage
+	\chapter{Klassendiagramme} \label{ch:class-diagram}
+	\begin{enumerate}
+		\item Klassendiagramm Analyse
+		\item Klassendiagramm Entwurf
+		\item Klassendiagramm Realisierung
+	\end{enumerate}
 	
-	\appendix
-	\noappendicestocpagenum
-	\addappheadtotoc
-	\appendixpage
+	\includepdf[fitpaper]{assets/pdf/gvs1-0.pdf}
+	\includepdf[fitpaper]{assets/pdf/gvs2-1.pdf}
+	\includepdf[fitpaper]{assets/pdf/classdiagramm-ui-A3.pdf}
+	
+	\chapter{Aufgabenstellung}
+	\label{aufgabenstellung}
+	Die folgenden Seiten enthalten die offizielle Aufgabenstellung dieser Studienarbeit.
+	
+	\includepdf[pages={1-}]{assets/Aufgabenstellung_GVS2.pdf}
+	
+	\chapter{Testprotokoll} \label{Testprotokoll}
+	
+	%TODO Testprotokoll
+	
+	%TODO Usability Tests
+	
+	\chapter{Persönliche Berichte}
+	\label{erfahrungsberichte}
+	
+	\section{Murièle Trenini}
+	
+	\section{Michael Wieland}
+	
+	\chapter{Zeitauswertung}
+	\label{zeitauswertung}
+	
+	%TODO Nach Personen
+	
+	%TODO Nach Kategorien
+	
+	
+	\chapter{Meeting Protokolle} \label{ch:minutes}
+	
+	\chapter{Eigenständigkeitserklärung}
+	Der/Die Verfasser/in erklärt hiermit, dass er/sie die vorliegende Arbeit selbständig, ohne fremde Hilfe und ohne Benutzung anderer als die angegebenen Hilfsmittel angefertigt hat. Die aus fremden Quellen (einschliesslich elektronischer Quellen) direkt oder indirekt übernommenen Gedanken sind ausnahmslos als solche kenntlich gemacht. Durch Copyright geschützte Materialien wurden in dieser Arbeit nicht in unerlaubter Weise genutzt. Die Arbeit ist in gleicher oder ähnlicher Form oder auszugsweise im Rahmen einer anderen Prüfung noch nicht vorgelegt worden.\\[2cm]
+	\dotbox{Ort, Datum} \hfill \dotbox{Unterschrift des/der Verfassers/in}
+	\hfill \\[2cm]
+	\dotbox{Ort, Datum} \hfill \dotbox{Unterschrift des/der Verfassers/in}
+	
+	\chapter{Vereinbarung über Urheber- und Nutzungsrechte}
+	Die folgende Seite enthält die Vereinbarung über Urheber- und Nutzungsrechte.
+	\includepdf[pages={1}]{assets/pdf/Nutzungsbestimmung.pdf}	
 	
 	% Glossary
 	\printglossary
@@ -1161,47 +1233,6 @@ eprint=false
 		\hypersetup{linkcolor=black}
 		\listoftables
 	}
-	
-	\chapter{Klassendiagramme} \label{ch:class-diagram}
-	\begin{enumerate}
-		\item Klassendiagramm Analyse
-		\item Klassendiagramm Entwurf
-		\item Klassendiagramm Realisierung
-	\end{enumerate}
-	
-	\includepdf[fitpaper]{assets/pdf/gvs1-0.pdf}
-	\includepdf[fitpaper]{assets/pdf/gvs2-1.pdf}
-	\includepdf[fitpaper]{assets/pdf/classdiagramm-ui-A3.pdf}
-		
-	\chapter{Eigenständigkeitserklärung}
-	Der/Die Verfasser/in erklärt hiermit, dass er/sie die vorliegende Arbeit selbständig, ohne fremde Hilfe und ohne Benutzung anderer als die angegebenen Hilfsmittel angefertigt hat. Die aus fremden Quellen (einschliesslich elektronischer Quellen) direkt oder indirekt übernommenen Gedanken sind ausnahmslos als solche kenntlich gemacht. Durch Copyright geschützte Materialien wurden in dieser Arbeit nicht in unerlaubter Weise genutzt. Die Arbeit ist in gleicher oder ähnlicher Form oder auszugsweise im Rahmen einer anderen Prüfung noch nicht vorgelegt worden.\\[2cm]
-	\dotbox{Ort, Datum} \hfill \dotbox{Unterschrift des/der Verfassers/in}
-	\hfill \\[2cm]
-	\dotbox{Ort, Datum} \hfill \dotbox{Unterschrift des/der Verfassers/in}
-	
-	\chapter{Vereinbarung über Urheber- und Nutzungsrechte}
-	Die folgende Seite enthält die Vereinbarung über Urheber- und Nutzungsrechte.
-	\includepdf[pages={1}]{assets/pdf/Nutzungsbestimmung.pdf}
-
-	
-	\chapter{Aufgabenstellung}
-	\label{aufgabenstellung}
-	Die folgenden Seiten enthalten die offizielle Aufgabenstellung dieser Studienarbeit.
-	
-    \includepdf[pages={1-}]{assets/Aufgabenstellung_GVS2.pdf}
-
-
-	\chapter{Persönliche Berichte}
-	\label{erfahrungsberichte}
-	
-	\chapter{Zeitauswertung}
-	\label{zeitauswertung}
-	
-	\chapter{Testspezifikation}
-	
-	\chapter{Meeting Protokolle} \label{ch:minutes}
-	
-	
 	
 \end{document}
 
