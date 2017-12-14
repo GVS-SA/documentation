@@ -477,10 +477,9 @@ eprint=false
 	\end{enumerate}
 
 	\subsection{Migrations Liste}
-		\label{ssec:class-refactroing-list}
-		Die folgende Liste zeigt, welche Klassen aus GVS 1.0 übernommen werden und welche Klassen in welcher Art und Weise verändert oder neu erstellt werden.
-	
-		\includepdf[fitpaper]{assets/pdf/Migration_Replacements.pdf}
+	\label{ssec:class-refactroing-list}
+	Die Migrations Liste im Anhang (siehe \ref{ch:migration-list}) zeigt, welche Klassen aus GVS 1.0 übernommen werden und welche Klassen in welcher Art und Weise verändert oder neu erstellt werden.
+
 	
 	\chapter{Umsetzung}
 		
@@ -735,14 +734,14 @@ eprint=false
 	
 	
 	\subsection{UI Design}
-	Das User Interface orientiert sich am Aussehen von GVS 1.0. Neu sind alle wichtigen Funktionen direkt über die Toolbar zugreifbar und alle Buttons verfügen über Tooltips. Ebenfalls wurden die Zahlen des Replay Sliders durch sprechende Namen ersetzt.
-	
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=0.7\linewidth]{assets/images/gvs-ui-graph}
 		\caption{User Interface GVS 2.0}
 		\label{fig:gvs-ui-graph}
 	\end{figure}
+
+	Das User Interface orientiert sich am Aussehen von GVS 1.0. Neu sind alle wichtigen Funktionen direkt über die Toolbar zugreifbar und alle Buttons verfügen über Tooltips. Ebenfalls wurden die Zahlen des Replay Sliders durch sprechende Namen ersetzt.
 	
 	\subsubsection{Logo}
 	Das Logo wurde von den Eigenschaften des Kraken \cite{kraken} inspiriert. Kraken sind bekannt dafür, dass sie Irrgarten-Probleme effizient lösen können. Dies ist eine Anspielung an die Algorithmen, die vom \gls{gvs} 2.0 unterstützt werden. Ebenfalls wurden die Saugnäpfe des Kraken als Graph Nodes visualisiert und auf der Stirn ist ein binärer Baum zu erkennen. 
@@ -800,11 +799,7 @@ eprint=false
 	In der C\# Library wurden die gleichen Änderungen wie in der Java Library durchgeführt. Zusätzlich wurde der Code um aktuelle C\# Best Practices erweitert. So werden durchgehend implizit typisierte Variablen (\lstinline|var|) verwendet, sowie der Null-Coalescing Operator (\lstinline|??|) eingesetzt. 
 	
 	\subsection{Layering}
-	Auch in den Client Libraries wurde ein einfaches Layering eingeführt. Des Weiteren sind alle verfügbaren Client Klassen dem folgenden Klassendiagramm zu entnehmen.
-	
-	%TODO in den anhang verschieben
-	\includepdf{assets/pdf/gvs-lib.pdf}
-	
+	Auch in den Client Libraries wurde ein einfaches Layering eingeführt. Die Umsetzung der Schichtenarchitektur ist dem Klassendiagramm aus Anhang \ref{ch:class-diagram} zu entnehmen.	
 			
 	\section{Weitere Änderungen gegenüber GVS 1.0}
 	Dieser Abschnitt umfasst kleinere Änderungen, Neuerungen und Fehlerbehebungen gegenüber dem Vorgänger Produkt \cite{gvs1}. 
@@ -907,9 +902,6 @@ eprint=false
 	
 	\subsection{Verbesserungspotential GVS 1.0}
 	Während der Verwendung von GVS 1.0 sind einige Dinge aufgefallen, die nicht optimal funktionieren. Diese wurden vom Betreuer in einer Liste festgehalten und an das Projektteam überreicht. Gemäss der Besprechung vom 27.09.2017 wurden diese Änderungen mit tiefer Priorität in den Backlog eingepflegt (siehe Anhang \ref{ch:minutes}). Dieses Kapitel zeigt auf, welche Punkte bis zum Abschluss des Projekts offen geblieben sind.
-	
-	\subsubsection{Environment-Variable}
-	GVS 3.0 sollte eine einfache Möglichkeit bieten, ein Programm auch ohne laufenden Sever auszuführen. Dies könnte zum Beispiel mit dem setzen und auslesen einer Environment-Variable umgesetzt werden.
 	
 	\subsubsection{Font Size}
 	GVS 3.0 sollte es dem User erlauben die Font Size der Labels zu verändern, ohne den Code von GVS UI zu bearbeiten. Eignen würde sich entweder ein Menü-Eintrag ''Einstellungen'' oder das setzen von der Font Size im \textit{GVSStyle}.
@@ -1152,15 +1144,24 @@ eprint=false
 	Die genaue Arbeitsteilung ist der git-History, den Java-Docs sowie den Änderungshistories in der Projektdokumentation zu entnehmen.
 	
 	\chapter{Klassendiagramme} \label{ch:class-diagram}
+	Die folgenden Seiten enthalten die Entwicklung der Klassendiagramme über den Projektverlauf. Für die GVS Lib Komponente existierte in der Vorgängerarbeit kein Klassendiagramm.
+	
 	\begin{enumerate}
-		\item Klassendiagramm Analyse
-		\item Klassendiagramm Entwurf
-		\item Klassendiagramm Realisierung
+		\item Klassendiagramm UI Analyse
+		\item Klassendiagramm UI Entwurf
+		\item Klassendiagramm UI Umsetzung
+		\item Klassendiagramm Lib Umsetzung
 	\end{enumerate}
 	
 	\includepdf[fitpaper]{assets/pdf/gvs1-0.pdf}
+	\includepdf[fitpaper]{assets/pdf/gvs2-0.pdf}
 	\includepdf[fitpaper]{assets/pdf/gvs2-1.pdf}
-	\includepdf[fitpaper]{assets/pdf/classdiagramm-ui-A3.pdf}
+	\includepdf[fitpaper]{assets/pdf/gvs2-lib.pdf}
+	
+	\chapter{Migrationsliste} \label{ch:migration-list}
+	Die Migrationsliste gibt einen Überblick über die geplante Migration aller GVS 1.0 Klassen.
+	
+	\includepdf[fitpaper]{assets/pdf/Migration_Replacements.pdf}
 	
 	\chapter{Aufgabenstellung}
 	\label{aufgabenstellung}
