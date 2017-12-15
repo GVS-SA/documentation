@@ -198,7 +198,11 @@ eprint=false
 	\pagenumbering{Roman}
 	\section*{Abstract}
 	\thispagestyle{firststyle}
+	An der \gls{hsr} werden in den Modulen ''Algorithmen und Datenstrukturen 1 und 2'' diverse Algorithmen unterrichtet, die auf den beiden Datenstrukturen ''Graph'' und ''Tree'' arbeiten. Die Funktionsweise solcher Algorithmen ist für Studenten teilweise schwer zu fassen. Aus diesem Grund wurde im Jahr 2005 im Rahmen einer Bachelorarbeit der \gls{gvs} 1.0 entwickelt.  Dieser visualisiert Datenstrukturen, die von einer Client Library in XML transformiert werden und anschliessend über eine Socket Verbindung an die Server Komponente zur Visualisierung übertragen werden. Studenten können so die Arbeitsweise der Algorithmen Schritt für Schritt nachvollziehen. \\
 	
+	\noindent Diese Studienarbeit beschäftigt sich mit der Erneuerung des gesamten GVS 1.0, wobei insbesondere bei der Server Komponente das UI Framework ersetzt wird. In einer Analysephase wird der bestehende Code auf Verbesserungspotential untersucht. Die gewonnen Erkenntnisse fliessen in eine saubere Schichtenarchitektur ein, die es auch Folgearbeiten erleichtern soll, einzelne Schichten zu ersetzen. \\
+
+	\noindent Während dem Projekt konnten eine erweiterbare Software Architektur erstellt werden, die das Vorgängerprodukt vollumfänglich ersetzt. Zusätzlich wurde die Usability verbessert und durch den Einsatz von speziellen Layouting Algorithmen eine ansprechende Darstellung von ''Graphen'' und ''Trees'' erreicht.
 	
 	\newpage
 	
@@ -206,12 +210,23 @@ eprint=false
 	\thispagestyle{firststyle}
 	
 	\subsection*{Ausgangslage}
+	GVS ist eine Visualisierungs-Software die Graphen und Trees darstellt. Durch die vernwendung von Styles können auch Algorithmen auf den Graphen visualisiert werden.\\
+	Die Datenstrukturen werden in der Entwicklungsumgebung des Benutzers implementiert und mit einer clientseitigen Library an die Visualisierungskomponenten übertragen. Diese interpretieren die eingehenden Daten und stellen diese auf eine ansprechende und verständliche Art und Weise dar. \\
 	
-	\subsection*{Vorgehen, Technologien}
+	\noindent
+	Der GVS 1.0 wird im Unterricht der Module ''Algorithmen und Datenstrukturen 1 und 2'' aktiv verwendet. Er erleichtert das Erlernen von komplexen Suchalgorithmen und Datenstrukturen die in den Modulen behandelt werden. Der GVS 1.0 hat aber bestimmte Einschränkungen bezüglich Usability und der Darstellung von grossen Trees. Ebenfalls gilt das eingesetzt UI Framework als veraltet und es existieren in der Zwischenzeit bessere Alternativen.
+	
+	\subsection*{Vorgehen / Technologien}	
+	In einer ersten Phase wird die bestehende Software auf Funktionsweise und Verbesserungspotential analysiert. Ebenfalls wird die umgesetzte Architektur kritisch beleuchtet. Da die Software HSR Intern verwendet wird, sind Folgearbeiten nicht auszuschliessen. Es wird deshalb darauf geachtet, dass mit den gewonnen Erkenntnissen eine Architektur designet wird, die einfach verständlich und erweiterbar ist. Ebenfalls sollen zeitgemässe Softwareentwicklungs-Techniken angewendet werden. \\
+	
+	\noindent
+	Das in die Jahre gekommene Swing UI Framework wird im Rahmen dieser Studienarbeit mit dem offiziellen Nachfolger JavaFX ersetzt.
 	
 	\subsection*{Ergebnisse}
+	In der Studienarbeit wurde ein vollumfänglicher Ersatz für den GVS 1.0 entwickelt. GVS 2.0 erweitert sogar die Funktionalität um ein intuitiveres User Interface sowie einer verbesserte Darstellung der Datenstrukturen.
 	
 	\subsection*{Ausblick}
+	Das Projektteam ist vom praktischen Nutzen der Applikation überzeugt und wird sich deshalb in der Bachelorarbeit mit einer umfänglicheren Anwendung beschäftigen. Diese wird den Studenten das Erlenenen von weiteren theoretischen Informatikkonzepten durch Visualisierung erleichtern.  
 	
 	\newpage
 	
@@ -914,24 +929,6 @@ eprint=false
 	
 	Dieses Kapitel bietet eine Übersicht, welche Aufgaben in einem nächsten GVS Major Update angegangen werden könnten. 
 	
-	
-	\subsection{Nicht umgesetzte Ideen für GVS 2.0}
-
-	\subsubsection{N-ary Trees}
-	Der in GVS 2.0 neu eingeführte Algorithmus zum Zeichnen von optisch ansprechenden Bäumen ist fähig n-ary Trees darzustellen (siehe \ref{ssec:treelayouter}). Da GVS 1.0 jedoch ausschliesslich Binary Trees unterstütze, sieht die Client Lib diese Erweiterung nicht vor.
-	
-	GVS 3.0 soll die GVS Lib für n-ary Trees erweitern.
-	
-	\subsubsection{Refactoring ModelBuilder und Persistor}
-	Die Klassen \textit{ModelBuilder} und \textit{Persistor} besitzen sehr ähnliche Funktionalität und somit viel \textit{duplicated Code}. Obwohl diese Klassen in GVS 2.0 einem Refactoring unterzogen wurden, besteht das Problem weiterhin (siehe Abschnitt \ref{sec:metrics-2}).
-	
-	GVS 3.0 sollte diese Klassen soweit refactoren, dass kein \textit{duplicated Code} mehr vorhanden ist.
-	
-	\subsubsection{Automated Testing}
-	GVS 1.0 besitzt keine automatisierten Tests. Auch in GVS 2.0 konnte diese Altlast nicht beseitigt werden. Es wurde nur eine sehr kleine Test Coverage erreicht, da die Erstellung von automatisierten Tests tief priorisiert wurde.
-	
-	GVS 3.0 sollte das Business Layer und Teile des Access Layers sinnvoll mit Tests abdecken.
-	
 	\subsection{Verbesserungspotential GVS 1.0}
 	Während der Verwendung von GVS 1.0 sind einige Dinge aufgefallen, die nicht optimal funktionieren. Diese wurden vom Betreuer in einer Liste festgehalten und an das Projektteam überreicht. Gemäss der Besprechung vom 27.09.2017 wurden diese Änderungen mit tiefer Priorität in den Backlog eingepflegt (siehe Anhang \ref{ch:minutes}). Dieses Kapitel zeigt auf, welche Punkte bis zum Abschluss des Projekts offen geblieben sind.
 	
@@ -948,6 +945,23 @@ eprint=false
 	
 	\subsubsection{Schnelle Beendung von GVS Lib}
 	Wenn die \textit{main} Methode des Programms, welches GVS Lib verwendet sehr schnell beendet, gehen Daten bei der Übertragung verloren. Dies sollte bei GVS 3.0 verhindert werden.
+	
+		\subsection{Nicht umgesetzte Ideen im GVS 2.0}
+	
+	\subsubsection{N-ary Trees}
+	Der in GVS 2.0 neu eingeführte Algorithmus zum Zeichnen von optisch ansprechenden Bäumen ist fähig n-ary Trees darzustellen (siehe \ref{ssec:treelayouter}). Da GVS 1.0 jedoch ausschliesslich Binary Trees unterstütze, sieht die Client Lib diese Erweiterung nicht vor.
+	
+	GVS 3.0 soll die GVS Lib für n-ary Trees erweitern.
+	
+	\subsubsection{Refactoring ModelBuilder und Persistor}
+	Die Klassen \textit{ModelBuilder} und \textit{Persistor} besitzen sehr ähnliche Funktionalität und somit viel \textit{duplicated Code}. Obwohl diese Klassen in GVS 2.0 einem Refactoring unterzogen wurden, besteht das Problem weiterhin (siehe Abschnitt \ref{sec:metrics-2}).
+	
+	GVS 3.0 sollte diese Klassen soweit refactoren, dass kein \textit{duplicated Code} mehr vorhanden ist.
+	
+	\subsubsection{Automated Testing}
+	GVS 1.0 besitzt keine automatisierten Tests. Auch in GVS 2.0 konnte diese Altlast nicht beseitigt werden. Es wurde nur eine sehr kleine Test Coverage erreicht, da die Erstellung von automatisierten Tests tief priorisiert wurde.
+	
+	GVS 3.0 sollte das Business Layer und Teile des Access Layers sinnvoll mit Tests abdecken.
 	
 	\newpage
 	
