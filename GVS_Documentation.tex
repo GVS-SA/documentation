@@ -407,7 +407,7 @@ eprint=false
 	\subsubsection{Layering}
 	Dem Projektplan GVS 1.0 \cite{gvs1} kann eine Schichtenarchitektur bestehend aus zwei Schichten entnommen werden. Die Schichten widerspiegeln sich aber nicht im Package Design. Gut erkennbar ist das Server Interface, dass die Visualisierung vom Socket Server trennt. GUI spezifische Elemente ziehen sich durch mehrere Layer.
 	
-	\subsubsection{Swing/AWT Imports im Business Layer} 
+	\subsubsection{Swing/AWT Imports im Business Layer} \label{sssec:swing-business}
 	Im Business Layer gibt es diverse Imports der UI Frameworks \gls{swing} rsp. \gls{awt}. Dies erschwert einen einfachen Austausch des eingesetzten UI Frameworks.
 	
 	\subsubsection{Tangles} Zwischen dem Presentation und Business Layer existieren \gls{tangle}s. Dies verhindert einen einfachen Austausch des Presentation Layers. 
@@ -498,7 +498,7 @@ eprint=false
 	Die Migrations Liste im Anhang (siehe \ref{ch:migration-list}) zeigt, welche Klassen aus GVS 1.0 übernommen werden und welche Klassen in welcher Art und Weise verändert oder neu erstellt werden.
 
 	
-	\chapter{Umsetzung}
+	\chapter{Umsetzung} \label{ch:umsetzung}
 		
 	\begin{table}[h!]
 	\centering
@@ -534,9 +534,10 @@ eprint=false
 		\item[Watchdog] \hfill \\ Behebt das Problem, dass beim Absturz eines Clients die Server Komponenten für andere Clients nicht wieder freigegeben wird. Dies erleichtert das Usability für den Benutzer sehr. Mehr dazu in Abschnitt \ref{sec:watchdog}
 		\item[SessionType] \hfill \\ Trees und Graphen werden völlig unterschiedlich gelayoutet. Dennoch werden die gleichen Klassen für die Darstellung im Presentation Layer verwendet. Durch das Type Object kann trotzdem ein spezifischer Layouting Algorithmus für jede Datenstrutkur eingesetzt werden.
 		\item[TreeVertex \& LeafVertex] \hfill \\ 
+		In der Designphase wurde das Zusammenführen von Graphen und Trees angedacht. In der Realisierung hat sich aber gezeigt, dass einerseits die Layouter sowie infolgedessen auch die Vertices unterschieden werden müssen. (siehe \ref{graph-vs-tree}) Für den Tree Layouter (\ref{sec:treelayouter}) wird deshalb neben dem \textit{TreeVertex} auch ein \textit{LeafVertex} benötigt.  Blattknoten dienen als Platzhalter die im UI nicht dargestellt werden. Sie vereinfachen die Berechnung des Tree Layouts aber stark.
 	\end{description}
 
-	\subsection{Layering}
+	\subsection{Layering} \label{ssec:layering}
 	Der GVS 2.0 ist in drei horizontale Layer unterteilt.
 	
 	\begin{figure}[h!]
@@ -699,9 +700,9 @@ eprint=false
 	\end{lstlisting}
 
 
-	\section{Tree Layouter} \label{ssec:treelayouter}
+	\section{Tree Layouter} \label{sec:treelayouter}
 
-	Die Darstellung von Trees auf eine optisch ansprechende und leserliche Art und Weise bietet verschiedene Schwierigkeiten. bereits 1981 haben Reingold-Tilford \cite{reingold-tilford} zu diesem Zweck einen Algorithmus entwickelt, welcher binäre Bäume zeichnet. Dieser Algorithmus wurde von Walker weiter entwickelt, um n-ary Trees darzustellen und schlussendlich von Buchheim, Jünger und Leipert \cite{tree-algorithm} verbessert, um die Laufzeit auf $\mathcal{O}(n)$ zu beschränken. 
+	Die Darstellung von Trees auf eine optisch ansprechende und leserliche Art und Weise bietet verschiedene Schwierigkeiten. bereits 1981 haben Reingold-Tilford \cite{reingold-tilford} zu diesem Zweck einen Algorithmus entwickelt, welcher binäre Bäume zeichnet. Dieser Algorithmus wurde von Walker weiter entwickelt, um \gls{n-ary}s darzustellen und schlussendlich von Buchheim, Jünger und Leipert \cite{tree-algorithm} verbessert, um die Laufzeit auf $\mathcal{O}(n)$ zu beschränken. 
 	
 	Der von GVS 2.0 verwendete Algorithmus, basiert auf diesem neusten Tree-Algorithmus und genügt somit auch den fünf anerkannten Prinzipien, denen ein solcher Algorithmus genügen muss:
 	
@@ -745,7 +746,7 @@ eprint=false
 	\begin{itemize}
 		\item Ein Graph besitzt Edges und Vertices. Ein Baum hingegen besitzt nur Vertices, denn seine Edges sind durch die Vater-Kind Beziehung der Vertices implizit gegeben. 
 		\item Ein Tree Vertex besitzt zusätzliche Attribute wie Vater-Kind Beziehungen und \textit{isRoot()}
-		\item Die benötigten Layout Algorithmen unterscheiden sich stark. (siehe \ref{ssec:graphlayouter} für GraphLayouter und \ref{ssec:treelayouter} für TreeLayouter)
+		\item Die benötigten Layout Algorithmen unterscheiden sich stark. (siehe \ref{ssec:graphlayouter} für GraphLayouter und \ref{sec:treelayouter} für TreeLayouter)
 	\end{itemize}
 	
 	\subsection{Umsetzung}
@@ -866,7 +867,10 @@ eprint=false
 
 	\subsection{Neuerungen}
 	\begin{description}
-		\item[SnapshotDescription] \hfill \\ Damit einzelne Schritte in den dargestellten Graphen besser verständlich sind, bietet GVS 2.0 die Möglichkeit kurze Beschreibungen zu erfassen. Diese können serverseitig erfasst, gespeichert und geladen werden. Die Erweiterung des Verbindungsprotokoll, um SnapshotDescription auch clientseitig zu unterstützen, sollte für ein allfälliges Folgeprojekt geplant werden (siehe Kapitel \ref{sec:ausblick}).
+		\item[SnapshotDescription] \hfill \\
+		Damit einzelne Schritte in den dargestellten Graphen besser verständlich sind, bietet GVS 2.0 die Möglichkeit kurze Beschreibungen zu erfassen. Diese können serverseitig erfasst, gespeichert und geladen werden. Die Erweiterung des Verbindungsprotokoll, um SnapshotDescription auch clientseitig zu unterstützen, sollte für ein allfälliges Folgeprojekt geplant werden (siehe Kapitel \ref{sec:ausblick}).
+		\item[\gls{n-ary}s] \hfill \\
+		Der Tree Layout Algorithmus von GVS 2.0 ist fähig neben Binary Trees auch \gls{n-ary}s zu zeichnen (siehe \ref{sec:treelayouter}). Da der nötige Code clientseitig bereits vorhanden war, konnte das GVS UI mit kleinen Aufwand erweitert werden. Somit können in GVS 2.0 nun auch allgemeinere Trees, wie z.B. \gls{trie}s, dargestellt werden.
 	\end{description}
 	
 	\subsection{Fehlerbehebungen}
@@ -887,13 +891,31 @@ eprint=false
 			Datum & Version & Änderungen & Autor \\
 			\midrule
 			11.12.17 & 1.0 & Ausblick geschrieben & mtrentini \\
+			11.12.17 & 1.1 & Metriken geschrieben & mwieland \\
+			15.12.17 & 1.2 & Zielerreichung geschrieben & mtrentini \\
 			\bottomrule 
 		\end{tabularx} 
-		\caption{Versionshistory Ausblick} 
+		\caption{Versionshistory Ergebnisdiskussion} 
 	\end{table}	
 	
+	\section{Zielerreichung}
+	Dieses Kapitel reflektiert die Erreichung der gemäss Aufgabenstellung (siehe Anhang \ref{aufgabenstellung}) gesetzter Ziele dieser Arbeit. Neben den subjektiven Einschätzungen des Projektteams dienen die benutzten Metriken als handfeste Grundlage für Code-basierte Veränderungen.
+	
+	\subsection{Ersetzung des Presentation Layers}
+	GVS 1.0 benutzt UI-spezifische \gls{swing} und \gls{awt} Klassen in sehr vielen Komponenten und durch alle Layer hinweg (siehe \ref{sssec:swing-business}). Insbesondere deshalb war das Ersetzen des Presentation Layers keine kleine Aufgabe. Schnell hat sich gezeigt, dass weniger Code als erwartet wiederverwendet werden kann. Im Zuge dieser Ersetzungen von \gls{swing} und \gls{awt} Klassen durch GVS spezifische Klassen, wurden auch viele kleinere Refactorings umgesetzt.\\
+	Die neue Architektur von GVS 2.0 konnte sämtliche \gls{tangle}s entwirren (siehe \ref{ssec:layering}) und glänzt mit einem in sich gekoppelten Presentation Layer.
+	
+	Für den Endbenutzer wirkt das neue User Interface frisch und modern. Durch die direkte Erreichbarkeit aller Funktionen über die Toolbar, ist es auch benutzerfreundlicher als das UI des Vorgängers.
+	
+	\subsection{Einführung von Generics in \gls{gvslib}}
+	Im Laufe des Projekts wurde erkannt, dass die \gls{gvslib} bereits einige Generics-Neuerungen enthält und eine weitere Einführung derselben keinen namhaften Mehrwert bringen würde. Somit wurde in Rücksprache mit dem Betreuer entschieden, dass diesbezüglich keine Änderungen an der \gls{gvslib} nötig sind (siehe Anhang \ref{ch:minutes}).\\
+	Stattdessen konnten die zahlreichen Style-Typ Klassen von GVS 1.0 auf eine einzige Style Klasse (analog zu \gls{gvsui}) reduziert werden, was wiederum zukünftige Erweiterungen der Applikation erleichtert.
+	
+	\subsection{Punktuelle Verbesserungen}
+	Wie im Kapitel \ref{ch:umsetzung} beschrieben, konnten zahlreiche Verbesserungen durchgeführt werden. Von besonderem Nutzen sind hierbei zwei Verbesserungen. Einerseits die Umsetzung einer klaren Schichtenarchitektur, die zukünftigen Entwicklern das Ersetzen einzelner Komponenten erleichtern wird. Andererseits das Einführen eines Watchdogs, welcher die Usability für Studenten stark erhöht, da Exceptions im Implementations-Code nicht mehr zur Blockierung des \gls{gvsui} führen.
+	
 	\section{Software Metriken} \label{sec:metrics-2}
-	In der Analyse Phase wurden mehrere Code Smells in GVS 1.0 erkannt. (Siehe Abschnitt \ref{sec:erkenntnisse}) In der Design Phase wurde deshalb ein Konzept ausgearbeitet, damit das Refactoring strukturiert ablaufen wird. (Siehe Abschnitt \ref{sec:refactroing-concept}) Die Refactorings wurden damals aus Zeitgründen tief priorisiert. Es hat sich aber gezeigt, dass bereits am Anfang der Realisations Phase viele Refactorings durchgeführt werden müssen. Dies nicht zuletzt deshalb, da der bestehende Code sehr schwer zu lesen war. Durch die Refactorings konnte die Verständlichkeit des Codes enorm verbessert werden. Dies spiegelt sich auch in den erhobenen Software Metriken wieder. Im folgenden Abschnitt sind dieser genauer beschrieben.
+	In der Analyse Phase wurden mehrere Code Smells in GVS 1.0 erkannt (Siehe Abschnitt \ref{sec:erkenntnisse}). In der Design Phase wurde deshalb ein Konzept ausgearbeitet, damit das Refactoring strukturiert ablaufen wird (Siehe Abschnitt \ref{sec:refactroing-concept}). Die Refactorings wurden damals aus Zeitgründen tief priorisiert. Es hat sich aber gezeigt, dass bereits am Anfang der Realisations Phase viele Refactorings durchgeführt werden müssen. Dies nicht zuletzt deshalb, da der bestehende Code sehr schwer zu lesen war. Durch die Refactorings konnte die Verständlichkeit des Codes enorm verbessert werden. Dies spiegelt sich auch in den erhobenen Software Metriken wieder. Im folgenden Abschnitt sind dieser genauer beschrieben.
 	
 	\subsection{Wartbarkeit}
 	In der Wartbarkeits-Metrik \cite{metric-maintainability} ist klar zu erkennen, dass die Wartbarkeit der meisten Klassen gut ist. Auf der X-Achse ist der Churn \cite{metric-churn} abgebildet, also wie oft eine Klasse verändert wurde. Klassen die oft angepasst werden, erledigen potentiell zu viele Aufgaben. Auf der Y-Achse ist die Wartbarkeit angezeigt. Diese errechnet sich aus Code-Duplikationen, zyklomatischer Komplexität von McCabe \cite{mccabe} und der Kognitiven Komplexität \cite{metric-cognitive-complexity} einer Klasse. Die beiden Klassen \textit{Persistor} und \textit{ModelBuilder} weisen die schlechtesten Werte auf. (oben rechts). Leider konnte aus Zeitgründen kein Refactoring der beiden Klassen durchgeführt werden. Ein entsprechender Hinweis ist aber im Ausblick dokumentiert.
@@ -922,6 +944,9 @@ eprint=false
 		\label{metric-linesofcode}
 	\end{figure}	
 	
+	\subsection{Kritik}
+	In der Analyse- und Entwurfsphase des Projekts wurde entschieden, dass die Hauptziele so umgesetzt werden sollen, dass möglichst viel bestehender Code wiederverwendet werden kann. Dieses Ziel wurde klar nicht erreicht.\\
+	Dies führte auch dazu, dass deutlich mehr Arbeitsaufwand für die Umsetzung des Projekts nötig war, als eingeplant wurde (siehe Anhang \ref{zeitauswertung}). Die Wirtschaftlichkeit des Projekts hat dadurch gelitten.
 
 	\section{Ausblick}
 	\label{sec:ausblick}
@@ -946,12 +971,7 @@ eprint=false
 	\subsubsection{Schnelle Beendung von GVS Lib}
 	Wenn die \textit{main} Methode des Programms, welches GVS Lib verwendet sehr schnell beendet, gehen Daten bei der Übertragung verloren. Dies sollte bei GVS 3.0 verhindert werden.
 	
-		\subsection{Nicht umgesetzte Ideen im GVS 2.0}
-	
-	\subsubsection{N-ary Trees}
-	Der in GVS 2.0 neu eingeführte Algorithmus zum Zeichnen von optisch ansprechenden Bäumen ist fähig n-ary Trees darzustellen (siehe \ref{ssec:treelayouter}). Da GVS 1.0 jedoch ausschliesslich Binary Trees unterstütze, sieht die Client Lib diese Erweiterung nicht vor.
-	
-	GVS 3.0 soll die GVS Lib für n-ary Trees erweitern.
+	\subsection{Nicht umgesetzte Ideen im GVS 2.0}
 	
 	\subsubsection{Refactoring ModelBuilder und Persistor}
 	Die Klassen \textit{ModelBuilder} und \textit{Persistor} besitzen sehr ähnliche Funktionalität und somit viel \textit{duplicated Code}. Obwohl diese Klassen in GVS 2.0 einem Refactoring unterzogen wurden, besteht das Problem weiterhin (siehe Abschnitt \ref{sec:metrics-2}).
@@ -1235,8 +1255,22 @@ eprint=false
 	
 	%TODO Nach Kategorien
 	
-	
 	\chapter{Meeting Protokolle} \label{ch:minutes}
+	Nachfolgend befinden sich sämtliche Protokolle der wöchentlichen Meetings zwischen dem Betreuer und dem Projektteam.
+	
+	\includepdf[pages={1-}]{assets/minutes/2017-09-20.pdf}
+	\includepdf[pages={1-}]{assets/minutes/2017-09-27.pdf}
+	\includepdf[pages={1-}]{assets/minutes/2017-10-04.pdf}
+	\includepdf[pages={1-}]{assets/minutes/2017-10-11.pdf}
+	\includepdf[pages={1-}]{assets/minutes/2017-10-18.pdf}
+	\includepdf[pages={1-}]{assets/minutes/2017-10-24.pdf}
+	\includepdf[pages={1-}]{assets/minutes/2017-11-07.pdf}
+	\includepdf[pages={1-}]{assets/minutes/2017-11-14.pdf}
+	\includepdf[pages={1-}]{assets/minutes/2017-11-22.pdf}
+	\includepdf[pages={1-}]{assets/minutes/2017-11-28.pdf}
+	\includepdf[pages={1-}]{assets/minutes/2017-12-06.pdf}
+	\includepdf[pages={1-}]{assets/minutes/2017-12-12.pdf}
+	
 	
 	\chapter{Eigenständigkeitserklärung}
 	Der/Die Verfasser/in erklärt hiermit, dass er/sie die vorliegende Arbeit selbständig, ohne fremde Hilfe und ohne Benutzung anderer als die angegebenen Hilfsmittel angefertigt hat. Die aus fremden Quellen (einschliesslich elektronischer Quellen) direkt oder indirekt übernommenen Gedanken sind ausnahmslos als solche kenntlich gemacht. Durch Copyright geschützte Materialien wurden in dieser Arbeit nicht in unerlaubter Weise genutzt. Die Arbeit ist in gleicher oder ähnlicher Form oder auszugsweise im Rahmen einer anderen Prüfung noch nicht vorgelegt worden.\\[2cm]
@@ -1246,7 +1280,7 @@ eprint=false
 	
 	\chapter{Vereinbarung über Urheber- und Nutzungsrechte}
 	Die folgende Seite enthält die Vereinbarung über Urheber- und Nutzungsrechte.
-	\includepdf[pages={1}]{assets/pdf/Nutzungsbestimmung.pdf}	
+	\includepdf[pages={1}]{assets/pdf/Nutzungsbestimmung.pdf}
 	
 	% Glossary
 	\printglossary
