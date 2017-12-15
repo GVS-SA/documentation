@@ -521,6 +521,27 @@ eprint=false
 		\item[TreeVertex \& LeafVertex] \hfill \\ 
 		In der Designphase wurde das Zusammenführen von Graphen und Trees angedacht. In der Realisierung hat sich aber gezeigt, dass einerseits die Layouter sowie infolgedessen auch die Vertices unterschieden werden müssen. (siehe \ref{graph-vs-tree}) Für den Tree Layouter (\ref{ssec:treelayouter}) wird deshalb neben dem \textit{TreeVertex} auch ein \textit{LeafVertex} benötigt.  Blattknoten dienen als Platzhalter die im UI nicht dargestellt werden. Sie vereinfachen die Berechnung des Tree Layouts aber stark.
 	\end{description}
+
+	\subsection{Layering}
+	Der GVS 2.0 ist in drei horizontale Layer unterteilt. Das \textit{Model} Package wird von den Schichten \textit{Business} und \textit{Access} verwendet und ist deshalb seitlich positioniert.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.5\linewidth]{assets/images/layering}
+		\caption{GVS 2.0 Layering}
+		\label{fig:layering}
+	\end{figure}
+	
+	\noindent
+	Die Zugriffe verlaufen durchgehend von höheren Schichten zu tieferen. Sämtliche Tangles, also Aufrufe von Klassen von tieferen Schichten zu höheren Schichten konnten mit dem Observer Pattern aufgelöst werden. Einzige Ausnahme bildet das Model Package, dass seitlich am \textit{Business} und \textit{Access} Layer positioniert wird. Das Strukturanalyse Tool zeichnet diese Zugriffe leider auch als Tangle (rot). Sie stellen jedoch kein Problem dar. Zur besseren Veranschaulichung dient das \textit{''Klassendiagramm UI Umsetzung''} im Anhang \ref{ch:class-diagram}.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.4\linewidth]{assets/images/structure-gvs2}
+		\caption{Package Struktur GVS 2.0}
+		\label{fig:structure-gvs2}
+	\end{figure}
+	
 	
 	\subsection{Sequenzdiagramme}
 	Während der Analyse-Phase dieses Projekts wurden die Programmabläufe in GVS 1.0 untersucht (siehe \ref{ssec:sequence-1}). Um Änderungen im Programmablauf aufzuzeigen, finden sich in diesem Kapitel neue Sequenzdiagramme, die die selben Abläufe in GVS 2.0 abbilden. 
