@@ -508,9 +508,11 @@ eprint=false
 	\section{Umgesetzte Architektur}
 	
 	\subsection{Klassendiagramm}
-	Das Klassendiagramm 3 \textit{''Klassendiagramm UI Umsetzung''} im Anhang \ref{ch:class-diagram} zeigt einen Überblick über die wichtigsten Klassen in GVS 2.0 sowie die umgesetzte Schichtenarchitektur (vgl. \ref{ssec:layer-architecture}). 
-	\\ \noindent
-	Die folgende Aufzählung (\ref{desc:architecture-changes}) zeigt die wichtigsten Änderungen zum Klassendiagramm aus der Entwurfsphase auf. (siehe Anhang \ref{ch:class-diagram}) Ansonsten widerspiegelt GVS 2.0 die angedachte Architektur und Klassenhirarchie.
+	Das \textit{''Klassendiagramm UI Umsetzung''} im Anhang \ref{ch:class-diagram} zeigt einen Überblick über die wichtigsten Klassen in GVS 2.0 sowie die umgesetzte Schichtenarchitektur (vgl. \ref{ssec:layer-architecture}). Durch den Einsatz des \gls{mvvm} Pattern ist der UI Layer in sich gekapselt. Im Gegensatz zum GVS 1.0 werden ausserhalb des Presentation Layer keine UI spezifischen Klassen verwendet. Dies ermöglicht einen Austausch des verwendenten UI Framework.
+	
+
+	\noindent
+	Die folgende Aufzählung (\ref{desc:architecture-changes}) zeigt die wichtigsten Änderungen zum Klassendiagramm aus der Entwurfsphase auf. (siehe Anhang \ref{ch:class-diagram}) Ansonsten widerspiegelt GVS 2.0 die angedachte Architektur und Klassenhierarchie.
 	
 	\begin{description} \label{desc:architecture-changes}
 		\item[GvsXmlReader \& ClientConnection ] \hfill \\ Diese Klassen entstanden durch ein Refactoring der GVS 1.0 Klasse \textit{ServerConnectionXML}. Die Trennung dieser Klasse führt dazu, dass das \gls{single-responsibility}  eingehalten wird. 
