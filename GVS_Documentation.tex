@@ -393,7 +393,7 @@ eprint=false
 	Dem Projektplan GVS 1.0 \cite{gvs1} kann eine Schichtenarchitektur bestehend aus zwei Schichten entnommen werden. Die Schichten widerspiegeln sich aber nicht im Package Design. Gut erkennbar ist das Server Interface, dass die Visualisierung vom Socket Server trennt. GUI spezifische Elemente ziehen sich durch mehrere Layer.
 	
 	\subsubsection{Swing/AWT Imports im Business Layer} 
-	Im Business Layer gibt es diverse Imports der UI Frameworks \gls{swing} rsp. \gls{awt}. Dies erschwert einen Austausch des eingesetzten UI Frameworks.
+	Im Business Layer gibt es diverse Imports der UI Frameworks \gls{swing} rsp. \gls{awt}. Dies erschwert einen einfachen Austausch des eingesetzten UI Frameworks.
 	
 	\subsubsection{Tangles} Zwischen dem Presentation und Business Layer existieren \gls{tangle}s. Dies verhindert einen einfachen Austausch des Presentation Layers. 
 	
@@ -519,11 +519,10 @@ eprint=false
 		\item[Watchdog] \hfill \\ Behebt das Problem, dass beim Absturz eines Clients die Server Komponenten für andere Clients nicht wieder freigegeben wird. Dies erleichtert das Usability für den Benutzer sehr. Mehr dazu in Abschnitt \ref{sec:watchdog}
 		\item[SessionType] \hfill \\ Trees und Graphen werden völlig unterschiedlich gelayoutet. Dennoch werden die gleichen Klassen für die Darstellung im Presentation Layer verwendet. Durch das Type Object kann trotzdem ein spezifischer Layouting Algorithmus für jede Datenstrutkur eingesetzt werden.
 		\item[TreeVertex \& LeafVertex] \hfill \\ 
-		In der Designphase wurde das Zusammenführen von Graphen und Trees angedacht. In der Realisierung hat sich aber gezeigt, dass einerseits die Layouter sowie infolgedessen auch die Vertices unterschieden werden müssen. (siehe \ref{graph-vs-tree}) Für den Tree Layouter (\ref{ssec:treelayouter}) wird deshalb neben dem \textit{TreeVertex} auch ein \textit{LeafVertex} benötigt.  Blattknoten dienen als Platzhalter die im UI nicht dargestellt werden. Sie vereinfachen die Berechnung des Tree Layouts aber stark.
 	\end{description}
 
 	\subsection{Layering}
-	Der GVS 2.0 ist in drei horizontale Layer unterteilt. Das \textit{Model} Package wird von den Schichten \textit{Business} und \textit{Access} verwendet und ist deshalb seitlich positioniert.
+	Der GVS 2.0 ist in drei horizontale Layer unterteilt.
 	
 	\begin{figure}[h!]
 		\centering
@@ -533,7 +532,7 @@ eprint=false
 	\end{figure}
 	
 	\noindent
-	Die Zugriffe verlaufen durchgehend von höheren Schichten zu tieferen. Sämtliche Tangles, also Aufrufe von Klassen von tieferen Schichten zu höheren Schichten konnten mit dem Observer Pattern aufgelöst werden. Einzige Ausnahme bildet das Model Package, dass seitlich am \textit{Business} und \textit{Access} Layer positioniert wird. Das Strukturanalyse Tool zeichnet diese Zugriffe leider auch als Tangle (rot). Sie stellen jedoch kein Problem dar. Zur besseren Veranschaulichung dient das \textit{''Klassendiagramm UI Umsetzung''} im Anhang \ref{ch:class-diagram}.
+	Die Zugriffe verlaufen durchgehend von höheren Schichten zu tieferen. Sämtliche Tangles, also Aufrufe von Klassen von tieferen Schichten zu höheren Schichten konnten mit dem Observer Pattern aufgelöst werden. Einzige Ausnahme bildet das \textit{Model} Package, dass seitlich am \textit{Business} und \textit{Access} Layer positioniert wird. Das Strukturanalyse Tool zeichnet diese Zugriffe leider auch als Tangle (rot). Sie stellen jedoch kein Problem dar. Zur besseren Veranschaulichung dient das \textit{''Klassendiagramm UI Umsetzung''} im Anhang \ref{ch:class-diagram}.
 	
 	\begin{figure}[h!]
 		\centering
@@ -704,7 +703,7 @@ eprint=false
 	\section{Graph Layouter}
 	
 	\subsection{Physics Engine} \label{ssec:graphlayouter}
-	Für das Layouting der Graphen wurde ein Force-Directed Drawing Algorithm verwendet. Dieser wurde mehrheitlich von GVS 1.0 übernommen. Der Algorithmus ordnet die Vertices so an, dass es möglichst wenig überschneidende Kanten gibt. Dazu wird für jeden Vertex ein \textit{Particle} erstellt, welcher während der dynamischen Plazierung auf der \textit{Area} bewegt wird. Zu Beginn des Layout Prozess wird ein Particle pseudo-zufällig platziert. Damit die Änderungen des Layouters in Echtzeit dargestellt werden, läuft der komplette Layouting Prozess in einem eigenständigen Thread. (siehe \textit{AreaTicker} Thread in der Tabelle \ref{tbl:concurrent-classes}) Sobald ein Graph gelayouted werden muss, wird ein \textit{AreaTicker} Thread gestartet, der in einem bestimmten Interval die Darstellung der neuen Koordinaten im UI veranlasst. Es läuft immer nur genau ein \textit{AreaTicker} Thread. Sobald sich die \textit{Particle} in der \textit{Area} stabilisiert haben, wird der \textit{AreaTicker} Thread terminiert. Das Sequenzdiagramm \ref{fig:sequencegraphlayouter} zeigt den grundlegenden Ablauf beim Starten des Graph Layout Prozess.
+	Für das Layouting der Graphen wurde ein Force-Directed Drawing Algorithm verwendet. Dieser wurde mehrheitlich von GVS 1.0 übernommen. Der Algorithmus ordnet die Vertices so an, dass es möglichst wenig überschneidende Kanten gibt. Dazu wird für jeden Vertex ein \textit{Particle} erstellt, welcher während der dynamischen Plazierung auf der \textit{Area} bewegt wird. Zu Beginn des Layout Prozess wird ein Particle pseudo-zufällig platziert. Damit die Änderungen des Layouters in Echtzeit dargestellt werden, läuft der komplette Layouting Prozess in einem eigenständigen Thread. (siehe \textit{AreaTicker} in der Tabelle \ref{tbl:concurrent-classes}) Sobald ein Graph gelayouted werden muss, wird ein \textit{AreaTicker} Thread gestartet, der in einem bestimmten Intervall die Darstellung der neuen Koordinaten im UI veranlasst. Es läuft immer nur genau ein \textit{AreaTicker} Thread. Sobald sich die \textit{Particles} in der \textit{Area} stabilisiert haben, wird der \textit{AreaTicker} Thread terminiert. Das Sequenzdiagramm \ref{fig:sequencegraphlayouter} zeigt den grundlegenden Ablauf beim Starten des Graph Layout Prozess.
 	
 	\begin{figure}[h!]
 		\centering
