@@ -393,7 +393,7 @@ eprint=false
 	Dem Projektplan GVS 1.0 \cite{gvs1} kann eine Schichtenarchitektur bestehend aus zwei Schichten entnommen werden. Die Schichten widerspiegeln sich aber nicht im Package Design. Gut erkennbar ist das Server Interface, dass die Visualisierung vom Socket Server trennt. GUI spezifische Elemente ziehen sich durch mehrere Layer.
 	
 	\subsubsection{Swing/AWT Imports im Business Layer} 
-	Im Business Layer gibt es diverse Imports der UI Frameworks \gls{swing} rsp. \gls{awt}. Dies erschwert einen Austausch des eingesetzten UI Frameworks.
+	Im Business Layer gibt es diverse Imports der UI Frameworks \gls{swing} rsp. \gls{awt}. Dies erschwert einen einfachen Austausch des eingesetzten UI Frameworks.
 	
 	\subsubsection{Tangles} Zwischen dem Presentation und Business Layer existieren \gls{tangle}s. Dies verhindert einen einfachen Austausch des Presentation Layers. 
 	
@@ -418,6 +418,7 @@ eprint=false
 
 		
 	\chapter{Architektur und Designspezifikation}
+	\label{ch:design-spec}
 	
 	\begin{table}[h!]
 		\centering
@@ -507,15 +508,39 @@ eprint=false
 	\section{Umgesetzte Architektur}
 	
 	\subsection{Klassendiagramm}
-	Das Klassendiagramm 3 \textit{''Klassendiagramm Realisierung''} im Anhang \ref{ch:class-diagram} zeigt einen Überblick über die wichtigsten Klassen in GVS 2.0 sowie die umgesetzte Schichtenarchitektur (vgl. \ref{ssec:layer-architecture}). Liste \ref{desc:architecture-changes} zeigt die wichtigsten Änderungen zum Klassendiagramm aus der Entwurfsphase \ref{label} auf. Ansonsten wiederspiegelt GVS 2.0 die angedachte Architektur und Klassenhirarchie.
+	Das \textit{''Klassendiagramm UI Umsetzung''} im Anhang \ref{ch:class-diagram} zeigt einen Überblick über die wichtigsten Klassen in GVS 2.0 sowie die umgesetzte Schichtenarchitektur (vgl. \ref{ssec:layer-architecture}). Durch den Einsatz des \gls{mvvm} Pattern ist der UI Layer in sich gekapselt. Im Gegensatz zum GVS 1.0 werden ausserhalb des Presentation Layer keine UI spezifischen Klassen verwendet. Dies ermöglicht einen Austausch des verwendenten UI Framework.
+	
+
+	\noindent
+	Die folgende Aufzählung (\ref{desc:architecture-changes}) zeigt die wichtigsten Änderungen zum Klassendiagramm aus der Entwurfsphase auf. (siehe Anhang \ref{ch:class-diagram}) Ansonsten widerspiegelt GVS 2.0 die angedachte Architektur und Klassenhierarchie.
 	
 	\begin{description} \label{desc:architecture-changes}
 		\item[GvsXmlReader \& ClientConnection ] \hfill \\ Diese Klassen entstanden durch ein Refactoring der GVS 1.0 Klasse \textit{ServerConnectionXML}. Die Trennung dieser Klasse führt dazu, dass das \gls{single-responsibility}  eingehalten wird. 
-		\item[Watchdog] \hfill \\ Behebt ein Usability Problem. Mehr dazu in Abschnitt \ref{ssec:watchdog}
-		\item[SessionType] \hfill \\ Trees und Graphen werden völlig unterschiedlich gelayoutet. Dennoch werden die gleichen Klassen für die Darstellung im Presentation Layer verwendet. Somit wird eine Klasse benötigt, die eine Typunterscheidung zulässt und den korrekten Layouter bereitstellt.
+		\item[Watchdog] \hfill \\ Behebt das Problem, dass beim Absturz eines Clients die Server Komponenten für andere Clients nicht wieder freigegeben wird. Dies erleichtert das Usability für den Benutzer sehr. Mehr dazu in Abschnitt \ref{sec:watchdog}
+		\item[SessionType] \hfill \\ Trees und Graphen werden völlig unterschiedlich gelayoutet. Dennoch werden die gleichen Klassen für die Darstellung im Presentation Layer verwendet. Durch das Type Object kann trotzdem ein spezifischer Layouting Algorithmus für jede Datenstrutkur eingesetzt werden.
 		\item[TreeVertex \& LeafVertex] \hfill \\ 
-		In der Designphase wurde das Zusammenführen von Graphen und Trees angedacht. In der Realisierung hat sich aber gezeigt, dass einerseits die Layouter sowie infolgedessen auch die Vertices unterschieden werden müssen. (siehe \ref{graph-vs-tree}) Für den Tree Layouter (\ref{ssec:treelayouter}) wird deshalb neben dem \textit{TreeVertex} auch ein \textit{LeafVertex} benötigt.  Blattknoten dienen als Platzhalter und werden nicht dargestellt. Sie vereinfachen die Berechnung des Tree Layouts aber stark.
 	\end{description}
+
+	\subsection{Layering}
+	Der GVS 2.0 ist in drei horizontale Layer unterteilt.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.5\linewidth]{assets/images/layering}
+		\caption{GVS 2.0 Layering}
+		\label{fig:layering}
+	\end{figure}
+	
+	\noindent
+	Die Zugriffe verlaufen durchgehend von höheren Schichten zu tieferen. Sämtliche Tangles, also Aufrufe von Klassen von tieferen Schichten zu höheren Schichten konnten mit dem Observer Pattern aufgelöst werden. Einzige Ausnahme bildet das \textit{Model} Package, dass seitlich am \textit{Business} und \textit{Access} Layer positioniert wird. Das Strukturanalyse Tool zeichnet diese Zugriffe leider auch als Tangle (rot). Sie stellen jedoch kein Problem dar. Zur besseren Veranschaulichung dient das \textit{''Klassendiagramm UI Umsetzung''} im Anhang \ref{ch:class-diagram}.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.4\linewidth]{assets/images/structure-gvs2}
+		\caption{Package Struktur GVS 2.0}
+		\label{fig:structure-gvs2}
+	\end{figure}
+	
 	
 	\subsection{Sequenzdiagramme}
 	Während der Analyse-Phase dieses Projekts wurden die Programmabläufe in GVS 1.0 untersucht (siehe \ref{ssec:sequence-1}). Um Änderungen im Programmablauf aufzuzeigen, finden sich in diesem Kapitel neue Sequenzdiagramme, die die selben Abläufe in GVS 2.0 abbilden. 
@@ -523,7 +548,7 @@ eprint=false
 	\subsubsection{Verbindungsaufbau}
 	Abbildung \ref{fig:sd-verbindungsaufbau-2} zeigt den Start der GVS 2.0 Applikation über die \textit{GVSApplication} sowie das Empfangen von Daten über die Socket. Nicht ersichtlich ist im Diagramm, dass GVS 2.0 an vielen Orten auf \gls{di} setzt (siehe \ref{DI}). Zum Beispiel werden die vier Klassen \textit{Watchdog},  \textit{ConnectionMonitor},  \textit{GvsXmlReader} und  \textit{ModelBuilder} (rechts im Diagramm) in den Constructor der  \textit{ClientConnection} ''injected''.
 	
-	Details zu den genauen Änderungen gegenüber GVS 1.0 finden sich im Abschnitt \ref{label}. %TODO: ergänzen welcher Abschnitt, wenn klar ist, wie Realisations Kapitel strukturiert ist, änderungen sind watchdog, clientConnection&gvsxmlreader,...
+	Details zu den genauen Änderungen gegenüber GVS 1.0 finden sich im Abschnitt \ref{desc:architecture-changes}.
 
 	\begin{figure}[h!]
 		\centering
@@ -585,11 +610,12 @@ eprint=false
 			\bottomrule 
 		\end{tabularx} 
 		\caption{Übersicht nebenläufige Klassen} 
+		\label{tbl:concurrent-classes}
 	\end{table}
 	
 	\subsection{Synchronisationspunkte}
 	
-	Die nebenläufigen Klassen werden von speziellen Synchronisationspunkten serialisiert. Alle Klassen wurden als Singleton implementiert.
+	Die nebenläufigen Klassen werden von speziellen Synchronisationspunkten serialisiert. Alle Klassen werden von Guice \cite{guice} als Singleton instantiiert. Dies ist wichtig, da die Threads sich andernfalls auf unterschiedliche Objekte beziehen. Die Synchronisation würde in diesem Fall nicht stattfinden.
 	
 	\begin{table}[h!]
 		\centering
@@ -631,7 +657,7 @@ eprint=false
 	
 	\begin{figure}
 		\centering
-		\includegraphics[width=0.7\linewidth]{assets/images/binarySearch}
+		\includegraphics[width=0.6\linewidth]{assets/images/binarySearch}
 		\caption{Algorithmus zur Suche eines Schnittpunktes}
 		\label{fig:binarySearch}
 	\end{figure}
@@ -677,7 +703,7 @@ eprint=false
 	\section{Graph Layouter}
 	
 	\subsection{Physics Engine} \label{ssec:graphlayouter}
-	Für das Layouting der Graphen wurde ein Force-Directed Drawing Algorithm verwendet. Dieser wurde mehrheitlich von GVS 1.0 übernommen. Der Algorithmus ordnet die Vertices so an, dass es möglichst wenig überschneidende Kanten gibt. Dazu wird für jeden Vertex ein \textit{Particle} erstellt, welcher während der dynamischen Plazierung auf der \textit{Area} bewegt wird. Zu Beginn des Layout Prozess wird ein Particle pseudo-zufällig platziert. GVS 2.0 unterstützt zwei Varianten von pseudo-zufällig: Je nach gewählter Option wird ein Particle immer gleich zufällig plaziert (Seeded Random) oder die Koordinaten werden durchgehend zufällig platziert. Sobald ein Graph gelayouted werden muss, wird ein \textit{AreaTicker} Thread gestartet, der in einem bestimmten Interval die Darstellung der neuen Koordinaten im UI veranlasst. Es läuft immer nur genau ein \textit{AreaTicker} Thread. Sobald sich die \textit{Particle} in der \textit{Area} stabilisiert haben, wird der \textit{AreaTicker} Thread terminiert. Das Sequenzdiagramm \ref{fig:sequencegraphlayouter} zeigt den grundlegenden Ablauf beim Starten des Graph Layout Prozess.
+	Für das Layouting der Graphen wurde ein Force-Directed Drawing Algorithm verwendet. Dieser wurde mehrheitlich von GVS 1.0 übernommen. Der Algorithmus ordnet die Vertices so an, dass es möglichst wenig überschneidende Kanten gibt. Dazu wird für jeden Vertex ein \textit{Particle} erstellt, welcher während der dynamischen Plazierung auf der \textit{Area} bewegt wird. Zu Beginn des Layout Prozess wird ein Particle pseudo-zufällig platziert. Damit die Änderungen des Layouters in Echtzeit dargestellt werden, läuft der komplette Layouting Prozess in einem eigenständigen Thread. (siehe \textit{AreaTicker} in der Tabelle \ref{tbl:concurrent-classes}) Sobald ein Graph gelayouted werden muss, wird ein \textit{AreaTicker} Thread gestartet, der in einem bestimmten Intervall die Darstellung der neuen Koordinaten im UI veranlasst. Es läuft immer nur genau ein \textit{AreaTicker} Thread. Sobald sich die \textit{Particles} in der \textit{Area} stabilisiert haben, wird der \textit{AreaTicker} Thread terminiert. Das Sequenzdiagramm \ref{fig:sequencegraphlayouter} zeigt den grundlegenden Ablauf beim Starten des Graph Layout Prozess.
 	
 	\begin{figure}[h!]
 		\centering
@@ -802,8 +828,12 @@ eprint=false
 	\subsection{Layering}
 	Auch in den Client Libraries wurde ein einfaches Layering eingeführt. Die Umsetzung der Schichtenarchitektur ist dem Klassendiagramm aus Anhang \ref{ch:class-diagram} zu entnehmen.	
 			
+	\section{Watchdog} \label{sec:watchdog}
+	%TODO extend		
+			
+			
 	\section{Weitere Änderungen gegenüber GVS 1.0}
-	Dieser Abschnitt umfasst kleinere Änderungen, Neuerungen und Fehlerbehebungen gegenüber dem Vorgänger Produkt \cite{gvs1}. 
+	Dieser Abschnitt umfasst kleinere Änderungen, Neuerungen und Fehlerbehebungen gegenüber dem Vorgänger Produkt \cite{gvs1}.
 	
 	\subsection{Änderungen}
 	\begin{description}
@@ -821,13 +851,13 @@ eprint=false
 
 	\subsection{Neuerungen}
 	\begin{description}
-		\item[SnapshotDescription] \hfill \\ Damit einzelne Schritte in den dargestellten Graphen besser verständlich sind, bietet GVS 2.0 die Möglichkeit kurze Beschreibungen zu erfassen. Diese können serverseitig erfasst, gespeichert und geladen werden. Die Erweiterung des Verbindungsprotokoll, um SnapshotDescription auch clientseitig zu unterstützen, sollte für ein allfälliges Folgeprojekt geplant werden (siehe Kapitel \ref{ch:ausblick}).
+		\item[SnapshotDescription] \hfill \\ Damit einzelne Schritte in den dargestellten Graphen besser verständlich sind, bietet GVS 2.0 die Möglichkeit kurze Beschreibungen zu erfassen. Diese können serverseitig erfasst, gespeichert und geladen werden. Die Erweiterung des Verbindungsprotokoll, um SnapshotDescription auch clientseitig zu unterstützen, sollte für ein allfälliges Folgeprojekt geplant werden (siehe Kapitel \ref{sec:ausblick}).
 	\end{description}
 	
 	\subsection{Fehlerbehebungen}
 	\begin{description}
-		\item[Watchog] \hfill \\ \label{ssec:watchdog}
-		In GVS 1.0 haben Exceptions im Client Code (der die GVS Lib benutzt) nicht zu einem Verbindungsabbruch geführt. Der Server blieb reserviert und ein neu gestarteter Client konnte keine Verbindung aufbauen. Für den User war nicht ersichtlich, wieso der Server auf den neuen Input nicht reagiert. Um dieses Usability Problem zu beheben bietet GVS 2.0 einen Watchdog Thread. Dieser überwacht die Verbindung und erzwingt einen Verbindungsabbruch, wenn sich der Client längere Zeit nicht mehr meldet.
+		\item[Watchog] \hfill \\ 
+		In GVS 1.0 haben Exceptions im Client Code (der die GVS Lib benutzt) nicht zu einem Verbindungsabbruch geführt. Der Server blieb reserviert und ein neu gestarteter Client konnte keine Verbindung aufbauen. Für den User war nicht ersichtlich, wieso der Server auf den neuen Input nicht reagiert. Um dieses Usability Problem zu beheben bietet GVS 2.0 einen Watchdog Thread. Dieser überwacht die Verbindung und erzwingt einen Verbindungsabbruch, wenn sich der Client längere Zeit nicht mehr meldet. Mehr zum Watchdog unter \ref{sec:watchdog}.
 		\item[Speicherort]  \hfill \\ Der Speicherort für Sessions war in GVS 1.0 hart kodiert. Dies führte auf UNIX Systemen zu einem Fehlverhalten. In GVS 2.0 kann der User den Speicherort für seine Sessions selber wählen.
 		\item[Entfernung der Root] \hfill \\ Die GVS Lib bietet zwei Unterschiedliche Strukturen um Trees darzustellen. Bei Benutzung der Struktur \textit{GVSTreeWithRoot} kam es zu Fehlern, wenn die Root auf \textit{null} gesetzt wurde. In GVS 2.0 ist dieser Fehler behoben.
 	\end{description}
@@ -851,7 +881,7 @@ eprint=false
 	In der Analyse Phase wurden mehrere Code Smells in GVS 1.0 erkannt. (Siehe Abschnitt \ref{sec:erkenntnisse}) In der Design Phase wurde deshalb ein Konzept ausgearbeitet, damit das Refactoring strukturiert ablaufen wird. (Siehe Abschnitt \ref{sec:refactroing-concept}) Die Refactorings wurden damals aus Zeitgründen tief priorisiert. Es hat sich aber gezeigt, dass bereits am Anfang der Realisations Phase viele Refactorings durchgeführt werden müssen. Dies nicht zuletzt deshalb, da der bestehende Code sehr schwer zu lesen war. Durch die Refactorings konnte die Verständlichkeit des Codes enorm verbessert werden. Dies spiegelt sich auch in den erhobenen Software Metriken wieder. Im folgenden Abschnitt sind dieser genauer beschrieben.
 	
 	\subsection{Wartbarkeit}
-	In der Wartbarkeits-Metrik \cite{metric-maintainability} ist klar zu erkennen, dass die Wartbarkeit der meisten Klassen gut ist. Auf der X-Achse ist der Churn \cite{metric-churn} abgebildet, also wie oft eine Klasse verändert wurde. Klassen die oft angepasst werden, erledigen potentiell zu viele Aufgaben. Auf der Y-Achse ist die Wartbarkeit angezeigt. Diese errechnet sich aus Code-Duplikationen, zyklomatischer Komplexität von McCabe \cite{mccabe} und der Kognitiven Komplexität \cite{metric-cognitive-complexity} einer Klasse. Die beiden Klassen \textit{Persistor} und \textit{ModelBuilder} weisen die schlechtesten Werte auf. (oben rechts)
+	In der Wartbarkeits-Metrik \cite{metric-maintainability} ist klar zu erkennen, dass die Wartbarkeit der meisten Klassen gut ist. Auf der X-Achse ist der Churn \cite{metric-churn} abgebildet, also wie oft eine Klasse verändert wurde. Klassen die oft angepasst werden, erledigen potentiell zu viele Aufgaben. Auf der Y-Achse ist die Wartbarkeit angezeigt. Diese errechnet sich aus Code-Duplikationen, zyklomatischer Komplexität von McCabe \cite{mccabe} und der Kognitiven Komplexität \cite{metric-cognitive-complexity} einer Klasse. Die beiden Klassen \textit{Persistor} und \textit{ModelBuilder} weisen die schlechtesten Werte auf. (oben rechts). Leider konnte aus Zeitgründen kein Refactoring der beiden Klassen durchgeführt werden. Ein entsprechender Hinweis ist aber im Ausblick dokumentiert.
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=0.7\linewidth]{assets/images/metrics/maintainability}
@@ -860,7 +890,7 @@ eprint=false
 	\end{figure}
 	
 	\subsection{Technische Schulden}
-	Technischen Schulden (Abb. \ref{fig:metric-technical-debt}) beschreiben den zusätzlichen Aufwand, welcher für die Korrektur von schlecht geschriebenen Software aufgewendet werden muss. Die Metrik korreliert mit den Anzahl Zeilen an Source Code (Siehe \ref{ssec:lines-code}). Auch gut zu erkennen ist, dass die technischen Schulden trotz weiteren Anpassungen nicht mehr zugenommen hat.
+	Technischen Schulden (Abb. \ref{fig:metric-technical-debt}) beschreiben den zusätzlichen Aufwand, welcher für die Korrektur von schlecht geschriebenen Software aufgewendet werden muss. Die Metrik korreliert mit den Anzahl Zeilen an Source Code (Siehe \ref{ssec:lines-code}). Auch gut zu erkennen ist, dass die technischen Schulden trotz weiteren Anpassungen nicht mehr zugenommen haben.
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=0.7\linewidth]{assets/images/metrics/technical_debt}
@@ -879,6 +909,7 @@ eprint=false
 	
 
 	\section{Ausblick}
+	\label{sec:ausblick}
 	Obwohl viel erreicht wurde im GVS 2.0 Projekt, konnten nicht all Ideen umgesetzt und sämtliches Verbesserungspotential ausgeschöpft werden.
 	
 	Dieses Kapitel bietet eine Übersicht, welche Aufgaben in einem nächsten GVS Major Update angegangen werden könnten. 
