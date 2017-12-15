@@ -516,7 +516,7 @@ eprint=false
 	
 	\begin{description} \label{desc:architecture-changes}
 		\item[GvsXmlReader \& ClientConnection ] \hfill \\ Diese Klassen entstanden durch ein Refactoring der GVS 1.0 Klasse \textit{ServerConnectionXML}. Die Trennung dieser Klasse führt dazu, dass das \gls{single-responsibility}  eingehalten wird. 
-		\item[Watchdog] \hfill \\ Behebt das Problem, dass beim Absturz eines Clients die Server Komponenten für andere Clients wieder freigegeben wird. Dies erleichtert das Usability für den Benutzer sehr. Mehr dazu in Abschnitt \ref{ssec:watchdog}
+		\item[Watchdog] \hfill \\ Behebt das Problem, dass beim Absturz eines Clients die Server Komponenten für andere Clients nicht wieder freigegeben wird. Dies erleichtert das Usability für den Benutzer sehr. Mehr dazu in Abschnitt \ref{sec:watchdog}
 		\item[SessionType] \hfill \\ Trees und Graphen werden völlig unterschiedlich gelayoutet. Dennoch werden die gleichen Klassen für die Darstellung im Presentation Layer verwendet. Durch das Type Object kann trotzdem ein spezifischer Layouting Algorithmus für jede Datenstrutkur eingesetzt werden.
 		\item[TreeVertex \& LeafVertex] \hfill \\ 
 		In der Designphase wurde das Zusammenführen von Graphen und Trees angedacht. In der Realisierung hat sich aber gezeigt, dass einerseits die Layouter sowie infolgedessen auch die Vertices unterschieden werden müssen. (siehe \ref{graph-vs-tree}) Für den Tree Layouter (\ref{ssec:treelayouter}) wird deshalb neben dem \textit{TreeVertex} auch ein \textit{LeafVertex} benötigt.  Blattknoten dienen als Platzhalter die im UI nicht dargestellt werden. Sie vereinfachen die Berechnung des Tree Layouts aber stark.
@@ -829,8 +829,12 @@ eprint=false
 	\subsection{Layering}
 	Auch in den Client Libraries wurde ein einfaches Layering eingeführt. Die Umsetzung der Schichtenarchitektur ist dem Klassendiagramm aus Anhang \ref{ch:class-diagram} zu entnehmen.	
 			
+	\section{Watchdog} \label{sec:watchdog}
+	%TODO extend		
+			
+			
 	\section{Weitere Änderungen gegenüber GVS 1.0}
-	Dieser Abschnitt umfasst kleinere Änderungen, Neuerungen und Fehlerbehebungen gegenüber dem Vorgänger Produkt \cite{gvs1}. 
+	Dieser Abschnitt umfasst kleinere Änderungen, Neuerungen und Fehlerbehebungen gegenüber dem Vorgänger Produkt \cite{gvs1}.
 	
 	\subsection{Änderungen}
 	\begin{description}
@@ -848,13 +852,13 @@ eprint=false
 
 	\subsection{Neuerungen}
 	\begin{description}
-		\item[SnapshotDescription] \hfill \\ Damit einzelne Schritte in den dargestellten Graphen besser verständlich sind, bietet GVS 2.0 die Möglichkeit kurze Beschreibungen zu erfassen. Diese können serverseitig erfasst, gespeichert und geladen werden. Die Erweiterung des Verbindungsprotokoll, um SnapshotDescription auch clientseitig zu unterstützen, sollte für ein allfälliges Folgeprojekt geplant werden (siehe Kapitel \ref{ch:ausblick}).
+		\item[SnapshotDescription] \hfill \\ Damit einzelne Schritte in den dargestellten Graphen besser verständlich sind, bietet GVS 2.0 die Möglichkeit kurze Beschreibungen zu erfassen. Diese können serverseitig erfasst, gespeichert und geladen werden. Die Erweiterung des Verbindungsprotokoll, um SnapshotDescription auch clientseitig zu unterstützen, sollte für ein allfälliges Folgeprojekt geplant werden (siehe Kapitel \ref{sec:ausblick}).
 	\end{description}
 	
 	\subsection{Fehlerbehebungen}
 	\begin{description}
-		\item[Watchog] \hfill \\ \label{ssec:watchdog}
-		In GVS 1.0 haben Exceptions im Client Code (der die GVS Lib benutzt) nicht zu einem Verbindungsabbruch geführt. Der Server blieb reserviert und ein neu gestarteter Client konnte keine Verbindung aufbauen. Für den User war nicht ersichtlich, wieso der Server auf den neuen Input nicht reagiert. Um dieses Usability Problem zu beheben bietet GVS 2.0 einen Watchdog Thread. Dieser überwacht die Verbindung und erzwingt einen Verbindungsabbruch, wenn sich der Client längere Zeit nicht mehr meldet.
+		\item[Watchog] \hfill \\ 
+		In GVS 1.0 haben Exceptions im Client Code (der die GVS Lib benutzt) nicht zu einem Verbindungsabbruch geführt. Der Server blieb reserviert und ein neu gestarteter Client konnte keine Verbindung aufbauen. Für den User war nicht ersichtlich, wieso der Server auf den neuen Input nicht reagiert. Um dieses Usability Problem zu beheben bietet GVS 2.0 einen Watchdog Thread. Dieser überwacht die Verbindung und erzwingt einen Verbindungsabbruch, wenn sich der Client längere Zeit nicht mehr meldet. Mehr zum Watchdog unter \ref{sec:watchdog}.
 		\item[Speicherort]  \hfill \\ Der Speicherort für Sessions war in GVS 1.0 hart kodiert. Dies führte auf UNIX Systemen zu einem Fehlverhalten. In GVS 2.0 kann der User den Speicherort für seine Sessions selber wählen.
 		\item[Entfernung der Root] \hfill \\ Die GVS Lib bietet zwei Unterschiedliche Strukturen um Trees darzustellen. Bei Benutzung der Struktur \textit{GVSTreeWithRoot} kam es zu Fehlern, wenn die Root auf \textit{null} gesetzt wurde. In GVS 2.0 ist dieser Fehler behoben.
 	\end{description}
@@ -906,6 +910,7 @@ eprint=false
 	
 
 	\section{Ausblick}
+	\label{sec:ausblick}
 	Obwohl viel erreicht wurde im GVS 2.0 Projekt, konnten nicht all Ideen umgesetzt und sämtliches Verbesserungspotential ausgeschöpft werden.
 	
 	Dieses Kapitel bietet eine Übersicht, welche Aufgaben in einem nächsten GVS Major Update angegangen werden könnten. 
