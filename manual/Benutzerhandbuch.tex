@@ -135,7 +135,7 @@ eprint=false
 	\plogo\\[2\baselineskip] %University Logo.
 	\rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt} %Thick horizontal line.
 	\rule{\textwidth}{0.4pt}\\[\baselineskip] %Thin horizontal line.
-	{\LARGE Graphs-Visualization-Service GVS 2.0 }\\[0.2\baselineskip] %Title.
+	{\LARGE Graph-Visualization-Service GVS 2.0 }\\[0.2\baselineskip] %Title.
 	\rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt} %Thin horizontal line.
 	\rule{\textwidth}{1.6pt}\\[2\baselineskip] %Thick horizontal line.
 	\scshape %Small caps.
@@ -157,7 +157,7 @@ eprint=false
 	\fancyhf{}%
 	\renewcommand{\headrulewidth}{0pt}
 	\fancyfoot[L]{GVS 2.0}
-	\fancyfoot[R]{\thepage}}
+	\fancyfoot[R]{Benutzerhandbuch - \thepage}}
 
 % customize header and footer for chapter pages
 \fancypagestyle{plain}{
@@ -174,7 +174,7 @@ eprint=false
 \fancyhead[L]{\rightmark}
 \fancyfoot[L]{GVS 2.0}
 \fancyfoot[C]{}
-\fancyfoot[R]{\thepage}
+\fancyfoot[R]{Benutzerhandbuch - \thepage}
 
 %Define the signature line with dots.
 \NewDocumentCommand \dotbox {o O{.5\linewidth} m O{3ex} O{\linewidth}}
@@ -197,23 +197,41 @@ eprint=false
 		\tableofcontents
 	}
 	
-	%TODO Handbuch und Installationsanleitung. Kürzel in Fusszeile. Somit gibt es keine Verwirrung mit den Seitenzahlen
-	
 	\newpage
 	\pagenumbering{arabic}
 	
-	\chapter{Anforderungen}
-	Für die Inbetriebnahme von GVS 2.0 müssen folgende Anforderungen erfüllt sein.
+	\chapter{Anforderungen und Hinweise}
+	Für die Inbetriebnahme von GVS 2.0 sind folgende Hinweise zu beachten.
 	\begin{itemize}
-		\item JDK 1.8 oder neuer
+		\item GVS 2.0 benötigt JDK 1.8 oder neuer
 		\item Für die Weiterentwicklung des GVS 2.0 werden Grundkenntnisse von git vorausgesetzt
+		\item Für die Weiterentwicklung des GVS 2.0 werden Grundkenntnisse für die Plugin Installation in Eclipse vorausgesetzt
 		\item Die folgende Installationsanleitung wurde für die Eclipse IDE geschrieben
 	\end{itemize}
 
 	\chapter{Installationsanleitung}
+	
+	\section{GVS Lib im Projekt integrieren}
+	Um GVS 2.0 nutzen zu können, muss die GVS Lib als Dependency in deinem Java Projekt hinzugefügt werden. 
+	
+	\begin{enumerate}
+		\item Rechtsklick auf das Projekt im \textit{Package Explorer}
+		\item \lstinline{Build Path > Configure Build Path...}
+		\item \lstinline{Tab ''Libraries'' > Add External JAR...}
+		\item \textit{gvs-lib-java.jar} in Ordnerstruktur auswählen
+		\item mit \lstinline{Apply and Close} bestätigen
+	\end{enumerate}
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.5\linewidth]{assets/images/lib-integration}
+		\caption{GVS Lib im Class Path verfügbar machen}
+		\label{fig:lib-integration}
+	\end{figure}
+	
 	\section{GVS UI ausführen}
 	\subsection{Windows \& macOS}
-	Das JAR File kann direkt per Doppelklick oder über die Konsole ausgeführt werden.
+	Das JAR File kann entweder direkt per Doppelklick oder über die Konsole ausgeführt werden.
 	
 	\lstinline{java -jar gvs-ui.jar}
 	
@@ -230,35 +248,23 @@ eprint=false
 	sudo dnf install java-1.8.0-openjdk-openjfx
 	java -jar gvs-ui.jar
 	\end{lstlisting}
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\linewidth]{assets/images/gvs-ui}
+		\caption{GVS UI}
+		\label{fig:gvs-ui}
+	\end{figure}
 
 	\clearpage
 	
-	\section{GVS Lib im Projekt integrieren}
-	\subsection{Eclipse}
-	\begin{enumerate}
-		\item Rechtsklick auf das Projekt im \textit{Package Explorer}
-		\item \lstinline{Build Path > Configure Build Path...}
-		\item \lstinline{Tab ''Libraries'' > Add External JAR...}
-		\item gvs-lib-java JAR File auswählen
-		\item mit \lstinline{Apply and Close} bestätigen
-	\end{enumerate}
 
-	\subsection{Gradle}
-	\begin{enumerate}
-		\item gvs-lib-java JAR File in den Ordner \lstinline{src/main/resources/} kopieren
-		\item In der Datei \textit{build.gradle}, die GVS Lib als Dependency hinzufügen
-\begin{lstlisting}
-dependencies {
-	compile files('src/main/resources/libs/gvs-lib-java.jar')
-}
-\end{lstlisting}
-	\end{enumerate}
 
 	
 	
 	\chapter{Benutzeranleitung}
 	\section{GVS Lib}
-	Die folgenden Beispielfiles sowie weitere Testfiles sind im Repository \href{https://github.com/Graphs-Visualization-Service/gvs-tester}{gvs-tester} zu finden (siehe \ref{tbl:repos}).
+	Die folgenden Testfiles sowie Referenzimplementierung sind im Repository \href{https://github.com/Graphs-Visualization-Service/gvs-tester}{gvs-tester} zu finden (siehe \ref{tbl:repos}).
 	
 	
 	\subsection{Graphen}
@@ -281,13 +287,10 @@ dependencies {
 		\label{tbl:Interfaces}
 	\end{table}
 	
+	\clearpage
+	\noindent
 	Der Code Ausschnitt \ref{lst:helloWorldGraph} zeigt ein Beispiel, wie ein Graph erstellt und an das GVS UI gesendet werden kann.
-	
 \begin{lstlisting}[language=java, frame=single, caption={Hello World Graph}, label={lst:helloWorldGraph}]
-import gvs.graph.GVSGraph;
-import gvs.model.graph.TestDefaultVertex;
-import gvs.model.graph.TestDirectedEdge;
-
 public class HelloGraph {
 
 	public static void main(String[] args) {
@@ -300,21 +303,19 @@ public class HelloGraph {
 		graph.add(v2);
 		graph.add(e);
 		
-		graph.display();
+		graph.display(); // send to gvs ui
 		graph.disconnect();
 	}
 }
 \end{lstlisting}	
 	
+	\noindent
 	Durch jeden Aufruf von \lstinline{graph.display()} wird ein Snapshot des Graphen an das GVS UI gesendet. Ganz zum Schluss des Programms muss \lstinline{graph.disconnect()} aufgerufen werden.
 	
 	\subsubsection{Vertices und Edges}
 	Für Vertices und Edges müssen ebenfalls konkrete Instanzen der Interfaces erstellt werden. Der Code Auszug \ref{lst:vertex-impl} zeigt ein Beispiel einer konkreten \textit{GVSDefaultVertex} Implementierung.
 	
 \begin{lstlisting}[language=java, frame=single, caption={DefaultVertex Implementierung}, label={lst:vertex-impl}]
-import gvs.graph.GVSDefaultVertex;
-import gvs.styles.GVSStyle;
-
 public class TestDefaultVertex implements GVSDefaultVertex {
 	private String label;
 	private GVSStyle style;
@@ -351,7 +352,7 @@ public class TestDefaultVertex implements GVSDefaultVertex {
 			Interface & Nutzen \\
 			\midrule
 			GVSTreeWithRoot & Erstellt einen Tree anhand der Root Node und deren Kind Beziehungen \\
-			GVSTreeWithCollection & Erstellt einen Tree anhand der Root Node und deren Kind Beziehungen. Die Collection muss manuell gefüllt werden.  \\
+			GVSTreeWithCollection & Ein Forest bestehend aus mehreren Trees.  \\
 			GVSBinaryNode & Ein Vertex für Binary Trees \\
 			\bottomrule 
 		\end{tabularx} 
@@ -359,12 +360,10 @@ public class TestDefaultVertex implements GVSDefaultVertex {
 		\label{tbl:tree-interfaces}
 	\end{table}
 	
+	\noindent
 	Der Code Ausschnitt \ref{lst:helloWorldTree} zeigt ein Beispiel, wie ein Tree erstellt und an das GVS UI gesendet werden kann.
 	
 \begin{lstlisting}[language=java, frame=single, caption={Hello World Tree}, label={lst:helloWorldTree}]
-import gvs.business.tree.GVSTreeWithRoot;
-import gvs.model.tree.TestBinaryNode;
-
 public class HelloTree {
 	
 	public static void main(String[] args) {
@@ -386,8 +385,10 @@ public class HelloTree {
 
 \end{lstlisting}
 
+\clearpage
+
 	\subsubsection{Binary Nodes}
-	Der Code Auszug \ref{lst:binarynode-impl} zeigt ein Beispiel einer konkreten \textit{GVSBinaryTreeNode} Implementierung.
+	Der Code Auszug \ref{lst:binarynode-impl} zeigt ein Beispiel einer konkreten \textit{GVSBinaryTreeNode} Implementierung. Die Edges werden vom UI implizit gezeichnet.
 
 \begin{lstlisting}[language=java, frame=single, caption={Binary Node Implementierung}, label={lst:binarynode-impl}]
 public class TestBinaryNode implements GVSBinaryTreeNode {
@@ -436,18 +437,13 @@ public class TestBinaryNode implements GVSBinaryTreeNode {
 	public void setStyle(GVSStyle style) {
 		this.style = style;
 	}
-	
-	@Override
-	public String toString() {
-		return label;
-	}
 }
 \end{lstlisting}
 
 	\clearpage
 	
-	\subsection{Styles ändern}
-	Um komplexe Algorithmen farblich zu visualisieren, bietet GVS 2.0 eine Style Klasse an. Wie Styles von Edges und Vertices verändert werden können, zeigt Code Ausschnitt \ref{lst:styles}
+	\subsection{Styles anpassen}
+	Um komplexe Algorithmen farblich zu visualisieren bietet GVS 2.0 eine Style Klasse an. Code Ausschnitt  \ref{lst:styles} zeigt Anpassungsmöglichkeiten von Vertices und Edges.
 	
 	\begin{lstlisting}[language=java, frame=single, caption={Styles verändern}, label={lst:styles}]
 	// lineColor, lineStyle, lineThickness
@@ -475,7 +471,7 @@ public class TestBinaryNode implements GVSBinaryTreeNode {
 	
 	\clearpage
 	
-	\section{GVS UI}
+	\section{GVS UI Benutzeroberfläche}
 		\begin{figure}[h!]
 		\centering
 		\includegraphics[width=0.7\linewidth]{assets/images/gvs-ui-graph}
@@ -484,34 +480,39 @@ public class TestBinaryNode implements GVSBinaryTreeNode {
 	\end{figure}
 
 	\subsection{User Interface}
-	Alle wichtigen Funktionen von GVS 2.0 sind direkt über die Toolbar zugreifbar und alle Buttons verfügen über Tooltips. 
+	Alle wichtigen Funktionen von GVS 2.0 sind direkt über die Toolbar zugreifbar. Alle Buttons verfügen über Tooltips. 
 	
 	\subsubsection{1. Toolbar}
-	Über die Toolbar, die am oberen Fensterrand dargestellt wird, sind die grundlegenden Aktionen schnell und einfach zugänglich. So kann ein Benutzer eine gespeicherte Session vom Dateisystem laden, die aktuelle Session speichern oder löschen und zwischen den aktuellen Sessions aus der Dropdown-Box wechseln. 
+	Über die Toolbar, die am oberen Fensterrand dargestellt wird, sind die grundlegenden Aktionen schnell und einfach zugänglich. Vier Aktionen sind möglich: 
+	\begin{enumerate}
+		\item Session laden: GVS Session im \lstinline|*.gvs| Format vom Dateisystem laden
+		\item Session speichern: Aktuelle Session auf das Dateisystem speichern
+		\item Session löschen: Aktuelle Session löschen. Diese Aktion hat keinen Effekt auf das Dateisystem.
+		\item Session wechseln: In der Dropdown Liste oben rechts, werden alle aktiven Session dargestellt. Zwischen den Sessions kann beliebig gewechselt werden. 
+	\end{enumerate}
 	
 	\subsubsection{2. Step Buttons und Fortschrittsanzeige}
 	Die Step Buttons bilden zusammen mit der Replay Funktionalität ein wichtiges Werkzeug, um die Funktionsweise eines Algorithmus schrittweise zu analysieren und zu verstehen. Über die Buttons können die einzelnen Momentaufnahmen einer Session durchgeschaut werden.
 	
 	\subsubsection{3. Snapshot Description}
-	Zur aktuellen Momentaufnahme können Notizen erfasst werden. Beim Speichern der Session werden diese ebenfalls gespeichert und werden beim Laden der Session wieder angezeigt.
+	Zur aktuellen Momentaufnahme können Notizen erfasst werden. Beim Speichern der Session werden die Notizen ebenfalls gespeichert und beim Laden der Session wieder angezeigt.
 	
 	\subsubsection{4. Replay}
 	Die Replay Funktionalität automatisiert die Aktionen der Step Buttons in einer bestimmten Geschwindigkeit. Standardmässig wird jede Sekunde zur nächsten Momentaufnahme gewechselt. Das Replay kann nach belieben gestoppt, gestartet und abgebrochen werden.
 	
 	\subsubsection{5. Autolayout}
-	%TODO update description to new functionality (force layout)
-	Das Autolayout steht nur für Graphen zur Verfügung. Alle Vertices die noch nicht mit der Maus positioniert wurden, werden vom Graph Layouter so positioniert, dass es möglichst wenig Überschneidungen der Edges gibt. Standardmässig verwendet der Graph Layouter immer zufällige Startkoordinaten. Dies kann über den ToggleButton deaktiviert werden, damit immer das gleiche Layout resultiert.
+	Das Autolayout steht nur für Graphen zur Verfügung. Vertices werden so positioniert, dass es möglichst wenig Überschneidungen der Edges gibt. Über den Umschaltknopf kann bestimmt werden, ob das Layout forciert wird. Ist der Toggle Button deaktiviert, werden nur noch jene Vertices gelayouted, die noch nicht mit der Maus manuell positioniert wurden.
 	
 	\subsection{Drag Support}
-	Bei Graphen können alle Vertices beliebig mit der Maus positioniert werden. Sobald alle Vertices manuell positioniert wurden, ist die Autolayout Funktion nicht mehr verfügbar. Trees können nicht manuell positioniert werden. Eine entsprechende Meldung wird angezeigt.
-	
+	Der Drag Support steht nur für Graphen zur Verfügung. Vertices können mit der Maus beliebig positioniert werden. Wenn ein Vertex aus dem aktuellen ViewPort gezogen wird, zoomt das Fenster automatisch heraus.
+		
 	\clearpage
 	
 	\section{Konfiguratiosfiles verändern}
-	Um Änderungen an Konfigurationsfiles durchzuführen die im JAR File enthalten sind, muss folgende Anleitung befolgt werden:
+	Um Änderungen an Konfigurationsfiles durchzuführen, die im JAR File enthalten sind, müssen folgende Schritte befolgt werden.
 	
 	\begin{enumerate}
-		\item JAR mit einem beliebigen File Archiver entpacken
+		\item JAR File mit einem beliebigen File Archiver entpacken
 		\item In den entstandenen Ordner wechseln
 		\begin{enumerate}
 			\item \lstinline{cd gvs-ui}
@@ -531,27 +532,39 @@ public class TestBinaryNode implements GVSBinaryTreeNode {
 			\toprule 
 			File & Einstellung \\
 			\midrule
-			config.xml & Festlegen des Startports. Default: \lstinline{3000} \\
-			gvs/ui/view/app/AppView.css & Farben, Dicke von Edges und Vertex-Rändern\\
+			config.xml & Festlegen des Server Socket Startports. Default: \lstinline{3000} \\
+			gvs/ui/view/app/AppView.css & Farben, Dicke von Edges und Vertex-Ränder \\
 			gvs/ui/view/session/SessionView.css & Schriftgrösse für Vertices und Edges\\
-			logback.xml & Festlegen des Log-Levels (siehe \ref{ssec:logger})\\
+			src/main/resources/logback.xml & Festlegen des Log-Levels (siehe \ref{ssec:logger})\\
 			\bottomrule 
 		\end{tabularx} 
 		\caption{GVS Lib 2.0 Interfaces} 
 		\label{tbl:preferences}
 	\end{table}
 	
-	\subsection{Änderungen des Log-Level} \label{ssec:logger}
+	\subsection{Ändern des Log-Level} \label{ssec:logger}
+	
 	\subsubsection{Im XML File}
-	Der applikations-übergreifende Log Level kann wie folgt verändert werden:
+	Die XML Konfigurationsdatei befindet sich unter \lstinline|src/main/resources/logback.xml|. \\
+	Das applikations- übergreifende Log Level kann über das Root Element bestimmt werden:
 	
 	\begin{lstlisting}[language=xml, frame=single, caption={Root Log Level verändern}, label={lst:root-log-level}]
 	<root level="DEBUG"> <!-- Log Level  -->
-		<appender-ref ref="FILE" /> <!--  Log Output-->
-		<appender-ref ref="STDOUT" /> <!--  Log Output-->
+		<appender-ref ref="FILE" /> <!--  Log to File -->
+		<appender-ref ref="STDOUT" /> <!--  Log to Standard Output-->
 	</root>
 	\end{lstlisting}
+
+	\noindent
+	Es ist auch möglich, dass Log Level für einzelnen Packages zu setzen. Dazu muss ein neues Loger Element erstellt werden.
 	
+	\begin{lstlisting}[language=xml, frame=single, caption={Package Log Level verändern}, label={lst:log-level}]
+	<logger name="gvs.access" level="DEBUG">
+		<appender-ref ref="STDOUT" /> <!--  Log to Standard Output-->
+	</logger>
+	\end{lstlisting}	
+	
+	\noindent
 	Mögliche Level sind:
 	\begin{itemize}
 		\item OFF
@@ -562,18 +575,10 @@ public class TestBinaryNode implements GVSBinaryTreeNode {
 		\item ERROR
 	\end{itemize}
 
-	Wie das Log-Level package-spezifisch festgelegt werden kann, zeigt der Code Ausschnitt \ref{lst:log-level}.
-	
-	\begin{lstlisting}[language=xml, frame=single, caption={Root Log Level verändern}, label={lst:log-level}]
-	<logger name="gvs.access" level="DEBUG">
-		<appender-ref ref="FILE" />
-	</logger>
-	\end{lstlisting}	
-
 	\subsubsection{Zur Laufzeit}
 	Über die JConsole kann das Log Level auch zur Laufzeit verändert werden. Die JConsole kann einfach über die Konsole geöffnet werden: 
 	
-	\lstinline|$> jconsole|
+	\lstinline|$bash> jconsole|
 
 	
 	\begin{explanation}{assets/images/jconsole-1}
@@ -601,7 +606,7 @@ public class TestBinaryNode implements GVSBinaryTreeNode {
 	\end{explanation}
 
 	\chapter{Weiterentwicklung}
-	Sämtlicher Programmcode von GVS 2.0 ist frei auf Github verfügbar. Um Verbesserungen durchzuführen, beschreibt dieser Abschnitt die notwendigen Schritte um sich die Entwicklungsumgebung aufzusetzen.
+	Sämtlicher Programmcode von GVS 2.0 ist frei auf Github verfügbar. Um Verbesserungen durchzuführen, beschreibt dieser Abschnitt die notwendigen Schritte um sich die Entwicklungsumgebung entsprechend einzurichten.
 	
 	\section{Repositories}
 	GVS 2.0 umfasst 4 Repositories, welche in Tabelle \ref{tbl:repos} aufgeführt sind.
@@ -612,7 +617,7 @@ public class TestBinaryNode implements GVSBinaryTreeNode {
 			\toprule 
 			Repository & Nutzen & URL \\
 			\midrule
-			gvs-ui & UI und Server & \url{https://github.com/Graphs-Visualization-Service/gvs-ui}  \\
+			gvs-ui & UI und Socket Server & \url{https://github.com/Graphs-Visualization-Service/gvs-ui}  \\
 			gvs-lib-java & Library für Java Programme & \url{https://github.com/Graphs-Visualization-Service/gvs-lib-java} \\
 			gvs-lib-csharp & Library für C\# Programme & \url{https://github.com/Graphs-Visualization-Service/gvs-lib-csharp} \\
 			gvs-tester & Ausführbare End-to-End Testfiles in Java & \url{https://github.com/Graphs-Visualization-Service/gvs-tester} \\
@@ -623,8 +628,26 @@ public class TestBinaryNode implements GVSBinaryTreeNode {
 	\end{table}
 
 \clearpage
+
+	\section{Entwicklungsumgebung}
 	
-	\section{Schritt für Schritt}
+	\subsection{Eclipse Plugins}
+	Für die Entwicklung des GVS 2.0 wurden folgenden Eclipse Plugins verwendet. Diese können optional installiert werden. Es empfiehlt sich aber, mindestens Gradle in Eclipse zu integrieren.
+	\begin{description}
+		\item[Buildship] Gradle Integration in Eclipse \footnote{\url{https://projects.eclipse.org/projects/tools.buildship}}
+		\item[EGit] Git Integration in Eclipse \footnote{\url{https://eclipse.org/egit}}
+		\item[Checkstyle] Codestyle Überprüfung in Eclipse \footnote{\url{http://eclipse-cs.sf.net}}
+		\item[FindBugs] Statische Codeanalyse in Eclipse \footnote{\url{http://findbugs.sourceforge.net}}
+		\item[Stan4J] Strukturanalyse in Eclipse \footnote{\url{http://stan4j.com}}
+		\item[ECLEmma] Test Coverage Analyse in Eclipse \footnote{\url{http://www.eclemma.org}}
+	\end{description}
+
+	\subsection{Gluon Scene Builder}
+	Für die Entwicklung von JavaFX Interfaces kann der Scene Builder von Gluon \footnote{\url{http://gluonhq.com/products/scene-builder}} verwendet werden.  Wie die meisten WYSIWYG Editoren ist auch der Scene Builder sehr verbose beim Erstellen von XML Elementen. Es empfiehlt sich, einen Grundlegende Struktur im Scene Builder zu erstellen und diese dann im XML Editor von Eclipse anzupassen.
+
+	\clearpage
+	
+	\section{Schritt für Schritt Integration}
 	Am Beispiel des gvs-ui Repositories folgt eine Schritt für Schritt Anleitung vom git clone bis zum fertigen Build. Diese Anleitung kann analog auch für die anderen Java Repositories benutzt werden.
 	
 	\begin{enumerate}
@@ -651,7 +674,7 @@ public class TestBinaryNode implements GVSBinaryTreeNode {
 		\item Ausführen von GVS 2.0 UI
 		\begin{enumerate}
 			\item Entweder erstelltes JAR ausführen
-			\item oder in Eclipse: Gradle Task \lstinline{application > run} ausführen
+			\item oder in Eclipse: Gradle Task View \lstinline{application > run} ausführen
 		\end{enumerate}
 	\end{enumerate}
 		
