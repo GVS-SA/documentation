@@ -1250,9 +1250,54 @@ eprint=false
 	
 	\chapter{Testprotokoll} \label{Testprotokoll}
 	
+	\section{Systemtests}
+	
 	%TODO Testprotokoll
 	
-	%TODO Usability Tests
+	\clearpage
+	
+	\section{Usability Tests}
+	Viele Funktionen sind im GVS 1.0 versteckt und es ist nicht immer klar, was eine Funktion auslöst. Bei dem Design von GVS 2.0 wurde deshalb darauf geachtet, dass ein minimales, sprechendes UI erstellt wird. Beim Vergleich der beiden Programmfenster (siehe Abb. \ref{fig:gvs-1} und \ref{fig:gvs-2}) sind die Unterschiede gut erkennbar. 
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.6\linewidth]{assets/images/gvs-1}
+		\caption{Ansicht GVS 1.0 UI}
+		\label{fig:gvs-1}
+	\end{figure}
+
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.6\linewidth]{assets/images/gvs-2}
+		\caption{Ansicht GVS 2.0 UI}
+		\label{fig:gvs-2}
+	\end{figure}
+	
+	\begin{table}[h!]
+		\centering
+		\begin{tabularx}{\linewidth}{X X }
+			\toprule 
+			Test GVS 1.0 & Reaktion \\
+			\midrule
+			Veraltetes User Interace & Modernes, ansprechendes User Interface, mit dunklen Farben, damit die Algorithmen besser farblich hervorgehoben werden \\
+			Icons werden unter Unix nicht dargestellt & Moderne, sprechende FontAwesome Icons einführen. Die Icons werden auf allen Plattformen korrekt dargestellt \\
+			Funktion \textit{Random und Stable Layout} ist nicht klar & Die Funktion wird wegen fehlendem praktischen Nutzen entfernt \\
+			Funktion \textit{Cluster Splitter} ist nicht klar & Ein spezieller Layout Algorithmus für Binary Trees wird implementiert \\
+			Beim Laden von gespeicherten Session muss der Speicherort immer wieder von Neuem ausgewählt werden & Der zuletzt verwendete Speicherort wird gespeichert \\
+			Graph Vertices lassen sich ausserhalb des sichtbaren Programmfenster draggen & ZoomPane skalliert das Fenster, sobald ein Knoten den Viewport verlässt \\
+			Autolayout Funktion ist nur für die letzten Momentaufnahme eines Graphen möglich & Die Autolayout Funktion ist für alle Momentaufnahmen möglich \\
+			Drag Support ist nur für die letzte Momentaufnahme eines Graphen möglich & Dragging von Vertices ist immer möglich \\
+			Koordinaten von gedraggten Vertices werden nicht für die nächste Momentaufnahme übernommen & Koordinaten werden immer übernommen \\
+			\textit{Replay} Geschwindigkeit wird in Milisekunden dargestellt & Es gibt nur doch die drei Geschwindigkeiten \textit{langsam}, \textit{normal} und \textit{schnell} \\
+			Server Applikation wird beim Absturz des Client nicht freigegeben & Watchdog Service gibt den Server bei inaktiven Clients wieder frei \\
+			\bottomrule 
+		\end{tabularx} 
+		\caption{Usability Tests} 
+	\end{table}
+	
+	
+	
+
 	
 	\chapter{Persönliche Berichte}
 	\label{erfahrungsberichte}
