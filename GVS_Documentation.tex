@@ -1086,6 +1086,9 @@ eprint=false
 	\section{Entwicklungsumgebung}
 	Als \gls{ide} wird Eclipse mit folgenden Plugins verwendet
 	\begin{itemize}
+		\item Buildship \cite{buildship} für die Gradle Integration
+		\item EGit \cite{egit} für die Git Integration
+		\item ECLEmma \cite{eclemma} zur Überprüfung der Testabdeckung
 		\item FindBugs \cite{findbugs} zur statischen Code Analyse
 		\item Stan4J \cite{stan4j} zur Überprüfung von zyklischen Abhängigkeiten
 		\item Checkstyle \cite{checkstyle} zur Überprüfung der Coding Richtlinien.
@@ -1096,6 +1099,16 @@ eprint=false
 	\subsection{Gluon Ignite mit Google Guice} \label{DI}
 	Gluon Ignite \cite{gluonignite} erweitert das verbreitete \gls{di}-Framework Guice \cite{guice} für den Einsatz in \gls{javafx} Applikationen. Mit Gluon Ignite lässt sich \gls{di} nicht nur im Business Layer, sondern auch für die \gls{fxml} Loader verwenden. \gls{di} verringert die Kopplung zwischen Komponenten, verbessert die Testbarkeit und zentralisiert die Erzeugungslogik von Klassenobjekten.
 	
+	\subsection{ControlsFX}
+	ControlsFX \cite{controlsfx} ist ein Open Source Projekt für JavaFX UI Controls. Es erweitert die Standard-Controls um nützliche Elemente. Im GVS 2.0 wird es für den Toggle Button verwendet. 
+	
+	\subsection{dom4j}
+	Dom4j \cite{dom4j} ist ein XML Framework für Java. Es wird für das Schreiben und Lesen der XML Files verwendet, die über die Socket Verbindung gesendet werden.
+	
+	\subsection{SLF4J und Logback}
+	SLF4J \cite{slf4j} und Logback \cite{logback} werden das Schreiben von Log Einträgen in ein File sowie auf die Standardausgabe (STDOUT) verwendet.
+	
+		
 	\section{Repositories}
 	Die Artefakte werden in verschiedenen Repositories auf GitHub versioniert abgelegt. So gibt es für die Dokumentation, die Meetings-Protokolle und den Sourcecode jeweils ein eigenes Repository.
 	
@@ -1132,8 +1145,7 @@ eprint=false
 	Als Styleguide wird eine angepasste Version des Sun Styleguide verwendet \cite{suncheckstyle}. Damit dieser im Projekt durchgängig eingehalten wird, wird das Checkstyle Plugin \cite{checkstyle} in den Buildprozess integriert. (Siehe \ref{sec:buildprocess})	
 	
 	\subsubsection{Code Climate}
-	%TODO Check technical debt
-	Zur Überwachung des Technical Debt und der Testabdeckung wird die Github App Code Climate \cite{codeclimate} eingesetzt. Code Climate visualisiert die mittels Cobertura \cite{cobertura} erstellten \gls{xml} Testabdeckung Files.
+	Zur Überwachung des Technical Debt und der Wartbarkeit wird die Github App Code Climate \cite{codeclimate} eingesetzt.
 	
 	\subsection{Refactorings}
 	Aufgrund der erkannten Mängel in der Analysephase (Siehe \ref{sec:erkenntnisse}) werden fortlaufend Refactorings des migrierten Codes durchgeführt.
@@ -1213,10 +1225,10 @@ eprint=false
 	Die folgenden Seiten enthalten die Entwicklung der Klassendiagramme über den Projektverlauf. Für die GVS Lib Komponente existierte in der Vorgängerarbeit kein Klassendiagramm.
 	
 	\begin{enumerate}
-		\item Klassendiagramm UI Analyse
-		\item Klassendiagramm UI Entwurf
-		\item Klassendiagramm UI Umsetzung
-		\item Klassendiagramm Lib Umsetzung
+		\item GVS 1.0 Klassendiagramm UI Analyse
+		\item GVS 2.0 Klassendiagramm UI Entwurf
+		\item GVS 2.0 Klassendiagramm UI Umsetzung
+		\item GVS 2.0 Klassendiagramm Lib Umsetzung
 	\end{enumerate}
 	
 	\includepdf[fitpaper]{assets/pdf/gvs1-0.pdf}
