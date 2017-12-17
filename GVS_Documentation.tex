@@ -280,6 +280,8 @@ eprint=false
 	Die Software \gls{gvs} unterstützt Studenten beim Erlernen der beiden Datenstrukturen sowie der darauf anwendbaren Algorithmen. Damit sich die Studenten ausschliesslich auf das Erlernen der Algorithmen fokussieren können, bietet \gls{gvs} eine Library, welche den Studenten repetitive Implementierungsarbeiten abnimmt. Der wichtigste Aspekt ist jedoch die Visualisierung der Arbeitsweise von Datenstrukturen und Algorithmen. So zeigt die Software zum Beispiel den schrittweisen Aufbau eines Baumes oder den Ablauf des Path Finding Algorithmus ''Dijkstra''. \\
 	Die Software wurde 2005 bereits im Rahmen einer Bachelorarbeit umgesetzt. Der in die Jahre gekommene GVS 1.0 soll nun in einem Major-Upgrade aktualisiert werden.
 	
+	
+	
 	\section{Mehrwert}
 	\gls{gvs} wird im Rahmen dieser Studienarbeit auf den neusten Stand der Technik gebracht und profitiert von neueren Java Features wie Generics und Lambdas sowie einer erweiterbaren Schichtenarchitektur. 
 	Für den Endbenutzer ändert sich hauptsächlich das User Interface. Dieses bekommt ein modernes und ansprechendes Design. Zudem hat die Applikation durch das Einführen eines Watchdogs eine höhere Fehlertoleranz. 
@@ -303,6 +305,8 @@ eprint=false
 		\caption{Versionshistory Anforderungsanalyse} 
 	\end{table}
 	
+	
+	
 	\section{Anforderungen} \label{sec:functionalreq}
 	Die Anforderungen werden massgeblich aus der offiziellen Aufgabenstellung entnommen. (siehe Anhang \ref{aufgabenstellung})
 	
@@ -318,6 +322,8 @@ eprint=false
 	\end{enumerate}
 
 	Eine genaue Definition der dritten Anforderung ist im Abschnitt Refactoring Ablauf (\ref{ssec:ablauf}) beschrieben.
+	
+	
 	
 	\section{Domainanalyse}
 	In der Domainanalyse wird der GVS 1.0 untersucht. Die Erkenntnisse fliessen in die Designspezifikation ein.
@@ -453,8 +459,12 @@ eprint=false
 		\caption{Versionshistory Designspezifikation} 
 	\end{table}
 	
+	
+	
 	\section{Klassendiagramm} \label{sec:class-diagram}
 	Das Klassendiagramm 2 \textit{''Klassendiagramm Entwurf''} im Anhang \ref{ch:class-diagram} orientiert sich stark an der Vorgängerversion des GVS 1.0. (Siehe \ref{ssec:klassendiagramm-1}). Mit dem Ziel möglichst viel Code wiederzuverwenden, wird der Access und Business Layer mehrheitlich beibehalten. Der Presentation Layer wird vollständig durch die neu eingeführte \gls{mvvm} Struktur ersetzt (Siehe \ref{sssec:mvvm}).
+	
+	
 	
 	\section{Schichtenstruktur} \label{ssec:layer-architecture}
 	
@@ -485,6 +495,8 @@ eprint=false
 	
 	\subsection{Access Layer}
 	Der Access Layer enthält Klassen für den Zugriff auf den Socket Server, sowie das File System. Es Ist für das Parsen von eingehenden XML Files zuständig und für deren Umwandlung in Domainobjekte.
+
+
 
 	\section{Refactoring Konzept} \label{sec:refactroing-concept}
 	Das Refactoring des GVS 1.0 soll organisiert durchgeführt werden. Dazu werden die notwendigen Schritte priorisiert aufgelistet.
@@ -523,6 +535,8 @@ eprint=false
 	\end{tabularx} 
 	\caption{Versionshistory Realisierung} 
 	\end{table}
+
+
 
 	\section{Umgesetzte Architektur}
 	
@@ -609,7 +623,9 @@ eprint=false
 		\label{fig:sd-session-2}
 	\end{figure}
 
-		\section{Multithreading} \label{sec:threading}
+
+
+	\section{Multithreading} \label{sec:threading}
 	Um die Benutzeroberfläche reaktiv zu halten und gleichzeitig auf Datenübertragungen von der Client Lib zu reagieren werden mehrere Threads benötigt. Daher müssen Synchronisationspunkte eingerichtet werden, damit typische Gefahren der Nebenläufigkeit (z.B Race Conditions) nicht auftreten können. Im GVS 2.0 sind folgende Klassen als eigenständige Threads konzipiert.
 	
 	\subsection{Nebenläufige Klassen}
@@ -664,6 +680,8 @@ eprint=false
 	}
 	\end{lstlisting}
 	
+	
+	
 	\section{Gerichtete Kanten}
 	\subsection{Problem}
 	In einem ersten Stadium hat GVS 2.0 nur ungerichtete Kanten angezeigt. Somit konnten Edges sehr einfach als Linien dargestellt werden, die zwei Vertex Mittelpunkte verbinden. Im endgültigen Stadium zeigt das GVS 2.0 auch gerichtete Kanten an. Somit genügt der einfach Lösungsansatz aus Stadium eins nicht mehr, denn bei diesem Ansatz werden Pfeilspitzen durch die darüber liegenden Vertices verdeckt.
@@ -704,6 +722,7 @@ eprint=false
 	\end{lstlisting}
 
 
+
 	\section{Tree Layouter} \label{sec:treelayouter}
 
 	Die Darstellung von Trees auf eine optisch ansprechende und leserliche Art und Weise bietet verschiedene Schwierigkeiten. bereits 1981 haben Reingold-Tilford \cite{reingold-tilford} zu diesem Zweck einen Algorithmus entwickelt, welcher binäre Bäume zeichnet. Dieser Algorithmus wurde von Walker weiter entwickelt, um \gls{n-ary}s darzustellen und schlussendlich von Buchheim, Jünger und Leipert \cite{tree-algorithm} verbessert, um die Laufzeit auf $\mathcal{O}(n)$ zu beschränken. 
@@ -719,6 +738,8 @@ eprint=false
 	\end{itemize}
 	
 	Ein weiterer Vorteil dieses Algorithmus ist, dass er Bäume immer so zeichnet, dass sie eine minimale Breite besitzen. Dadurch werden auch Bäume mit sehr vielen Nodes schön dargestellt. Dies führt dazu, dass der in GVS 1.0 \cite{gvs1} verwendete \textit{Cluster Splitter} nicht mehr benötigt wird. 
+	
+	
 	
 	\section{Graph Layouter}
 	
@@ -743,6 +764,7 @@ eprint=false
 	\end{figure}
 
 
+
 	\section{Graph und Tree Verschmelzung} \label{graph-vs-tree}
 	In theoretischer Hinsicht sind Bäume Spezialformen von Graphen. In GVS 1.0 wurden diese beiden Strukturen jedoch durchgehend getrennt modelliert. GVS 2.0 vereinigt diese Strukturen soweit es technisch Sinn macht, mit dem Ziel, Code Duplikationen weit möglichst zu vermeiden.
 	
@@ -765,6 +787,30 @@ eprint=false
 
 	
 	
+	\section{Watchdog} \label{sec:watchdog}
+	\subsection{Bedeutung in der Informatik}
+	Im  Allgemeinen versteht man in der Informatik unter einem Watchdog eine System Komponente, die andere Komponenten überwacht. Wenn in der überwachten Komponente ein Fehler auftritt, wird dieser vom Watchdog erkannt und er leitet eine angemessene Fehlerbehebung ein.\\
+	Watchdogs werden vor allem in der Hardware und in der Software von Microcontrollern eingesetzt, um einen kompletten Ausfall des vom Microcontroller gesteuerten Geräts vorzubeugen.\\
+	
+	\subsection{Arbeitsweise}
+	Während dem normalen Betrieb einer Software, wird der Watchdog regelmässig vom zu überwachendem System gefüttern. Das bedeutet, der Timer des Watchdogs wird zurückgesetzt. Beim Auftreten eines Fehlers verzögert sich diese ''Fütterung'' oder fällt gar ganz aus. Dies führt zum Ablaufen des Watchdog Timers. \\
+	Sobald der Timer ausgelaufen ist, wird der Watchdog aktiv und leitet Fehlerbehebungsmassnahmen ein.
+	
+	\subsection{Watchdog in GVS 2.0}
+	\subsubsection{Problem}
+	Da per Spezifikation immer nur ein Client gleichzeitig mit dem Server kommunizieren darf, startet jeder Verbindungsaufbau mit dem Reservieren des \gls{gvsui} Services. Um den Service für andere Clients wieder frei zu geben, muss der Client nach dem Übertragen der Daten ein \textit{Release Command} senden.\\
+	Der Einsatz des GVS im Unterricht findet relativ früh im Studium statt. Deshalb kommt es immer wieder einmal vor, dass sich Fehler in den Code einschleichen, welcher die \gls{gvslib} benutzt. Das Auftretten einer Programm-beendenden Exception führt dazu, dass das \textit{Release Command} nicht gesendet wird, was den GVS Service endlos blockiert. Für den Endbenutzer ist nicht ersichtlich, wieso das \gls{gvsui} nicht auf den User-Input reagiert. Einziger Ausweg bleibt, die Applikation über den Task-Manager zu beenden.
+	
+	\subsubsection{Lösung}
+	GVS 2.0 führt einen Watchdog ein, der die Verbindung des Clients überwacht. Bei jedem Eintreffen neuer Daten, wird der Watchdog gefüttert bis er beim erhalten des \textit{Release Command}s beendet wird. Wenn nun das Auftreten einer Exception im Client Code dazu führt, dass der \textit{Release Command} nicht gesendet wird, läuft der Timer des Watchdogs aus. Dadurch wird der Watchdog aktiv und forciert das Freigeben des Services. Dieser Vorgang ist in Abbildung \ref{fig:watchdog} visualisiert.\\
+	Der Endnutzer nimmt die Komplexität dieses Vorgangs nicht wahr. Nach einer Exception kann das Benutzer Programm einfach erneut gestartet werden und das \gls{gvsui} zeigt wie Erwartet die neue Session an.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\linewidth]{assets/images/watchdog}
+		\caption{Watchdog von GVS 2.0}
+		\label{fig:watchdog}
+	\end{figure}
 	
 	
 	\section{Presentation Layer}
@@ -778,8 +824,7 @@ eprint=false
 	\subsection{Autolayout}
 	%TODO update force layout
 	Das Autolayout steht nur für Graphen zur Verfügung. Alle Vertices die noch nicht mit der Maus positioniert wurden, werden vom Graph Layouter so positioniert, dass es möglichst wenig Überschneidungen der Edges gibt. Standardmässig verwendet der Graph Layouter immer zufällige Startkoordinaten. Dies kann über den ToggleButton deaktiviert werden, damit immer das gleiche Layout resultiert.
-	
-	
+		
 	\subsection{UI Design}
 	\begin{figure}[h!]
 		\centering
@@ -847,11 +892,10 @@ eprint=false
 	
 	\subsection{Layering}
 	Auch in den Client Libraries wurde ein einfaches Layering eingeführt. Die Umsetzung der Schichtenarchitektur ist dem Klassendiagramm aus Anhang \ref{ch:class-diagram} zu entnehmen.	
-			
-	\section{Watchdog} \label{sec:watchdog}
-	%TODO extend		
-			
-			
+
+
+
+
 	\section{Weitere Änderungen gegenüber GVS 1.0}
 	Dieser Abschnitt umfasst kleinere Änderungen, Neuerungen und Fehlerbehebungen gegenüber dem Vorgänger Produkt \cite{gvs1}.
 	
@@ -902,6 +946,8 @@ eprint=false
 		\caption{Versionshistory Ergebnisdiskussion} 
 	\end{table}	
 	
+	
+	
 	\section{Zielerreichung}
 	Dieses Kapitel reflektiert die Erreichung der gemäss Aufgabenstellung (siehe Anhang \ref{aufgabenstellung}) gesetzter Ziele dieser Arbeit. Neben den subjektiven Einschätzungen des Projektteams dienen die benutzten Metriken als handfeste Grundlage für Code-basierte Veränderungen.
 	
@@ -917,6 +963,8 @@ eprint=false
 	
 	\subsection{Punktuelle Verbesserungen}
 	Wie im Kapitel \ref{ch:umsetzung} beschrieben, konnten zahlreiche Verbesserungen durchgeführt werden. Von besonderem Nutzen sind hierbei zwei Verbesserungen. Einerseits die Umsetzung einer klaren Schichtenarchitektur, die zukünftigen Entwicklern das Ersetzen einzelner Komponenten erleichtern wird. Andererseits das Einführen eines Watchdogs, welcher die Usability für Studenten stark erhöht, da Exceptions im Implementations-Code nicht mehr zur Blockierung des \gls{gvsui} führen.
+	
+	
 	
 	\section{Software Metriken} \label{sec:metrics-2}
 	In der Analyse Phase wurden mehrere Code Smells in GVS 1.0 erkannt (Siehe Abschnitt \ref{sec:erkenntnisse}). In der Design Phase wurde deshalb ein Konzept ausgearbeitet, damit das Refactoring strukturiert ablaufen wird (Siehe Abschnitt \ref{sec:refactroing-concept}). Die Refactorings wurden damals aus Zeitgründen tief priorisiert. Es hat sich aber gezeigt, dass bereits am Anfang der Realisations Phase viele Refactorings durchgeführt werden müssen. Dies nicht zuletzt deshalb, da der bestehende Code sehr schwer zu lesen war. Durch die Refactorings konnte die Verständlichkeit des Codes enorm verbessert werden. Dies spiegelt sich auch in den erhobenen Software Metriken wieder. Im folgenden Abschnitt sind dieser genauer beschrieben.
@@ -954,6 +1002,8 @@ eprint=false
 	
 	\paragraph{}
 	Des Weiteren hat sich das Projektteam zu Beginn stark mit der Verbesserung der Architektur und Code Qualität beschäftigt. Dadurch gingen gewisse Feinheiten der Funktionalität etwas unter. Als Beispiel kann hier genannt werden, dass erst relativ spät klar wurde, wozu einige Einstellungen aus dem Kontextmenü - wie der Cluster Splitter oder das Soft-Layout - dienen.
+
+
 
 	\section{Ausblick}
 	\label{sec:ausblick}
@@ -1013,6 +1063,8 @@ eprint=false
 		\caption{Versionshistory Projektmanagement} 
 	\end{table}
 	
+	
+	
 	\section{Meilensteine}
 	\label{sec:milestones}
 	
@@ -1062,9 +1114,13 @@ eprint=false
 	Im Artefact Overview sind sämtliche zu erbringende Arbeitsergebnisse mit ihren Fertigstellungsdaten aufgelistet. Wenn nötig sind verschiedene Versionen gekennzeichnet.
 	\includepdf[landscape]{assets/pdf/artefact_overview.pdf}
 	
+	
+	
 	\section{Zeitplanung}
 	
 	Das Projekt wird im Rahmen der Studienarbeit durchgeführt. Insgesamt stehen 14 Wochen zur Verfügung in welchen jedes Teammitglied 240 Stunden leisten muss. Somit entstehen ca. 17 Stunden Arbeitsaufwand pro Woche und Teammitglied.
+	
+	
 	
 	\section{Projektverwaltung}
 	
@@ -1088,6 +1144,8 @@ eprint=false
 	\subsection{Branch Konzept}
 	Die Branch Struktur orientiert sich an Gitflow \cite{gitflow}. Pro Issue wird ein Feature Branch erstellt, der nach erfolgreichem Review in den Development Branch gemerged wird. Beim Erreichen eines Meilensteins (siehe \ref{sec:milestones}) wird der Entwicklungszweig in den Master Branch gemerged.
 	
+	
+	
 	\section{Entwicklungsumgebung}
 	Als \gls{ide} wird Eclipse mit folgenden Plugins verwendet
 	\begin{itemize}
@@ -1098,6 +1156,8 @@ eprint=false
 		\item Stan4J \cite{stan4j} zur Überprüfung von zyklischen Abhängigkeiten
 		\item Checkstyle \cite{checkstyle} zur Überprüfung der Coding Richtlinien.
 	\end{itemize}
+	
+	
 	
 	\section{Frameworks}
 	
@@ -1114,8 +1174,11 @@ eprint=false
 	SLF4J \cite{slf4j} und Logback \cite{logback} werden das Schreiben von Log Einträgen in ein File sowie auf die Standardausgabe (STDOUT) verwendet.
 	
 		
+		
 	\section{Repositories}
 	Die Artefakte werden in verschiedenen Repositories auf GitHub versioniert abgelegt. So gibt es für die Dokumentation, die Meetings-Protokolle und den Sourcecode jeweils ein eigenes Repository.
+	
+	
 	
 	\section{Continuous Integration}
 	Die Software wird nach jedem Commit mit Travis CI \cite{travisci} gebuildet. Dies garantiert, dass sämtliche Qualitätsmassnahmen stets eingehalten werden. (Siehe \ref{sec:qualitymeasures})
@@ -1123,6 +1186,8 @@ eprint=false
 	\subsection{Buildprozess}
 	\label{sec:buildprocess}
 	Zur Erstellung der Software Artefakte wird Gradle \cite{gradle} eingesetzt. Gradle verwaltet alle externen Software Abhängigkeiten. Zusätzlich wird die Software nur dann gebuilded, wenn alle Metriktools grünes Licht geben. Es resultiert ein ausführbares \gls{jar}.
+	
+	
 	
 	\section{Qualitätsmanagement}
 	\label{sec:qualitymeasures}
@@ -1154,6 +1219,9 @@ eprint=false
 	
 	\subsection{Refactorings}
 	Aufgrund der erkannten Mängel in der Analysephase (Siehe \ref{sec:erkenntnisse}) werden fortlaufend Refactorings des migrierten Codes durchgeführt.
+	
+	
+	
 	
 	\section{Risikomanagement}
 	Nachfolgend sind die wichtigsten Risiken für diese Arbeit aufgelistet. Gewichtet werden die Risiken nach Eintrittswahrscheinlichkeit und Schadenshöhe. \cite{risikomanagement}
@@ -1203,6 +1271,8 @@ eprint=false
 		\item Die Projektdokumentation sowie der Programmcode wird in den vier Github Repositories der Github Organisation \cite{github} versioniert abgelegt. Für die Projektmitglieder gilt der Grundsatz ''Commit early and often''.
 		\item Weitere Artefakte werden auf Dropbox \cite{dropbox} abgelegt und dort automatisch gesichert und versioniert.
 	\end{enumerate}
+	
+	
 	
 	\section{Verantwortlichkeiten}
 	Um Unklarheiten und Unstimmigkeiten zu vermeiden sind folgende Verantwortlichkeiten zugeteilt:
@@ -1254,6 +1324,8 @@ eprint=false
 	
 	\chapter{Testprotokoll} \label{Testprotokoll}
 	
+	
+	
 	\section{Systemtests}
 	
 	\begin{enumerate}
@@ -1265,6 +1337,8 @@ eprint=false
 	\includepdf[pages={1-}]{assets/pdf/SystemTests-17-12-15}
 	
 	\clearpage
+	
+	
 	
 	\section{Usability Tests}
 	Viele Funktionen sind im GVS 1.0 versteckt und es ist nicht immer klar, was eine Funktion auslöst. Beim Design von GVS 2.0 wurde deshalb darauf geachtet, dass ein minimales, sprechendes UI erstellt wird. Beim Vergleich der beiden Programmfenster (siehe Abb. \ref{fig:gvs-1} und \ref{fig:gvs-2}) sind die Unterschiede gut erkennbar. 
@@ -1307,6 +1381,8 @@ eprint=false
 	
 	\chapter{Persönliche Berichte}
 	\label{erfahrungsberichte}
+	
+	
 	
 	\section{Murièle Trenini}
 	
