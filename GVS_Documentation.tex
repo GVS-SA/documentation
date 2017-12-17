@@ -250,17 +250,11 @@ eprint=false
 		\tableofcontents
 	}
 
-	%TODO REMEMBER: Keine Verhangenheiten. Wir beschreiben was gemacht werden muss und nicht was gemacht wurde.
-	
-	%TODO Handbuch und Installationsanleitung. Kürzel in Fusszeile. Somit gibt es keine Verwirrung mit den Seitenzahlen
-	
 	\newpage
 	\pagenumbering{arabic}
 	
 	
 	\chapter{Ausgangslage}
-	
-	%TODO Enthält Anforderungen des Kuden/Auftrageber
 	
 	\begin{table}[h!]
 		\centering
@@ -283,13 +277,17 @@ eprint=false
 	
 	
 	\section{Mehrwert}
-	\gls{gvs} wird im Rahmen dieser Studienarbeit auf den neusten Stand der Technik gebracht und profitiert von neueren Java Features wie Generics und Lambdas sowie einer erweiterbaren Schichtenarchitektur. 
-	Für den Endbenutzer ändert sich hauptsächlich das User Interface. Dieses bekommt ein modernes und ansprechendes Design. Zudem hat die Applikation durch das Einführen eines Watchdogs eine höhere Fehlertoleranz. 
+	\gls{gvs} wird im Rahmen dieser Studienarbeit auf den neusten Stand der Technik gebracht und profitiert von neueren Java Features wie Generics und Lambdas sowie einer erweiterbaren Schichtenarchitektur. \\
+	
+	Für den Endbenutzer ändert sich hauptsächlich das User Interface. Dieses bekommt ein modernes und ansprechendes Design, besitzt intuitiven Zugriff auf vorhandene Features und ist flexibler in der Darstellung von Graphen und Trees, durch die automatisch skalierende und zentrierende Zeichenfläche. Zudem hat die Applikation durch das Einführen eines Watchdogs eine höhere Fehlertoleranz. \\
+	
+	Durch die Verbesserung der Code Qualität und die Einführung einer sauberen Schichten-Architektur, wird es zukünftigen Entwicklern leichter gemacht, die Applikation zu verstehen und zu erweitern.	
+	
 	%TODO: ausführen!!
 	
-	\chapter{Anforderungsspezifikation}
 	
-	%TODO Enthält Anforderungen des Kuden/Auftrageber
+	
+	\chapter{Anforderungsspezifikation}
 	
 	\begin{table}[h!]
 		\centering
@@ -822,8 +820,7 @@ eprint=false
 	Bei Graphen können alle Vertices beliebig mit der Maus positioniert werden. Sobald alle Vertices manuell positioniert wurden, ist die Autolayout Funktion nicht mehr verfügbar. Trees können nicht manuell positioniert werden. Eine entsprechende Meldung wird angezeigt.
 		
 	\subsection{Autolayout}
-	%TODO update force layout
-	Das Autolayout steht nur für Graphen zur Verfügung. Alle Vertices die noch nicht mit der Maus positioniert wurden, werden vom Graph Layouter so positioniert, dass es möglichst wenig Überschneidungen der Edges gibt. Standardmässig verwendet der Graph Layouter immer zufällige Startkoordinaten. Dies kann über den ToggleButton deaktiviert werden, damit immer das gleiche Layout resultiert.
+	Das Autolayout steht nur für Graphen zur Verfügung. Die Vertices werden vom Graph Layouter so positioniert, dass es möglichst wenig Überschneidungen der Edges gibt. Standardmässig ist die Einstellung \textit{Force Layout} aktiv. Dies führt dazu, dass beim betätigen des Auto-Layout Buttons die Koordinaten sämtlicher Vertices neu berechnet werden. Das Deaktivieren dieser Einstellung hat zur Folge, dass Vertices, die manuell durch den User positioniert wurden, nicht von einem Auto-Layout betroffen sind. Sollte dies auf alle Vertices zutreffen, wird der User über einen Tooltip entsprechend informiert.
 		
 	\subsection{UI Design}
 	\begin{figure}[h!]
