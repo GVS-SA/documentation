@@ -223,10 +223,13 @@ eprint=false
 	Das in die Jahre gekommene Swing UI Framework wird im Rahmen dieser Studienarbeit mit dem offiziellen Nachfolger JavaFX ersetzt.
 	
 	\subsection*{Ergebnisse}
-	In der Studienarbeit wurde ein vollumfänglicher Ersatz für den GVS 1.0 entwickelt. GVS 2.0 erweitert sogar die Funktionalität um ein intuitiveres User Interface sowie einer verbesserte Darstellung der Datenstrukturen.
+	In der Studienarbeit wurde ein vollumfänglicher Ersatz für den GVS 1.0 entwickelt.\\
+	Die Code Qualität konnte durch die Umsetzung einer klaren Schichtenarchitektur und zahlreichen Refactorings gesteigert werden. Dabei wurde ein besonderes Augenmerk auf das Einhalten des \gls{single-responsibility} und auf die Reduktion von dupliziertem Code gelegt. Somit konnten sämtliche Metrik-Noten verbessert werden.\\
+	Eine Steigerung der Usability wurde unter anderem durch ein modernes UI mit starken Farbkontrasten und eine automatisch skalierende und zentrierende Zeichenfläche erreicht. Zudem ist GVS 2.0 robuster gegenüber Programmierfehler in der User-Applikation. Bei auftretenden Exceptions springt ein Watchdog ein und kappt die Verbindung zwischen Client und Server.\\
+	GVS 2.0 erweitert den bisherigen Funktionsumfang um einen Algorithmus für Trees, welcher fähig ist auch grosse Binary-Trees ansprechend und lesbar zu zeichnen sowie \gls{n-ary}s darzustellen.
 	
 	\subsection*{Ausblick}
-	Das Projektteam ist vom praktischen Nutzen der Applikation überzeugt und wird sich deshalb in der Bachelorarbeit mit einer umfänglicheren Anwendung beschäftigen. Diese wird den Studenten das Erlenenen von weiteren theoretischen Informatikkonzepten durch Visualisierung erleichtern.  
+	Das Projektteam ist vom praktischen Nutzen der Applikation überzeugt und wird sich deshalb in der Bachelorarbeit mit einer umfänglicheren Anwendung beschäftigen. Diese wird den Studenten das Erlernen von weiteren theoretischen Informatikkonzepten durch Visualisierung erleichtern.  
 	
 	\newpage
 	
@@ -1327,6 +1330,8 @@ eprint=false
 	%TODO Nach Kategorien
 	
 	\chapter{Benutzerhandbuch}
+	Nachfolgend findet sich das Benutzerhandbuch für GVS 2.0 inklusive einer Installationsanleitung für User der Library sowie für Entwickler.
+	
 	\includepdf[pages={1-}]{manual/Benutzerhandbuch}	
 	
 	\chapter{Meeting Protokolle} \label{ch:minutes}
