@@ -198,11 +198,11 @@ eprint=false
 	\pagenumbering{Roman}
 	\section*{Abstract}
 	\thispagestyle{firststyle}
-	An der \gls{hsr} werden in den Modulen \textit{Algorithmen und Datenstrukturen 1 und 2} diverse Algorithmen unterrichtet, die auf den beiden Datenstrukturen \textit{Graph} und \textit{Tree} arbeiten. Die Funktionsweise solcher Algorithmen ist für Studenten teilweise schwer zu fassen. Aus diesem Grund wurde im Jahr 2005 im Rahmen einer Bachelorarbeit der \gls{gvs} 1.0 entwickelt.  Dieser visualisiert Datenstrukturen, die von einer Client Library in XML transformiert werden und anschliessend über eine Socket Verbindung an die Server Komponente zur Visualisierung übertragen werden. Studenten können so die Arbeitsweise der Algorithmen Schritt für Schritt nachvollziehen. \\
+	An der \gls{hsr} werden in den Modulen \textit{Algorithmen und Datenstrukturen 1 und 2} diverse Algorithmen unterrichtet, die auf den beiden Datenstrukturen \textit{Graph} und \textit{Tree} arbeiten. Die Funktionsweise solcher Algorithmen ist für Studenten teilweise schwer zu verstehen. Hinzu kommt, dass die Programmierung für die Visualisierung der Algorithmen mit viel Aufwand verbunden ist. Aus diesem Grund wurde im Jahr 2005, im Rahmen einer Bachelorarbeit, der \gls{gvs} 1.0 entwickelt. Dieser visualisiert Datenstrukturen, die von einer Client Library in XML transformiert werden und anschliessend über eine Socket Verbindung an die Server Komponente zur Visualisierung übertragen werden. Durch die Visualisierung können Studenten die Arbeitsweise der Algorithmen Schritt für Schritt nachvollziehen. \\
 	
 	\noindent Diese Studienarbeit beschäftigt sich mit der Erneuerung des gesamten GVS 1.0, wobei insbesondere bei der Server Komponente das UI Framework ersetzt wird. In einer Analysephase wurde der bestehende Code auf Verbesserungspotential untersucht. Die gewonnen Erkenntnisse flossen in eine saubere Schichtenarchitektur ein, die es auch Folgearbeiten erleichtern soll, einzelne Schichten zu ersetzen. \\
 
-	\noindent Während dem Projekt konnten eine erweiterbare Software Architektur erstellt werden, die das Vorgängerprodukt vollumfänglich ersetzt. Zusätzlich wurde die Usability verbessert und durch den Einsatz von speziellen Layouting Algorithmen eine ansprechende Darstellung von \textit{Graphen} und \textit{Trees} erreicht.
+	\noindent Während dem Projekt konnten eine erweiterbare Software Architektur erstellt werden, die das Vorgängerprodukt vollständig ersetzt. Zusätzlich wurde die Usability verbessert und durch den Einsatz von speziellen Layouting Algorithmen eine ansprechende Darstellung von \textit{Graphen} und \textit{Trees} erreicht.
 	
 	\newpage
 	
@@ -210,38 +210,38 @@ eprint=false
 	\thispagestyle{firststyle}
 	
 	\subsection*{Ausgangslage}
-	GVS ist eine Visualisierungs-Software die Graphen und Trees darstellt. Durch die Verwendung von Styles können auch Algorithmen auf den Graphen visualisiert werden.\\
-	Die Datenstrukturen werden in der Entwicklungsumgebung des Benutzers implementiert und mit einer clientseitigen Library an die Visualisierungskomponenten übertragen. Diese interpretieren die eingehenden Daten und stellen diese auf eine ansprechende und verständliche Art und Weise dar. \\
+	GVS ist eine Visualisierungs-Software die Graphen und Trees darstellt. Zusätzlich werden Algorithmen durch den Einsatz von Farben und gerichteten Kanten visuell hervorgehoben. \\
+	Die Datenstrukturen werden in der Entwicklungsumgebung des Benutzers implementiert und mit einer clientseitigen Library an die Visualisierungskomponenten übertragen. Diese interpretiert die eingehenden Daten und stellt diese auf eine ansprechende Art und Weise dar. \\
 	
 	\noindent
-	Der GVS 1.0 wird im Unterricht der Module \textit{Algorithmen und Datenstrukturen 1 und 2} aktiv verwendet. Er erleichtert das Erlernen von komplexen Suchalgorithmen und Datenstrukturen die in den Modulen behandelt werden. Der GVS 1.0 hat aber bestimmte Einschränkungen bezüglich Usability und der Darstellung von grossen Trees. Ebenfalls gilt das eingesetzt UI Framework als veraltet und es existieren in der Zwischenzeit bessere Alternativen.
+	Der im Jahre 2005 entwickelte GVS 1.0 wurde im Unterricht der Module \textit{Algorithmen und Datenstrukturen 1 und 2} aktiv verwendet. Er erleichtert das Erlernen von komplexen Suchalgorithmen und Datenstrukturen die in den Modulen behandelt werden. Der GVS 1.0 hat aber bestimmte Einschränkungen bezüglich Usability und der Darstellung von grossen Trees. Ebenfalls gilt das eingesetzt UI Framework als veraltet und es existieren in der Zwischenzeit bessere Alternativen.
 	
 	\subsection*{Vorgehen / Technologien}	
-	In einer ersten Phase wird die bestehende Software auf Funktionsweise und Verbesserungspotential analysiert. Ebenfalls wird die umgesetzte Architektur kritisch beleuchtet. Da die Software HSR Intern verwendet wird, sind Folgearbeiten nicht auszuschliessen. Es wird deshalb darauf geachtet, dass mit den gewonnen Erkenntnissen eine Architektur designet wird, die einfach verständlich und erweiterbar ist. Ebenfalls sollen zeitgemässe Softwareentwicklungs-Techniken angewendet werden. \\
+	In einer ersten Phase wird die bestehende Software auf Funktionsweise und Verbesserungspotential analysiert. Ebenfalls wird die umgesetzte Architektur kritisch beleuchtet. Da die Software HSR Intern verwendet wird, sind Folgearbeiten nicht auszuschliessen. Es wird deshalb darauf geachtet, dass mit den gewonnen Erkenntnissen eine Architektur designed wird, die einfach verständlich und erweiterbar ist. Ebenfalls sollen zeitgemässe Softwareentwicklungs-Techniken angewendet werden. \\
 	
 	\noindent
-	Das in die Jahre gekommene Swing UI Framework wird im Rahmen dieser Studienarbeit mit dem offiziellen Nachfolger JavaFX ersetzt.
+	Das in die Jahre gekommene Java Swing GUI Toolkit wird im Rahmen dieser Studienarbeit mit dem offiziellen Nachfolger JavaFX ersetzt.
 	
 	\subsection*{Ergebnisse}
-	In der Studienarbeit wurde ein vollumfänglicher Ersatz für den GVS 1.0 entwickelt.\\
+	In der Studienarbeit wurde ein vollständiger Ersatz für den GVS 1.0 entwickelt.\\
 	Die Code Qualität konnte durch die Umsetzung einer klaren Schichtenarchitektur und zahlreichen Refactorings gesteigert werden. Dabei wurde ein besonderes Augenmerk auf das Einhalten des \gls{single-responsibility} und auf die Reduktion von dupliziertem Code gelegt. Somit konnten sämtliche Metrik-Noten verbessert werden.\\
 	Eine Steigerung der Usability wurde unter anderem durch ein modernes UI mit starken Farbkontrasten und eine automatisch skalierende und zentrierende Zeichenfläche erreicht. Zudem ist GVS 2.0 robuster gegenüber Programmierfehler in der User-Applikation. Bei auftretenden Exceptions springt ein Watchdog ein und kappt die Verbindung zwischen Client und Server.\\
 	GVS 2.0 erweitert den bisherigen Funktionsumfang um einen Algorithmus für Trees, welcher fähig ist auch grosse Binary-Trees ansprechend und lesbar zu zeichnen sowie \gls{n-ary}s darzustellen.
 	
 	\subsection*{Ausblick}
-	Das Projektteam ist vom praktischen Nutzen der Applikation überzeugt und wird sich deshalb in der Bachelorarbeit mit einer umfänglicheren Anwendung beschäftigen. Diese wird den Studenten das Erlernen von weiteren theoretischen Informatikkonzepten durch Visualisierung erleichtern.  
+	Das Projektteam ist vom praktischen Nutzen der Applikation überzeugt und wird sich deshalb in der Bachelorarbeit mit einer generischen Lösung beschäftigen. Diese wird den Studenten das Erlernen von weiteren theoretischen Informatikkonzepten durch Visualisierung erleichtern.  
 	
 	\newpage
 	
 	\section*{Danksagungen}
 	\thispagestyle{firststyle}
 	
-	Wir danken folgenden Personen für Ihre Unterstützung während der Studienarbeit:
+	Wir danken folgenden Personen für Ihre Unterstützung:
 	
 	\begin{itemize}
-		\item Thomas Letsch für die Betreuung und Unterstützung während unserer Studienarbeit.
-		\item Prof. Olaf Zimmermann für die interessanten Gespräche während der Architekturphase.
-		\item Jessica Martin für die technische Unterstützung beim Logo Design.
+		\item Thomas Letsch für die Betreuung und Unterstützung während unserer Studienarbeit
+		\item Prof. Olaf Zimmermann für die interessanten Gespräche während der Architekturphase
+		\item Jessica Martin für die technische Unterstützung beim Logo Design
 	\end{itemize}
 	
 
@@ -279,8 +279,10 @@ eprint=false
 	\section{Mehrwert}
 	\gls{gvs} wird im Rahmen dieser Studienarbeit auf den neusten Stand der Technik gebracht und profitiert von neueren Java Features wie Generics und Lambdas sowie einer erweiterbaren Schichtenarchitektur. \\
 	
+	\noindent
 	Für den Endbenutzer ändert sich hauptsächlich das User Interface. Dieses bekommt ein modernes und ansprechendes Design, besitzt intuitiven Zugriff auf vorhandene Features und ist flexibler in der Darstellung von Graphen und Trees, durch die automatisch skalierende und zentrierende Zeichenfläche. Zudem hat die Applikation durch das Einführen eines Watchdogs eine höhere Fehlertoleranz. \\
 	
+	\noindent
 	Durch die Verbesserung der Code Qualität und die Einführung einer sauberen Schichten-Architektur, wird es zukünftigen Entwicklern leichter gemacht, die Applikation zu verstehen und zu erweitern.	
 	
 	%TODO: ausführen!!
@@ -309,7 +311,7 @@ eprint=false
 	Die Anforderungen werden massgeblich aus der offiziellen Aufgabenstellung entnommen. (siehe Anhang \ref{aufgabenstellung})
 	
 	\subsection{Funktionale Anforderungen}
-	Die funktionalen Anforderungen werden vollständig von GVS 1.0 \cite{gvs1} übernommen. Der Funktionsumfang der Applikation soll nicht verändert werden.
+	Die funktionalen Anforderungen werden vollständig von GVS 1.0 \cite{gvs1} übernommen. Der Funktionsumfang der Applikation soll nicht verändert werden. Anpassungen am Funktionsumfang werden mit dem Betreuer besprochen und in den Sitzungsprotokollen dokumentiert.
 	
 	\subsection{Nicht funktionale Anforderungen}
 	
@@ -369,7 +371,7 @@ eprint=false
 	Um schwierig zu verstehende Systemabläufe zu abstrahieren, werden Systemdiagramme erstellt. Sie zeigen die wichtigsten Abläufe in GVS 1.0.
 	
 	\subsubsection{Verbindungsaufbau}
-	Das Sequenzdiagramm	\ref{fig:sd-verbindungsaufbau} zeigt den Verbindungsaufbau über den \textit{SocketServer} beim starten der Applikation. Der Start einer \textit{SeverConnectionXML} führt zu einem Locking mit Hilfe des \textit{ConnectionMonitors}. Dieses Locking verhindert, dass mehr als eine \gls{gvslib} gleichzeitig mit einem \gls{gvsui} kommuniziert. Nach dem Empfangen der Daten aus dem Socket, erstellt der \textit{ModelBuilder} einen Graphen oder Tree als Domain-Objekt. Dieser Ablauf ist auf dem Sequenzdiagramm \textbf{ModelBuilder} (siehe \ref{sssec:modelbuilder}) ersichtlich.
+	Das Sequenzdiagramm	\ref{fig:sd-verbindungsaufbau} zeigt den Verbindungsaufbau über den \textit{SocketServer} beim Starten der Applikation. Der Start einer \textit{ServerConnectionXML} führt zu einem Locking mit Hilfe des \textit{ConnectionMonitors}. Dieses Locking verhindert, dass mehr als eine \gls{gvslib} gleichzeitig mit einem \gls{gvsui} kommuniziert. Nach dem Empfangen der Daten aus dem Socket, erstellt der \textit{ModelBuilder} einen Graphen oder Tree als Domain-Objekt. Dieser Ablauf ist auf dem Sequenzdiagramm \textbf{ModelBuilder} (siehe \ref{sssec:modelbuilder}) ersichtlich.
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=\linewidth]{assets/images/verbindungsaufbau}
@@ -504,7 +506,7 @@ eprint=false
 		\item Der Presentation Layer wird ersetzt. Dabei wird \gls{swing} durch \gls{javafx} ersetzt. Mehr Details finden sich in der Migrations Liste (\ref{ssec:class-refactroing-list}) sowie im Klassendiagramm von GVS 2.0 (\ref{sec:class-diagram})
 		\item Die GVS 1.0 Library wird um Generics erweitert. Dies betrifft die Java-, sowie die .NET Library.
 		\item Eine klare Schichtenarchitektur (\ref{ssec:layer-architecture}) wird eingeführt. Besonders wichtig ist dabei, die Entfernung von \gls{tangle}s.
-		\item Duplicated Code und weitere Code Smells sollen entfernt werden. Ein besonderes Augenmerk wird auf ein konsequentes Naming, das \gls{dry} Konzept sowie das ''Single Responsibility'' Konzept für Klassen und Methoden gelegt.
+		\item Duplicated Code und weitere Code Smells sollen entfernt werden. Ein besonderes Augenmerk wird auf ein konsequentes Naming, das \gls{dry} Konzept sowie das \gls{single-responsibility} Konzept für Klassen und Methoden gelegt.
 	\end{enumerate}
 
 	\subsection{Migrations Liste}
@@ -1399,7 +1401,7 @@ eprint=false
 	Die Zusammenarbeit mit Murièle war über die gesamte Projektdauer äusserst angenehm. Die Arbeitsteilung hat gut geklappt und durch die enge Zusammenarbeit und das gegenseitige Aushelfen, konnten Probleme bereits früh aus dem Weg geräumt werden. \\
 	
 	\noindent
-	Abschliessend ist es erfreulich, dass durch diese Studienarbeit ein funktionsfähiges Produkt entstanden ist, dass den Lernerfolg zukünftiger Studenten vereinfachen wird. Nichtzugletzt wegen dem Praktischen Nutzen der Software, freue ich mich bereits jetzt auf ein interessantes Folgeprojekt im nächsten Semester.
+	Abschliessend ist es erfreulich, dass durch diese Studienarbeit ein funktionsfähiges Produkt entstanden ist, welches den Lernerfolg zukünftiger Studenten vereinfachen wird. Nichtzugletzt wegen dem Praktischen Nutzen der Software, freue ich mich bereits jetzt auf ein interessantes Folgeprojekt im nächsten Semester.
 	
 	\chapter{Zeitauswertung}	\label{zeitauswertung}
 	
