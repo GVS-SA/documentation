@@ -329,8 +329,8 @@ eprint=false
 	\section{Domainanalyse}
 	In der Domainanalyse wird der GVS 1.0 untersucht. Die Erkenntnisse fliessen in die Designspezifikation ein.
 		
-	\subsection{Stakeholder}
-	Stakeholder repräsentieren Personen, die ein Interesse an der vorliegenden Software haben. Aus den funktionalen Anforderungen (\ref{sec:functionalreq}) von GVS 1.0 können drei relevant Stakeholder ermittelt werden. Während der Realisierung wird überprüft, ob die Erwartungen der Stakeholder erfüllt werden können. Wegen der technischen Orientierung der vorliegenden Studienarbeit werden speziell die Ansprüche zukünftiger Entwickler berücksichtigt.
+	\subsection{Stakeholder} \label{ssec:stakeholder}
+	Stakeholder repräsentieren Personen, die ein Interesse an der vorliegenden Software haben. Aus den funktionalen Anforderungen (\ref{sec:functionalreq}) von GVS 1.0 können drei relevant Stakeholder ermittelt werden. Während der Umsetzung wird überprüft, ob die Erwartungen der Stakeholder erfüllt werden können. Wegen der technischen Orientierung der vorliegenden Studienarbeit werden speziell die Ansprüche zukünftiger Entwickler berücksichtigt.
 	
 	\begin{table}[h!]
 		\centering
@@ -964,6 +964,14 @@ eprint=false
 	\subsection{Punktuelle Verbesserungen}
 	Wie im Kapitel \ref{ch:umsetzung} beschrieben, konnten zahlreiche Verbesserungen durchgeführt werden. Von besonderem Nutzen sind hierbei zwei Verbesserungen. Einerseits die Umsetzung einer klaren Schichtenarchitektur, die zukünftigen Entwicklern das Ersetzen einzelner Komponenten erleichtern wird. Andererseits das Einführen eines Watchdogs, welcher die Usability für Studenten stark erhöht, da Exceptions im Implementations-Code nicht mehr zur Blockierung des \gls{gvsui} führen.
 	
+	\subsection{Bedürfnisse der Stakeholder}
+	Wie in Kapitel \ref{ssec:stakeholder} beschrieben, gibt es für den \gls{gvs} drei relevante Stakeholder. Das in dieser Arbeit entstandene Endprodukt deckt die Bedürfnisse dieser Stakeholder ab.
+	
+	\begin{itemize}
+		\item Für Studenten entstand eine modern anmutende und intuitiv bedienbare Applikation mit verbesserter Fehlertoleranz (siehe Kapitel \ref{sec:watchdog} ''Watchdog'').
+		\item Zukünftige Entwickler wird die Erweiterung oder Ersetzung einzelner Teile der Applikation durch die umgesetzte Schichtenarchitektur erleitert.
+		\item Der Dozent kann die Applikation wie gewohnt einsetzen. Sämtliche bisherigen Übungen die auf \gls{gvs} setzen, finden sich in einer erneuerten Version im \textit{Testers} Repository \cite{gvs-tester}.
+	\end{itemize}
 	
 	
 	\section{Software Metriken} \label{sec:metrics-2}
