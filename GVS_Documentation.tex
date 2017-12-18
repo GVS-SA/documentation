@@ -198,11 +198,11 @@ eprint=false
 	\pagenumbering{Roman}
 	\section*{Abstract}
 	\thispagestyle{firststyle}
-	An der \gls{hsr} werden in den Modulen \textit{Algorithmen und Datenstrukturen 1 und 2} diverse Algorithmen unterrichtet, die auf den beiden Datenstrukturen \textit{Graph} und \textit{Tree} arbeiten. Die Funktionsweise solcher Algorithmen ist für Studenten teilweise schwer zu verstehen. Hinzu kommt, dass die Programmierung für die Visualisierung der Algorithmen mit viel Aufwand verbunden ist. Aus diesem Grund wurde im Jahr 2005, im Rahmen einer Bachelorarbeit, der \gls{gvs} 1.0 entwickelt. Dieser visualisiert Datenstrukturen, die von einer clientseitigen Software-Bibliothek in XML transformiert, und anschliessend über eine Socket Verbindung an die Server Komponente zur Visualisierung übertragen werden. Durch die Visualisierung können Studenten die Arbeitsweise der Algorithmen Schritt für Schritt nachvollziehen. \\
+	An der \gls{hsr} werden in den Modulen \textit{Algorithmen und Datenstrukturen 1 und 2} diverse Algorithmen unterrichtet, die auf den beiden Datenstrukturen \textit{Graph} und \textit{Tree} arbeiten. Die Funktionsweise solcher Algorithmen ist für Studenten teilweise schwer zu verstehen. Hinzu kommt, dass die Programmierung für die Visualisierung der Algorithmen mit viel Aufwand verbunden ist. Aus diesen Gründen wurde im Jahr 2005, im Rahmen einer Bachelorarbeit, der \gls{gvs} 1.0 entwickelt. Dieser visualisiert Datenstrukturen, die von einer clientseitigen Software-Bibliothek in XML transformiert, und anschliessend über eine Socket Verbindung an die Server Komponente zur Visualisierung übertragen werden. Durch die Visualisierung können Studenten die Arbeitsweise der Algorithmen Schritt für Schritt nachvollziehen. \\
 	
-	\noindent Diese Studienarbeit beschäftigt sich mit der Erneuerung des gesamten GVS 1.0, wobei insbesondere bei der Server Komponente das UI Framework mit JavaFX ersetzt wird. In der Analysephases wird die Funktionsweise des Vorgängerprodukt untersucht und Vorschläge für Verbesserungen gemacht. Die gewonnen Erkenntnisse fliessen in eine klare Schichtenarchitektur ein, die es auch Folgearbeiten erleichtern soll, einzelne Schichten zu ersetzen. Ebenfalls halten aktuelle Software Best Practices wie Dependency Injection in dem Projekt Einzug. \\
+	\noindent Diese Studienarbeit beschäftigt sich mit der Erneuerung des gesamten GVS 1.0, wobei insbesondere bei der Server Komponente das UI Framework mit JavaFX ersetzt wird. In der Analysephases wird die Funktionsweise des Vorgängerprodukt untersucht und Vorschläge für Verbesserungen gemacht. Die gewonnenen Erkenntnisse fliessen in eine klare Schichtenarchitektur ein, die es auch Folgearbeiten erleichtern soll, einzelne Schichten zu ersetzen. Ebenfalls halten aktuelle Software Best Practices wie Dependency Injection in dem Projekt Einzug. \\
 
-	\noindent Während dem Projekt konnte eine erweiterbare Software Architektur erstellt werden, die das Vorgängerprodukt vollständig ersetzt. Wie eingesetzte Metriken zeigen, konnte die Code-Qualität beträchtlich gesteigert werden. Zusätzlich wurde das Usability verbessert und durch den Einsatz von speziellen Layouting Algorithmen eine ansprechende Darstellung von \textit{Graphen} und \textit{Trees} erreicht.
+	\noindent Während dem Projekt konnte eine erweiterbare Software Architektur erstellt werden, die das Vorgängerprodukt vollständig ersetzt. Wie eingesetzte Metriken zeigen, konnte die Code-Qualität beträchtlich gesteigert werden. Zusätzlich wurde das Usability verbessert und durch den Einsatz von speziellen Layouting Algorithmen eine ansprechende Darstellung von \textit{Graphen} und \textit{Trees} erreicht werden.
 	
 	\newpage
 	
@@ -210,14 +210,14 @@ eprint=false
 	\thispagestyle{firststyle}
 	
 	\subsection*{Ausgangslage}
-	GVS ist eine Visualisierungs-Software die Graphen und Trees darstellt. Zusätzlich werden Algorithmen durch den Einsatz von Farben und gerichteten Kanten visuell hervorgehoben. \\
+	GVS ist eine Visualisierungs-Software, die Graphen und Trees darstellt. Zusätzlich werden Algorithmen durch den Einsatz von Farben und gerichteten Kanten visuell hervorgehoben. \\
 	Die Datenstrukturen werden in der Entwicklungsumgebung des Benutzers implementiert und mit einer clientseitigen Library an die Visualisierungskomponente übertragen. Dort werden die eingehenden Daten interpretiert und auf eine ansprechende Art und Weise dargestellt. \\
 	
 	\noindent
-	Der im Jahre 2005 entwickelte GVS 1.0 wurde im Unterricht der Module \textit{Algorithmen und Datenstrukturen 1 und 2} aktiv verwendet. Er erleichtert das Erlernen von komplexen Suchalgorithmen und Datenstrukturen die in den Modulen behandelt werden. Der GVS 1.0 hat aber bestimmte Einschränkungen bezüglich Usability und der Darstellung von grossen Trees. Ebenfalls gilt das eingesetzt UI Framework als veraltet und es existieren in der Zwischenzeit bessere Alternativen.
+	Der im Jahre 2005 entwickelte GVS 1.0 wurde im Unterricht der Module \textit{Algorithmen und Datenstrukturen 1 und 2} aktiv verwendet. Er erleichtert das Erlernen von komplexen Suchalgorithmen und Datenstrukturen, die in den Modulen behandelt werden. Der GVS 1.0 hat aber bestimmte Einschränkungen bezüglich Usability und der Darstellung von grossen Trees. Ebenfalls gilt das eingesetzt UI Framework als veraltet und es existieren in der Zwischenzeit bessere Alternativen.
 	
 	\subsection*{Vorgehen / Technologien}	
-	In einer ersten Phase wird die bestehende Software auf Funktionsweise und Verbesserungspotential analysiert. Ebenfalls wird die umgesetzte Architektur kritisch beleuchtet. Da die Software HSR-intern verwendet wird, sind Folgearbeiten nicht auszuschliessen. Es wird deshalb darauf geachtet, dass mit den gewonnen Erkenntnissen eine Architektur designet wird, die einfach verständlich und erweiterbar ist. Ebenfalls sollen zeitgemässe Softwareentwicklungs-Techniken angewendet werden. \\
+	In einer ersten Phase wird die bestehende Software auf Funktionsweise und Verbesserungspotential analysiert. Ebenfalls wird die umgesetzte Architektur kritisch beleuchtet. Da die Software HSR-intern verwendet wird, sind Folgearbeiten nicht auszuschliessen. Es wird deshalb darauf geachtet, dass mit den gewonnenen Erkenntnissen eine Architektur designet wird, die einfach verständlich und erweiterbar ist. Ebenfalls sollen zeitgemässe Softwareentwicklungs-Techniken angewendet werden. \\
 	
 	\noindent
 	Das in die Jahre gekommene Java Swing GUI Toolkit wird im Rahmen dieser Studienarbeit mit dem offiziellen Nachfolger JavaFX ersetzt. 
@@ -225,11 +225,11 @@ eprint=false
 	\subsection*{Ergebnisse}
 	In der Studienarbeit wurde ein vollständiger Ersatz für den GVS 1.0 entwickelt.\\
 	Die Code Qualität konnte durch die Umsetzung einer klaren Schichtenarchitektur und zahlreichen Refactorings gesteigert werden. Dabei wurde ein besonderes Augenmerk auf das Einhalten des \gls{single-responsibility} und auf die Reduktion von dupliziertem Code gelegt. Somit konnten sämtliche Metrik-Noten verbessert werden.\\
-	Eine Steigerung der Usability wurde unter anderem durch ein modernes UI mit starken Farbkontrasten und eine automatisch skalierende und zentrierende Zeichenfläche erreicht. Zudem ist GVS 2.0 robuster gegenüber Programmierfehler in der User-Applikation. Bei auftretenden Exceptions springt ein Watchdog ein und kappt die Verbindung zwischen Client und Server.\\
+	Eine Verbesserung der Usability wurde unter anderem durch ein modernes UI mit starken Farbkontrasten und eine automatisch skalierende und zentrierende Zeichenfläche erreicht. Zudem ist GVS 2.0 robuster gegenüber Programmierfehler in der User-Applikation. Bei auftretenden Exceptions springt ein Watchdog ein und kappt die Verbindung zwischen Client und Server.\\
 	GVS 2.0 erweitert den bisherigen Funktionsumfang um einen Algorithmus für Trees, welcher fähig ist auch grosse Binary-Trees ansprechend und lesbar zu zeichnen sowie \gls{n-ary}s darzustellen.
 	
 	\subsection*{Ausblick}
-	Das Projektteam ist vom praktischen Nutzen der Applikation überzeugt und wird sich deshalb in der Bachelorarbeit mit einer generischen Lösung zur Visualisierung von weiteren theoretischen Informatikkonzepten  beschäftigen.
+	Das Projektteam ist vom praktischen Nutzen der Applikation überzeugt und wird sich deshalb in der Bachelorarbeit mit einer generischen Lösung zur Visualisierung von weiteren theoretischen Informatikkonzepten beschäftigen.
 	
 	\newpage
 	
@@ -413,7 +413,7 @@ eprint=false
 	\end{figure}
 	
 	\subsection{Erkenntnisse} \label{sec:erkenntnisse}
-	Die aus der Analysephase gewonnen Erkenntnisse fliessen in die Designspezifikation ein.
+	Die aus der Analysephase gewonnenen Erkenntnisse fliessen in die Designspezifikation ein.
 		
 	\subsubsection{Layering}
 	Dem Projektplan GVS 1.0 \cite{gvs1} kann eine Schichtenarchitektur bestehend aus zwei Schichten entnommen werden. Die Schichten widerspiegeln sich aber nicht im Package Design. Gut erkennbar ist das Server Interface, dass die Visualisierung vom Socket Server trennt. GUI spezifische Imports ziehen sich durch mehrere Layer.
