@@ -415,7 +415,7 @@ eprint=false
 	\subsection{Erkenntnisse} \label{sec:erkenntnisse}
 	Die aus der Analysephase gewonnen Erkenntnisse fliessen in die Designspezifikation ein.
 		
-	\subsubsection{Layering}
+	\subsubsection{Layering} %TODO: stimmt zwei schichten?
 	Dem Projektplan GVS 1.0 \cite{gvs1} kann eine Schichtenarchitektur bestehend aus zwei Schichten entnommen werden. Die Schichten widerspiegeln sich aber nicht im Package Design. Gut erkennbar ist das Server Interface, dass die Visualisierung vom Socket Server trennt. GUI spezifische Elemente ziehen sich durch mehrere Layer.
 	
 	\subsubsection{Swing/AWT Imports im Business Layer} \label{sssec:swing-business}
@@ -457,7 +457,7 @@ eprint=false
 			20.10.17 & 1.1 & Klassendiagramm 2.0 & mtrentini, mwieland \\
 			\bottomrule 
 		\end{tabularx} 
-		\caption{Versionshistory Designspezifikation} 
+		\caption{Versionshistory Architektur und Designspezifikation} 
 	\end{table}
 	
 	
@@ -499,15 +499,15 @@ eprint=false
 
 
 
-	\section{Refactoring Konzept} \label{sec:refactroing-concept}
+	\section{Refactoring Konzept} \label{sec:refactoring-concept}
 	Das Refactoring des GVS 1.0 soll organisiert durchgeführt werden. Dazu werden die notwendigen Schritte priorisiert aufgelistet.
 		
 	\subsection{Ablauf}\label{ssec:ablauf}
 	\begin{enumerate}
-		\item Der Presentation Layer wird ersetzt. Dabei wird \gls{swing} durch \gls{javafx} ersetzt. Mehr Details finden sich in der Migrations Liste (\ref{ssec:class-refactroing-list}) sowie im Klassendiagramm von GVS 2.0 (\ref{sec:class-diagram})
+		\item Der Presentation Layer wird ersetzt. Dabei wird \gls{swing} durch \gls{javafx} ersetzt. Mehr Details finden sich in der Migrations Liste (\ref{ch:migration-list}) sowie im Klassendiagramm von GVS 2.0 (\ref{sec:class-diagram})
 		\item Die GVS 1.0 Library wird um Generics erweitert. Dies betrifft die Java-, sowie die .NET Library.
 		\item Eine klare Schichtenarchitektur (\ref{ssec:layer-architecture}) wird eingeführt. Besonders wichtig ist dabei, die Entfernung von \gls{tangle}s.
-		\item Duplicated Code und weitere Code Smells sollen entfernt werden. Ein besonderes Augenmerk wird auf ein konsequentes Naming, das \gls{dry} Konzept sowie das \gls{single-responsibility} Konzept für Klassen und Methoden gelegt.
+		\item Duplicated Code und weitere Code Smells sollen entfernt werden. Ein besonderes Augenmerk wird auf ein konsequentes Naming, das \gls{dry} Konzept sowie das \gls{single-responsibility} für Klassen und Methoden gelegt.
 	\end{enumerate}
 
 	\subsection{Migrations Liste}
@@ -534,7 +534,7 @@ eprint=false
 		11.12.17 & 1.8 & Sequenzdiagramme beschrieben & mtrentini \\
 		\bottomrule 
 	\end{tabularx} 
-	\caption{Versionshistory Realisierung} 
+	\caption{Versionshistory Umsetzung} 
 	\end{table}
 
 
@@ -542,18 +542,18 @@ eprint=false
 	\section{Umgesetzte Architektur}
 	
 	\subsection{Klassendiagramm}
-	Das \textit{''Klassendiagramm UI Umsetzung''} im Anhang \ref{ch:class-diagram} zeigt einen Überblick über die wichtigsten Klassen in GVS 2.0 sowie die umgesetzte Schichtenarchitektur (vgl. \ref{ssec:layer-architecture}). Durch den Einsatz des \gls{mvvm} Pattern ist der UI Layer in sich gekapselt. Im Gegensatz zum GVS 1.0 werden ausserhalb des Presentation Layer keine UI spezifischen Klassen verwendet. Dies ermöglicht einen Austausch des verwendenten UI Framework.
+	Das \textit{''Klassendiagramm UI Umsetzung''} im Anhang \ref{ch:class-diagram} zeigt einen Überblick über die wichtigsten Klassen in GVS 2.0 sowie die umgesetzte Schichtenarchitektur (siehe \ref{ssec:layer-architecture}). Durch den Einsatz des \gls{mvvm} Pattern ist der Presentation Layer in sich gekapselt. Im Gegensatz zum GVS 1.0 werden ausserhalb des Presentation Layers keine UI spezifischen Klassen verwendet. Dies ermöglicht einen Austausch des verwendeten UI Frameworks.
 	
 
 	\noindent
 	Die folgende Aufzählung (\ref{desc:architecture-changes}) zeigt die wichtigsten Änderungen zum Klassendiagramm aus der Entwurfsphase auf. (siehe Anhang \ref{ch:class-diagram}) Ansonsten widerspiegelt GVS 2.0 die angedachte Architektur und Klassenhierarchie.
 	
 	\begin{description} \label{desc:architecture-changes}
-		\item[GvsXmlReader \& ClientConnection ] \hfill \\ Diese Klassen entstanden durch ein Refactoring der GVS 1.0 Klasse \textit{ServerConnectionXML}. Die Trennung dieser Klasse führt dazu, dass das \gls{single-responsibility}  eingehalten wird. 
+		\item[GvsXmlReader \& ClientConnection ] \hfill \\ Diese Klassen entstanden durch ein Refactoring der GVS 1.0 Klasse \textit{ServerConnectionXML}. Die Trennung dieser Klasse führt dazu, dass das \gls{single-responsibility} eingehalten wird. 
 		\item[Watchdog] \hfill \\ Behebt das Problem, dass beim Absturz eines Clients die Server Komponenten für andere Clients nicht wieder freigegeben wird. Dies erleichtert das Usability für den Benutzer sehr. Mehr dazu in Abschnitt \ref{sec:watchdog}
-		\item[SessionType] \hfill \\ Trees und Graphen werden völlig unterschiedlich gelayoutet. Dennoch werden die gleichen Klassen für die Darstellung im Presentation Layer verwendet. Durch das Type Object kann trotzdem ein spezifischer Layouting Algorithmus für jede Datenstrutkur eingesetzt werden.
+		\item[SessionType] \hfill \\ Trees und Graphen werden völlig unterschiedlich gelayoutet. Dennoch werden die gleichen Klassen für die Darstellung im Presentation Layer verwendet. Durch das \gls{type-object} kann trotzdem ein spezifischer Layouting Algorithmus für jede Datenstruktur eingesetzt werden.
 		\item[TreeVertex \& LeafVertex] \hfill \\ 
-		In der Designphase wurde das Zusammenführen von Graphen und Trees angedacht. In der Realisierung hat sich aber gezeigt, dass einerseits die Layouter sowie infolgedessen auch die Vertices unterschieden werden müssen. (siehe \ref{graph-vs-tree}) Für den Tree Layouter (\ref{sec:treelayouter}) wird deshalb neben dem \textit{TreeVertex} auch ein \textit{LeafVertex} benötigt.  Blattknoten dienen als Platzhalter die im UI nicht dargestellt werden. Sie vereinfachen die Berechnung des Tree Layouts aber stark.
+		In der Designphase wurde das Zusammenführen von Graphen und Trees angedacht. In der Realisierung hat sich aber gezeigt, dass einerseits die Layouter sowie infolgedessen auch die Vertices unterschieden werden müssen. (siehe \ref{graph-vs-tree}) Für den Tree Layouter (\ref{sec:treelayouter}) wird neben dem \textit{TreeVertex} auch ein \textit{LeafVertex} benötigt.  Blattknoten dienen als Platzhalter die im UI nicht dargestellt werden. Sie vereinfachen die Berechnung des Tree Layouts aber stark.
 	\end{description}
 
 	\subsection{Layering} \label{ssec:layering}
@@ -583,6 +583,7 @@ eprint=false
 	\subsubsection{Verbindungsaufbau}
 	Abbildung \ref{fig:sd-verbindungsaufbau-2} zeigt den Start der GVS 2.0 Applikation über die \textit{GVSApplication} sowie das Empfangen von Daten über die Socket. Nicht ersichtlich ist im Diagramm, dass GVS 2.0 an vielen Orten auf \gls{di} setzt (siehe \ref{DI}). Zum Beispiel werden die vier Klassen \textit{Watchdog},  \textit{ConnectionMonitor},  \textit{GvsXmlReader} und  \textit{ModelBuilder} (rechts im Diagramm) in den Constructor der  \textit{ClientConnection} ''injected''.
 	
+	\noindent
 	Details zu den genauen Änderungen gegenüber GVS 1.0 finden sich im Abschnitt \ref{desc:architecture-changes}.
 
 	\begin{figure}[h!]
@@ -630,6 +631,7 @@ eprint=false
 	Um die Benutzeroberfläche reaktiv zu halten und gleichzeitig auf Datenübertragungen von der Client Lib zu reagieren werden mehrere Threads benötigt. Daher müssen Synchronisationspunkte eingerichtet werden, damit typische Gefahren der Nebenläufigkeit (z.B Race Conditions) nicht auftreten können. Im GVS 2.0 sind folgende Klassen als eigenständige Threads konzipiert.
 	
 	\subsection{Nebenläufige Klassen}
+	Tabelle \ref{tbl:concurrent-classes} zeigt sämtliche nebenläufige Klassen des GVS 2.0.
 	
 	\begin{table}[h!]
 		\centering
@@ -643,7 +645,7 @@ eprint=false
 			\textit{ClientConnection} & Interpretiert mit Hilfe des \textit{GvsXmlReaders} die eingehende Verbindung und leitet die XML Daten an den ModelBuilder weiter & Während einer Client Verbindung \\
 			\textit{Watchdog} & Ermöglicht, dass ein Client den Server nur so lange reserviert wie auch Daten übertragen werden & Während einer Client Verbindung \\
 			\textit{AreaTicker} & Representiert einen Layouting Pulse. Definiert wie oft die View während dem Layouting eines Graphen aktualisiert wird. & Während dem Layout Prozess eines Graphen \\
-			SessionReplay & Gibt Graph Snapshots in einem konfigurierbaren Interval wieder & Solange die Session existiert \\
+			\textit{SessionReplay} & Gibt Graph Snapshots in einem konfigurierbaren Intervall wieder & Solange die Session existiert \\
 			\bottomrule 
 		\end{tabularx} 
 		\caption{Übersicht nebenläufige Klassen} 
@@ -652,7 +654,7 @@ eprint=false
 	
 	\subsection{Synchronisationspunkte}
 	
-	Die nebenläufigen Klassen werden von speziellen Synchronisationspunkten serialisiert. Alle Klassen werden von Guice \cite{guice} als Singleton instantiiert. Dies ist wichtig, da die Threads sich andernfalls auf unterschiedliche Objekte beziehen. Die Synchronisation würde in diesem Fall nicht stattfinden.
+	Die nebenläufigen Klassen werden von speziellen Synchronisationspunkten serialisiert, die in Tabelle \ref{tbl:sync-pt} aufgelistet sind. Alle Klassen werden von Guice \cite{guice} als Singleton instantiiert. Dies ist wichtig, da sich die Threads andernfalls auf unterschiedliche Objekte beziehen. Die Synchronisation würde in diesem Fall nicht greifen.
 	
 	\begin{table}[h!]
 		\centering
@@ -666,10 +668,11 @@ eprint=false
 			\bottomrule 
 		\end{tabularx} 
 		\caption{Übersicht Synchronisationspunkte} 
+			\label{tbl:sync-pt}
 	\end{table}
 	
 	\subsection{UI Thread}
-	Wichtig ist, dass alle Änderungen am User Interface ausschliesslich vom JavaFX UI Thread durchgeführt werden. Dazu wird bei allen Eintrittspunkten in den Presentation Layer ein \lstinline|runLater()| ausgeführt. Dies veranlasst einen Thread Wechsel zum UI Thread. 
+	Wichtig ist, dass alle Änderungen am User Interface ausschliesslich vom JavaFX UI Thread durchgeführt werden. Dazu wird bei allen Eintrittspunkten in den Presentation Layer ein \lstinline|runLater()| ausgeführt (siehe Code Abschnitt \ref{code:uithread}). Dies veranlasst einen Thread Wechsel zum UI Thread. 
 	
 	\begin{lstlisting}[language=java, frame=single, caption={Java FX UI Thread}, label={code:uithread}]
 	@Override
@@ -701,6 +704,7 @@ eprint=false
 		\label{fig:binarySearch}
 	\end{figure}
 	
+	\noindent
 	Die spezifische Implementierung dieses Suchalgorithmus ist dem Listing \ref{code:binarySearch} zu entnehmen.
 	
 	\begin{lstlisting}[language=java, frame=single,caption={Algorithmus Schnittpunkt Suche}, label={code:binarySearch}]
@@ -738,6 +742,7 @@ eprint=false
 		\item Der Algorithmus arbeitet symmetrisch.
 	\end{itemize}
 	
+	\noindent
 	Ein weiterer Vorteil dieses Algorithmus ist, dass er Bäume immer so zeichnet, dass sie eine minimale Breite besitzen. Dadurch werden auch Bäume mit sehr vielen Nodes schön dargestellt. Dies führt dazu, dass der in GVS 1.0 \cite{gvs1} verwendete \textit{Cluster Splitter} nicht mehr benötigt wird. 
 	
 	
@@ -769,7 +774,7 @@ eprint=false
 	\section{Graph und Tree Verschmelzung} \label{graph-vs-tree}
 	In theoretischer Hinsicht sind Bäume Spezialformen von Graphen. In GVS 1.0 wurden diese beiden Strukturen jedoch durchgehend getrennt modelliert. GVS 2.0 vereinigt diese Strukturen soweit es technisch Sinn macht, mit dem Ziel, Code Duplikationen weit möglichst zu vermeiden.
 	
-	\subsection{Unterschiede}
+	\subsection{Unterschiede zwischen Graphs und Trees}
 	\begin{itemize}
 		\item Ein Graph besitzt Edges und Vertices. Ein Baum hingegen besitzt nur Vertices, denn seine Edges sind durch die Vater-Kind Beziehung der Vertices implizit gegeben. 
 		\item Ein Tree Vertex besitzt zusätzliche Attribute wie Vater-Kind Beziehungen und \textit{isRoot()}
@@ -817,10 +822,10 @@ eprint=false
 	\section{Presentation Layer}
 	
 	\subsection{ScalablePane}
-	Während der Realisierungsphase hat sich gezeigt, dass die Grösse von Trees und Graphen einen grossen Einfluss auf ihre Darstellung hat. Um diesen Ansprüchen gerecht zu werden, bietet GVS 2.0 eine Zeichenfläche, welche ihre Inhalte automatisch skaliert und zentriert. Dadruch werden zum Beispiel grosse Trees leserlich abgebildet und kleine Graphen verwenden die gesamte Bildschirmbreite. 
+	Während der Realisierungsphase hat sich gezeigt, dass die Anzahl an Vertices in Trees und Graphen einen grossen Einfluss auf ihre Darstellung hat. Um diesen Ansprüchen gerecht zu werden, bietet GVS 2.0 eine Zeichenfläche, welche ihre Inhalte automatisch skaliert und zentriert. Dadurch werden zum Beispiel grosse Trees leserlich abgebildet und kleine Graphen verwenden die gesamte Bildschirmbreite. 
 	
 	\subsection{Drag Support}
-	Bei Graphen können alle Vertices beliebig mit der Maus positioniert werden. Sobald alle Vertices manuell positioniert wurden, ist die Autolayout Funktion nicht mehr verfügbar. Trees können nicht manuell positioniert werden. Eine entsprechende Meldung wird angezeigt.
+	Bei Graphen können alle Vertices beliebig mit der Maus positioniert werden. Sobald alle Vertices manuell ausgerichtet wurden, ist die Autolayout Funktion nicht mehr verfügbar. Trees können nicht manuell positioniert werden. Eine entsprechende Meldung wird angezeigt.
 		
 	\subsection{Autolayout}
 	Das Autolayout steht nur für Graphen zur Verfügung. Die Vertices werden vom Graph Layouter so positioniert, dass es möglichst wenig Überschneidungen der Edges gibt. Standardmässig ist die Einstellung \textit{Force Layout} aktiv. Dies führt dazu, dass beim betätigen des Auto-Layout Buttons die Koordinaten sämtlicher Vertices neu berechnet werden. Das Deaktivieren dieser Einstellung hat zur Folge, dass Vertices, die manuell durch den User positioniert wurden, nicht von einem Auto-Layout betroffen sind. Sollte dies auf alle Vertices zutreffen, wird der User über einen Tooltip entsprechend informiert.
@@ -906,11 +911,11 @@ eprint=false
 		\item[Background] \hfill \\ 
 		Für Graphen bestand in GSV 1.0 die Möglichkeit, ein Background Bild festzulegen. Diese Funktionalität ist nach Rücksprache mit dem Betreuer ersatzlos entfernt worden.
 		\item[Icon \& IconVertex] \hfill \\
-		Anstelle der Icon Bilder, die für Knoten in GVS 1.0 ausgewählt werden konnten, bietet GVS 2.0 neu sämtliche Icons von \gls{fontawesome} \cite{fontawesome} an. Zudem gibt es serverseitig keine Unterscheidung zwischen "normalen" Vertices und IconVertex mehr.
+		Anstelle der Icon Bilder, die für Knoten in GVS 1.0 ausgewählt werden konnten, bietet GVS 2.0 neu sämtliche Icons von \gls{fontawesome} \cite{fontawesome} an. Zudem gibt es serverseitig keine Unterscheidung zwischen Vertices mit und ohne Icon, was die Klasse \textit{IconVertex} überflüssig macht.
 		\item[CORBA] \hfill \\
 		Gemäss Vereinbarung mit dem Betreuer (siehe Anhang \ref{ch:minutes}) wurde die Verbindungsoption über CORBA entfernt.
 		\item[Log Level Konfiguration] \hfill \\
-		Die Log Level können in GVS 2.0 nicht mehr über das User Interface konfiguriert werden. Stattdessen kann das Log Level mittels \gls{jmx} und der JConsole oder durch Anpassen der Logback Konfiguration verändert werden. Dieses Vorgehen ist in der Benutzeranleitung genauer beschrieben.
+		Die Log Level können in GVS 2.0 nicht mehr über das User Interface konfiguriert werden. Stattdessen kann das Log Level mittels \gls{jmx} und der JConsole oder durch Anpassen der Logback Konfiguration verändert werden. Dieses Vorgehen ist im Benutzerhandbuch (siehe Anhang \ref{ch:manual}) genauer beschrieben.
 	\end{description}
 
 	\subsection{Neuerungen} \label{ssec:neuerungen}
@@ -949,7 +954,7 @@ eprint=false
 	
 	
 	\section{Zielerreichung}
-	Dieses Kapitel reflektiert die Erreichung der gemäss Aufgabenstellung (siehe Anhang \ref{aufgabenstellung}) gesetzter Ziele dieser Arbeit. Neben den subjektiven Einschätzungen des Projektteams dienen die benutzten Metriken als handfeste Grundlage für Code-basierte Veränderungen.
+	Dieses Kapitel reflektiert die Erreichung der gemäss Aufgabenstellung (siehe Anhang \ref{aufgabenstellung}) gesetzter Ziele dieser Arbeit. Neben den subjektiven Einschätzungen des Projektteams dienen die benutzten Metriken als handfeste Grundlage für qualitative Verbesserungen.
 	
 	\subsection{Ersetzung des Presentation Layers}
 	GVS 1.0 benutzt UI-spezifische \gls{swing} und \gls{awt} Klassen in sehr vielen Komponenten und durch alle Layer hinweg (siehe \ref{sssec:swing-business}). Insbesondere deshalb war das Ersetzen des Presentation Layers keine kleine Aufgabe. Schnell hat sich gezeigt, dass weniger Code als erwartet wiederverwendet werden kann. Im Zuge dieser Ersetzungen von \gls{swing} und \gls{awt} Klassen durch GVS spezifische Klassen, wurden auch viele kleinere Refactorings umgesetzt.\\
@@ -968,14 +973,14 @@ eprint=false
 	Wie in Kapitel \ref{ssec:stakeholder} beschrieben, gibt es für den \gls{gvs} drei relevante Stakeholder. Das in dieser Arbeit entstandene Endprodukt deckt die Bedürfnisse dieser Stakeholder ab.
 	
 	\begin{itemize}
-		\item Für Studenten entstand eine modern anmutende und intuitiv bedienbare Applikation mit verbesserter Fehlertoleranz (siehe Kapitel \ref{sec:watchdog} ''Watchdog'').
+		\item Für Studenten entstand eine modern anmutende und intuitiv bedienbare Applikation mit verbesserter Fehlertoleranz (siehe Kapitel \ref{sec:watchdog} \textit{Watchdog}).
 		\item Zukünftige Entwickler wird die Erweiterung oder Ersetzung einzelner Teile der Applikation durch die umgesetzte Schichtenarchitektur erleitert.
 		\item Der Dozent kann die Applikation wie gewohnt einsetzen. Sämtliche bisherigen Übungen die auf \gls{gvs} setzen, finden sich in einer erneuerten Version im \textit{Testers} Repository \cite{gvs-tester}.
 	\end{itemize}
 	
 	
 	\section{Software Metriken} \label{sec:metrics-2}
-	In der Analyse Phase wurden mehrere Code Smells in GVS 1.0 erkannt (Siehe Abschnitt \ref{sec:erkenntnisse}). In der Design Phase wurde deshalb ein Konzept ausgearbeitet, damit das Refactoring strukturiert ablaufen wird (Siehe Abschnitt \ref{sec:refactroing-concept}). Die Refactorings wurden damals aus Zeitgründen tief priorisiert. Es hat sich aber gezeigt, dass bereits am Anfang der Realisations Phase viele Refactorings durchgeführt werden müssen. Dies nicht zuletzt deshalb, da der bestehende Code sehr schwer zu lesen war. Durch die Refactorings konnte die Verständlichkeit des Codes enorm verbessert werden. Dies spiegelt sich auch in den erhobenen Software Metriken wieder. Im folgenden Abschnitt sind dieser genauer beschrieben.
+	In der Analyse Phase wurden mehrere Code Smells in GVS 1.0 erkannt (Siehe Abschnitt \ref{sec:erkenntnisse}). In der Design Phase wurde deshalb ein Konzept ausgearbeitet, damit das Refactoring strukturiert ablaufen wird (Siehe Abschnitt \ref{sec:refactroing-concept}). Die Refactorings wurden damals aus Zeitgründen tief priorisiert. Es hat sich aber gezeigt, dass bereits am Anfang der Realisations Phase viele Refactorings durchgeführt werden müssen. Dies nicht zuletzt deshalb, da der bestehende Code sehr schwer zu lesen war. Durch die Refactorings konnte die Verständlichkeit des Codes enorm verbessert werden. Dies spiegelt sich auch in den erhobenen Software Metriken wieder. Im folgenden Abschnitt sind diese genauer beschrieben.
 	
 	\subsection{Wartbarkeit}
 	In der Wartbarkeits-Metrik \cite{metric-maintainability} ist klar zu erkennen, dass die Wartbarkeit der meisten Klassen gut ist. Auf der X-Achse ist der Churn \cite{metric-churn} abgebildet, also wie oft eine Klasse verändert wurde. Klassen die oft angepasst werden, erledigen potentiell zu viele Aufgaben. Auf der Y-Achse ist die Wartbarkeit angezeigt. Diese errechnet sich aus Code-Duplikationen, zyklomatischer Komplexität von McCabe \cite{mccabe} und der Kognitiven Komplexität \cite{metric-cognitive-complexity} einer Klasse. Die beiden Klassen \textit{Persistor} und \textit{ModelBuilder} weisen die schlechtesten Werte auf. (oben rechts). Leider konnte aus Zeitgründen kein Refactoring der beiden Klassen durchgeführt werden. Ein entsprechender Hinweis ist aber im Ausblick dokumentiert.
@@ -1006,9 +1011,9 @@ eprint=false
 	
 	\subsection{Kritik}
 	In der Analyse- und Entwurfsphase des Projekts wurde entschieden, dass die Hauptziele so umgesetzt werden sollen, dass möglichst viel bestehender Code wiederverwendet werden kann. Dieses Ziel wurde klar nicht erreicht.\\
-	Dies führte auch dazu, dass deutlich mehr Arbeitsaufwand für die Umsetzung des Projekts nötig war, als eingeplant wurde (siehe Anhang \ref{zeitauswertung}). Die Wirtschaftlichkeit des Projekts hat dadurch gelitten.
+	Dies führte auch dazu, dass deutlich mehr Arbeitsaufwand für die Umsetzung des Projekts nötig war, als eingeplant wurde (siehe Anhang \ref{zeitauswertung}). Die Wirtschaftlichkeit des Projekts hat dadurch gelitten.\\
 	
-	\paragraph{}
+	\noindent
 	Des Weiteren hat sich das Projektteam zu Beginn stark mit der Verbesserung der Architektur und Code Qualität beschäftigt. Dadurch gingen gewisse Feinheiten der Funktionalität etwas unter. Als Beispiel kann hier genannt werden, dass erst relativ spät klar wurde, wozu einige Einstellungen aus dem Kontextmenü - wie der Cluster Splitter oder das Soft-Layout - dienen.
 
 
@@ -1023,28 +1028,29 @@ eprint=false
 	\subsection{Verbesserungspotential GVS 1.0}
 	Während der Verwendung von GVS 1.0 sind einige Dinge aufgefallen, die nicht optimal funktionieren. Diese wurden vom Betreuer in einer Liste festgehalten und an das Projektteam überreicht. Gemäss der Besprechung vom 27.09.2017 wurden diese Änderungen mit tiefer Priorität in den Backlog eingepflegt (siehe Anhang \ref{ch:minutes}). Dieses Kapitel zeigt auf, welche Punkte bis zum Abschluss des Projekts offen geblieben sind.
 	
-	\subsubsection{Font Size}
-	GVS 3.0 sollte es dem User erlauben die Font Size der Labels zu verändern, ohne den Code von GVS UI zu bearbeiten. Eignen würde sich entweder ein Menü-Eintrag ''Einstellungen'' oder das setzen von der Font Size im \textit{GVSStyle}.
-	
-	\subsubsection{Unicode Labels}
-	GVS 3.0 sollte die Darstellung von Unicode Zeichen in Labels unterstützen.
-	
-	\subsubsection{Snapshot Description}
-	GVS 2.0 bietet einem User die Möglichkeit, eine Notiz zu einem Snapshot zu verfassen (siehe \ref{ssec:neuerungen}).\\
-	GVS 3.0 sollte das verwendete Protokoll und die GVS Lib Klassen so erweitern, dass solche Notizen direkt im Client erstellt und mit den Graphen mitgeschickt werden können.
-	
-	\subsubsection{Schnelle Beendung von GVS Lib}
-	Wenn die \textit{main} Methode des Programms, welches GVS Lib verwendet sehr schnell beendet, gehen Daten bei der Übertragung verloren. Dies sollte bei GVS 3.0 verhindert werden.
+	\begin{description}
+		\item[Font Size] \hfill \\
+			GVS 3.0 sollte es dem User erlauben die Font Size der Labels zu verändern, ohne den Code von GVS UI zu bearbeiten. Eignen würde sich entweder ein Menü-Eintrag ''Einstellungen'' oder das setzen von der Font Size im \textit{GVSStyle}.
+		\item[Unicode Labels] \hfill \\
+		GV	S 3.0 sollte die Darstellung von Unicode Zeichen in Labels unterstützen.
+		\item[Snapshot Description] \hfill \\
+			GVS 2.0 bietet einem User die Möglichkeit, eine Notiz zu einem Snapshot zu verfassen (siehe \ref{ssec:neuerungen}).\\
+			GVS 3.0 sollte das verwendete Protokoll und die GVS Lib Klassen so erweitern, dass solche Notizen direkt im Client erstellt und mit den Graphen mitgeschickt werden können.
+		\item[Schnelle Beendung von GVS Lib] \hfill \\
+			Wenn die \textit{main} Methode des Programms, welches GVS Lib verwendet sehr schnell beendet, gehen Daten bei der Übertragung verloren. Dies sollte bei GVS 3.0 verhindert werden.
+	\end{description}
 	
 	\subsection{Nicht umgesetzte Ideen im GVS 2.0}
 	
-	\subsubsection{Refactoring ModelBuilder und Persistor}
-	Die Klassen \textit{ModelBuilder} und \textit{Persistor} besitzen sehr ähnliche Funktionalität und somit viel \textit{duplicated Code}. Obwohl diese Klassen in GVS 2.0 einem Refactoring unterzogen wurden, besteht das Problem weiterhin (siehe Abschnitt \ref{sec:metrics-2}).\\
-	GVS 3.0 sollte diese Klassen soweit refactoren, dass kein \textit{duplicated Code} mehr vorhanden ist.
+	\begin{description}
+		\item[Refactoring ModelBuilder und Persistor] \hfill \\
+			Die Klassen \textit{ModelBuilder} und \textit{Persistor} besitzen sehr ähnliche Funktionalität und somit viel \textit{duplicated Code}. Obwohl diese Klassen in GVS 2.0 einem Refactoring unterzogen wurden, besteht das Problem weiterhin (siehe Abschnitt \ref{sec:metrics-2}).\\
+			GVS 3.0 sollte diese Klassen soweit refactoren, dass kein \textit{duplicated Code} mehr vorhanden ist.
+		\item[Automated Testing] \hfill \\
+			GVS 1.0 besitzt keine automatisierten Tests. Auch in GVS 2.0 konnte diese Altlast nicht beseitigt werden. Es wurde nur eine sehr kleine Test Coverage erreicht, da die Erstellung von automatisierten Tests tief priorisiert wurde.\\
+			GVS 3.0 sollte das Business Layer und Teile des Access Layers sinnvoll mit Tests abdecken.
+	\end{description}
 	
-	\subsubsection{Automated Testing}
-	GVS 1.0 besitzt keine automatisierten Tests. Auch in GVS 2.0 konnte diese Altlast nicht beseitigt werden. Es wurde nur eine sehr kleine Test Coverage erreicht, da die Erstellung von automatisierten Tests tief priorisiert wurde.\\
-	GVS 3.0 sollte das Business Layer und Teile des Access Layers sinnvoll mit Tests abdecken.
 	
 	\newpage
 	
@@ -1053,7 +1059,7 @@ eprint=false
 	\addappheadtotoc
 	\appendixpage
 	
-		\chapter{Projektplanung}
+	\chapter{Projektplanung}
 	
 	\begin{table}[h!]
 		\centering
@@ -1088,7 +1094,7 @@ eprint=false
 	Der Presentation Layer ist vollständig gemäss Punkt 1 im Refactroing Konzept (\ref{sec:refactroing-concept}) umgesetzt.
 	
 	\subsubsection{Meilenstein 4: Release 2}
-	Die im Refactoring Konzept (\ref{sec:refactroing-conpet}) beschlossenen Änderungen sind umgesetzt. Das mit dem Enterprise Architekt erstellte Klassendiagramm ist mit dem Stand der GVS 2.0 Software synchron.
+	Die im Refactoring Konzept (\ref{sec:refactoring-concept}) beschlossenen Änderungen sind umgesetzt. Das mit dem Enterprise Architekt erstellte Klassendiagramm ist mit dem Stand der GVS 2.0 Software synchron.
 	
 	\subsubsection{Meilenstein 5: Release 3}
 	Alle im Meilenstein 2 definierten Requirements sind umgesetzt. Die GVS 2.0 Software ist für den Einsatz im Unterricht bereit.
@@ -1200,8 +1206,10 @@ eprint=false
 	\section{Qualitätsmanagement}
 	\label{sec:qualitymeasures}
 	
-	\subsection{Unit Tests}
-	Zur Sicherung der Software Qualität sind gute Tests unerlässlich. Da jedoch ein grosser Teil des Business Layers von GVS 1.0 übernommen wird, ist es nicht realistisch, für sämtliche Klassen Unit Tests nachzureichen. Klassen die neu erstellt oder einem weitreichendem Refactroing unterzogen werden, sollen hinreichenden mit Tests abgedeckt sein. Der Schwerpunkt liegt dabei auf der Qualität und nicht auf einer möglichst hohen Testabdeckung.
+	\subsection{Unit und System Tests}
+	Zur Sicherung der Software Qualität sind gute Tests unerlässlich. Da jedoch ein grosser Teil des Business Layers von GVS 1.0 übernommen wird, ist es nicht realistisch, für sämtliche Klassen Unit Tests nachzureichen. Wo immer möglich und sinnvoll sollen automatisierte Tests geschrieben werden. Der Schwerpunkt liegt dabei auf der Qualität und nicht auf einer möglichst hohen Testabdeckung.
+	
+	Des Weiteren ist ein grosser Teil der Applikation an die Benutzeroberfläche gekoppelt. Diese Teile können nur schwer mit automatisieren Tests abgedeckt werden. Deshalb soll mit End-zu-End Tests der gesamte Funktionsumfang getestet und protokolliert werden (siehe Anhang \ref{Testprotokoll}).
 	
 	\subsection{Definition of Done} \label{ssec:dod}
 	Source Code wird erst zum Review freigegeben, wenn folgende Kriterien erfüllt sind.
@@ -1331,9 +1339,6 @@ eprint=false
 	\includepdf[pages={1-}]{assets/Aufgabenstellung_GVS2.pdf}
 	
 	\chapter{Testprotokoll} \label{Testprotokoll}
-	
-	
-	
 	\section{Systemtests}
 	
 	\begin{enumerate}
@@ -1440,7 +1445,7 @@ eprint=false
 		\label{zeitauswertung-kategorien}
 	\end{figure}
 	
-	\chapter{Benutzerhandbuch}
+	\chapter{Benutzerhandbuch} \label{ch:manual}
 	Nachfolgend findet sich das Benutzerhandbuch für GVS 2.0 inklusive einer Installationsanleitung für User der Library sowie für Entwickler.
 	
 	\includepdf[pages={1-}]{manual/Benutzerhandbuch}	
