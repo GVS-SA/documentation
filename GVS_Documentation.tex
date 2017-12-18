@@ -654,7 +654,9 @@ eprint=false
 	
 	\subsection{Synchronisationspunkte}
 	
-	Die nebenläufigen Klassen werden von speziellen Synchronisationspunkten serialisiert, die in Tabelle \ref{tbl:sync-pt} aufgelistet sind. Alle Klassen werden von Guice \cite{guice} als Singleton instantiiert. Dies ist wichtig, da sich die Threads andernfalls auf unterschiedliche Objekte beziehen. Die Synchronisation würde in diesem Fall nicht greifen.
+	Die nebenläufigen Klassen werden von speziellen Synchronisationspunkten serialisiert, die in Tabelle \ref{tbl:sync-pt} aufgelistet sind. Die Synchronisationspunkte werden von Guice \cite{guice} als Singleton instantiiert, damit alle Threads den selben Monitor beziehen. Die Singletons in Guice dürfen keinesfalls mit dem klassischen \gls{gof} Singleton verglichen werden. Die Guice Singletons besitzen keinen privaten Konstruktor und auch keine statische Instanz der eigenen Klasse. Vielmehr stellt Guice sicher, dass pro Injector genau eine Instanz der Klasse erzeugt wird. Diese Instanz wird dann über den Konstruktor bei allen abhängigen Klassen injiziert. Somit bleibt eine abhängige Klasse testbar, da die Instanz einfach durch einen Mock ersetzt werden kann. \\
+	\noindent
+	Im Gegensatz zum klassischen Singleton garantiert also der Erzeuger des Sigletons (i.e. Guice Injector), die Einmaligkeit der Instanz, statt der Instanz selber. Dieses Verhalten wird auch \textit{Weak Singleton} genannt, wobei die Begrifflichkeit keine allgemeine Gültigkeit hat.
 	
 	\begin{table}[h!]
 		\centering
