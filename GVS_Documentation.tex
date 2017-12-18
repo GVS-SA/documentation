@@ -211,16 +211,16 @@ eprint=false
 	
 	\subsection*{Ausgangslage}
 	GVS ist eine Visualisierungs-Software die Graphen und Trees darstellt. Zusätzlich werden Algorithmen durch den Einsatz von Farben und gerichteten Kanten visuell hervorgehoben. \\
-	Die Datenstrukturen werden in der Entwicklungsumgebung des Benutzers implementiert und mit einer clientseitigen Library an die Visualisierungskomponenten übertragen. Diese interpretiert die eingehenden Daten und stellt diese auf eine ansprechende Art und Weise dar. \\
+	Die Datenstrukturen werden in der Entwicklungsumgebung des Benutzers implementiert und mit einer clientseitigen Library an die Visualisierungskomponenten übertragen. Dort werden die eingehenden Daten interpretiert und auf eine ansprechende Art und Weise dargestellt. \\
 	
 	\noindent
 	Der im Jahre 2005 entwickelte GVS 1.0 wurde im Unterricht der Module \textit{Algorithmen und Datenstrukturen 1 und 2} aktiv verwendet. Er erleichtert das Erlernen von komplexen Suchalgorithmen und Datenstrukturen die in den Modulen behandelt werden. Der GVS 1.0 hat aber bestimmte Einschränkungen bezüglich Usability und der Darstellung von grossen Trees. Ebenfalls gilt das eingesetzt UI Framework als veraltet und es existieren in der Zwischenzeit bessere Alternativen.
 	
 	\subsection*{Vorgehen / Technologien}	
-	In einer ersten Phase wird die bestehende Software auf Funktionsweise und Verbesserungspotential analysiert. Ebenfalls wird die umgesetzte Architektur kritisch beleuchtet. Da die Software HSR Intern verwendet wird, sind Folgearbeiten nicht auszuschliessen. Es wird deshalb darauf geachtet, dass mit den gewonnen Erkenntnissen eine Architektur designed wird, die einfach verständlich und erweiterbar ist. Ebenfalls sollen zeitgemässe Softwareentwicklungs-Techniken angewendet werden. \\
+	In einer ersten Phase wird die bestehende Software auf Funktionsweise und Verbesserungspotential analysiert. Ebenfalls wird die umgesetzte Architektur kritisch beleuchtet. Da die Software HSR Intern verwendet wird, sind Folgearbeiten nicht auszuschliessen. Es wird deshalb darauf geachtet, dass mit den gewonnen Erkenntnissen eine Architektur designet wird, die einfach verständlich und erweiterbar ist. Ebenfalls sollen zeitgemässe Softwareentwicklungs-Techniken angewendet werden. \\
 	
 	\noindent
-	Das in die Jahre gekommene Java Swing GUI Toolkit wird im Rahmen dieser Studienarbeit mit dem offiziellen Nachfolger JavaFX ersetzt.
+	Das in die Jahre gekommene Java Swing GUI Toolkit wird im Rahmen dieser Studienarbeit mit dem offiziellen Nachfolger JavaFX ersetzt. 
 	
 	\subsection*{Ergebnisse}
 	In der Studienarbeit wurde ein vollständiger Ersatz für den GVS 1.0 entwickelt.\\
@@ -265,12 +265,12 @@ eprint=false
 			28.09.17 & 1.0 & Grundgerüst erstellt & mwieland, mtrentini \\
 			\bottomrule 
 		\end{tabularx} 
-		\caption{Versionshistory Anforderungsanalyse} 
+		\caption{Versionshistory Ausgangslage} 
 	\end{table}
 	
 	
 	\section{Problembeschreibung}
-	An der \gls{hsr} werden in den Modulen ''Algorithmen und Datenstrukturen 1'' und ''Algorithmen und Datenstrukturen 2'' die Funktionsweise von schwierig zu verstehenden Algorithmen unterrichtet. Zusätzlicher Bestandteil der Module ist das Erlernen der beiden Datenstrukturen ''Graph'' und ''Tree''. Die Implementierung derartiger Algorithmen und Datenstrukturen ist oft mit grossem Aufwand verbunden. \\
+	An der \gls{hsr} werden in den Modulen \textit{Algorithmen und Datenstrukturen 1} und \textit{Algorithmen und Datenstrukturen 2} die Funktionsweise von schwierig zu verstehenden Algorithmen unterrichtet. Zusätzlicher Bestandteil der Module ist das Erlernen der beiden Datenstrukturen \textit{Graph} und \textit{Tree}. Die Implementierung derartiger Algorithmen und Datenstrukturen ist oft mit grossem Aufwand verbunden. \\
 	Die Software \gls{gvs} unterstützt Studenten beim Erlernen der beiden Datenstrukturen sowie der darauf anwendbaren Algorithmen. Damit sich die Studenten ausschliesslich auf das Erlernen der Algorithmen fokussieren können, bietet \gls{gvs} eine Library, welche den Studenten repetitive Implementierungsarbeiten abnimmt. Der wichtigste Aspekt ist jedoch die Visualisierung der Arbeitsweise von Datenstrukturen und Algorithmen. So zeigt die Software zum Beispiel den schrittweisen Aufbau eines Baumes oder den Ablauf des Path Finding Algorithmus ''Dijkstra''. \\
 	Die Software wurde 2005 bereits im Rahmen einer Bachelorarbeit umgesetzt. Der in die Jahre gekommene GVS 1.0 soll nun in einem Major-Upgrade aktualisiert werden.
 	
@@ -280,7 +280,7 @@ eprint=false
 	\gls{gvs} wird im Rahmen dieser Studienarbeit auf den neusten Stand der Technik gebracht und profitiert von neueren Java Features wie Generics und Lambdas sowie einer erweiterbaren Schichtenarchitektur. \\
 	
 	\noindent
-	Für den Endbenutzer ändert sich hauptsächlich das User Interface. Dieses bekommt ein modernes und ansprechendes Design, besitzt intuitiven Zugriff auf vorhandene Features und ist flexibler in der Darstellung von Graphen und Trees, durch die automatisch skalierende und zentrierende Zeichenfläche. Zudem hat die Applikation durch das Einführen eines Watchdogs eine höhere Fehlertoleranz. \\
+	Für den Endbenutzer ändert sich hauptsächlich das User Interface. Dieses bekommt ein modernes und ansprechendes Design, besitzt intuitiven Zugriff auf vorhandene Features und ist durch die automatisch skalierende und zentrierende Zeichenfläche flexibler in der Darstellung von Graphen und Trees. Zudem hat die Applikation durch das Einführen eines Watchdogs (siehe \ref{sec:watchdog}) eine höhere Fehlertoleranz. \\
 	
 	\noindent
 	Durch die Verbesserung der Code Qualität und die Einführung einer sauberen Schichten-Architektur, wird es zukünftigen Entwicklern leichter gemacht, die Applikation zu verstehen und zu erweitern.	
@@ -302,7 +302,7 @@ eprint=false
 			19.10.17 & 1.2 & Erkenntnisse: Stärken, Schwächen, Schlüsse beschrieben & mwieland \\
 			\bottomrule 
 		\end{tabularx} 
-		\caption{Versionshistory Anforderungsanalyse} 
+		\caption{Versionshistory Anforderungsspezifikation} 
 	\end{table}
 	
 	
@@ -311,7 +311,7 @@ eprint=false
 	Die Anforderungen werden massgeblich aus der offiziellen Aufgabenstellung entnommen. (siehe Anhang \ref{aufgabenstellung})
 	
 	\subsection{Funktionale Anforderungen}
-	Die funktionalen Anforderungen werden vollständig von GVS 1.0 \cite{gvs1} übernommen. Der Funktionsumfang der Applikation soll nicht verändert werden. Anpassungen am Funktionsumfang werden mit dem Betreuer besprochen und in den Sitzungsprotokollen dokumentiert.
+	Die funktionalen Anforderungen werden vollständig von GVS 1.0 \cite{gvs1} übernommen. Der Funktionsumfang der Applikation soll nicht verändert werden. Sollten dennoch Anpassungen am Funktionsumfang nötig sein, werden diese mit dem Betreuer besprochen und in den Sitzungsprotokollen dokumentiert.
 	
 	\subsection{Nicht funktionale Anforderungen}
 	
@@ -321,6 +321,7 @@ eprint=false
 		\item Punktuell müssen Verbesserungen vorgenommen werden.
 	\end{enumerate}
 
+	\noindent
 	Eine genaue Definition der dritten Anforderung ist im Abschnitt Refactoring Ablauf (\ref{ssec:ablauf}) beschrieben.
 	
 	
