@@ -1212,7 +1212,21 @@ eprint=false
 	\section{Repositories}
 	Die Artefakte werden in verschiedenen Repositories auf GitHub versioniert abgelegt. So gibt es für die Dokumentation, die Meetings-Protokolle und den Sourcecode jeweils ein eigenes Repository.
 	
-	
+	\begin{table}[h!]
+		\centering
+		\begin{tabularx}{\linewidth}{l l X}
+			\toprule 
+			Repository & Nutzen & URL \\
+			\midrule
+			gvs-ui & UI und Socket Server & \url{https://github.com/Graphs-Visualization-Service/gvs-ui}  \\
+			gvs-lib-java & Library für Java Programme & \url{https://github.com/Graphs-Visualization-Service/gvs-lib-java} \\
+			gvs-lib-csharp & Library für C\# Programme & \url{https://github.com/Graphs-Visualization-Service/gvs-lib-csharp} \\
+			gvs-tester & Ausführbare End-to-End Testfiles in Java & \url{https://github.com/Graphs-Visualization-Service/gvs-tester} \\
+			\bottomrule 
+		\end{tabularx} 
+		\caption{GVS 2.0 Repositories} 
+		\label{tbl:repos}
+	\end{table}
 	
 	\section{Continuous Integration}
 	Die Software wird nach jedem Commit mit Travis CI \cite{travisci} gebuildet. Dies garantiert, dass sämtliche Qualitätsmassnahmen stets eingehalten werden. (Siehe \ref{sec:qualitymeasures})
@@ -1506,10 +1520,10 @@ eprint=false
 	
 	
 	\chapter{Eigenständigkeitserklärung}
-	Der/Die Verfasser/in erklärt hiermit, dass er/sie die vorliegende Arbeit selbständig, ohne fremde Hilfe und ohne Benutzung anderer als die angegebenen Hilfsmittel angefertigt hat. Die aus fremden Quellen (einschliesslich elektronischer Quellen) direkt oder indirekt übernommenen Gedanken sind ausnahmslos als solche kenntlich gemacht. Durch Copyright geschützte Materialien wurden in dieser Arbeit nicht in unerlaubter Weise genutzt. Die Arbeit ist in gleicher oder ähnlicher Form oder auszugsweise im Rahmen einer anderen Prüfung noch nicht vorgelegt worden.\\[2cm]
-	\dotbox{Ort, Datum} \hfill \dotbox{Unterschrift des/der Verfassers/in}
-	\hfill \\[2cm]
-	\dotbox{Ort, Datum} \hfill \dotbox{Unterschrift des/der Verfassers/in}
+	
+	Die folgende Seite enthält die Eigenständigkeitserklärung.
+	
+	\includepdf{assets/pdf/eigenstaendigkeitserklaerung}
 	
 	\chapter{Vereinbarung über Urheber- und Nutzungsrechte}
 	Die folgende Seite enthält die Vereinbarung über Urheber- und Nutzungsrechte.
