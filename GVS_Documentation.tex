@@ -618,7 +618,7 @@ eprint=false
 	
 	
 	\subsubsection{Session}	
-	Auch in Abbildung \ref{fig:sd-session-2} zeigen sich die Änderungen im Presentation Layer und die strukturellen Änderungen an der gesamten Applikation stark. So ist nicht auf den ersten Blick ersichtlich, dass Abbildung \ref{fig:sd-graphsessioncontroller} und Abbildung \ref{fig:sd-session-2} die gleiche Programmlogik aufzeigen, nämlich wie \gls{pojo}s des Business Layers an das Presentation Layer gelangen und auf dem UI dargestellt werden.
+	Auch in Abbildung \ref{fig:sd-session-2} zeigen sich die Änderungen im Presentation Layer und die strukturellen Änderungen an der gesamten Applikation stark. So ist nicht auf den ersten Blick ersichtlich, dass Abbildung \ref{fig:sd-graphsessioncontroller} und Abbildung \ref{fig:sd-session-2} die gleiche Programmlogik aufzeigen, nämlich wie \gls{pojo}s des Business Layers an den Presentation Layer gelangen und auf dem UI dargestellt werden.
 	
 	\begin{figure}[h!]
 		\centering
@@ -1203,7 +1203,7 @@ eprint=false
 	
 	\subsection{Buildprozess}
 	\label{sec:buildprocess}
-	Zur Erstellung der Software Artefakte wird Gradle \cite{gradle} eingesetzt. Gradle verwaltet alle externen Software Abhängigkeiten. Zusätzlich wird die Software nur dann gebuilded, wenn alle Metriktools grünes Licht geben. Es resultiert ein ausführbares \gls{jar}.
+	Zur Erstellung der Software Artefakte wird Gradle \cite{gradle} eingesetzt. Gradle verwaltet alle externen Software Abhängigkeiten. Zusätzlich wird die Software nur dann gebuildet, wenn alle Metriktools grünes Licht geben. Es resultiert ein ausführbares \gls{jar}.
 	
 	
 	
@@ -1232,7 +1232,7 @@ eprint=false
 	Mit den Metriken kann während der Entwicklung geprüft werden, ob die Code Qualität den gesetzten Vorgaben (Siehe \ref{ssec:dod}) entspricht.
 	
 	\subsubsection{Code Style}
-	Als Styleguide wird eine angepasste Version des Sun Styleguide verwendet \cite{suncheckstyle}. Damit dieser im Projekt durchgängig eingehalten wird, wird das Checkstyle Plugin \cite{checkstyle} in den Buildprozess integriert. (Siehe \ref{sec:buildprocess})	
+	Als Styleguide wird eine angepasste Version des Sun Styleguide verwendet \cite{suncheckstyle}. Damit dieser im Projekt durchgängig eingehalten wird, wird das Checkstyle Plugin \cite{checkstyle} in den Build-Prozess integriert. (Siehe \ref{sec:buildprocess})	
 	
 	\subsubsection{Code Climate}
 	Zur Überwachung des Technical Debt und der Wartbarkeit wird die Github App Code Climate \cite{codeclimate} eingesetzt.
@@ -1287,7 +1287,7 @@ eprint=false
 	Zur Minimierung von allfälligen Datenverlusten wird wie folgt vorgegangen:
 	
 	\begin{enumerate}
-		\item Täglich automatisiertes Backup aller Projektdaten im JIRA \cite{jira} (Zeiterfassung, erstellte Issues, Jira Konfiguration)
+		\item Täglich automatisiertes Backup aller Projektdaten im JIRA \cite{jira} (Zeiterfassung, erstellte Issues, JIRA Konfiguration)
 		\item Die Projektdokumentation sowie der Programmcode wird in den vier Github Repositories der Github Organisation \cite{github} versioniert abgelegt. Für die Projektmitglieder gilt der Grundsatz ''Commit early and often''.
 		\item Weitere Artefakte werden auf Dropbox \cite{dropbox} abgelegt und dort automatisch gesichert und versioniert.
 	\end{enumerate}
