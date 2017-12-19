@@ -226,7 +226,7 @@ eprint=false
 	In der Studienarbeit wurde ein vollständiger Ersatz für den GVS 1.0 entwickelt.\\
 	Die Code Qualität konnte durch die Umsetzung einer klaren Schichtenarchitektur und zahlreichen Refactorings gesteigert werden. Dabei wurde ein besonderes Augenmerk auf das Einhalten des \gls{single-responsibility} und auf die Reduktion von dupliziertem Code gelegt. Somit konnten sämtliche Metrik-Noten verbessert werden.\\
 	Eine Verbesserung der Usability wurde unter anderem durch ein modernes UI mit starken Farbkontrasten und eine automatisch skalierende und zentrierende Zeichenfläche erreicht. Zudem ist GVS 2.0 robuster gegenüber Programmierfehler in der User-Applikation. Bei auftretenden Exceptions springt ein Watchdog ein und kappt die Verbindung zwischen Client und Server.\\
-	GVS 2.0 erweitert den bisherigen Funktionsumfang um einen Algorithmus für Trees, welcher fähig ist auch grosse Binary-Trees ansprechend und lesbar zu zeichnen sowie \gls{n-ary}s darzustellen.
+	GVS 2.0 erweitert den bisherigen Funktionsumfang um einen Algorithmus für Trees, welcher fähig ist auch grosse Binary-Trees ansprechend und lesbar zu zeichnen sowie \glspl{n-ary} darzustellen.
 	
 	\subsection*{Ausblick}
 	Das Projektteam ist vom praktischen Nutzen der Applikation überzeugt und wird sich deshalb in der Bachelorarbeit mit einer generischen Lösung zur Visualisierung von weiteren theoretischen Informatikkonzepten beschäftigen.
@@ -426,7 +426,7 @@ eprint=false
 	Im Business Layer gibt es diverse Imports der UI Frameworks \gls{swing} rsp. \gls{awt}. Dies erschwert einen einfachen Austausch des eingesetzten UI Frameworks.
 	
 	\item[Tangles] \hfill \\
-	Zwischen dem Presentation und Business Layer existieren \gls{tangle}s. Dies verhindert einen einfachen Austausch des Presentation Layers. 
+	Zwischen dem Presentation und Business Layer existieren \glspl{tangle}. Dies verhindert einen einfachen Austausch des Presentation Layers. 
 	
 	\item[Magic Numbers] \hfill \\
 	Viele Konstanten sind ungenügend beschrieben. Der Zweck von vielen Zahlen ist daher nur schwer nachvollziehbar.
@@ -515,7 +515,7 @@ eprint=false
 	\begin{enumerate}
 		\item Der Presentation Layer wird ersetzt. Dabei wird \gls{swing} durch \gls{javafx} ersetzt. Mehr Details finden sich in der Migrations Liste (\ref{ch:migration-list}) sowie im Klassendiagramm von GVS 2.0 (\ref{sec:class-diagram})
 		\item Die GVS 1.0 Library wird um Generics erweitert. Dies betrifft die Java-, sowie die .NET Library.
-		\item Eine klare Schichtenarchitektur (\ref{ssec:layer-architecture}) wird eingeführt. Besonders wichtig ist dabei, das Entfernen von \gls{tangle}s.
+		\item Eine klare Schichtenarchitektur (\ref{ssec:layer-architecture}) wird eingeführt. Besonders wichtig ist dabei, das Entfernen von \glspl{tangle}.
 		\item Duplicated Code und weitere Code Smells sollen entfernt werden. Ein besonderes Augenmerk wird auf ein konsequentes Naming, das \gls{dry} Konzept sowie das \gls{single-responsibility} für Klassen und Methoden gelegt.
 	\end{enumerate}
 
@@ -609,7 +609,7 @@ eprint=false
 	\clearpage
 	
 	\subsubsection{ModelBuilder}
-	Das Sequenzdiagramm in Abbildung \ref{fig:sd-modelbuilder-2} zeigt, wie aus einem empfangenen XML File \gls{pojo}s des Business Layers erstellt werden. Sehr gut erkennbar ist, dass im Vergleich zu GVS 1.0 die Trennung zwischen Graph und Tree viel weniger ausgeprägt ist, um \textit{duplicated Code} zu vermeiden (siehe \ref{graph-vs-tree}).
+	Das Sequenzdiagramm in Abbildung \ref{fig:sd-modelbuilder-2} zeigt, wie aus einem empfangenen XML File \glspl{pojo} des Business Layers erstellt werden. Sehr gut erkennbar ist, dass im Vergleich zu GVS 1.0 die Trennung zwischen Graph und Tree viel weniger ausgeprägt ist, um \textit{duplicated Code} zu vermeiden (siehe \ref{graph-vs-tree}).
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=\linewidth]{assets/images/sequence_ModelBuilder}
@@ -632,7 +632,7 @@ eprint=false
 	\clearpage
 	
 	\subsubsection{Session}	
-	Auch in Abbildung \ref{fig:sd-session-2} zeigen sich die Änderungen im Presentation Layer und die strukturellen Änderungen an der gesamten Applikation stark. So ist nicht auf den ersten Blick ersichtlich, dass Abbildung \ref{fig:sd-graphsessioncontroller} und Abbildung \ref{fig:sd-session-2} die gleiche Programmlogik aufzeigen, nämlich wie \gls{pojo}s des Business Layers an den Presentation Layer gelangen und auf dem UI dargestellt werden.
+	Auch in Abbildung \ref{fig:sd-session-2} zeigen sich die Änderungen im Presentation Layer und die strukturellen Änderungen an der gesamten Applikation stark. So ist nicht auf den ersten Blick ersichtlich, dass Abbildung \ref{fig:sd-graphsessioncontroller} und Abbildung \ref{fig:sd-session-2} die gleiche Programmlogik aufzeigen, nämlich wie \glspl{pojo} des Business Layers an den Presentation Layer gelangen und auf dem UI dargestellt werden.
 	
 	\begin{figure}[h!]
 		\centering
@@ -752,7 +752,7 @@ eprint=false
 
 	\section{Tree Layouter} \label{sec:treelayouter}
 
-	Die Darstellung von Trees auf eine optisch ansprechende und leserliche Art und Weise bietet verschiedene Schwierigkeiten. Bereits 1981 haben Reingold-Tilford \cite{reingold-tilford} zu diesem Zweck einen Algorithmus entwickelt, welcher binäre Bäume zeichnet. Dieser Algorithmus wurde von Walker weiterentwickelt, um \gls{n-ary}s darzustellen und schlussendlich von Buchheim, Jünger und Leipert \cite{tree-algorithm} verbessert, um die Laufzeit auf $\mathcal{O}(n)$ zu beschränken. 
+	Die Darstellung von Trees auf eine optisch ansprechende und leserliche Art und Weise bietet verschiedene Schwierigkeiten. Bereits 1981 haben Reingold-Tilford \cite{reingold-tilford} zu diesem Zweck einen Algorithmus entwickelt, welcher binäre Bäume zeichnet. Dieser Algorithmus wurde von Walker weiterentwickelt, um \glspl{n-ary} darzustellen und schlussendlich von Buchheim, Jünger und Leipert \cite{tree-algorithm} verbessert, um die Laufzeit auf $\mathcal{O}(n)$ zu beschränken. 
 	
 	Der von GVS 2.0 verwendete Algorithmus, basiert auf diesem neusten Tree-Algorithmus und genügt somit auch den fünf anerkannten Prinzipien, denen ein solcher Algorithmus genügen muss:
 	
@@ -978,7 +978,7 @@ eprint=false
 	
 	\subsection{Ersetzung des Presentation Layers}
 	GVS 1.0 benutzt UI-spezifische \gls{swing} und \gls{awt} Klassen in sehr vielen Komponenten und durch alle Layer hinweg (siehe \ref{sssec:swing-business}). Insbesondere deshalb war das Ersetzen des Presentation Layers keine kleine Aufgabe. Schnell hat sich gezeigt, dass weniger Code als erwartet wiederverwendet werden kann. Im Zuge dieser Ersetzungen von \gls{swing} und \gls{awt} Klassen durch GVS spezifische Klassen, wurden auch viele kleinere Refactorings umgesetzt.\\
-	Die neue Architektur von GVS 2.0 konnte sämtliche \gls{tangle}s entwirren (siehe \ref{ssec:layering}) und glänzt mit einem in sich gekoppelten Presentation Layer.
+	Die neue Architektur von GVS 2.0 konnte sämtliche \glspl{tangle} entwirren (siehe \ref{ssec:layering}) und glänzt mit einem in sich gekoppelten Presentation Layer.
 	
 	Für den Endbenutzer wirkt das neue User Interface frisch und modern. Durch die direkte Erreichbarkeit aller Funktionen über die Toolbar, ist es auch benutzerfreundlicher als das UI des Vorgängers.
 	
