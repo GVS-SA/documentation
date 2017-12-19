@@ -217,7 +217,7 @@ eprint=false
 	Der im Jahre 2005 entwickelte GVS 1.0 wurde im Unterricht der Module \textit{Algorithmen und Datenstrukturen 1 und 2} aktiv verwendet. Er erleichtert das Erlernen von komplexen Suchalgorithmen und Datenstrukturen, die in den Modulen behandelt werden. Der GVS 1.0 hat aber bestimmte Einschränkungen bezüglich Usability und der Darstellung von grossen Trees. Ebenfalls gilt das eingesetzt UI Framework als veraltet und es existieren in der Zwischenzeit bessere Alternativen.
 	
 	\subsection*{Vorgehen / Technologien}	
-	In einer ersten Phase wird die bestehende Software auf Funktionsweise und Verbesserungspotential analysiert. Ebenfalls wird die umgesetzte Architektur kritisch beleuchtet. Da die Software \gls{hsr}-intern verwendet wird, sind Folgearbeiten nicht auszuschliessen. Es wird deshalb darauf geachtet, dass mit den gewonnenen Erkenntnissen eine Architektur designet wird, die einfach verständlich und erweiterbar ist. Ebenfalls sollen zeitgemässe Softwareentwicklungs-Techniken angewendet werden. \\
+	In einer ersten Phase wird die bestehende Software auf Funktionsweise und Verbesserungspotential analysiert. Ebenfalls wird die umgesetzte Architektur kritisch beleuchtet. Da die Software \gls{hsr}-intern verwendet wird, sind Folgearbeiten nicht auszuschliessen. Es wird deshalb darauf geachtet, dass mit den gewonnenen Erkenntnissen eine Architektur designet wird, die einfach verständlich und erweiterbar ist. Zudem sollen zeitgemässe Softwareentwicklungs-Techniken angewendet werden. \\
 	
 	\noindent
 	Das in die Jahre gekommene Java \gls{swing} GUI Toolkit wird im Rahmen dieser Studienarbeit mit dem offiziellen Nachfolger \gls{javafx} ersetzt. 
@@ -506,7 +506,7 @@ eprint=false
 	Die \textit{View} stellt den UI Zustand des \textit{ViewModels} dar. Sie setzt sich aus einer Controller Klasse sowie einer deklarativen \gls{fxml} Datei zusammen. Die View hält eine Instanz des ViewModels und leitet die eingehenden Anfragen direkt an dieses weiter. Mit der Databinding-API wird eine bidirektionale Kommunikation zwischen \textit{View} und \textit{ViewModel} sichergestellt. 
 	
 	\paragraph{ViewModel}
-	Das \textit{ViewModel} kennt die View nicht. Es hat somit keine Abhängigkeiten zu konkreten Anzeige-Elementen. Dies hat den grossen Vorteil, dass die gesamte UI Logik im \textit{ViewModel} gekapselt ist und somit sehr gut testbar ist. Das ViewModel enthält \gls{javafx} spezifische Properties, die für das bidirektionale Binding zwischen UI Komponenten und Code Behind nötig sind.
+	Das \textit{ViewModel} kennt die View nicht. Es hat somit keine Abhängigkeiten zu konkreten Anzeige-Elementen. Dies hat den grossen Vorteil, dass die gesamte UI Logik im \textit{ViewModel} gekapselt ist und somit sehr gut testbar ist. Das ViewModel enthält \gls{javafx} spezifische Properties, die für das bidirektionale Binding zwischen UI Komponenten und Code Behind nötig sind \cite{javafxbook}.
 	
 	\subsection{Business Layer}
 	Im Business Layer liegt die eigentliche Logik. Er enthält keine \gls{javafx} Komponenten, weshalb das eingesetzte UI Framework ohne weiteres ausgewechselt werden kann. 
@@ -1122,7 +1122,7 @@ eprint=false
 	Entwurf des Soll-Zustand von GVS 2.0: Eine klassische 3-Schichten Architektur wird entworfen. Es wird spezifiziert, welche GVS 1.0 Komponenten durch welche GVS 2.0 Komponenten ersetzt werden. 
 	
 	\subsubsection{Meilenstein 3: Release 1}
-	Der Presentation Layer ist vollständig gemäss Punkt 1 im Refactroing Konzept (\ref{sec:refactroing-concept}) umgesetzt.
+	Der Presentation Layer ist vollständig gemäss Punkt 1 im Refactroing Konzept (\ref{sec:refactoring-concept}) umgesetzt.
 	
 	\subsubsection{Meilenstein 4: Release 2}
 	Die im Refactoring Konzept (\ref{sec:refactoring-concept}) beschlossenen Änderungen sind umgesetzt. Das mit dem Enterprise Architekt erstellte Klassendiagramm ist mit dem Stand der GVS 2.0 Software synchron.
