@@ -390,7 +390,7 @@ eprint=false
 
 	\subsubsection{ApplicationView: Load \& Save Session} \label{sssec:appView}
 	Der Programmablauf beim Laden und Speichern einer Session ist im Sequenzdiagramm \ref{fig:sd-applicationview} dargestellt. \\
-	Wenn ein User eine Session lädt, wird das entsprechende \gls{xml} vom \textit{Persistor} geparsed. Je nach Bedarf wird ein Vector aus Graphs oder Trees erstellt. Dieser Vector wird an den \textit{SessionController} übergeben. Der Ablauf innerhalb des \textit{SessionController}s ist im separaten Sequenzdiagramm \textbf{GraphSessionController} (siehe \ref{sssec:sessioncontroller}) dargestellt. \\
+	Wenn ein User eine Session lädt, wird das entsprechende \gls{xml} vom \textit{Persistor} geparsed. Je nach Bedarf wird ein Vector aus Graphen oder Trees erstellt. Dieser Vector wird an den \textit{SessionController} übergeben. Der Ablauf innerhalb des \textit{SessionController}s ist im separaten Sequenzdiagramm \textbf{GraphSessionController} (siehe \ref{sssec:sessioncontroller}) dargestellt. \\
 	Nachdem die Session erstellt wurde, wird die \textit{ApplicationView} per Observer-Beziehung (siehe Glossar: \gls{observer}) notifiziert. Sie stellt darauf die neue Session im \gls{gvsui} dar.\\
 	Auffällig an der Klasse \textit{ApplicationView} ist, dass sie im Constructor einen \textit{Persistor} instanziert. Diese Instanz wird jedoch nicht direkt in der ApplicationView verwendet, sondern wird als Argument an den \textit{ApplicationController} geschickt, welcher dann mit dem Persistor Sessions speichert und lädt. In der Analyse des Projektteams ist unklar geblieben, wieso die Instanzierung des \textit{Persistor}s nicht direkt im \textit{ApplicationController} passiert.
 	\begin{figure}[h!]
@@ -578,7 +578,7 @@ eprint=false
 	\end{figure}
 	
 	\noindent
-	Die Zugriffe verlaufen durchgehend von höheren Schichten zu tieferen. Sämtliche Tangles, also Aufrufe von tieferen Schichten zu höheren Schichten werden mit dem Observer Pattern aufgelöst. Einzige Ausnahme bildet das \textit{Model} Package, dass seitlich am \textit{Business} und \textit{Access} Layer positioniert ist. \\
+	Die Zugriffe verlaufen durchgehend von höheren Schichten zu tieferen. Sämtliche \glspl{tangle} werden mit dem \gls{observer} aufgelöst. Einzige Ausnahme bildet das \textit{Model} Package, dass seitlich am \textit{Business} und \textit{Access} Layer positioniert ist. \\
 	\noindent
 	Das Strukturanalyse Tool markiert die Zugriffe zwischen \textit{Model} und \textit{Business} leider auch als Tangle (rot). Diese stellen jedoch kein Problem dar, da sich die beiden Packages logisch auf der selben Ebene befinden. Zur besseren Veranschaulichung dient das \textit{''Klassendiagramm UI Umsetzung''} im Anhang \ref{ch:class-diagram}.
 	
@@ -656,7 +656,7 @@ eprint=false
 			\toprule 
 			Klasse & Beschreibung & Lebensdauer \\
 			\midrule
-			\textit{GVSApplication} & Läuft im Java Main Thread. Startet den JavaFX UI Thread sowie den SocketServer Thread & Programmstart bis App Terminierung. \\
+			\textit{GVSApplication} & Läuft im Java Main Thread. Startet den \gls{javafx} UI Thread sowie den SocketServer Thread & Programmstart bis App Terminierung. \\
 			UI Klassen & Alle UI Klassen laufen im JavaFX Thread & Programmstart bis App Terminierung \\
 			\textit{SocketServer} & Startet einen \textit{SocketServer} auf einen konfigurierbaren Port und erstellt \textit{ClientConnection} Instanzen für jede eingehende Anfrage. & Programmstart bis App Terminierung. \\
 			\textit{ClientConnection} & Interpretiert mit Hilfe des \textit{GvsXmlReaders} die eingehende Verbindung und leitet die XML Daten an den ModelBuilder weiter & Während einer Client Verbindung \\
@@ -691,7 +691,7 @@ eprint=false
 	\end{table}
 	
 	\subsection{UI Thread}
-	Wichtig ist, dass alle Änderungen am User Interface ausschliesslich vom JavaFX UI Thread durchgeführt werden. Dazu wird bei allen Eintrittspunkten in den Presentation Layer ein \lstinline|runLater()| ausgeführt (siehe Code Abschnitt \ref{code:uithread}). Dies veranlasst einen Thread Wechsel zum UI Thread. 
+	Wichtig ist, dass alle Änderungen am User Interface ausschliesslich vom \gls{javafx} UI Thread durchgeführt werden. Dazu wird bei allen Eintrittspunkten in den Presentation Layer ein \lstinline|runLater()| ausgeführt (siehe Code Abschnitt \ref{code:uithread}). Dies veranlasst einen Thread Wechsel zum UI Thread. 
 	
 	\clearpage
 	
@@ -782,7 +782,7 @@ eprint=false
 	\end{figure}
 	
 	\subsection{Area} \label{ssec:area}
-	Die \textit{Area} dient als Container während dem dynamischen Layout Prozess. Sie beinhaltet mehrere \textit{Particle}s die von physischen Kräften bewegt werden (\textit{Traction}s und \textit{RepulsiveForce}s). Ein \textit{Particle} repräsentiert einen Vertex. Die Positionen der \textit{Particles} werden fortlaufend berechnet. Sobald ein Tick Event passiert, werden die aktuellen Koordinaten des Particles in den \textit{GraphVertex} im Business Layer kopiert. 	Über eine Observer Beziehung wird das \textit{VertexViewModel} im Presentation Layer über die neuen Koordinaten notifziert. Dessen X/Y Properties sind über ein bidirektionales Binding mit dem UI Element (z.B \textit{Ellipse}) verbunden. Die neuen Koordinaten werden auf der Oberfläche dargestellt. 
+	Die \textit{Area} dient als Container während dem dynamischen Layout Prozess. Sie beinhaltet mehrere \textit{Particle}s die von physischen Kräften bewegt werden (\textit{Traction}s und \textit{RepulsiveForce}s). Ein \textit{Particle} repräsentiert einen Vertex. Die Positionen der \textit{Particles} werden fortlaufend berechnet. Sobald ein Tick Event passiert, werden die aktuellen Koordinaten des Particles in den \textit{GraphVertex} im Business Layer kopiert. Über eine Observer Beziehung wird das \textit{VertexViewModel} im Presentation Layer über die neuen Koordinaten notifziert. Dessen X/Y Properties sind über ein bidirektionales Binding mit dem UI Element (z.B \textit{Ellipse}) verbunden. Die neuen Koordinaten werden auf der Oberfläche dargestellt. 
 	
 	\begin{figure}[h!]
 		\centering
@@ -884,7 +884,7 @@ eprint=false
 	Gemäss der Aufgabenstellung (siehe Anhang \ref{aufgabenstellung}) müssen beide Clients um Generics erweitert werden. Es hat sich aber gezeigt, dass Generics auf der Schnittstelle keinen Mehrwert bieten würden (siehe Beschluss in Sitzungsprotokoll Woche 11, Anhang \ref{ch:minutes}). Schlussendlich wurden deshalb nur die intern verwendeten Listen und Maps um Generics erweitert.
 	
 	\subsection{Styles und Icons}
-	Die von GVS 1.0 unterstützten Style-Typen wurden durch einen generellen GVS 2.0 Style ersetzt. Die Typ Klassen aus GVS 1.0 haben nur marginale Unterschiede untereinander. Mit der generellen \textit{GVSStyle} Klasse sowie vier weiteren Enums, konnte damit sehr viele duplizierter Code entfernt werden. Des Weiteren wurden die GVS 1.0 Icons durch FontAwesome Icons ersetzt. Eine Übersicht der migrierten Klassen ist der Tabelle \ref{tbl:styles} zu entnehmen.
+	Die von GVS 1.0 unterstützten Style-Typen wurden durch einen generellen GVS 2.0 Style ersetzt. Die Typ Klassen aus GVS 1.0 haben nur marginale Unterschiede untereinander. Mit der generellen \textit{GVSStyle} Klasse sowie vier weiteren Enums, konnte damit sehr viele duplizierter Code entfernt werden. Des Weiteren wurden die GVS 1.0 Icons durch \gls{fontawesome} Icons ersetzt. Eine Übersicht der migrierten Klassen ist der Tabelle \ref{tbl:styles} zu entnehmen.
 	
 	\begin{table}[h!]
 		\centering
@@ -943,7 +943,7 @@ eprint=false
 		\item[SnapshotDescription] \hfill \\ 
 		Damit einzelne Schritte in den dargestellten Graphen besser verständlich sind, bietet GVS 2.0 die Möglichkeit kurze Beschreibungen zu erfassen. Diese können serverseitig erfasst, gespeichert und geladen werden. Die Erweiterung des Verbindungsprotokoll, um SnapshotDescription auch clientseitig zu unterstützen, sollte für ein allfälliges Folgeprojekt geplant werden (siehe Kapitel \ref{sec:ausblick}).
 		\item[n-ary Trees] \hfill \\
-		Der Tree Layout Algorithmus von GVS 2.0 ist fähig neben Binary Trees auch \glspl{n-ary} zu zeichnen (siehe \ref{sec:treelayouter}). Da der nötige Code clientseitig bereits vorhanden war, konnte das GVS UI mit kleinen Aufwand erweitert werden. Somit können in GVS 2.0 nun auch allgemeinere Trees, wie z.B. \glspl{trie}, dargestellt werden.
+		Der Tree Layout Algorithmus von GVS 2.0 ist fähig neben Binary Trees auch \glspl{n-ary} zu zeichnen (siehe \ref{sec:treelayouter}). Da der nötige Code clientseitig bereits vorhanden war, konnte das \gls{gvsui} mit kleinen Aufwand erweitert werden. Somit können in GVS 2.0 nun auch allgemeinere Trees, wie z.B. \glspl{trie}, dargestellt werden.
 	\end{description}
 	
 	\subsection{Fehlerbehebungen}
@@ -977,7 +977,7 @@ eprint=false
 	Dieses Kapitel reflektiert die Erreichung der gemäss Aufgabenstellung (siehe Anhang \ref{aufgabenstellung}) gesetzter Ziele dieser Arbeit. Neben den subjektiven Einschätzungen des Projektteams dienen die benutzten Metriken als handfeste Grundlage für qualitative Verbesserungen.
 	
 	\subsection{Ersetzung des Presentation Layers}
-	GVS 1.0 benutzt UI-spezifische \gls{swing} und \gls{awt} Klassen in sehr vielen Komponenten und durch alle Layer hinweg (siehe \ref{sssec:swing-business}). Insbesondere deshalb war das Ersetzen des Presentation Layers keine kleine Aufgabe. Schnell hat sich gezeigt, dass weniger Code als erwartet wiederverwendet werden kann. Im Zuge dieser Ersetzungen von \gls{swing} und \gls{awt} Klassen durch GVS spezifische Klassen, wurden auch viele kleinere Refactorings umgesetzt.\\
+	GVS 1.0 benutzt UI-spezifische \gls{swing} und \gls{awt} Klassen in sehr vielen Komponenten und durch alle Layer hinweg (siehe \ref{sssec:swing-business}). Insbesondere deshalb war das Ersetzen des Presentation Layers keine kleine Aufgabe. Schnell hat sich gezeigt, dass weniger Code als erwartet wiederverwendet werden kann. Im Zuge dieser Ersetzungen von Swing und AWT Klassen durch GVS spezifische Klassen, wurden auch viele kleinere Refactorings umgesetzt.\\
 	Die neue Architektur von GVS 2.0 konnte sämtliche \glspl{tangle} entwirren (siehe \ref{ssec:layering}) und glänzt mit einem in sich gekoppelten Presentation Layer.
 	
 	Für den Endbenutzer wirkt das neue User Interface frisch und modern. Durch die direkte Erreichbarkeit aller Funktionen über die Toolbar, ist es auch benutzerfreundlicher als das UI des Vorgängers.
@@ -1053,12 +1053,12 @@ eprint=false
 	
 	\begin{description}
 		\item[Font Size] \hfill \\
-			GVS 3.0 sollte es dem User erlauben die Font Size der Labels zu verändern, ohne den Code von GVS UI zu bearbeiten. Eignen würde sich entweder ein Menü-Eintrag ''Einstellungen'' oder das setzen von der Font Size in der \textit{GVSStyle} Klasse.
+			GVS 3.0 sollte es dem User erlauben die Font Size der Labels zu verändern, ohne den Code von \gls{gvsui} zu bearbeiten. Eignen würde sich entweder ein Menü-Eintrag ''Einstellungen'' oder das setzen von der Font Size in der \textit{GVSStyle} Klasse.
 		\item[Unicode Labels] \hfill \\
 		GVS 3.0 sollte die Darstellung von Unicode Zeichen in Labels unterstützen.
 		\item[Snapshot Description] \hfill \\
 			GVS 2.0 bietet einem User die Möglichkeit, eine Notiz zu einem Snapshot zu verfassen (siehe \ref{ssec:neuerungen}).\\
-			GVS 3.0 sollte das verwendete Protokoll und die GVS Lib Klassen so erweitern, dass solche Notizen direkt im Client erstellt und mit den Graphen mitgeschickt werden können.
+			GVS 3.0 sollte das verwendete Protokoll und die \gls{gvslib} Klassen so erweitern, dass solche Notizen direkt im Client erstellt und mit den Graphen mitgeschickt werden können.
 		\item[Schnelle Beendigung der GVS Lib] \hfill \\
 			Wenn die \textit{main} Methode des Programms, welches GVS Lib verwendet sehr schnell beendet, gehen Daten bei der Übertragung verloren. Dies sollte bei GVS 3.0 verhindert werden.
 	\end{description}
@@ -1071,7 +1071,7 @@ eprint=false
 			GVS 3.0 sollte diese Klassen soweit refactoren, dass kein \textit{duplicated Code} mehr vorhanden ist.
 		\item[Automated Testing] \hfill \\
 			GVS 1.0 besitzt keine automatisierten Tests. Auch in GVS 2.0 konnte diese Altlast nicht beseitigt werden. Es wurde nur eine sehr kleine Test Coverage erreicht, da die Erstellung von automatisierten Tests tief priorisiert wurde.\\
-			GVS 3.0 sollte das Business Layer und Teile des Access Layers sinnvoll mit Tests abdecken.
+			GVS 3.0 sollte den Business Layer und Teile des Access Layers sinnvoll mit Tests abdecken.
 	\end{description}
 	
 	
@@ -1304,7 +1304,7 @@ eprint=false
 				\midrule
 				2 & Die Schnittstelle zwischen Business Logik und Presentation Layer ist weitaus weniger wohldefiniert als ursprünglich angenommen. Der nötige Zeitaufwand übersteigt die Schätzung um ein Vielfaches & 1 & 2 & Gute Recherche und Einarbeit in GVS 1.0, genügend lange Elaboration Phase & Rücksprache mit Betreuer. Überprüfen des Projektscopes und allenfalls Anpassung des Scopes. \\
 				\midrule
-				3 & Funktionalitäten von GVS 1.0, welche mit Swing umgesetzt wurden, werden durch JavaFX nicht oder unzureichend unterstützt & 1 & 2 & Einlesen in JavaFX, Funktionalitäten GVS 1.0 abklären & Alternative zur bestehenden Umsetzung finden \\
+				3 & Funktionalitäten von GVS 1.0, welche mit Swing umgesetzt wurden, werden durch \gls{javafx} nicht oder unzureichend unterstützt & 1 & 2 & Einlesen in JavaFX, Funktionalitäten GVS 1.0 abklären & Alternative zur bestehenden Umsetzung finden \\
 				\midrule
 				4 & Eingesetzte Frameworks, Libraries und Cloud Services harmonieren nicht wie angenommen & 2 & 2 & Auf einen Software Stack setzen, der beliebt und weit verbreitet ist. Dies reduziert das Risiko, dass der gegenseitige Support fehlt. & Alternativen für inkompatible Services finden \\  
 				\midrule 
@@ -1350,7 +1350,7 @@ eprint=false
 	Die genaue Arbeitsteilung ist der git-History, den Java-Docs sowie den Änderungshistories in der Projektdokumentation zu entnehmen.
 	
 	\chapter{Klassendiagramme} \label{ch:class-diagram}
-	Die folgenden Seiten enthalten die Entwicklung der Klassendiagramme über den Projektverlauf. Für die GVS Lib Komponente existierte in der Vorgängerarbeit kein Klassendiagramm.
+	Die folgenden Seiten enthalten die Entwicklung der Klassendiagramme über den Projektverlauf. Für die \gls{gvslib} Komponente existierte in der Vorgängerarbeit kein Klassendiagramm.
 	
 	\begin{enumerate}
 		\item GVS 1.0 Klassendiagramm UI Analyse
@@ -1414,7 +1414,7 @@ eprint=false
 			Erkannte Mängel GVS 1.0 & Einfluss auf GVS 2.0\\
 			\midrule
 			Veraltetes User Interace & Modernes, ansprechendes User Interface, mit dunklen Farben, damit die Algorithmen besser farblich hervorgehoben werden \\
-			Icons werden unter Unix nicht dargestellt & Moderne, sprechende FontAwesome Icons einführen. Die Icons werden auf allen Plattformen korrekt dargestellt \\
+			Icons werden unter Unix nicht dargestellt & Moderne, sprechende \gls{fontawesome} Icons einführen. Die Icons werden auf allen Plattformen korrekt dargestellt \\
 			Funktion \textit{Random und Stable Layout} ist nicht klar & Die Funktion wird wegen fehlendem praktischen Nutzen entfernt \\
 			Funktion \textit{Cluster Splitter} ist nicht klar & Ein spezieller Layout Algorithmus für Binary Trees wird implementiert \\
 			Beim Laden von gespeicherten Session muss der Speicherort immer wieder von Neuem ausgewählt werden & Der zuletzt verwendete Speicherort wird gespeichert \\
