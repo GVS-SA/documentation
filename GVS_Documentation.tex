@@ -271,7 +271,7 @@ eprint=false
 	
 	\section{Problembeschreibung}
 	An der \gls{hsr} werden in den Modulen \textit{Algorithmen und Datenstrukturen 1} und \textit{Algorithmen und Datenstrukturen 2} die Funktionsweise von schwierig zu verstehenden Algorithmen unterrichtet. Zusätzlicher Bestandteil der Module ist das Erlernen der beiden Datenstrukturen \textit{Graph} und \textit{Tree}. Die Implementierung derartiger Algorithmen und Datenstrukturen ist oft mit grossem Aufwand verbunden. \\
-	Die Software \gls{gvs} unterstützt Studenten beim Erlernen der beiden Datenstrukturen sowie der darauf anwendbaren Algorithmen. Damit sich die Studenten ausschliesslich auf das Erlernen der Algorithmen fokussieren können, bietet \gls{gvs} eine Library, welche den Studenten repetitive Implementierungsarbeiten abnimmt. Der wichtigste Aspekt ist jedoch die Visualisierung der Arbeitsweise von Datenstrukturen und Algorithmen. So zeigt die Software zum Beispiel den schrittweisen Aufbau eines Baumes oder den Ablauf des Path Finding Algorithmus ''Dijkstra''. \\
+	Die Software \gls{gvs} unterstützt Studenten beim Erlernen der beiden Datenstrukturen sowie der darauf anwendbaren Algorithmen. Damit sich die Studenten ausschliesslich auf das Erlernen der Algorithmen fokussieren können, bietet GVS eine Library, welche den Studenten repetitive Implementierungsarbeiten abnimmt. Der wichtigste Aspekt ist jedoch die Visualisierung der Arbeitsweise von Datenstrukturen und Algorithmen. So zeigt die Software zum Beispiel den schrittweisen Aufbau eines Baumes oder den Ablauf des Path Finding Algorithmus ''Dijkstra''. \\
 	Die Software wurde 2005 bereits im Rahmen einer Bachelorarbeit umgesetzt. Der in die Jahre gekommene GVS 1.0 soll nun in einem Major-Upgrade aktualisiert werden.
 	
 	
@@ -323,8 +323,6 @@ eprint=false
 
 	\noindent
 	Eine genaue Definition der dritten Anforderung ist im Abschnitt Refactoring Ablauf (\ref{ssec:ablauf}) beschrieben.
-	
-	
 	
 	\section{Domainanalyse}
 	In der Domainanalyse wird der GVS 1.0 untersucht. Die Erkenntnisse fliessen in die Designspezifikation ein.
@@ -401,6 +399,8 @@ eprint=false
 		\label{fig:sd-applicationview}
 	\end{figure}
 
+	\clearpage
+
 	\subsubsection{GraphSessionController} \label{sssec:sessioncontroller}
 	Wie das Sequenzdiagramm \ref{fig:sd-graphsessioncontroller} zeigt, wird der \textit{GraphSessionController} vom \textit{ModelBuilder} und vom \textit{Persistor} angestossen, wenn ein oder mehrere neue Graphen geparsed wurden. Der \textit{GraphSessionController} ist dafür zuständig diese Graphen in eine neue oder bestehende Session einzufügen. Dabei unterscheidet sich der Programmablauf kaum. Der besseren Übersicht halber ist nur der Fall ''ein einzelner neuer Graph wurde empfangen'' abgebildet.\\
 	Für Graphen die keine fix positionierte Vertices haben, wird in einem weiteren Schritt der \textit{LayoutController} aufgerufen. Dieser steuert die Funktionalität der Physics-Engine. Die Physics-Engine berechnet die Koordinaten von Vertices mittels anziehenden und abstossenden Kräften. (siehe \gls{forcedirecteddrawing}) Der \textit{GraphSessionController} wird  per Observer-Beziehung (siehe Glossar: \gls{observer}) informiert, sobald die Physics-Engine die Berechnung der Positionen abgeschlossen hat.\\
@@ -411,36 +411,44 @@ eprint=false
 		\caption{Sequenzdiagramm: GraphSessionController}
 		\label{fig:sd-graphsessioncontroller}
 	\end{figure}
+
+	\clearpage
 	
 	\subsection{Erkenntnisse} \label{sec:erkenntnisse}
 	Die aus der Analysephase gewonnenen Erkenntnisse fliessen in die Designspezifikation ein.
 		
-	\subsubsection{Layering}
+	\begin{description}
+	\item[Layering] \hfill \\
 	Dem Projektplan GVS 1.0 \cite{gvs1} kann eine Schichtenarchitektur bestehend aus zwei Schichten entnommen werden. Die Schichten widerspiegeln sich aber nicht im Package Design. Gut erkennbar ist das Server Interface, dass die Visualisierung vom Socket Server trennt. GUI spezifische Imports ziehen sich durch mehrere Layer.
 	
-	\subsubsection{Swing/AWT Imports im Business Layer} \label{sssec:swing-business}
+	\item[Swing/AWT Imports im Business Layer] \hfill \\ \label{sssec:swing-business}
 	Im Business Layer gibt es diverse Imports der UI Frameworks \gls{swing} rsp. \gls{awt}. Dies erschwert einen einfachen Austausch des eingesetzten UI Frameworks.
 	
-	\subsubsection{Tangles} Zwischen dem Presentation und Business Layer existieren \gls{tangle}s. Dies verhindert einen einfachen Austausch des Presentation Layers. 
+	\item[Tangles] \hfill \\
+	Zwischen dem Presentation und Business Layer existieren \gls{tangle}s. Dies verhindert einen einfachen Austausch des Presentation Layers. 
 	
-	\subsubsection{Magic Numbers} Viele Konstanten sind ungenügend beschrieben. Der Zweck von vielen Zahlen ist daher nur schwer nachvollziehbar.
+	\item[Magic Numbers] \hfill \\
+	Viele Konstanten sind ungenügend beschrieben. Der Zweck von vielen Zahlen ist daher nur schwer nachvollziehbar.
 	
-	\subsubsection{Namenskonvention}
+	\item[Namenskonvention] \hfill \\
 	Es gibt keine durchgehende Namenskonvention. Den Variablen fehlt es oft an Informationsgehalt. Ebenfalls sind veränderbare Variablen in Grossbuchstaben geschrieben, was per Konvention \cite{jls-naming} den Konstanten vorbehalten ist.
 	
-	\subsubsection{Temporary Fields}
+	\item[Temporary Fields] \hfill \\
 	Viele Klassen arbeiten exzessiv mit Klassenvariablen, die in diversen Methoden gesetzt und gelesen werden. Des Weiteren werden die Klassenvariablen von Funktionsparameter und lokalen Variablen überdeckt.   
 	
-	\subsubsection{Duplicated Code}
+	\item[Duplicated Code] \hfill \\
 	Klassen wie der \textit{ModelBuilder} und \textit{Persistor} übernehmen sehr ähnliche Aufgaben.
 	
-	\subsubsection{Long Classes}
+	\item[Long Classes] \hfill \\
 	Einige Klassen überschreiten die Obergrenze von 250 Zeilen Code/Klasse. Dies hebt den Verdacht, dass die Klassen mehr als eine Aufgabe erledigen und somit das ''Single Responsibility Principle'' verletzen.
 	
-	\subsubsection{Keine Unit Tests} Im GVS 1.0 wurden keine Unit Tests geschrieben. Die Klassen sind sehr schwer testbar, da kein \gls{di} umgesetzt wurde.
+	\item[Keine Unit Tests] \hfill \\
+	Im GVS 1.0 wurden keine Unit Tests geschrieben. Die Klassen sind sehr schwer testbar, da kein \gls{di} umgesetzt wurde.
 	
-	\subsubsection{JavaDoc}
-	Das Verhalten von Klassen ist nicht durchgehend dokumentiert.  Ebenfalls fehlt es bei einigen Kommentaren an Aussagekraft.	
+	\item[JavaDoc] \hfill \\
+	Das Verhalten von Klassen ist nicht durchgehend dokumentiert.  Ebenfalls fehlt es bei einigen Kommentaren an Aussagekraft.
+	
+	\end{description}	
 
 		
 	\chapter{Architektur und Designspezifikation}
@@ -465,7 +473,7 @@ eprint=false
 	\section{Klassendiagramm} \label{sec:class-diagram}
 	Das Klassendiagramm 2 \textit{''Klassendiagramm Entwurf''} im Anhang \ref{ch:class-diagram} orientiert sich stark an der Vorgängerversion des GVS 1.0. (Siehe \ref{ssec:klassendiagramm-1}). Mit dem Ziel möglichst viel Code wiederzuverwenden, wird der Access und Business Layer mehrheitlich beibehalten. Der Presentation Layer wird vollständig durch die neu eingeführte \gls{mvvm} Struktur ersetzt (Siehe \ref{sssec:mvvm}).
 	
-	
+	\clearpage
 	
 	\section{Schichtenstruktur} \label{ssec:layer-architecture}
 	
@@ -473,7 +481,7 @@ eprint=false
 	Der Presentation Layer wird von der restlichen Anwendung entkoppelt. Damit kann das eingesetzte UI Framework (z.B \gls{javafx}) leicht ersetzt werden. Der Presentation Layer ist nach dem \gls{mvvm} Prinzip organisiert.
 	
 	\subsubsection{Model-View-ViewModel} \label{sssec:mvvm}
-	\gls{mvvm} dient der Trennung zwischen dem User Interface und der Anzeigelogik. \gls{mvvm} ist eine Konkretisierung des verbreiteten \gls{mvc} Pattern und setzt stark auf Databindings. Es wurde von Microsoft für das \gls{wpf} Framework entwickelt und wird auch in modernen \gls{javafx} Applikation eingesetzt.
+	\gls{mvvm} dient der Trennung zwischen dem User Interface und der Anzeigelogik. MVVM ist eine Konkretisierung des verbreiteten \gls{mvc} Pattern und setzt stark auf Databindings. Es wurde von Microsoft für das \gls{wpf} Framework entwickelt und wird auch in modernen \gls{javafx} Applikation eingesetzt.
 	
 	\begin{figure}[h!]
 		\centering
@@ -594,6 +602,8 @@ eprint=false
 		\caption{Sequenzdiagramm: Verbindungsaufbau}
 		\label{fig:sd-verbindungsaufbau-2}
 	\end{figure}
+
+	\clearpage
 	
 	\subsubsection{ModelBuilder}
 	Das Sequenzdiagramm in Abbildung \ref{fig:sd-modelbuilder-2} zeigt, wie aus einem empfangenen XML File \gls{pojo}s des Business Layers erstellt werden. Sehr gut erkennbar ist, dass im Vergleich zu GVS 1.0 die Trennung zwischen Graph und Tree viel weniger ausgeprägt ist, um \textit{duplicated Code} zu vermeiden (siehe \ref{graph-vs-tree}).
@@ -616,6 +626,7 @@ eprint=false
 		\label{fig:sd-load_save_session-2}
 	\end{figure}
 	
+	\clearpage
 	
 	\subsubsection{Session}	
 	Auch in Abbildung \ref{fig:sd-session-2} zeigen sich die Änderungen im Presentation Layer und die strukturellen Änderungen an der gesamten Applikation stark. So ist nicht auf den ersten Blick ersichtlich, dass Abbildung \ref{fig:sd-graphsessioncontroller} und Abbildung \ref{fig:sd-session-2} die gleiche Programmlogik aufzeigen, nämlich wie \gls{pojo}s des Business Layers an den Presentation Layer gelangen und auf dem UI dargestellt werden.
@@ -627,6 +638,7 @@ eprint=false
 		\label{fig:sd-session-2}
 	\end{figure}
 
+	\clearpage
 
 
 	\section{Multithreading} \label{sec:threading}
@@ -658,7 +670,7 @@ eprint=false
 	
 	Die nebenläufigen Klassen werden von speziellen Synchronisationspunkten serialisiert, die in Tabelle \ref{tbl:sync-pt} aufgelistet sind. Die Synchronisationspunkte werden von Guice \cite{guice} als Singleton instantiiert, damit alle Threads das selbe Monitor Objekt beziehen. Die Singletons in Guice dürfen keinesfalls mit dem klassischen \gls{gof} Singleton verglichen werden. Die Guice Singletons besitzen keinen privaten Konstruktor und auch keine statische Instanz der eigenen Klasse. Vielmehr stellt Guice sicher, dass pro Injector genau eine Instanz der Klasse erzeugt wird. Diese Instanz wird dann über den Konstruktor bei allen abhängigen Klassen injiziert. Somit bleibt eine abhängige Klasse testbar, da die Instanz einfach durch einen Mock ersetzt werden kann. \\
 	\noindent
-	Im Gegensatz zum klassischen Singleton garantiert also der Erzeuger des Sigletons (i.e. Guice Injector), die Einmaligkeit der Instanz, statt der Instanz selber. Dieses Verhalten wird auch \textit{Weak Singleton} genannt, wobei die Begrifflichkeit keine allgemeine Gültigkeit hat.
+	Im Gegensatz zum klassischen Singleton garantiert also der Erzeuger des Sigletons (i.e. Guice Injector), die Einmaligkeit der Instanz, statt die Instanz selber. Dieses Verhalten wird auch \textit{Weak Singleton} genannt, wobei die Begrifflichkeit keine allgemeine Gültigkeit hat.
 	
 	\begin{table}[h!]
 		\centering
@@ -677,6 +689,8 @@ eprint=false
 	
 	\subsection{UI Thread}
 	Wichtig ist, dass alle Änderungen am User Interface ausschliesslich vom JavaFX UI Thread durchgeführt werden. Dazu wird bei allen Eintrittspunkten in den Presentation Layer ein \lstinline|runLater()| ausgeführt (siehe Code Abschnitt \ref{code:uithread}). Dies veranlasst einen Thread Wechsel zum UI Thread. 
+	
+	\clearpage
 	
 	\begin{lstlisting}[language=java, frame=single, caption={Java FX UI Thread}, label={code:uithread}]
 	@Override
@@ -699,15 +713,16 @@ eprint=false
 	\subsection{Lösung}
 	Die Lösung bietet ein Suchalgorithmus, der wie der \textit{Binary Search Algorithm} \cite{adbook} funktioniert. So wird ebenfalls mit zwei Endpunkten begonnen, welche in diesem Fall den Mittelpunkten des Start- und Endvertex der Kante entsprechen. Mittels Rekursion wird dann der Schnittpunkt gesucht. Beispielhaft ist der Ablauf mit den verschiedenen Iterationen in Abbildung \ref{fig:binarySearch} dargestellt. \\
 	In einem ersten Schritt wird der Mittelpunkt zwischen den beiden Endpunkten bestimmt (in Abbildung  \ref{fig:binarySearch} grün respektive orange eingezeichnet). Dann wird getestet, ob sich der Mittelpunkt innerhalb oder ausserhalb des Vertex befindet, denn für jede Iteration wird ein Punkt innerhalb und ein Punkt ausserhalb des Vertex benötigt. \\
-	Für die nächste Iteration wird der neu bestimmte Mittelpunkt plus einer der Endpunkte übergeben. In Abbildung  \ref{fig:binarySearch} zeigen Iterationen eins bis drei den Fall, dass der Mittelpunkt ausserhalb des Vertex zu liegen kommt. Ab Iteration Vier wechselt das Szenario, da der Mittelpunkt innerhalb des Vertex zu liegen kommt. In Iteration Sechs ist der Abstand zwischen den Endpunkten so klein, dass die Abbruch Bedingung der Rekursion zu tragen kommt und der gesuchte Schnittpunkt gefunden ist. \\
+	Für die nächste Iteration wird der neu bestimmte Mittelpunkt plus einer der Endpunkte übergeben. In Abbildung  \ref{fig:binarySearch} zeigen Iterationen eins bis drei den Fall, dass der Mittelpunkt ausserhalb des Vertex zu liegen kommt. Ab Iteration Vier wechselt das Szenario, da der Mittelpunkt innerhalb des Vertex zu liegen kommt. In Iteration Sechs ist der Abstand zwischen den Endpunkten so klein, dass die Abbruch Bedingung der Rekursion zu tragen kommt und der gesuchte Schnittpunkt gefunden ist.
 	
-	\begin{figure}
+	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=0.6\linewidth]{assets/images/binarySearch}
 		\caption{Algorithmus zur Suche eines Schnittpunktes}
 		\label{fig:binarySearch}
 	\end{figure}
 	
+	\clearpage
 	\noindent
 	Die spezifische Implementierung dieses Suchalgorithmus ist dem Listing \ref{code:binarySearch} zu entnehmen.
 	
@@ -768,17 +783,17 @@ eprint=false
 	
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[width=0.8\linewidth]{assets/images/sequence_area}
+		\includegraphics[width=\linewidth]{assets/images/sequence_area}
 		\caption{Sequenzdiagramm Area}
 		\label{fig:sequencearea}
 	\end{figure}
 
-
+	\clearpage
 
 	\section{Graph und Tree Verschmelzung} \label{graph-vs-tree}
 	In theoretischer Hinsicht sind Bäume Spezialformen von Graphen. In GVS 1.0 wurden diese beiden Strukturen jedoch durchgehend getrennt modelliert. GVS 2.0 vereinigt diese Strukturen soweit es technisch Sinn macht, mit dem Ziel, Code Duplikationen weit möglichst zu vermeiden.
 	
-	\subsection{Unterschiede zwischen Graphs und Trees}
+	\subsection{Unterschiede zwischen Graphen und Trees}
 	\begin{itemize}
 		\item Ein Graph besitzt Edges und Vertices. Ein Baum hingegen besitzt nur Vertices, denn seine Edges sind durch die Vater-Kind Beziehung der Vertices implizit gegeben. 
 		\item Ein Tree Vertex besitzt zusätzliche Attribute wie Vater-Kind Beziehungen und \textit{isRoot()}
@@ -903,8 +918,6 @@ eprint=false
 	Auch in den Client Libraries wurde ein einfaches Layering eingeführt. Die Umsetzung der Schichtenarchitektur ist dem Klassendiagramm aus Anhang \ref{ch:class-diagram} zu entnehmen.	
 
 
-
-
 	\section{Weitere Änderungen gegenüber GVS 1.0}
 	Dieser Abschnitt umfasst kleinere Änderungen, Neuerungen und Fehlerbehebungen gegenüber dem Vorgänger Produkt \cite{gvs1}.
 	
@@ -913,7 +926,7 @@ eprint=false
 		\item[MaxLabelLength] \hfill \\
 		In GVS 1.0 wurde eine MaxLabelLength vom Client an den Server übermittelt. In GVS 2.0 ist dieser Wert in der \textit{Configuration} Klasse als Konstante definiert. Da er vor allem Einfluss auf das Layout der Trees hat, ist dieser Wert in GVS 2.0 nicht mehr konfigurierbar. Erhält der GVS 2.0 mit zu langen Labels, werden diese automatisch durch Auslassungspunkte in der Mitte des Labels gekürzt.
 		\item[Background] \hfill \\ 
-		Für Graphen bestand in GSV 1.0 die Möglichkeit, ein Background Bild festzulegen. Diese Funktionalität ist nach Rücksprache mit dem Betreuer ersatzlos entfernt worden.
+		Für Graphen bestand in GSV 1.0 die Möglichkeit, ein Background Bild festzulegen. Da diese Funktionalität im Unterricht nicht verwendet wird, wurde sie nach Rücksprache mit dem Betreuer ersatzlos entfernt.
 		\item[Icon \& IconVertex] \hfill \\
 		Anstelle der Icon Bilder, die für Knoten in GVS 1.0 ausgewählt werden konnten, bietet GVS 2.0 neu sämtliche Icons von \gls{fontawesome} \cite{fontawesome} an. Zudem gibt es serverseitig keine Unterscheidung zwischen Vertices mit und ohne Icon, was die Klasse \textit{IconVertex} überflüssig macht.
 		\item[CORBA] \hfill \\
@@ -926,8 +939,8 @@ eprint=false
 	\begin{description}
 		\item[SnapshotDescription] \hfill \\ 
 		Damit einzelne Schritte in den dargestellten Graphen besser verständlich sind, bietet GVS 2.0 die Möglichkeit kurze Beschreibungen zu erfassen. Diese können serverseitig erfasst, gespeichert und geladen werden. Die Erweiterung des Verbindungsprotokoll, um SnapshotDescription auch clientseitig zu unterstützen, sollte für ein allfälliges Folgeprojekt geplant werden (siehe Kapitel \ref{sec:ausblick}).
-		\item[\gls{n-ary}s] \hfill \\
-		Der Tree Layout Algorithmus von GVS 2.0 ist fähig neben Binary Trees auch \gls{n-ary}s zu zeichnen (siehe \ref{sec:treelayouter}). Da der nötige Code clientseitig bereits vorhanden war, konnte das GVS UI mit kleinen Aufwand erweitert werden. Somit können in GVS 2.0 nun auch allgemeinere Trees, wie z.B. \gls{trie}s, dargestellt werden.
+		\item[n-ary Trees] \hfill \\
+		Der Tree Layout Algorithmus von GVS 2.0 ist fähig neben Binary Trees auch \glspl{n-ary} zu zeichnen (siehe \ref{sec:treelayouter}). Da der nötige Code clientseitig bereits vorhanden war, konnte das GVS UI mit kleinen Aufwand erweitert werden. Somit können in GVS 2.0 nun auch allgemeinere Trees, wie z.B. \glspl{trie}, dargestellt werden.
 	\end{description}
 	
 	\subsection{Fehlerbehebungen}
@@ -982,15 +995,17 @@ eprint=false
 		\item Der Dozent kann die Applikation wie gewohnt einsetzen. Sämtliche bisherigen Übungen die auf \gls{gvs} setzen, finden sich in einer erneuerten Version im \textit{Testers} Repository \cite{gvs-tester}.
 	\end{itemize}
 	
-	
 	\section{Software Metriken} \label{sec:metrics-2}
 	In der Analyse Phase wurden mehrere Code Smells in GVS 1.0 erkannt (Siehe Abschnitt \ref{sec:erkenntnisse}). In der Design Phase wurde deshalb ein Konzept ausgearbeitet, damit das Refactoring strukturiert ablaufen wird (Siehe Abschnitt \ref{sec:refactoring-concept}). Die Refactorings wurden damals aus Zeitgründen tief priorisiert. Es hat sich aber gezeigt, dass bereits am Anfang der Realisations Phase viele Refactorings durchgeführt werden müssen. Dies nicht zuletzt deshalb, da der bestehende Code sehr schwer zu lesen war. Durch die Refactorings konnte die Verständlichkeit des Codes enorm verbessert werden. Dies spiegelt sich auch in den erhobenen Software Metriken wieder. Im folgenden Abschnitt sind diese genauer beschrieben.
 	
 	\subsection{Wartbarkeit}
 	In der Wartbarkeits-Metrik \cite{metric-maintainability} ist klar zu erkennen, dass die Wartbarkeit der meisten Klassen gut ist. Auf der X-Achse ist der Churn \cite{metric-churn} abgebildet, also wie oft eine Klasse verändert wurde. Klassen die oft angepasst werden, erledigen potentiell zu viele Aufgaben. Auf der Y-Achse ist die Wartbarkeit angezeigt. Diese errechnet sich aus Code-Duplikationen, zyklomatischer Komplexität von McCabe \cite{mccabe} und der Kognitiven Komplexität \cite{metric-cognitive-complexity} einer Klasse. Die beiden Klassen \textit{Persistor} und \textit{ModelBuilder} weisen die schlechtesten Werte auf. (oben rechts). Leider konnte aus Zeitgründen kein Refactoring der beiden Klassen durchgeführt werden. Ein entsprechender Hinweis ist aber im Ausblick \ref{ssec:gvs-todos} dokumentiert.
+	
+	\clearpage
+	
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[width=0.7\linewidth]{assets/images/metrics/maintainability}
+		\includegraphics[width=\linewidth]{assets/images/metrics/maintainability}
 		\caption{Wartbarkeit Metrik}
 		\label{fig:metric-maintainability}
 	\end{figure}
@@ -999,7 +1014,7 @@ eprint=false
 	Technischen Schulden (Abb. \ref{fig:metric-technical-debt}) beschreiben den zusätzlichen Aufwand, welcher für die Korrektur von schlecht geschriebenen Software aufgewendet werden muss. Die Metrik korreliert mit den Anzahl Zeilen an Source Code (Siehe \ref{ssec:lines-code}). Auch gut zu erkennen ist, dass die technischen Schulden trotz weiteren Anpassungen nicht mehr zugenommen haben.
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[width=0.7\linewidth]{assets/images/metrics/technical_debt}
+		\includegraphics[width=\linewidth]{assets/images/metrics/technical_debt}
 		\caption{Technische Schulden Metrik}
 		\label{fig:metric-technical-debt}
 	\end{figure}
@@ -1008,10 +1023,11 @@ eprint=false
 	Interessant zu beobachten ist, dass beinahe die selbe Funktionalität mit viel weniger Zeilen Code erreicht wurde. Dies ist insbesondere durch das Entfernen von dupliziertem Code möglich. Ein weiterer Einfluss hat der Einsatz von modernen Lambda Ausdrücken, die zur Zeit der Entwicklung von GVS 1.0 nicht zur Verfügung standen.
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[width=0.7\linewidth]{assets/images/metrics/lines_of_code}
+		\includegraphics[width=\linewidth]{assets/images/metrics/lines_of_code}
 		\caption{Lines of Code Metrik}
 		\label{metric-linesofcode}
 	\end{figure}	
+
 	
 	\subsection{Kritik}
 	In der Analyse- und Entwurfsphase des Projekts wurde entschieden, dass die Hauptziele so umgesetzt werden sollen, dass möglichst viel bestehender Code wiederverwendet werden kann. Dieses Ziel wurde klar nicht erreicht.\\
@@ -1434,7 +1450,7 @@ eprint=false
 	\section{Auswertung nach Kategorien}
 	\begin{description}
 		\item[Administratives] \hfill \\ 
-		Meetings mit dem Betreuer, Sprint-Meetings sowie die Verfassung von Protokollen
+		Meetings mit dem Betreuer, Sprint-Meetings sowie die Verfassung von Protokollen. Aufsetzen der Entwicklungsumgebung und Projektmanagement Software. Software Releases.
 		\item[Dokumentation] \hfill \\ 
 		Verfassen der Dokumentation sowie durchführen von End-to-End Tests
 		\item[Implementierung] \hfill \\ 
@@ -1448,6 +1464,9 @@ eprint=false
 		\caption{Zeitauswertung Kategorien}
 		\label{zeitauswertung-kategorien}
 	\end{figure}
+	
+	\clearpage
+
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=0.7\linewidth]{assets/images/zeitauswertung-kat-pie}
@@ -1455,10 +1474,11 @@ eprint=false
 		\label{zeitauswertung-kategorien-pie}
 	\end{figure}
 
+
 	\section{Auswertung Soll - Ist Zeit}
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[width=\linewidth]{assets/images/zeitauswertung-soll_ist}
+		\includegraphics[width=0.7\linewidth]{assets/images/zeitauswertung-soll_ist}
 		\caption{Zeitauswertung Soll - Ist Zeit}
 		\label{zeitauswertung-soll_ist}
 	\end{figure}
