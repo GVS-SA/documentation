@@ -21,6 +21,10 @@
 % Include external pdf
 \usepackage{pdfpages}
 
+% Float images
+\usepackage{wrapfig}
+
+
 % set single pages to landscape
 \usepackage{lscape}
 
@@ -210,13 +214,22 @@ eprint=false
 	\thispagestyle{firststyle}
 	
 	\subsection*{Ausgangslage}
-	\gls{gvs} ist eine Visualisierungs-Software, die Graphen und Trees darstellt. Zusätzlich werden Algorithmen durch den Einsatz von Farben und gerichteten Kanten visuell hervorgehoben. \\
+	\gls{gvs} ist eine Visualisierungs-Software, die Graphen und Trees darstellt. Zusätzlich wird die Arbeitsweise von Algorithmen durch den Einsatz von Farben und gerichteten Kanten visuell hervorgehoben. \\
 	Die Datenstrukturen werden in der Entwicklungsumgebung des Benutzers implementiert und mit einer clientseitigen Library an die Visualisierungskomponente übertragen. Dort werden die eingehenden Daten interpretiert und auf eine ansprechende Art und Weise dargestellt. \\
 	
 	\noindent
 	Der im Jahre 2005 entwickelte GVS 1.0 wurde im Unterricht der Module \textit{Algorithmen und Datenstrukturen 1 und 2} aktiv verwendet. Er erleichtert das Erlernen von komplexen Suchalgorithmen und Datenstrukturen, die in den Modulen behandelt werden. Der GVS 1.0 hat aber bestimmte Einschränkungen bezüglich Usability und der Darstellung von grossen Trees. Ebenfalls gilt das eingesetzt UI Framework als veraltet und es existieren in der Zwischenzeit bessere Alternativen.
 	
 	\subsection*{Vorgehen / Technologien}	
+	\begin{wrapfigure}{r}{0.4\textwidth}
+		\vspace{-28pt}
+		\begin{center}
+			\includegraphics[width=\linewidth]{assets/images/layering}
+		\end{center}
+		\caption{GVS 2.0 Layering}
+		\vspace{-20pt}
+	\end{wrapfigure}
+	
 	In einer ersten Phase wird die bestehende Software auf Funktionsweise und Verbesserungspotential analysiert. Ebenfalls wird die umgesetzte Architektur kritisch beleuchtet. Da die Software \gls{hsr}-intern verwendet wird, sind Folgearbeiten nicht auszuschliessen. Es wird deshalb darauf geachtet, dass mit den gewonnenen Erkenntnissen eine Architektur designet wird, die einfach verständlich und erweiterbar ist. Zudem sollen zeitgemässe Softwareentwicklungs-Techniken angewendet werden. \\
 	
 	\noindent
@@ -233,7 +246,7 @@ eprint=false
 	
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[width=0.7\linewidth]{assets/images/gvs-overview}
+		\includegraphics[width=0.6\linewidth]{assets/images/gvs-overview}
 		\caption{Visualisierter Dijkstra Algorithmus im GVS UI 2.0}
 		\label{fig:gvs-overview}
 	\end{figure}
@@ -1486,7 +1499,7 @@ eprint=false
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=\linewidth]{assets/images/zeitauswertung-kat}
-		\caption{Zeitauswertung Kategorien}
+		\caption{Zeitauswertung Kategorien Säulendiagramm}
 		\label{zeitauswertung-kategorien}
 	\end{figure}
 	
@@ -1495,7 +1508,7 @@ eprint=false
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=0.7\linewidth]{assets/images/zeitauswertung-kat-pie}
-		\caption{Zeitauswertung Kategorien}
+		\caption{Zeitauswertung Kategorien Kuchendiagramm}
 		\label{zeitauswertung-kategorien-pie}
 	\end{figure}
 
