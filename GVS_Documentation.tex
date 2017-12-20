@@ -575,7 +575,7 @@ eprint=false
 	
 
 	\noindent
-	Die folgende Aufzählung (\ref{desc:architecture-changes}) zeigt die wichtigsten Änderungen zum Klassendiagramm aus der Entwurfsphase auf. (siehe Anhang \ref{ch:class-diagram}) Ansonsten widerspiegelt GVS 2.0 die angedachte Architektur und Klassenhierarchie.
+	Die folgende Aufzählung (\ref{desc:architecture-changes}) zeigt die wichtigsten Änderungen zum Klassendiagramm aus der Entwurfsphase auf (siehe Anhang \ref{ch:class-diagram}). Ansonsten widerspiegelt GVS 2.0 die angedachte Architektur und Klassenhierarchie.
 	
 	\begin{description} \label{desc:architecture-changes}
 		\item[GvsXmlReader \& ClientConnection ] \hfill \\ Diese Klassen entstanden durch ein Refactoring der GVS 1.0 Klasse \textit{ServerConnectionXML}. Die Trennung dieser Klasse führt dazu, dass das \gls{single-responsibility} eingehalten wird. 
@@ -609,10 +609,10 @@ eprint=false
 	
 	
 	\subsection{Sequenzdiagramme}
-	Während der Analyse-Phase dieses Projekts wurden die Programmabläufe in GVS 1.0 untersucht (siehe \ref{ssec:sequence-1}). Um Änderungen im Programmablauf aufzuzeigen, finden sich in diesem Kapitel neue Sequenzdiagramme, die die selben Abläufe in GVS 2.0 abbilden. 
+	Während der Analyse-Phase dieses Projekts wurden die Programmabläufe in GVS 1.0 untersucht (siehe \ref{ssec:sequence-1}). Um Änderungen im Programmablauf aufzuzeigen, finden sich in diesem Kapitel neue Sequenzdiagramme, welche die selben Abläufe in GVS 2.0 abbilden. 
 	
 	\subsubsection{Verbindungsaufbau}
-	Abbildung \ref{fig:sd-verbindungsaufbau-2} zeigt den Start der GVS 2.0 Applikation über die \textit{GVSApplication} sowie das Empfangen von Daten über die Socket. Nicht ersichtlich ist im Diagramm, dass GVS 2.0 an vielen Orten auf \gls{di} setzt (siehe \ref{DI}). Zum Beispiel werden die vier Klassen \textit{Watchdog},  \textit{ConnectionMonitor},  \textit{GvsXmlReader} und  \textit{ModelBuilder} (rechts im Diagramm) in den Constructor der  \textit{ClientConnection} ''injected''.
+	Abbildung \ref{fig:sd-verbindungsaufbau-2} zeigt den Start der GVS 2.0 Applikation über die \textit{GVSApplication} sowie das Empfangen von Daten über die Socket. Nicht ersichtlich ist im Diagramm, dass GVS 2.0 an vielen Orten auf \gls{di} setzt (siehe \ref{DI}). Zum Beispiel werden die vier Klassen \textit{Watchdog},  \textit{ConnectionMonitor},  \textit{GvsXmlReader} und  \textit{ModelBuilder} (rechts im Diagramm) in den Constructor der  \textit{ClientConnection} ''injected''.\\
 	
 	\noindent
 	Details zu den genauen Änderungen gegenüber GVS 1.0 finden sich im Abschnitt \ref{desc:architecture-changes}.
