@@ -1003,7 +1003,7 @@ eprint=false
 	Dieses Kapitel reflektiert die Erreichung der gemäss Aufgabenstellung (siehe Anhang \ref{aufgabenstellung}) gesetzten Ziele dieser Arbeit. Neben den subjektiven Einschätzungen des Projektteams dienen die benutzten Metriken als handfeste Grundlage für qualitative Verbesserungen.
 	
 	\subsection{Ersetzung des Presentation Layers}
-	GVS 1.0 benutzt UI-spezifische \gls{swing} und \gls{awt} Klassen in sehr vielen Komponenten und durch alle Layer hinweg (siehe \ref{sssec:swing-business}). Insbesondere deshalb war das Ersetzen des Presentation Layers keine kleine Aufgabe. Schnell hat sich gezeigt, dass weniger Code als erwartet wiederverwendet werden kann. Im Zuge dieser Ersetzungen von Swing und AWT Klassen durch GVS spezifische Klassen, wurden auch viele kleinere Refactorings umgesetzt. Diese Umstände haben auch dazu geführt, dass es zu Abweichungen gegenüber der geplanten Migration der Klassen gekommen ist (siehe Anhang \ref{ch:migration-list})\\
+	GVS 1.0 benutzt UI-spezifische \gls{swing} und \gls{awt} Klassen in sehr vielen Komponenten und durch alle Layer hinweg (siehe \ref{sssec:swing-business}). Insbesondere deshalb war das Ersetzen des Presentation Layers keine kleine Aufgabe. Schnell hat sich gezeigt, dass weniger Code als erwartet wiederverwendet werden kann. Im Zuge dieser Ersetzungen von Swing und AWT Klassen durch GVS spezifische Klassen, wurden auch viele kleinere Refactorings umgesetzt. Diese Umstände haben auch dazu geführt, dass es zu Abweichungen gegenüber der geplanten Migration der Klassen gekommen ist (siehe Anhang \ref{ch:migration-list}).\\
 	Die neue Architektur von GVS 2.0 konnte sämtliche \glspl{tangle} entwirren (siehe \ref{ssec:layering}) und glänzt mit einem in sich gekoppelten Presentation Layer.
 	
 	Für den Endbenutzer wirkt das neue User Interface frisch und modern. Durch die direkte Erreichbarkeit aller Funktionen über die Toolbar, ist es auch benutzerfreundlicher als das UI des Vorgängers.
@@ -1021,15 +1021,15 @@ eprint=false
 	
 	\begin{itemize}
 		\item Für Studenten entstand eine modern anmutende und intuitiv bedienbare Applikation mit verbesserter Fehlertoleranz (siehe Kapitel \ref{sec:watchdog} \textit{Watchdog}).
-		\item Zukünftige Entwickler wird die Erweiterung oder Ersetzung einzelner Teile der Applikation durch die umgesetzte Schichtenarchitektur erleitert.
+		\item Zukünftigen Entwickler wird die Erweiterung oder Ersetzung einzelner Teile der Applikation durch die umgesetzte Schichtenarchitektur erleichtert.
 		\item Der Dozent kann die Applikation wie gewohnt einsetzen. Sämtliche bisherigen Übungen die auf \gls{gvs} setzen, finden sich in einer erneuerten Version im \textit{Testers} Repository \cite{gvs-tester}.
 	\end{itemize}
 	
 	\section{Software Metriken} \label{sec:metrics-2}
-	In der Analyse Phase wurden mehrere Code Smells in GVS 1.0 erkannt (Siehe Abschnitt \ref{sec:erkenntnisse}). In der Design Phase wurde deshalb ein Konzept ausgearbeitet, damit das Refactoring strukturiert ablaufen wird (Siehe Abschnitt \ref{sec:refactoring-concept}). Die Refactorings wurden damals aus Zeitgründen tief priorisiert. Es hat sich aber gezeigt, dass bereits am Anfang der Realisations Phase viele Refactorings durchgeführt werden müssen. Dies nicht zuletzt deshalb, da der bestehende Code sehr schwer zu lesen war. Durch die Refactorings konnte die Verständlichkeit des Codes enorm verbessert werden. Dies spiegelt sich auch in den erhobenen Software Metriken wieder. Im folgenden Abschnitt sind diese genauer beschrieben.
+	In der Analyse Phase wurden mehrere Code Smells in GVS 1.0 erkannt (Siehe Abschnitt \ref{sec:erkenntnisse}). In der Design Phase wurde deshalb ein Konzept ausgearbeitet, damit das Refactoring strukturiert ablaufen wird (Siehe Abschnitt \ref{sec:refactoring-concept}). Die Refactorings wurden damals aus Zeitgründen tief priorisiert. Es hat sich aber gezeigt, dass bereits am Anfang der Umsetzungs Phase viele Refactorings durchgeführt werden müssen. Dies nicht zuletzt aufgrund des schwer lesbaren Legacy Codes. Durch die Refactorings konnte die Verständlichkeit des Codes enorm verbessert werden. Dies spiegelt sich auch in den erhobenen Software Metriken wieder. Im folgenden Abschnitt sind diese genauer beschrieben.
 	
 	\subsection{Wartbarkeit}
-	In der Wartbarkeits-Metrik \cite{metric-maintainability} ist klar zu erkennen, dass die Wartbarkeit der meisten Klassen gut ist. Auf der X-Achse ist der Churn \cite{metric-churn} abgebildet, also wie oft eine Klasse verändert wurde. Klassen die oft angepasst werden, erledigen potentiell zu viele Aufgaben. Auf der Y-Achse ist die Wartbarkeit angezeigt. Diese errechnet sich aus Code-Duplikationen, zyklomatischer Komplexität von McCabe \cite{mccabe} und der Kognitiven Komplexität \cite{metric-cognitive-complexity} einer Klasse. Die beiden Klassen \textit{Persistor} und \textit{ModelBuilder} weisen die schlechtesten Werte auf (oben rechts). Leider konnte aus Zeitgründen kein Refactoring der beiden Klassen durchgeführt werden. Ein entsprechender Hinweis ist aber im Ausblick \ref{ssec:gvs-todos} dokumentiert.
+	In der Wartbarkeits-Metrik \cite{metric-maintainability} ist klar zu erkennen, dass die Wartbarkeit der meisten Klassen gut ist. Auf der X-Achse ist der Churn \cite{metric-churn} abgebildet, also wie oft eine Klasse verändert wurde. Klassen die häufig angepasst werden, erledigen potentiell zu viele Aufgaben. Auf der Y-Achse ist die Wartbarkeit angezeigt. Diese errechnet sich aus Code-Duplikationen, zyklomatischer Komplexität von McCabe \cite{mccabe} und der Kognitiven Komplexität \cite{metric-cognitive-complexity} einer Klasse. Die beiden Klassen \textit{Persistor} und \textit{ModelBuilder} weisen die schlechtesten Werte auf (oben rechts). Leider konnte aus Zeitgründen kein Refactoring der beiden Klassen durchgeführt werden. Ein entsprechender Hinweis ist aber im Ausblick \ref{ssec:gvs-todos} dokumentiert.
 	
 	\clearpage
 	
@@ -1041,17 +1041,17 @@ eprint=false
 	\end{figure}
 	
 	\subsection{Technische Schulden}
-	Technischen Schulden (Abb. \ref{fig:metric-technical-debt}) beschreiben den zusätzlichen Aufwand, welcher für die Korrektur von schlecht geschriebenen Software (Issues) aufgewendet werden muss. Das Verhältnis der Technischen Schulden (e.g. Technical Debt Ratio) errechnet sich wie folgt: 
+	Technischen Schulden (Abb. \ref{fig:metric-technical-debt}) beschreiben den zusätzlichen Aufwand, welcher für die Korrektur von schlecht geschriebener Software (Issues) aufgewendet werden muss. Das Verhältnis der Technischen Schulden (e.g. Technical Debt Ratio) errechnet sich wie folgt: 
 	
 	\begin{equation*}
 		\text{Technical Debt Ratio} = \frac{\text{Remediation Time}_{total}}{\text{Implementation Time}_{total}}
 	\end{equation*}
 	
 	\noindent
-	Code Climate schätzt die benötigte Zeit um offene Issues zu beheben und teilt diese durch die geschätzte aufgewendete Implementations Zeit in Abhängigkeit zur Projektgrösse. Der resultierende Prozentwert ist im Idealfall so klein wie möglich. In der Grafik ist sowohl die Remediation Time als auch das Technical Debt Ratio ersichtlich. \\
+	Code Climate schätzt einerseits die benötigte Zeit um offene Issues zu beheben (\textit{Remediation Time}) und andererseits die aufgewendete Implementations Zeit (\textit{Implementation Time}) in Abhängigkeit zur Projektgrösse. Das Verhältnis dieser beiden Werte bildet das \textit{Technical Debt Ratio}. Dieses ist im Idealfall so klein wie möglich. In der Grafik ist sowohl die \textit{Remediation Time} als auch das \textit{Technical Debt Ratio} ersichtlich. \\
 	
 	\noindent
-	Das Technical Debt Ratio korreliert mit den Anzahl Zeilen an Source Code (Siehe \ref{ssec:lines-code}). Auch gut zu erkennen ist, dass die technischen Schulden trotz weiteren Anpassungen am GVS nicht mehr zugenommen haben.
+	Das \textit{Technical Debt Ratio} korreliert mit den Anzahl Zeilen an Source Code (Siehe \ref{ssec:lines-code}). Auch gut zu erkennen ist, dass die technischen Schulden trotz weiteren Anpassungen am GVS nicht mehr zugenommen haben.
 
 	\begin{figure}[h!]
 		\centering
@@ -1071,7 +1071,8 @@ eprint=false
 
 	
 	\subsection{Kritik}
-	In der Analyse- und Entwurfsphase des Projekts wurde entschieden, dass die Hauptziele so umgesetzt werden sollen, dass möglichst viel bestehender Code wiederverwendet werden kann. Dieses Ziel wurde klar nicht erreicht.\\
+	In der Analyse- und Entwurfsphase des Projekts wurde entschieden, dass die Hauptziele so umgesetzt werden sollen, dass möglichst viel bestehender Code wiederverwendet werden kann. Dieses Ziel wurde klar nicht erreicht.
+	
 	Dies führte auch dazu, dass deutlich mehr Arbeitsaufwand für die Umsetzung des Projekts nötig war, als eingeplant wurde (siehe Anhang \ref{zeitauswertung}). Die Wirtschaftlichkeit des Projekts hat dadurch gelitten.\\
 	
 	\noindent
@@ -1091,7 +1092,7 @@ eprint=false
 	
 	\begin{description}
 		\item[Font Size] \hfill \\
-			GVS 3.0 sollte es dem User erlauben die Font Size der Labels zu verändern, ohne den Code von \gls{gvsui} zu bearbeiten. Eignen würde sich entweder ein Menü-Eintrag ''Einstellungen'' oder das setzen von der Font Size in der \textit{GVSStyle} Klasse.
+			GVS 3.0 sollte es dem User erlauben die Font Size der Labels zu verändern, ohne den Code von \gls{gvsui} zu bearbeiten. Eignen würde sich entweder ein Menü-Eintrag ''Einstellungen'' oder das setzen der Font Size in der \textit{GVSStyle} Klasse.
 		\item[Unicode Labels] \hfill \\
 		GVS 3.0 sollte die Darstellung von Unicode Zeichen in Labels unterstützen.
 		\item[Snapshot Description] \hfill \\
@@ -1106,7 +1107,7 @@ eprint=false
 	\begin{description}
 		\item[Refactoring ModelBuilder und Persistor] \hfill \\
 			Die Klassen \textit{ModelBuilder} und \textit{Persistor} besitzen sehr ähnliche Funktionalität und somit viel \textit{duplicated Code}. Obwohl diese Klassen in GVS 2.0 einem Refactoring unterzogen wurden, besteht das Problem weiterhin (siehe Abschnitt \ref{sec:metrics-2}).\\
-			GVS 3.0 sollte diese Klassen soweit refactoren, dass kein \textit{duplicated Code} mehr vorhanden ist.
+			GVS 3.0 sollte diese Klassen soweit überarbeiten, dass das \gls{dry} Prinzip nicht mehr verletzt wird.
 		\item[Automated Testing] \hfill \\
 			GVS 1.0 besitzt keine automatisierten Tests. Auch in GVS 2.0 konnte diese Altlast nicht beseitigt werden. Es wurde nur eine sehr kleine Test Coverage erreicht, da die Erstellung von automatisierten Tests tief priorisiert wurde.\\
 			GVS 3.0 sollte den Business Layer und Teile des Access Layers sinnvoll mit Tests abdecken.
