@@ -204,8 +204,7 @@ eprint=false
 	\thispagestyle{firststyle}
 	An der \gls{hsr} werden in den Modulen \textit{Algorithmen und Datenstrukturen 1 und 2} diverse Algorithmen unterrichtet, die auf den beiden Datenstrukturen \textit{Graph} und \textit{Tree} arbeiten. Die Funktionsweise solcher Algorithmen ist für Studenten teilweise schwer zu verstehen. Hinzu kommt, dass die Programmierung für die Visualisierung der Algorithmen mit viel Aufwand verbunden ist. Aus diesen Gründen wurde im Jahr 2005, im Rahmen einer Diplomarbeit, der \gls{gvs} 1.0 entwickelt. Der GVS besteht aus einer clientseitigen Software-Bibliothek, sowie einer Server Komponente, welche die eingehenden Datenstrukturen visualisiert. So können Studenten die Arbeitsweise der Algorithmen Schritt für Schritt nachvollziehen. \\
 	
-	%TODO: Allenfalls in Vergangenheits Form wechseln!
-	\noindent Diese Studienarbeit beschäftigt sich mit der Erneuerung des GVS 1.0, wobei insbesondere bei der Server Komponente das UI Framework mit \gls{javafx} ersetzt wird. In der Analysephase wird die Funktionsweise des Vorgängerprodukts untersucht und Vorschläge für Verbesserungen gemacht. Die gewonnenen Erkenntnisse fliessen in eine klare Schichtenarchitektur ein, die es auch Folgearbeiten erleichtern wird, einzelne Schichten zu ersetzen. Ebenfalls halten aktuelle Software Best Practices wie Dependency Injection im Projekt Einzug. \\
+	\noindent Diese Studienarbeit beschäftigte sich mit der Erneuerung des GVS 1.0, wobei insbesondere bei der Server Komponente das UI Framework mit \gls{javafx} ersetzt wurde. In der Analysephase wurde die Funktionsweise des Vorgängerprodukts untersucht und Vorschläge für Verbesserungen gemacht. Die gewonnenen Erkenntnisse flossen in eine klare Schichtenarchitektur ein, die es auch Folgearbeiten erleichtern wird, einzelne Schichten zu ersetzen. Ebenfalls wurden zeitgemässe Software Best Practices umgesetzt. \\
 
 	\noindent Während dem Projekt konnte eine erweiterbare Software Architektur erstellt werden, die das Vorgängerprodukt vollständig ersetzt. In den eingesetzten Metriken ist klar ersichtlich, dass sich die Code-Qualität über die Dauer des Projekts stark verbessert hat. Zusätzlich profitiert der GVS von einem modernen, intuitiven User Interface, das \textit{Graphen} und \textit{Trees} durch den Einsatz von speziellen Layouting Algorithmen ansprechend darstellt.
 	
@@ -213,7 +212,6 @@ eprint=false
 	
 	\section*{Management Summary}
 	\thispagestyle{firststyle}
-	%TODO: Allenfalls in Vergangenheits Form wechseln!
 	\subsection*{Ausgangslage}
 	\gls{gvs} ist eine Visualisierungs-Software, die Graphen und Trees darstellt. Zusätzlich wird die Arbeitsweise von Algorithmen durch den Einsatz von Farben und gerichteten Kanten visuell hervorgehoben. \\
 	Die Datenstrukturen werden in der Entwicklungsumgebung des Benutzers implementiert und mit einer clientseitigen Library an die Visualisierungskomponente übertragen. Dort werden die eingehenden Daten interpretiert und auf eine ansprechende Art und Weise dargestellt. \\
@@ -231,10 +229,10 @@ eprint=false
 		\vspace{-20pt}
 	\end{wrapfigure}
 	
-	In einer ersten Phase wird die bestehende Software auf Funktionsweise und Verbesserungspotential analysiert. Ebenfalls wird die umgesetzte Architektur kritisch beleuchtet. Da die Software \gls{hsr}-intern verwendet wird, sind Folgearbeiten nicht auszuschliessen. Es wird deshalb darauf geachtet, dass mit den gewonnenen Erkenntnissen eine Architektur designet wird, die einfach verständlich und erweiterbar ist. Zudem sollen zeitgemässe Softwareentwicklungs-Techniken angewendet werden. \\
+	In einer ersten Phase wurde die bestehende Software auf Funktionsweise und Verbesserungspotential analysiert. Ebenfalls wurde die umgesetzte Architektur kritisch beleuchtet. Da die Software \gls{hsr}-intern verwendet wird, sind Folgearbeiten nicht auszuschliessen. Es wurde deshalb darauf geachtet, dass mit den gewonnenen Erkenntnissen eine Architektur designet wurde, die einfach verständlich und erweiterbar ist. Zudem sollen zeitgemässe Softwareentwicklungs-Techniken angewendet werden. \\
 	
 	\noindent
-	Das in die Jahre gekommene Java \gls{swing} GUI Toolkit wird im Rahmen dieser Studienarbeit mit dem offiziellen Nachfolger \gls{javafx} ersetzt. 
+	Das in die Jahre gekommene Java \gls{swing} GUI Toolkit wurde im Rahmen dieser Studienarbeit mit dem offiziellen Nachfolger \gls{javafx} ersetzt. 
 	
 	\subsection*{Ergebnisse}
 	In der Studienarbeit wurde ein vollständiger Ersatz für den GVS 1.0 entwickelt.\\
@@ -295,7 +293,7 @@ eprint=false
 	\section{Problembeschreibung}
 	An der \gls{hsr} werden in den Modulen \textit{Algorithmen und Datenstrukturen 1} und \textit{Algorithmen und Datenstrukturen 2} die Funktionsweise von schwierig zu verstehenden Algorithmen unterrichtet. Zusätzlicher Bestandteil der Module ist das Erlernen der beiden Datenstrukturen \textit{Graph} und \textit{Tree}. Die Implementierung derartiger Algorithmen und Datenstrukturen ist oft mit grossem Aufwand verbunden. \\
 	Die Software \gls{gvs} unterstützt Studenten beim Erlernen der beiden Datenstrukturen sowie der darauf anwendbaren Algorithmen. Damit sich die Studenten ausschliesslich auf das Erlernen der Algorithmen fokussieren können, bietet GVS eine Library, welche den Studenten repetitive Implementierungsarbeiten abnimmt. Der wichtigste Aspekt ist jedoch die Visualisierung der Arbeitsweise von Datenstrukturen und Algorithmen. So zeigt die Software zum Beispiel den schrittweisen Aufbau eines Baumes oder den Ablauf des Path Finding Algorithmus ''Dijkstra''. \\
-	Die Software wurde 2005 bereits im Rahmen einer Bachelorarbeit umgesetzt. Der in die Jahre gekommene GVS 1.0 soll nun in einem Major-Upgrade aktualisiert werden.
+	Die Software wurde 2005 bereits im Rahmen einer Diplomarbeit umgesetzt. Der in die Jahre gekommene GVS 1.0 soll nun in einem Major-Upgrade aktualisiert werden.
 	
 	
 	
@@ -1030,16 +1028,27 @@ eprint=false
 	
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[width=\linewidth]{assets/images/metrics/maintainability}
+		\includegraphics[width=0.9\linewidth]{assets/images/metrics/maintainability}
 		\caption{Metrik: Wartbarkeit}
 		\label{fig:metric-maintainability}
 	\end{figure}
 	
 	\subsection{Technische Schulden}
-	Technischen Schulden (Abb. \ref{fig:metric-technical-debt}) beschreiben den zusätzlichen Aufwand, welcher für die Korrektur von schlecht geschriebenen Software aufgewendet werden muss. Die Metrik korreliert mit den Anzahl Zeilen an Source Code (Siehe \ref{ssec:lines-code}). Auch gut zu erkennen ist, dass die technischen Schulden trotz weiteren Anpassungen nicht mehr zugenommen haben.
+	Technischen Schulden (Abb. \ref{fig:metric-technical-debt}) beschreiben den zusätzlichen Aufwand, welcher für die Korrektur von schlecht geschriebenen Software (Issues) aufgewendet werden muss. Das Verhältnis der Technischen Schulden (e.g. Technical Debt Ratio) errechnet sich wie folgt: 
+	
+	\begin{equation*}
+		\text{Technical Debt Ratio} = \frac{\text{Remediation Time}_{total}}{\text{Implementation Time}_{total}}
+	\end{equation*}
+	
+	\noindent
+	Code Climate schätzt die benötigte Zeit um offene Issues zu beheben und teilt diese durch die geschätzte aufgewendete Implementations Zeit in Abhängigkeit zur Projektgrösse. Der resultierende Prozentwert ist im Idealfall so klein wie möglich. In der Grafik ist sowohl die Remediation Time als auch das Technical Debt Ratio ersichtlich. \\
+	
+	\noindent
+	Das Technical Debt Ratio korreliert mit den Anzahl Zeilen an Source Code (Siehe \ref{ssec:lines-code}). Auch gut zu erkennen ist, dass die technischen Schulden trotz weiteren Anpassungen am GVS nicht mehr zugenommen haben.
+
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[width=\linewidth]{assets/images/metrics/technical_debt}
+		\includegraphics[width=0.9\linewidth]{assets/images/metrics/technical_debt}
 		\caption{Metrik: Technische Schulden}
 		\label{fig:metric-technical-debt}
 	\end{figure}
@@ -1547,6 +1556,7 @@ eprint=false
 	\includepdf[pages={1-}]{assets/minutes/2017-11-28.pdf}
 	\includepdf[pages={1-}]{assets/minutes/2017-12-06.pdf}
 	\includepdf[pages={1-}]{assets/minutes/2017-12-12.pdf}
+	\includepdf[pages={1-}]{assets/minutes/2017-12-19.pdf}
 	
 	
 	\chapter{Eigenständigkeitserklärung}
