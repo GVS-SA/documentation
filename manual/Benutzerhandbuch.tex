@@ -204,9 +204,10 @@ eprint=false
 	Für die Inbetriebnahme von GVS 2.0 sind folgende Hinweise zu beachten.
 	\begin{itemize}
 		\item GVS 2.0 benötigt JDK 1.8 oder neuer
+		\item Für die Entwicklung wurde die Eclipse IDE for Java Developers - Oxygen und Visual Studio-IDE 2017 verwendet
 		\item Für die Weiterentwicklung des GVS 2.0 werden Grundkenntnisse von git vorausgesetzt
 		\item Für die Weiterentwicklung des GVS 2.0 werden Grundkenntnisse für die Plugin Installation in Eclipse vorausgesetzt
-		\item Die folgende Installationsanleitung wurde für die Eclipse IDE geschrieben
+		\item Die folgende Installationsanleitung wurde für die Eclipse IDE geschrieben. Die Weiterentwicklung sollte aber grundsätzlich auch in anderen IDE's funktionieren.
 	\end{itemize}
 
 	\chapter{Installationsanleitung}
@@ -264,7 +265,7 @@ eprint=false
 	
 	\chapter{Benutzeranleitung}
 	\section{GVS Lib}
-	Die folgenden Testfiles sowie Referenzimplementierung sind im Repository \href{https://github.com/Graphs-Visualization-Service/gvs-tester}{gvs-tester} zu finden (siehe \ref{tbl:repos}).
+	Die folgenden Testfiles sowie Referenzimplementierungen sind im Repository \href{https://github.com/Graphs-Visualization-Service/gvs-tester}{gvs-tester} zu finden (siehe \ref{tbl:repos}).
 	
 	
 	\subsection{Graphen}
@@ -443,7 +444,7 @@ public class TestBinaryNode implements GVSBinaryTreeNode {
 	\clearpage
 	
 	\subsection{Styles anpassen}
-	Um komplexe Algorithmen farblich zu visualisieren bietet GVS 2.0 eine Style Klasse an. Code Ausschnitt  \ref{lst:styles} zeigt Anpassungsmöglichkeiten von Vertices und Edges.
+	Um komplexe Algorithmen farblich zu visualisieren bietet GVS 2.0 eine Style Klasse an. Code Ausschnitt  \ref{lst:styles} zeigt die Anpassungsmöglichkeiten von Vertices und Edges.
 	
 	\begin{lstlisting}[language=java, frame=single, caption={Styles verändern}, label={lst:styles}]
 	// lineColor, lineStyle, lineThickness
@@ -488,7 +489,7 @@ public class TestBinaryNode implements GVSBinaryTreeNode {
 		\item Session laden: GVS Session im \lstinline|*.gvs| Format vom Dateisystem laden
 		\item Session speichern: Aktuelle Session auf das Dateisystem speichern
 		\item Session löschen: Aktuelle Session löschen. Diese Aktion hat keinen Effekt auf das Dateisystem.
-		\item Session wechseln: In der Dropdown Liste oben rechts, werden alle aktiven Session dargestellt. Zwischen den Sessions kann beliebig gewechselt werden. 
+		\item Session wechseln: In der Dropdown Liste oben rechts, werden alle aktiven Sessions dargestellt. Zwischen den Sessions kann beliebig gewechselt werden. 
 	\end{enumerate}
 	
 	\subsubsection{2. Step Buttons und Fortschrittsanzeige}
@@ -556,7 +557,7 @@ public class TestBinaryNode implements GVSBinaryTreeNode {
 	\end{lstlisting}
 
 	\noindent
-	Es ist auch möglich, dass Log Level für einzelnen Packages zu setzen. Dazu muss ein neues Loger Element erstellt werden.
+	Es ist auch möglich, dass Log Level für einzelnen Packages zu setzen. Dazu muss ein neues Logger Element erstellt werden.
 	
 	\begin{lstlisting}[language=xml, frame=single, caption={Package Log Level verändern}, label={lst:log-level}]
 	<logger name="gvs.access" level="DEBUG">
@@ -606,7 +607,7 @@ public class TestBinaryNode implements GVSBinaryTreeNode {
 	\end{explanation}
 
 	\chapter{Weiterentwicklung}
-	Sämtlicher Programmcode von GVS 2.0 ist frei auf Github verfügbar. Um Verbesserungen durchzuführen, beschreibt dieser Abschnitt die notwendigen Schritte um sich die Entwicklungsumgebung entsprechend einzurichten.
+	Sämtlicher Programmcode von GVS 2.0 ist frei auf Github verfügbar. Um Verbesserungen durchzuführen beschreibt dieser Abschnitt die notwendigen Schritte, um sich die Entwicklungsumgebung entsprechend einzurichten.
 	
 	\section{Repositories}
 	GVS 2.0 umfasst 4 Repositories, welche in Tabelle \ref{tbl:repos} aufgeführt sind.
@@ -631,8 +632,12 @@ public class TestBinaryNode implements GVSBinaryTreeNode {
 
 	\section{Entwicklungsumgebung}
 	
-	\subsection{Eclipse Plugins}
-	Für die Entwicklung des GVS 2.0 wurden folgenden Eclipse Plugins verwendet. Diese können optional installiert werden. Es empfiehlt sich aber, mindestens Gradle in Eclipse zu integrieren.
+	\subsection{Java}
+	Für die Entwicklung des GVS 2.0 UI und der GVS 2.0 Java Lib wurde die \textit{Eclipse IDE for Java Developers} in der Version \textit{Oxygen} verwendet. Zusätzlich wurden folgende Plugins installiert.
+	
+	
+	\subsubsection{Eclipse Plugins}
+	Sämtliche Plugins können optional installiert werden. Es empfiehlt sich aber mindestens Gradle in Eclipse zu integrieren.
 	\begin{description}
 		\item[Buildship] Gradle Integration in Eclipse \footnote{\url{https://projects.eclipse.org/projects/tools.buildship}}
 		\item[EGit] Git Integration in Eclipse \footnote{\url{https://eclipse.org/egit}}
@@ -642,8 +647,11 @@ public class TestBinaryNode implements GVSBinaryTreeNode {
 		\item[ECLEmma] Test Coverage Analyse in Eclipse \footnote{\url{http://www.eclemma.org}}
 	\end{description}
 
-	\subsection{Gluon Scene Builder}
-	Für die Entwicklung von JavaFX Interfaces kann der Scene Builder von Gluon \footnote{\url{http://gluonhq.com/products/scene-builder}} verwendet werden.  Wie die meisten WYSIWYG Editoren ist auch der Scene Builder sehr verbose beim Erstellen von XML Elementen. Es empfiehlt sich, einen Grundlegende Struktur im Scene Builder zu erstellen und diese dann im XML Editor von Eclipse anzupassen.
+	\subsubsection{Gluon Scene Builder}
+	Für die Entwicklung von JavaFX Interfaces kann der Scene Builder von Gluon \footnote{\url{http://gluonhq.com/products/scene-builder}} verwendet werden.  Wie die meisten WYSIWYG Editoren ist auch der Scene Builder sehr verbose beim Erstellen von XML Elementen. Es empfiehlt sich, eine grundlegende Struktur im Scene Builder zu erstellen und diese dann im XML Editor von Eclipse anzupassen.
+
+	\subsection{C Sharp}
+	Für die GVS 2.0 C\# Lib wurden die Visual Studio-IDE 2017 \footnote{\url{https://www.visualstudio.com}} ohne weitere Plugins verwendet.
 
 	\clearpage
 	
