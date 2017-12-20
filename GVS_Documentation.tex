@@ -1250,12 +1250,12 @@ eprint=false
 	Dom4j \cite{dom4j} ist ein XML Framework für Java. Es wird für das Schreiben und Lesen der XML Files verwendet, die über die Socket Verbindung gesendet werden.
 	
 	\subsection{SLF4J und Logback}
-	SLF4J \cite{slf4j} und Logback \cite{logback} werden das Schreiben von Log Einträgen in ein File sowie auf die Standardausgabe (STDOUT) verwendet.
+	SLF4J \cite{slf4j} und Logback \cite{logback} werden für das Schreiben von Log Einträgen in ein File sowie auf die Standardausgabe (STDOUT) verwendet.
 	
 		
 		
 	\section{Repositories}
-	Die Artefakte werden in verschiedenen Repositories auf GitHub versioniert abgelegt. So gibt es für die Dokumentation, die Meetings-Protokolle und den Sourcecode jeweils ein eigenes Repository.
+	Die Artefakte werden in verschiedenen Repositories auf GitHub versioniert abgelegt. So gibt es für die Dokumentation, die Meeting-Protokolle und den Sourcecode jeweils ein eigenes Repository.
 	
 	\begin{table}[h!]
 		\centering
@@ -1390,8 +1390,8 @@ eprint=false
 	\end{table}
 	
 	\noindent
-	Alle Team-Mitglieder arbeiten jedoch in allen Bereichen des Projekts mit. 
-	Die genaue Arbeitsteilung ist der git-History, den Java-Docs sowie den Änderungshistories in der Projektdokumentation zu entnehmen.
+	Beide Team-Mitglieder arbeiten jedoch in allen Bereichen des Projekts mit. 
+	Die genaue Arbeitsteilung ist der git-History, den Java-Docs, sowie den Änderungshistories der Projektdokumentation zu entnehmen.
 	
 	\chapter{Klassendiagramme} \label{ch:class-diagram}
 	Die folgenden Seiten enthalten die Entwicklung der Klassendiagramme über den Projektverlauf. Für die \gls{gvslib} Komponente existierte in der Vorgängerarbeit kein Klassendiagramm.
@@ -1409,7 +1409,7 @@ eprint=false
 	\includepdf[fitpaper]{assets/pdf/gvs2-lib.pdf}
 	
 	\chapter{Migrationsliste} \label{ch:migration-list}
-	Die Migrationsliste gibt einen Überblick über die geplante Migration aller GVS 1.0 Klassen.
+	Die Migrationsliste gibt einen Überblick über die geplante Migration aller GVS 1.0 Klassen. Die angedachte Package Struktur entspricht nicht der effektiv Umgesetzten, da sich diese in der Umsetzungsphase noch geändert hat.
 	
 	\includepdf[fitpaper]{assets/pdf/Migration_Replacements.pdf}
 	
@@ -1421,7 +1421,7 @@ eprint=false
 	
 	\chapter{Testprotokoll} \label{Testprotokoll}
 	\section{Systemtests}
-	
+	Die folgenden Seiten enthalten die Testprotokolle der beiden Systemtest-Durchführungen.	
 	\begin{enumerate}
 		\item System Tests 04.12.17
 		\item System Tests 15.12.17
@@ -1458,13 +1458,13 @@ eprint=false
 			Erkannte Mängel GVS 1.0 & Einfluss auf GVS 2.0\\
 			\midrule
 			Veraltetes User Interace & Modernes, ansprechendes User Interface, mit dunklen Farben, damit die Algorithmen besser farblich hervorgehoben werden \\
-			Icons werden unter Unix nicht dargestellt & Moderne, sprechende \gls{fontawesome} Icons einführen. Die Icons werden auf allen Plattformen korrekt dargestellt \\
+			Icons werden unter Unix nicht dargestellt & Moderne, sprechende \gls{fontawesome} Icons eingeführt. Die Icons werden auf allen Plattformen korrekt dargestellt \\
 			Funktion \textit{Random und Stable Layout} ist nicht klar & Die Funktion wird wegen fehlendem praktischen Nutzen entfernt \\
 			Funktion \textit{Cluster Splitter} ist nicht klar & Ein spezieller Layout Algorithmus für Binary Trees wird implementiert \\
-			Beim Laden von gespeicherten Session muss der Speicherort immer wieder von Neuem ausgewählt werden & Der zuletzt verwendete Speicherort wird gespeichert \\
+			Beim Laden von gespeicherten Sessions muss der Speicherort immer wieder von Neuem ausgewählt werden & Der zuletzt verwendete Speicherort wird gespeichert \\
 			Graph Vertices lassen sich ausserhalb des sichtbaren Programmfenster draggen & ZoomPane skaliert das Fenster, sobald ein Knoten den Viewport verlässt \\
 			Autolayout Funktion ist nur für die letzten Momentaufnahme eines Graphen möglich & Die Autolayout Funktion ist für alle Momentaufnahmen möglich \\
-			Drag Support ist nur für die letzte Momentaufnahme eines Graphen möglich & Dragging von Vertices ist immer möglich \\
+			Drag Support ist nur für die letzte Momentaufnahme eines Graphen möglich & Dragging von Graph Vertices ist immer möglich \\
 			Koordinaten von gedraggten Vertices werden nicht für die nächste Momentaufnahme übernommen & Koordinaten werden immer übernommen \\
 			\textit{Replay} Geschwindigkeit wird in Millisekunden dargestellt & Es gibt nur doch die drei Geschwindigkeiten \textit{langsam}, \textit{normal} und \textit{schnell} \\
 			Server Applikation wird beim Absturz des Client nicht freigegeben & Watchdog Service gibt den Server bei inaktiven Clients wieder frei \\
@@ -1490,10 +1490,10 @@ eprint=false
 	
 	\clearpage
 	\section{Michael Wieland}
-	Die Durchführung unserer Studienarbeit war durchgehend spannend, da wir uns stets neuen Herausforderungen stellen durften. Den Anfang machte die Analyse des bestehenden Codes. Dieser war sichtlich in die Jahre gekommen und schien (wahrscheinlich aus Zeitgründen) viel Code Duplikate zu enthalten. Dies machte es schwierig, das Wesentliche herauszufiltern. So war es nicht erstaunlich, dass wir von dem geplanten Vorgehen, möglichst viel Code wiederzuverwenden, schon bald abweichen mussten. In der Analyse Phase war es dann interessant, die Architektur so zu planen, wie es in diversen Modulen der HSR vermittelt wird. Unter anderem in interessanten Gesprächen mit Prof. Olaf Zimmermann konnte eine flexible Architektur designed werden, die es auch Folgearbeiten erleichtern wird, Erweiterungen anzubringen. \\
+	Die Durchführung unserer Studienarbeit war durchgehend spannend, da wir uns stets neuen Herausforderungen stellen durften. Den Anfang machte die Analyse des bestehenden Codes. Dieser war sichtlich in die Jahre gekommen und schien (wahrscheinlich aus Zeitgründen) viele Code Duplikate zu enthalten. Dies machte es schwierig, das Wesentliche herauszufiltern. So war es nicht erstaunlich, dass wir von dem geplanten Vorgehen, möglichst viel Code wiederzuverwenden, schon bald abweichen mussten. In der Analyse Phase war es dann interessant, die Architektur so zu planen, wie es in diversen Modulen der HSR vermittelt wird. Unter anderem in interessanten Gesprächen mit Prof. Olaf Zimmermann konnte eine flexible Architektur designed werden, die es auch Folgearbeiten erleichtern wird, Erweiterungen anzubringen. \\
 	
 	\noindent
-	Der Zeitaufwand für das Projekt war relativ gross. Zu Beginn des Projekts konnte man annehmen, dass man durch die bereits existierende Lösung viel Zeit einsparen kann. Es zeichnete sich aber ab, dass für das Verständnis des existierenden Code etwa gleich viel Zeit aufgewendet werden musste, wie für den Neuentwurf der Funktionalität. So mussten schlussendlich auch in diesem Projekt einige Abstriche zugunsten der Zeit gemacht werden. Ich bin aber überzeugt, dass die aktuelle Architektur wesentlich verständlicher wie die Alte ist. \\
+	Der Zeitaufwand für das Projekt war relativ gross. Zu Beginn des Projekts konnte man annehmen, dass man durch die bereits existierende Lösung viel Zeit einsparen kann. Es zeichnete sich aber ab, dass für das Verständnis des existierenden Codes etwa gleich viel Zeit aufgewendet werden musste, wie für den Neuentwurf der Funktionalität. So mussten schlussendlich auch in diesem Projekt einige Abstriche zugunsten der Zeit gemacht werden. Ich bin aber überzeugt, dass die aktuelle Architektur wesentlich verständlicher wie die Alte ist. \\
 	
 	\noindent
 	Die Zusammenarbeit mit Murièle war über die gesamte Projektdauer äusserst angenehm. Die Arbeitsteilung hat gut geklappt und durch die enge Zusammenarbeit und das gegenseitige Aushelfen, konnten Probleme bereits früh aus dem Weg geräumt werden. \\
@@ -1516,7 +1516,7 @@ eprint=false
 		\item[Administratives] \hfill \\ 
 		Meetings mit dem Betreuer, Sprint-Meetings, Verfassung von Protokollen, Aufsetzen der Entwicklungsumgebung \& Projektmanagement Software, Software Releases
 		\item[Dokumentation] \hfill \\ 
-		Verfassen der Dokumentation, Durchführen von End-to-End Tests
+		Verfassen der Dokumentation, Planen der Architektur, Durchführen von End-to-End Tests
 		\item[Implementierung] \hfill \\ 
 		Schreiben von Code, inkl. Refactorings \& Unit Tests
 		\item[Requirement Analyse] \hfill \\ 
@@ -1548,7 +1548,7 @@ eprint=false
 	\end{figure}
 	
 	\chapter{Benutzerhandbuch} \label{ch:manual}
-	Nachfolgend findet sich das Benutzerhandbuch für GVS 2.0 inklusive einer Installationsanleitung für User der Library sowie für Entwickler.
+	Nachfolgend findet sich das Benutzerhandbuch für GVS 2.0 inklusive einer Installationsanleitung für die Benutzer der Library. Für die Weiterentwicklung werden die nötigen Schritte für das Aufsetzen der Entwicklungsumgebung beschrieben.
 	
 	\includepdf[pages={1-}]{manual/Benutzerhandbuch}	
 	
