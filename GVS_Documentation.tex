@@ -733,7 +733,8 @@ eprint=false
 	
 	\subsection{Lösung}
 	Die Lösung bietet ein Suchalgorithmus, der wie der \textit{Binary Search Algorithm} \cite{adbook} funktioniert. So wird ebenfalls mit zwei Endpunkten begonnen, welche in diesem Fall den Mittelpunkten des Start- und Endvertex der Kante entsprechen. Mittels Rekursion wird dann der Schnittpunkt gesucht. Beispielhaft ist der Ablauf mit den verschiedenen Iterationen in Abbildung \ref{fig:binarySearch} dargestellt. \\
-	In einem ersten Schritt wird der Mittelpunkt zwischen den beiden Endpunkten bestimmt (in Abbildung  \ref{fig:binarySearch} grün respektive orange eingezeichnet). Dann wird getestet, ob sich der Mittelpunkt innerhalb oder ausserhalb des Vertex befindet, denn für jede Iteration wird ein Punkt innerhalb und ein Punkt ausserhalb des Vertex benötigt. \\
+	In einem ersten Schritt wird der Mittelpunkt zwischen den beiden Endpunkten bestimmt (in Abbildung  \ref{fig:binarySearch} grün respektive orange eingezeichnet). Dann wird getestet, ob sich der Mittelpunkt innerhalb oder ausserhalb des Vertex befindet, denn für jede Iteration wird ein Punkt innerhalb und ein Punkt ausserhalb des Vertex benötigt.
+	
 	Für die nächste Iteration wird der neu bestimmte Mittelpunkt plus einer der Endpunkte übergeben. In Abbildung  \ref{fig:binarySearch} zeigen Iterationen eins bis drei den Fall, dass der Mittelpunkt ausserhalb des Vertex zu liegen kommt. Ab Iteration Vier wechselt das Szenario, da der Mittelpunkt innerhalb des Vertex zu liegen kommt. In Iteration Sechs ist der Abstand zwischen den Endpunkten so klein, dass die Abbruch Bedingung der Rekursion zu tragen kommt und der gesuchte Schnittpunkt gefunden ist.
 	
 	\begin{figure}[h!]
@@ -790,7 +791,9 @@ eprint=false
 	\section{Graph Layouter}
 	
 	\subsection{Physics Engine} \label{ssec:graphlayouter}
-	Für das Layouting der Graphen wurde ein Force-Directed Drawing Algorithm verwendet. Dieser wurde mehrheitlich von GVS 1.0 übernommen. Der Algorithmus ordnet die Vertices so an, dass es möglichst wenig überschneidende Kanten gibt. Dazu wird für jeden Vertex ein \textit{Particle} Objekt erstellt, welches während der dynamischen Plazierung auf der \textit{Area} bewegt wird. Zu Beginn des Layout Prozess wird ein Particle pseudo-zufällig platziert. Damit die Änderungen des Layouters in Echtzeit dargestellt werden, läuft der komplette Layouting Prozess in einem eigenständigen Thread. (siehe \textit{AreaTicker} in der Tabelle \ref{tbl:concurrent-classes}) Sobald ein Graph gelayouted werden muss, wird ein \textit{AreaTicker} Thread gestartet, der in einem bestimmten Intervall die Darstellung der neuen Koordinaten im UI veranlasst. Es läuft immer nur genau ein \textit{AreaTicker} Thread. Sobald sich die \textit{Particles} in der \textit{Area} stabilisiert haben, wird der \textit{AreaTicker} Thread terminiert. Das Sequenzdiagramm \ref{fig:sequencegraphlayouter} zeigt den grundlegenden Ablauf beim Starten des Graph Layout Prozess.
+	Für das Layouting der Graphen wurde ein Force-Directed Drawing Algorithm verwendet. Dieser wurde mehrheitlich von GVS 1.0 übernommen. Der Algorithmus ordnet die Vertices so an, dass es möglichst wenig überschneidende Kanten gibt. Dazu wird für jeden Vertex ein \textit{Particle} Objekt erstellt, welches während der dynamischen Plazierung auf der \textit{Area} bewegt wird. Zu Beginn des Layout Prozess wird ein Particle pseudo-zufällig platziert.
+	
+	Damit die Änderungen des Layouters in Echtzeit dargestellt werden, läuft der komplette Layouting Prozess in einem eigenständigen Thread (siehe \textit{AreaTicker} in der Tabelle \ref{tbl:concurrent-classes}). Sobald ein Graph gelayouted werden muss, wird ein \textit{AreaTicker} Thread gestartet, der in einem bestimmten Intervall die Darstellung der neuen Koordinaten im UI veranlasst. Es läuft immer nur genau ein \textit{AreaTicker} Thread. Sobald sich die \textit{Particles} in der \textit{Area} stabilisiert haben, wird der \textit{AreaTicker} Thread terminiert. Das Sequenzdiagramm \ref{fig:sequencegraphlayouter} zeigt den grundlegenden Ablauf beim Starten des Graph Layout Prozess.
 	
 	\begin{figure}[h!]
 		\centering
@@ -835,20 +838,25 @@ eprint=false
 	
 	\section{Watchdog} \label{sec:watchdog}
 	\subsection{Bedeutung in der Informatik}
-	Im  Allgemeinen versteht man in der Informatik unter einem Watchdog eine System Komponente, die andere Komponenten überwacht. Wenn in der überwachten Komponente ein Fehler auftritt, wird dieser vom Watchdog erkannt und er leitet eine angemessene Fehlerbehebung ein.\\
-	Watchdogs werden vor allem in der Hardware und in der Software von Microcontrollern eingesetzt, um einen kompletten Ausfall des vom Microcontroller gesteuerten Geräts vorzubeugen.\\
+	Im  Allgemeinen versteht man in der Informatik unter einem Watchdog eine System Komponente, die andere Komponenten überwacht. Wenn in der überwachten Komponente ein Fehler auftritt, wird dieser vom Watchdog erkannt und er leitet eine angemessene Fehlerbehebung ein.
+	
+	Watchdogs werden vor allem in der Hardware und in der Software von Microcontrollern eingesetzt, um einen kompletten Ausfall des vom Microcontroller gesteuerten Geräts vorzubeugen.
 	
 	\subsection{Arbeitsweise}
-	Während dem normalen Betrieb einer Software, wird der Watchdog regelmässig vom zu überwachendem System gefüttern. Das bedeutet, der Timer des Watchdogs wird zurückgesetzt. Beim Auftreten eines Fehlers verzögert sich diese ''Fütterung'' oder fällt gar ganz aus. Dies führt zum Ablaufen des Watchdog Timers. \\
+	Während dem normalen Betrieb einer Software, wird der Watchdog regelmässig vom zu überwachendem System gefüttern. Das bedeutet, der Timer des Watchdogs wird zurückgesetzt. Beim Auftreten eines Fehlers verzögert sich diese ''Fütterung'' oder fällt gar ganz aus. Dies führt zum Ablaufen des Watchdog Timers.
+	
 	Sobald der Timer ausgelaufen ist, wird der Watchdog aktiv und leitet Fehlerbehebungsmassnahmen ein.
 	
 	\subsection{Watchdog in GVS 2.0}
 	\subsubsection{Problem}
 	Da per Spezifikation immer nur ein Client gleichzeitig mit dem Server kommunizieren darf, startet jeder Verbindungsaufbau mit dem Reservieren des \gls{gvsui} Services. Um den Service für andere Clients wieder frei zu geben, muss der Client nach dem Übertragen der Daten ein \textit{Release Command} senden.\\
+	
+	\noindent
 	Der Einsatz des GVS im Unterricht findet relativ früh im Studium statt. Deshalb kommt es immer wieder einmal vor, dass sich Fehler in den Code einschleichen, welcher die \gls{gvslib} benutzt. Das Auftretten einer Programm-beendenden Exception führt dazu, dass das \textit{Release Command} nicht gesendet wird, was den GVS Service endlos blockiert. Für den Endbenutzer ist nicht ersichtlich, wieso das \gls{gvsui} nicht auf den User-Input reagiert. Einziger Ausweg bleibt, die Applikation über den Task-Manager zu beenden.
 	
 	\subsubsection{Lösung}
-	GVS 2.0 führt einen Watchdog ein, der die Verbindung des Clients überwacht. Bei jedem Eintreffen neuer Daten, wird der Watchdog gefüttert bis er beim erhalten des \textit{Release Command}s beendet wird. Wenn nun das Auftreten einer Exception im Client Code dazu führt, dass der \textit{Release Command} nicht gesendet wird, läuft der Timer des Watchdogs aus. Dadurch wird der Watchdog aktiv und forciert das Freigeben des Services. Dieser Vorgang ist in Abbildung \ref{fig:watchdog} visualisiert.\\
+	GVS 2.0 führt einen Watchdog ein, der die Verbindung des Clients überwacht. Bei jedem Eintreffen neuer Daten, wird der Watchdog gefüttert bis er beim erhalten des \textit{Release Command}s beendet wird. Wenn nun das Auftreten einer Exception im Client Code dazu führt, dass der \textit{Release Command} nicht gesendet wird, läuft der Timer des Watchdogs aus. Dadurch wird der Watchdog aktiv und forciert das Freigeben des Services. Dieser Vorgang ist in Abbildung \ref{fig:watchdog} visualisiert.
+	
 	Der Endnutzer nimmt die Komplexität dieses Vorgangs nicht wahr. Nach einer Exception kann das Benutzer Programm einfach erneut gestartet werden und das \gls{gvsui} zeigt wie Erwartet die neue Session an.
 	
 	\begin{figure}[h!]
@@ -1001,7 +1009,8 @@ eprint=false
 	Für den Endbenutzer wirkt das neue User Interface frisch und modern. Durch die direkte Erreichbarkeit aller Funktionen über die Toolbar, ist es auch benutzerfreundlicher als das UI des Vorgängers.
 	
 	\subsection{Einführung von Generics in \gls{gvslib}}
-	Im Laufe des Projekts wurde erkannt, dass die \gls{gvslib} bereits einige Generics-Neuerungen enthält und eine weitere Einführung derselben keinen namhaften Mehrwert bringen würde. Somit wurde in Rücksprache mit dem Betreuer entschieden, dass diesbezüglich keine Änderungen an der \gls{gvslib} nötig sind (siehe Anhang \ref{ch:minutes}).\\
+	Im Laufe des Projekts wurde erkannt, dass die \gls{gvslib} bereits einige Generics-Neuerungen enthält und eine weitere Einführung derselben keinen namhaften Mehrwert bringen würde. Somit wurde in Rücksprache mit dem Betreuer entschieden, dass diesbezüglich keine Änderungen an der \gls{gvslib} nötig sind (siehe Anhang \ref{ch:minutes}).
+	
 	Stattdessen konnten die zahlreichen Style-Typ Klassen von GVS 1.0 auf eine einzige Style Klasse (analog zu \gls{gvsui}) reduziert werden, was wiederum zukünftige Erweiterungen der Applikation erleichtert.
 	
 	\subsection{Punktuelle Verbesserungen}
@@ -1072,7 +1081,7 @@ eprint=false
 
 	\section{Ausblick}
 	\label{sec:ausblick}
-	Obwohl viel erreicht wurde im GVS 2.0 Projekt, konnten nicht alle Ideen umgesetzt und sämtliches Verbesserungspotential ausgeschöpft werden.
+	Obwohl viel erreicht wurde im GVS 2.0 Projekt, konnten nicht alle Ideen umgesetzt und sämtliches Verbesserungspotential ausgeschöpft werden.\\
 	
 	\noindent
 	Dieses Kapitel bietet eine Übersicht, welche Aufgaben in einem nächsten GVS Major Update angegangen werden könnten. 
@@ -1136,6 +1145,8 @@ eprint=false
 	
 	\subsubsection{Meilenstein 1: Analyse}
 	Analyse des Ist-Zustandes von GVS 1.0: Die Problemdomäne wird spezifiziert. Mehrere Diagramme zeigen die Schnittstelle zwischen dem Business Layer und dem Presentation Layer auf. Es ist ersichtlich, wie die einzelnen Komponenten miteinander kommunizieren bzw. wie die Daten von der Socket ans UI weiter gereicht werden.\\
+	
+	\noindent
 	Die in der Aufgabenstellung (\ref{aufgabenstellung}) geforderten Requirements werden festgehalten.
 	
 	\subsubsection{Meilenstein 2: Entwurf}
@@ -1194,7 +1205,8 @@ eprint=false
 	
 	
 	\subsection{Iterationsplanung}
-	Die Iterationsplanung orientiert sich grob am \gls{rup} und ist unterteilt in eine Inception-, Elaboration-, Construction- sowie eine Transition-Phase. Jede Phase besteht aus einer oder mehreren Iterationen, die jeweils 1 Wochen dauern und am Donnerstag enden. Die Sprints sind bewusst nur 1 Woche lang, um eventuell ändernden Anforderungen gerecht zu werden. Zudem bringen die Wochenmeetings (\ref{ssec:meeting}) jeweils neuen Input, welcher dann direkt in den nächsten Sprint einfliessen kann.\\
+	Die Iterationsplanung orientiert sich grob am \gls{rup} und ist unterteilt in eine Inception-, Elaboration-, Construction- sowie eine Transition-Phase. Jede Phase besteht aus einer oder mehreren Iterationen, die jeweils 1 Wochen dauern und am Donnerstag enden. Die Sprints sind bewusst nur 1 Woche lang, um eventuell ändernden Anforderungen gerecht zu werden. Zudem bringen die Wochenmeetings (\ref{ssec:meeting}) jeweils neuen Input, welcher dann direkt in den nächsten Sprint einfliessen kann.
+	
 	Eine Iteration wird nach \gls{scrum} organisiert. Am Anfang des Sprints definiert das Projektteam die zu erledigenden Issues und schätzt deren Aufwand. (Siehe \ref{sec:estimations}) Jeweils am Ende eines Sprints wird die geleistete Arbeit reflektiert. Entsprechende Erkenntnisse und Verbesserungen werden fortlaufend in die Projektorganisation aufgenommen. 
 	
 	\subsection{Schätzungen}
