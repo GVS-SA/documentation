@@ -793,7 +793,7 @@ eprint=false
 	\subsection{Physics Engine} \label{ssec:graphlayouter}
 	Für das Layouting der Graphen wurde ein Force-Directed Drawing Algorithm verwendet. Dieser wurde mehrheitlich von GVS 1.0 übernommen. Der Algorithmus ordnet die Vertices so an, dass es möglichst wenig überschneidende Kanten gibt. Dazu wird für jeden Vertex ein \textit{Particle} Objekt erstellt, welches während der dynamischen Plazierung auf der \textit{Area} bewegt wird. Zu Beginn des Layout Prozess wird ein Particle pseudo-zufällig platziert.
 	
-	Damit die Änderungen des Layouters in Echtzeit dargestellt werden, läuft der komplette Layouting Prozess in einem eigenständigen Thread (siehe \textit{AreaTicker} in der Tabelle \ref{tbl:concurrent-classes}). Sobald ein Graph gelayouted werden muss, wird ein \textit{AreaTicker} Thread gestartet, der in einem bestimmten Intervall die Darstellung der neuen Koordinaten im UI veranlasst. Es läuft immer nur genau ein \textit{AreaTicker} Thread. Sobald sich die \textit{Particles} in der \textit{Area} stabilisiert haben, wird der \textit{AreaTicker} Thread terminiert. Das Sequenzdiagramm \ref{fig:sequencegraphlayouter} zeigt den grundlegenden Ablauf beim Starten des Graph Layout Prozess.
+	Damit die Änderungen des Layouters in Echtzeit dargestellt werden, läuft der komplette Layouting Prozess in einem eigenständigen Thread (siehe \textit{AreaTicker} Thread in der Tabelle \ref{tbl:concurrent-classes}). Sobald ein Graph gelayouted werden muss, wird ein \textit{AreaTicker} Thread gestartet, der in einem bestimmten Intervall die Darstellung der neuen Koordinaten im UI veranlasst. Es läuft immer nur genau ein \textit{AreaTicker} Thread. Sobald sich die \textit{Particles} in der \textit{Area} stabilisiert haben, wird der \textit{AreaTicker} Thread terminiert. Das Sequenzdiagramm \ref{fig:sequencegraphlayouter} zeigt den grundlegenden Ablauf beim Starten des Graph Layout Prozess.
 	
 	\begin{figure}[h!]
 		\centering
@@ -855,7 +855,7 @@ eprint=false
 	Der Einsatz des GVS im Unterricht findet relativ früh im Studium statt. Deshalb kommt es immer wieder einmal vor, dass sich Fehler in den Code einschleichen, welcher die \gls{gvslib} benutzt. Das Auftretten einer Programm-beendenden Exception führt dazu, dass das \textit{Release Command} nicht gesendet wird, was den GVS Service endlos blockiert. Für den Endbenutzer ist nicht ersichtlich, wieso das \gls{gvsui} nicht auf den User-Input reagiert. Einziger Ausweg bleibt, die Applikation über den Task-Manager zu beenden.
 	
 	\subsubsection{Lösung}
-	GVS 2.0 führt einen Watchdog ein, der die Verbindung des Clients überwacht. Bei jedem Eintreffen neuer Daten, wird der Watchdog gefüttert bis er beim erhalten des \textit{Release Command}s beendet wird. Wenn nun das Auftreten einer Exception im Client Code dazu führt, dass der \textit{Release Command} nicht gesendet wird, läuft der Timer des Watchdogs aus. Dadurch wird der Watchdog aktiv und forciert das Freigeben des Services. Dieser Vorgang ist in Abbildung \ref{fig:watchdog} visualisiert.
+	GVS 2.0 führt einen Watchdog ein, der die Verbindung des Clients überwacht. Bei jedem Eintreffen neuer Daten, wird der Watchdog gefüttert bis er beim Erhalten des \textit{Release Command}s beendet wird. Wenn nun das Auftreten einer Exception im Client Code dazu führt, dass der \textit{Release Command} nicht gesendet wird, läuft der Timer des Watchdogs aus. Dadurch wird der Watchdog aktiv und forciert das Freigeben des Services. Dieser Vorgang ist in Abbildung \ref{fig:watchdog} visualisiert.
 	
 	Der Endnutzer nimmt die Komplexität dieses Vorgangs nicht wahr. Nach einer Exception kann das Benutzer Programm einfach erneut gestartet werden und das \gls{gvsui} zeigt wie Erwartet die neue Session an.
 	
@@ -876,7 +876,7 @@ eprint=false
 	Bei Graphen können alle Vertices beliebig mit der Maus positioniert werden. Trees können nicht manuell positioniert werden. Eine entsprechende Meldung wird angezeigt.
 		
 	\subsection{Autolayout}
-	Das Autolayout steht nur für Graphen zur Verfügung. Die Vertices werden vom Graph Layouter so positioniert, dass es möglichst wenig Überschneidungen der Edges gibt. Standardmässig ist die Einstellung \textit{Force Layout} aktiv. Dies führt dazu, dass beim betätigen des Auto-Layout Buttons die Koordinaten sämtlicher Vertices neu berechnet werden. Das Deaktivieren dieser Einstellung hat zur Folge, dass Vertices, die manuell durch den User positioniert wurden, nicht von einem Auto-Layout betroffen sind. Sollte dies auf alle Vertices zutreffen, wird der User über einen Tooltip entsprechend informiert.
+	Das Autolayout steht nur für Graphen zur Verfügung. Die Vertices werden vom Graph Layouter so positioniert, dass es möglichst wenig Überschneidungen der Edges gibt. Standardmässig ist die Einstellung \textit{Force Layout} aktiv. Dies führt dazu, dass beim Betätigen des Auto-Layout Buttons die Koordinaten sämtlicher Vertices neu berechnet werden. Das Deaktivieren dieser Einstellung hat zur Folge, dass Vertices, die manuell durch den User positioniert wurden, nicht von einem Auto-Layout betroffen sind. Sollte dies auf alle Vertices zutreffen, wird der User über einen Tooltip entsprechend informiert.
 		
 	\subsection{UI Design}
 	\begin{figure}[h!]
@@ -953,7 +953,7 @@ eprint=false
 	\subsection{Änderungen}
 	\begin{description}
 		\item[MaxLabelLength] \hfill \\
-		In GVS 1.0 wurde eine MaxLabelLength vom Client an den Server übermittelt. In GVS 2.0 ist dieser Wert in der \textit{Configuration} Klasse als Konstante definiert. Da er vor allem Einfluss auf das Layout der Trees hat, ist dieser Wert in GVS 2.0 nicht mehr konfigurierbar. Erhält der GVS 2.0 mit zu langen Labels, werden diese automatisch durch Auslassungspunkte in der Mitte des Labels gekürzt.
+		In GVS 1.0 wurde eine MaxLabelLength vom Client an den Server übermittelt. In GVS 2.0 ist dieser Wert in der \textit{Configuration} Klasse als Konstante definiert. Da er vor allem Einfluss auf das Layout der Trees hat, ist dieser Wert in GVS 2.0 nicht mehr konfigurierbar. Erhält der GVS 2.0 zu lange Labels, werden diese automatisch durch Auslassungspunkte in der Mitte des Labels gekürzt.
 		\item[Background] \hfill \\ 
 		Für Graphen bestand in GSV 1.0 die Möglichkeit, ein Background Bild festzulegen. Da diese Funktionalität im Unterricht nicht verwendet wird, wurde sie nach Rücksprache mit dem Betreuer ersatzlos entfernt.
 		\item[Icon \& IconVertex] \hfill \\
@@ -1008,8 +1008,8 @@ eprint=false
 	
 	Für den Endbenutzer wirkt das neue User Interface frisch und modern. Durch die direkte Erreichbarkeit aller Funktionen über die Toolbar, ist es auch benutzerfreundlicher als das UI des Vorgängers.
 	
-	\subsection{Einführung von Generics in \gls{gvslib}}
-	Im Laufe des Projekts wurde erkannt, dass die \gls{gvslib} bereits einige Generics-Neuerungen enthält und eine weitere Einführung derselben keinen namhaften Mehrwert bringen würde. Somit wurde in Rücksprache mit dem Betreuer entschieden, dass diesbezüglich keine Änderungen an der \gls{gvslib} nötig sind (siehe Anhang \ref{ch:minutes}).
+	\subsection{Einführung von Generics in GVS Lib}
+	Im Laufe des Projekts wurde erkannt, dass die \gls{gvslib} bereits einige Generics-Neuerungen enthält und eine weitere Einführung derselben keinen namhaften Mehrwert bringen würde. Somit wurde in Rücksprache mit dem Betreuer entschieden, dass diesbezüglich keine Änderungen an der GVS Lib nötig sind (siehe Anhang \ref{ch:minutes}).
 	
 	Stattdessen konnten die zahlreichen Style-Typ Klassen von GVS 1.0 auf eine einzige Style Klasse (analog zu \gls{gvsui}) reduziert werden, was wiederum zukünftige Erweiterungen der Applikation erleichtert.
 	
@@ -1048,7 +1048,7 @@ eprint=false
 	\end{equation*}
 	
 	\noindent
-	Code Climate schätzt einerseits die benötigte Zeit um offene Issues zu beheben (\textit{Remediation Time}) und andererseits die aufgewendete Implementations Zeit (\textit{Implementation Time}) in Abhängigkeit zur Projektgrösse. Das Verhältnis dieser beiden Werte bildet das \textit{Technical Debt Ratio}. Dieses ist im Idealfall so klein wie möglich. In der Grafik ist sowohl die \textit{Remediation Time} als auch das \textit{Technical Debt Ratio} ersichtlich. \\
+	Code Climate schätzt einerseits die benötigte Zeit um offene Issues zu beheben (\textit{Remediation Time}) und andererseits die aufgewendete Implementations Zeit (\textit{Implementation Time}) in Abhängigkeit zur Projektgrösse. Das Verhältnis dieser beiden Werte bildet das \textit{Technical Debt Ratio}. Dieses ist im Idealfall so klein wie möglich. In der Grafik \ref{fig:metric-technical-debt} ist sowohl die \textit{Remediation Time} als auch das \textit{Technical Debt Ratio} ersichtlich. \\
 	
 	\noindent
 	Das \textit{Technical Debt Ratio} korreliert mit den Anzahl Zeilen an Source Code (Siehe \ref{ssec:lines-code}). Auch gut zu erkennen ist, dass die technischen Schulden trotz weiteren Anpassungen am GVS nicht mehr zugenommen haben.
