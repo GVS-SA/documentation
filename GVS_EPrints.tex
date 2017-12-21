@@ -1472,35 +1472,7 @@ eprint=false
 		\end{tabularx} 
 		\caption{Usability Tests} 
 	\end{table}
-	
-	\chapter{Persönliche Berichte}
-	\label{erfahrungsberichte}
-	\section{Murièle Trenini}
-	
-	Meine bisherige Erfahrung mit Informatik Projekten beschränkt sich auf das Engineering Projekt aus dem vergangenen Semester. Im Kontrast dazu stand vor allem, dass dieses Projekt nicht ''auf der grünen Wiese'' stattfand. Für mich war der Umgang mit Legacy Code eine neue Erfahrung, die interessant aber auch herausfordernd war. Zu Beginn des Projektes, aber auch während der Refactoring Phase, war viel Zeit nötig, um bestehenden Code und bisherige Programmabläufe nachzuvollziehen.  \\
 
-	\noindent	
-	Wir haben uns voller Elan daran gemacht, den bestehenden Code unseren Achitektur- und Qualitätsansprüchen anzupassen. Leider litt die Funktionalität teilweise darunter. So kam es vor, dass Code Abschnitte im Zuge eines Refactorings weg rationalisiert wurden, nur um später festzustellen, dass der Abschnitt wieder Erwartens notwendig war. Für zukünftige Projekte nehme ich mir vor, Code Abschnitte in Legacy Code genau zu hinterfragen, bevor sie umgeschrieben oder gelöscht werden. Hier hätte sicher auch eine bessere Testabdeckung geholfen. Leider ist es auch uns nicht gelungen, grössere Teile der Applikation mit automatisierten Tests abzudecken. \\
-
-	\noindent	
-	Die gute Zusammenarbeit mit meinem Projektpartner, Michael Wieland, habe ich geschätzt und sie hat mich immer wieder motiviert, selber eben soviel Einsatz zu geben um ein qualitativ hochwertiges Endresultat zu erreichen. Ich freue mich auf die nächste Herausforderung, welche wir in der Bachelorarbeit gemeinsam bestreiten werden.\\
-	
-	\noindent
-	Mit dem Endresultat bin ich sehr zufrieden.  Ich denke wir dürfen stolz sein über die Qualität des Codes, welche wir im Laufe dieses Projektes ständig erhöhen konnten. Dies zeigt sich auch deutlich in den verwendeten Metriken. Optisch finde ich GVS 2.0 sehr ansprechend und ich bin mir sicher, dass es die Verbesserung der Usability (u.A. durch die Einführung des Watchdogs) zukünftigen Studenten erleichtert, mit der Applikation umzugehen.
-	
-	\clearpage
-	\section{Michael Wieland}
-	Die Durchführung unserer Studienarbeit war durchgehend spannend, da wir uns stets neuen Herausforderungen stellen durften. Den Anfang machte die Analyse des bestehenden Codes. Dieser war sichtlich in die Jahre gekommen und schien (wahrscheinlich aus Zeitgründen) viele Code Duplikate zu enthalten. Dies machte es schwierig, das Wesentliche herauszufiltern. So war es nicht erstaunlich, dass wir von dem geplanten Vorgehen, möglichst viel Code wiederzuverwenden, schon bald abweichen mussten. In der Analyse Phase war es dann interessant, die Architektur so zu planen, wie es in diversen Modulen der HSR vermittelt wird. Unter anderem in interessanten Gesprächen mit Prof. Olaf Zimmermann konnte eine flexible Architektur designed werden, die es auch Folgearbeiten erleichtern wird, Erweiterungen anzubringen. \\
-	
-	\noindent
-	Der Zeitaufwand für das Projekt war relativ gross. Zu Beginn des Projekts konnte man annehmen, dass man durch die bereits existierende Lösung viel Zeit einsparen kann. Es zeichnete sich aber ab, dass für das Verständnis des existierenden Codes etwa gleich viel Zeit aufgewendet werden musste, wie für den Neuentwurf der Funktionalität. So mussten schlussendlich auch in diesem Projekt einige Abstriche zugunsten der Zeit gemacht werden. Ich bin aber überzeugt, dass die aktuelle Architektur wesentlich verständlicher wie die Alte ist. \\
-	
-	\noindent
-	Die Zusammenarbeit mit Murièle war über die gesamte Projektdauer äusserst angenehm. Die Arbeitsteilung hat gut geklappt und durch die enge Zusammenarbeit und das gegenseitige Aushelfen, konnten Probleme bereits früh aus dem Weg geräumt werden. \\
-	
-	\noindent
-	Abschliessend ist es erfreulich, dass durch diese Studienarbeit ein funktionsfähiges Produkt entstanden ist, welches den Lernerfolg zukünftiger Studenten vereinfachen wird. Nichtzugletzt wegen dem Praktischen Nutzen der Software, freue ich mich bereits jetzt auf ein interessantes Folgeprojekt im nächsten Semester.
-	
 	\chapter{Zeitauswertung}	\label{zeitauswertung}
 	
 	\section{Auswertung nach Teammitgliedern}
@@ -1553,19 +1525,22 @@ eprint=false
 	\includepdf[pages={1-}]{manual/Benutzerhandbuch}	
 	
 	% Glossary
-	\printglossary
+	\printglossary[title=Glossar,toctitle=Glossar] 
 	\glsaddall
-	
 	% List of references
-	\printbibliography[heading=bibintoc]
-	
+	\printbibliography[heading=bibintoc, title={Literaturverzeichnis}]
 	{
 		\hypersetup{linkcolor=black}
+		\cleardoublepage
+		\phantomsection
+		\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
 		\listoffigures
 	}
-	
 	{
 		\hypersetup{linkcolor=black}
+		\cleardoublepage
+		\phantomsection
+		\addcontentsline{toc}{chapter}{Tabellenverzeichnis}
 		\listoftables
 	}
 	
