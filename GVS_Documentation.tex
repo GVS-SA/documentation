@@ -582,7 +582,7 @@ eprint=false
 		\item[Watchdog] \hfill \\ Behebt das Problem, dass beim Absturz eines Clients die Server Komponenten für andere Clients nicht wieder freigegeben wird. Dies erleichtert das Usability für den Benutzer sehr. Mehr dazu in Abschnitt \ref{sec:watchdog}
 		\item[SessionType] \hfill \\ Trees und Graphen werden völlig unterschiedlich gelayoutet. Dennoch werden die gleichen Klassen für die Darstellung im Presentation Layer verwendet. Durch das \gls{type-object} kann trotzdem ein spezifischer Layouting Algorithmus für jede Datenstruktur eingesetzt werden.
 		\item[TreeVertex \& LeafVertex] \hfill \\ 
-		In der Designphase wurde das Zusammenführen von Graphen und Trees angedacht. In der Realisierung hat sich aber gezeigt, dass einerseits die Layouter sowie infolgedessen auch die Vertices unterschieden werden müssen. (siehe \ref{graph-vs-tree}) Für den Tree Layouter (\ref{sec:treelayouter}) wird neben dem \textit{TreeVertex} auch ein \textit{LeafVertex} benötigt.  Blattknoten dienen als Platzhalter die im UI nicht dargestellt werden. Sie vereinfachen die Berechnung des Tree Layouts aber stark.
+		In der Designphase wurde das Zusammenführen von Graphen und Trees angedacht. In der Umsetzung hat sich aber gezeigt, dass einerseits die Layouter sowie infolgedessen auch die Vertices unterschieden werden müssen. (siehe \ref{graph-vs-tree}) Für den Tree Layouter (\ref{sec:treelayouter}) wird neben dem \textit{TreeVertex} auch ein \textit{LeafVertex} benötigt.  Blattknoten dienen als Platzhalter die im UI nicht dargestellt werden. Sie vereinfachen die Berechnung des Tree Layouts aber stark.
 	\end{description}
 
 	\subsection{Layering} \label{ssec:layering}
@@ -870,7 +870,7 @@ eprint=false
 	\section{Presentation Layer}
 	
 	\subsection{ScalablePane}
-	Während der Realisierungsphase hat sich gezeigt, dass die Anzahl an Vertices in Trees und Graphen einen grossen Einfluss auf ihre Darstellung hat. Um diesen Ansprüchen gerecht zu werden, bietet GVS 2.0 eine Zeichenfläche, welche ihre Inhalte automatisch skaliert und zentriert. Dadurch werden zum Beispiel grosse Trees leserlich abgebildet und kleine Graphen verwenden die gesamte Bildschirmbreite. 
+	Während der Umsetzungsphase hat sich gezeigt, dass die Anzahl an Vertices in Trees und Graphen einen grossen Einfluss auf ihre Darstellung hat. Um diesen Ansprüchen gerecht zu werden, bietet GVS 2.0 eine Zeichenfläche, welche ihre Inhalte automatisch skaliert und zentriert. Dadurch werden zum Beispiel grosse Trees leserlich abgebildet und kleine Graphen verwenden die gesamte Bildschirmbreite. 
 	
 	\subsection{Drag Support}
 	Bei Graphen können alle Vertices beliebig mit der Maus positioniert werden. Trees können nicht manuell positioniert werden. Eine entsprechende Meldung wird angezeigt.
@@ -1391,7 +1391,7 @@ eprint=false
 	
 	\noindent
 	Beide Team-Mitglieder arbeiten jedoch in allen Bereichen des Projekts mit. 
-	Die genaue Arbeitsteilung ist der git-History, den Java-Docs, sowie den Änderungshistories der Projektdokumentation zu entnehmen.
+	Die genaue Arbeitsteilung ist der git-History, den Java-Docs sowie den Änderungshistories der Projektdokumentation zu entnehmen.
 	
 	\chapter{Klassendiagramme} \label{ch:class-diagram}
 	Die folgenden Seiten enthalten die Entwicklung der Klassendiagramme über den Projektverlauf. Für die \gls{gvslib} Komponente existierte in der Vorgängerarbeit kein Klassendiagramm.
@@ -1409,7 +1409,7 @@ eprint=false
 	\includepdf[fitpaper]{assets/pdf/gvs2-lib.pdf}
 	
 	\chapter{Migrationsliste} \label{ch:migration-list}
-	Die Migrationsliste gibt einen Überblick über die geplante Migration aller GVS 1.0 Klassen. Die angedachte Package Struktur entspricht nicht der effektiv Umgesetzten, da sich diese in der Umsetzungsphase noch geändert hat.
+	Die Migrationsliste gibt einen Überblick über die geplante Migration aller GVS 1.0 Klassen. Die angedachte Package Struktur entspricht nicht der effektiv umgesetzten, da sich diese in der Umsetzungsphase noch geändert hat.
 	
 	\includepdf[fitpaper]{assets/pdf/Migration_Replacements.pdf}
 	
